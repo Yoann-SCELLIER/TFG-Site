@@ -18,7 +18,7 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-grey">
             <div class="container-fluid">
-                <a class="navbar-brand m-0 p-0 b-0 g-0" href="#">
+                <a class="navbar-brand m-0 p-0 b-0 g-0" src="index.html">
                     <img src="assets/images/logoV1.gif" alt="Logo" width="80" height="auto"
                         class="d-inline-block align-text-top">
                 </a>
@@ -29,13 +29,13 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active text-white" aria-current="page" href="#">STORY</a>
+                            <a class="nav-link active text-white" aria-current="page" href="#storySection">STORY</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">STAFF</a>
+                            <a class="nav-link text-white" href="#staffSection">STAFF</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">GAMING</a>
+                            <a class="nav-link text-white" href="#gamingSection">GAMING</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled text-white" aria-disabled="true" href="#">CONTACT</a>
@@ -49,12 +49,12 @@
     <!-- Contenu BANNIERE -->
     <!------------------------------------------------------------------------------------------------------------------------------------>
     <div>
-        <img class="" width="100%" height="auto" src="assets/images/ban-index.webp" alt="bannière de la page index">
+        <img class="" width="100%" height="auto" src="assets/images/banniere-esport.png" alt="bannière de la page index">
     </div>
 
     <!-- Contenu STORY -->
     <!------------------------------------------------------------------------------------------------------------------------------------>
-    <div class="downStoryContent">
+    <div class="downStoryContent" id="storySection">
         <div class="row row-cols-1 row-cols-md-2 text-center g-0 p-1">
             <div class="col">
                 <img class="p-0 m-0 b-0 g-0" width="40%" height="auto" src="assets/images/img-story.png"
@@ -75,7 +75,7 @@
     <!-- CONTENU CACHÉ -->
     <div id="hiddenStoryContent" class="text-center" style="display: none;">
         <div class="text-center align-self-center text-center">
-            <img class="p-0 m-0 b-0 g-0" width="15%" height="auto" src="assets/images/img-story.png"
+            <img class="p-0 m-0 b-0 g-0" width="23%" height="auto" src="assets/images/img-story.png"
                 alt="image pour la section story">
         </div>
         <h1>TF - True Fighters Gaming</h1>
@@ -108,7 +108,7 @@
 
     <!-- Contenu MEMBRE et STAFF -->
     <!------------------------------------------------------------------------------------------------------------------------------------>
-    <div class="downStaff bg-grey text-white">
+    <div class="downStaff bg-grey text-white" id="staffSection">
         <div class="row row-cols-1 row-cols-md-2 row-clos-lg-2 text-center g-0 bg-grey p-1" id="staffSection">
             <div class="col align-self-center text-end m-0 text-white order-2 order-sm-2 order-md-1">
                 <h1 class="fs-4">Staff & Membres</h1>
@@ -127,7 +127,7 @@
 
     <div id="hiddenStaff" class="text-center bg-grey text-white" style="display: none;">
         <div class="text-center">
-            <img class="p-0 m-0 b-0 g-0" width="15%" height="auto" src="assets/images/img-member.png"
+            <img class="p-0 m-0 b-0 g-0" width="23%" height="auto" src="assets/images/img-member.png"
                 alt="image pour la section membre et staff">
         </div>
         <h1>Explorez la Galerie des Membres du Staff de la TF - True Fighters Gaming</h1>
@@ -150,7 +150,7 @@
 
     <!-- Contenu GAMING -->
     <!------------------------------------------------------------------------------------------------------------------------------------>
-    <div class="downGamingContent">
+    <div class="downGamingContent" id="gamingSection">
         <div class="row row-cols-1 row-cols-md-2 text-center g-0 p-1">
             <div class="col">
                 <img class="p-0 m-0 b-0 g-0" width="40%" height="auto" src="assets/images/img-gaming.png"
@@ -172,7 +172,7 @@
     <!-- CONTENU CACHÉ -->
     <div id="hiddenGamingContent" class="text-center" style="display: none;">
         <div class="text-center align-self-center text-center">
-            <img class="p-0 m-0 b-0 g-0" width="15%" height="auto" src="assets/images/img-gaming.png"
+            <img class="p-0 m-0 b-0 g-0" width="8%" height="auto" src="assets/images/img-gaming.png"
                 alt="image pour la section gaming">
         </div>
         <h1>Gaming</h1>
@@ -180,7 +180,7 @@
 
         <div class="text-center">
             <div class="bg-grey" background-size="10%">
-                <img class="p-0 m-0 b-0 g-0" width="15%" height="auto" src="assets/images/logo-esport.png"
+                <img class="p-0 m-0 b-0 g-0" width="8%" height="auto" src="assets/images/logo-esport.png"
                     alt="image pour la section esport">
             </div>
         </div>
@@ -194,8 +194,8 @@
 
     <!-- FOOTER -->
     <!------------------------------------------------------------------------------------------------------------------------------------>
-    <footer class="bg-grey">
-        <div class="row row-cols-1 row-cols-md-1 g-0 m-0 b-0 p-0 justify-content-center ">
+    <footer class="bg-grey" >
+        <div class="row row-cols-1 row-cols-md-1 g-0 m-0 b-0 pt-3 justify-content-center ">
             <div class="col d-flex text-center justify-content-center align-self-center p-2">
                 <div class="">
                     <img src="assets/images/JobGame.gif" alt="logo JobGame" width="30%" height="auto">
@@ -223,25 +223,35 @@
             <br>
         </div>
 
-        <div class="text-light">
-            <div class="row row-cols-1 row-cols-md-2 g-0 m-0 b-0 p-0">
-                <div class="col">
+        <!-- <div class="text-light"> -->
+            <div class="row cols-12 row-cols-1 row-cols-md-1 row-cols-lg-3 g-0 m-0 b-0 p-0 text-center align-self-center text-light">
+                <div class="row col">
                     <h1 class="">Like & Follow</h1>
-                    <ul>
+                    <ul style="list-style-type:none;">
                         <li>FaceBook</li>
                         <li>YouTube</li>
+                        <li>Twitter</li>
                     </ul>
                 </div>
-                <div class="col">
+                <div class="row col">
                     <h1 class="">Condition</h1>
-                    <ul>
+                    <ul style="list-style-type:none;">
                         <li>CGU</li>
                         <li>l'association</li>
-                        <li>aventures</li>
+                        <li>Tournois</li>
+                    </ul>
+                </div>
+                <div class="row col">
+                    <img src="assets/images/true-fighters-gaming.png" width="600rem" widht="auto" class="p-3" alt="">
+                    <hr>
+                    <ul class="d-flex justify-content-center" style="list-style-type:none;">
+                        <li class="p-0 m-2">Connexion</li>
+                        <li class="p-0 m-2">Inscription</li>
+                        <li class="p-0 m-2">Contact</li>
                     </ul>
                 </div>
             </div>
-        </div>
+        <!-- </div> -->
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
