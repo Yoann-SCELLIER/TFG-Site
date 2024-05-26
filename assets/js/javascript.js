@@ -57,3 +57,9 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('showMoreGaming').style.display = 'inline';
     });
 });
+
+document.getElementById('contactButton').addEventListener('click', function (event) {
+    event.preventDefault();  // Empêche le comportement par défaut du lien
+    var contactModal = new bootstrap.Modal(document.getElementById('contactModal'));
+    contactModal.show();
+});

@@ -19,7 +19,8 @@
         <nav class="navbar navbar-expand-lg bg-grey">
             <div class="container-fluid">
                 <a class="navbar-brand m-0 p-0 b-0 g-0" href="index.html">
-                    <img src="assets/images/logoV1.gif" alt="Logo" width="80" height="auto" class="d-inline-block align-text-top">
+                    <img src="assets/images/logoV1.gif" alt="Logo" width="80" height="auto"
+                        class="d-inline-block align-text-top">
                 </a>
                 <button class="navbar-toggler navbar-dark border-2" type="button" data-bs-theme="dark"
                     data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
@@ -38,7 +39,7 @@
                             <a class="nav-link text-white" href="#gamingSection">GAMING</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled text-white" aria-disabled="true" href="#">CONTACT</a>
+                            <a class="nav-link text-white" href="#" id="contactButton">CONTACT</a>
                         </li>
                     </ul>
                 </div>
@@ -49,8 +50,7 @@
     <!-- Contenu BANNIERE -->
     <!------------------------------------------------------------------------------------------------------------------------------------>
     <div>
-        <img class="" width="100%" height="auto" src="assets/images/banniere-esport.png"
-            alt="bannière de la page index">
+        <img width="100%" height="auto" src="assets/images/banniere-esport.png" alt="bannière de la page index">
     </div>
 
     <!-- Contenu STORY -->
@@ -228,6 +228,51 @@
         </div>
     </div>
 
+    <!-- FORMULAIRE DE CONTACT -->
+    <!------------------------------------------------------------------------------------------------------------------------------------>
+
+    <!-- Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactModalLabel">Contactez-nous</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Contenu de la page CONTACT -->
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nom et prénom :</label>
+                            <input type="text" class="form-control" id="name" placeholder="(ou pseudo)" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email :</label>
+                            <input type="email" class="form-control" id="email" placeholder="True.Fighters.gaming.contact@gmail.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Sujet de votre demande :</label>
+                            <select class="form-select" id="subject" aria-label="Default select example">
+                                <option selected>Sélectionnez un sujet :</option>
+                                <option value="1">Adhésion</option>
+                                <option value="2">Demande de partenariat</option>
+                                <option value="3">Tournois organisés par la TF</option>
+                                <option value="4">Autres...</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message :</label>
+                            <textarea class="form-control" id="message" rows="3" placeholder="Votre message ici..." required></textarea>
+                        </div>
+                        <div class="justify-content-center text-center">
+                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                        </div>
+                    </form>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <!------------------------------------------------------------------------------------------------------------------------------------>
     <footer class="bg-grey">
@@ -236,32 +281,32 @@
                 <hr class="border border-1 border-black">
             </div>
             <div class="col d-flex text-center justify-content-center align-self-center p-2">
-                <div class="">
+                <div>
                     <a href="https://fr.jobs.game/entreprise-tf-true-fighters-gaming-20848/" target="_blank">
                         <img src="assets/images/JobGame.gif" alt="logo JobGame" width="30%" height="auto">
                     </a>
                 </div>
-                <div class="">
+                <div>
                     <a href="https://www.helloasso.com/associations/true-fighters-gaming" target="_blank">
-                    <img src="assets/images/helloasso.gif" alt="logo HelloAsso" width="30%" height="auto">
+                        <img src="assets/images/helloasso.gif" alt="logo HelloAsso" width="30%" height="auto">
                     </a>
                 </div>
-                <div class="">
+                <div>
                     <a href="https://www.facebook.com/True.Fighters.Gaming/" target="_blank">
                         <img src="assets/images/logo-fb.gif" alt="logo Facebook" width="30%" height="auto">
                     </a>
                 </div>
-                <div class="">
+                <div>
                     <a href="https://www.youtube.com/user/TFMultiGaming" target="_blank">
                         <img src="assets/images/YT.gif" alt="logo Youtube" width="30%" height="auto">
                     </a>
                 </div>
-                <div class="">
+                <div>
                     <a href="https://twitter.com/TFG_Officiel" target="_blank">
                         <img src="assets/images/Twitter.gif" alt="logo Twitter" width="30%" height="auto">
                     </a>
                 </div>
-                <div class="">
+                <div>
                     <a href="https://www.twitch.tv/akito_soma" target="_blank">
                         <img src="assets/images/twitch.gif" alt="logo Twitch" width="30%" height="auto">
                     </a>
@@ -278,7 +323,7 @@
         <div
             class="row cols-12 row-cols-1 row-cols-md-1 row-cols-lg-3 g-0 m-0 b-0 p-0 text-center align-self-center text-light">
             <div class="row col">
-                <h1 class="">Like & Follow</h1>
+                <h1>Like & Follow</h1>
                 <ul style="list-style-type:none;">
                     <li>FaceBook</li>
                     <li>YouTube</li>
@@ -286,7 +331,7 @@
                 </ul>
             </div>
             <div class="row col">
-                <h1 class="">Condition</h1>
+                <h1>Condition</h1>
                 <ul style="list-style-type:none;">
                     <li>CGU</li>
                     <li>l'association</li>
@@ -295,13 +340,13 @@
             </div>
             <div class="row col">
                 <a href="index.html">
-                    <img src="assets/images/true-fighters-gaming.png" width="600rem" widht="auto" class="p-3" alt="">
+                    <img src="assets/images/true-fighters-gaming.png" width="600rem" widht="auto" class="p-3"
+                        alt="image true fighters gaming">
                 </a>
                 <hr>
                 <ul class="d-flex justify-content-center" style="list-style-type:none;">
                     <li class="p-0 m-2">Connexion</li>
                     <li class="p-0 m-2">Inscription</li>
-                    <li class="p-0 m-2">Contact</li>
                 </ul>
             </div>
         </div>
