@@ -12,3 +12,26 @@ background-color: #3b3b3b !important;
     max-height: 500px; /* Ajustez cette valeur selon vos besoins */
 }
 
+.banner-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.banner-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.banner-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 3em; /* Ajustez la taille selon vos besoins */
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Pour améliorer la lisibilité */
+    text-align: center;
+}
