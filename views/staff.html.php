@@ -11,7 +11,7 @@
             <img class="p-0 m-0 b-0 g-0" width="40%" height="auto" src="assets/images/img-member.png" alt="image pour la section membres et staff">
         </div>
     </div>
-    <div class="text-center">
+    <div class="text-center p-2">
         <i class="bi bi-chevron-double-down" id="showMoreStaff">VOIR PLUS...</i>
     </div>
 </div>
@@ -67,7 +67,7 @@
     </div>
     <!-- Fin de la section pour afficher les membres -->
 
-    <div class="text-center">
+    <div class="text-center p-2">
         <i class="bi bi-chevron-double-up" id="showLessStaff">VOIR MOINS...</i>
     </div>
 </div>

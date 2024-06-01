@@ -12,8 +12,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $departement_id = $_POST['departement_id'];
 
+    // Vérifier si un fichier a été uploadé
+    if (isset($_FILES['cover']) && $_FILES['cover']['error'] == 0) {
+        $cover_path = 'uploads/' . basename($_FILES['cover']['name']);
+        move_uploaded_file($_FILES['cover']['tmp_name'], $cover_path);
+    } else {
+        // Utiliser une image par défaut si aucun fichier n'est uploadé
+        $cover_path = 'path/to/default/image.jpg';
+    }
+
     // Appel de la fonction d'inscription
-    $result = ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id);
+    $result = ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover_path);
 
     if ($result) {
         // Redirection vers la page d'accueil après inscription réussie

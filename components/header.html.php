@@ -39,7 +39,7 @@
                             <a class="nav-link text-white" href="#" id="contactButton">CONTACT</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="connexion.html.php">CONNEXION</a>
+                            <a class="nav-link text-white" href="/tfg/log.html.php">CONNEXION</a>
                         </li>
                     </ul>
                 </div>

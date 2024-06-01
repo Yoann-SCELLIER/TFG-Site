@@ -19,16 +19,10 @@
 </div>
 
 <!-- Affichage des actualités -->
-<div class="text-center">
-    <div>
-        <h1>ACTUALITÉS</h1>
-    </div>
-</div>
-
 <article class="text-center">
 
     <!-- Affichage des posts -->
-    <div class="row row-cols-1 row-cols-sm-3 row-cols-md-5 m-5 g-4 d-flex justify-content-evenly">
+    <div class="row row-cols-1 row-cols-xs-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 m-5 g-4 d-flex justify-content-evenly">
 
         <?php
         $posts = viewsPost($bdd);

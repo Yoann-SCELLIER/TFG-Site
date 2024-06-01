@@ -12,7 +12,7 @@
                 l'univers du gaming et ses objectifs communs.</p>
         </div>
     </div>
-    <div class="text-center">
+    <div class="text-center p-2">
         <i class="bi bi-chevron-double-down" id="showMoreStory">VOIR PLUS...</i> <!-- BOUTTON POUR FAIRE AFFICHER LE CONTENU -->
     </div>
 </div>
@@ -57,7 +57,7 @@
         joueurs de tous horizons dans une aventure<br>
         collective et passionnante.
     </p>
-    <div class="text-center">
+    <div class="text-center p-2">
         <i class="bi bi-chevron-double-up" id="showLessStory">VOIR MOINS...</i> <!-- BOUTON QUI CACHE LE CONTENU ET AFFICHE LA PREMIÈRE PARTIE -->
     </div>
 </div>

@@ -12,7 +12,7 @@
                 de la True Fighters (TF), ainsi que les tournois proposés par notre communauté.</p>
         </div>
     </div>
-    <div class="text-center">
+    <div class="text-center p-2">
         <i class="bi bi-chevron-double-down" id="showMoreGaming">VOIR PLUS...</i> <!-- BOUTTON POUR FAIRE AFFICHER LE CONTENU -->
     </div>
 </div>
@@ -49,7 +49,7 @@
             </div>
         </div>
         <hr class="border-1 text-light">
-        <div>
+        <div class="p-2">
             <i class="bi bi-chevron-double-up" id="showLessGaming">VOIR MOINS...</i> <!-- BOUTON QUI CACHE LE CONTENU ET AFFICHE LA PREMIÈRE PARTIE -->
         </div>
     </div>

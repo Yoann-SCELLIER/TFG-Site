@@ -71,8 +71,8 @@
             </a>
             <hr>
             <ul class="d-flex justify-content-center" style="list-style-type:none;">
-                <li class="p-0 m-2"><a href="connexion.html.php">Connexion</a></li>
-                <li class="p-0 m-2"><a href="/tfg/inscription.html.php">Inscription</a></li>
+                <li class="p-0 m-2"><a href="/tfg/log.html.php">Connexion</a></li>
+                <li class="p-0 m-2"><a href="/tfg/log.html.php">Inscription</a></li>
             </ul>
         </div>
         <div class="text-center mt-4">

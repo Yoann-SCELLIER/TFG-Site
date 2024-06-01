@@ -2,34 +2,31 @@
 // Inclure le fichier de configuration de la base de données
 require_once dirname(__DIR__) . '\controller\db.fn.php';
 
-function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id)
-{
-    // Vérifier si le nom d'utilisateur ou l'adresse e-mail est déjà utilisé
-    if (isUsernameTaken($bdd, $username) || isEmailTaken($bdd, $email)) {
-        return false; // Nom d'utilisateur ou adresse e-mail déjà utilisé
-    }
-
-    // Hasher le mot de passe
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover) {
+    // Hacher le mot de passe
+    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
     // Préparer la requête SQL
-    $sql = "INSERT INTO member (username, first_name, last_name, email, password, departement_id) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO member (username, first_name, last_name, email, password, departement_id, cover) 
+            VALUES (:username, :first_name, :last_name, :email, :password, :departement_id, :cover)";
 
-    try {
-        // Préparer la requête SQL
-        $stmt = $bdd->prepare($sql);
+    // Préparer la requête
+    $stmt = $bdd->prepare($sql);
 
-        // Exécuter la requête avec les données
-        $stmt->execute([$username, $first_name, $last_name, $email, $hashed_password, $departement_id]);
+    // Lier les valeurs
+    $stmt->bindValue(':username', $username);
+    $stmt->bindValue(':first_name', $first_name);
+    $stmt->bindValue(':last_name', $last_name);
+    $stmt->bindValue(':email', $email);
+    $stmt->bindValue(':password', $hashed_password);
+    $stmt->bindValue(':departement_id', $departement_id, PDO::PARAM_INT);
+    $stmt->bindValue(':cover', $cover);
 
-        // Retourner true si l'insertion a réussi
-        return true;
-    } catch (PDOException $e) {
-        // Retourner false en cas d'erreur et afficher l'erreur
-        echo "Erreur lors de l'ajout du membre : " . $e->getMessage();
-        return false;
-    }
+    // Exécuter la requête
+    return $stmt->execute();
 }
+
+
 
 function isUsernameTaken($bdd, $username)
 {
@@ -71,3 +68,4 @@ function viewMembers($bdd) {
     
     return $members;
 }
+
