@@ -1,7 +1,11 @@
+</main>
+
+<!-- Bouton "Revenir en haut" -->
+<button id="backToTopBtn" class="btn btn-primary">↑</button>
+
 <!-- FOOTER -->
-<!------------------------------------------------------------------------------------------------------------------------------------>
 <footer class="bg-grey">
-    <div class="row row-cols-1 row-cols-md-1 g-0 m-0 b-0 pt-3 justify-content-center ">
+    <div class="row row-cols-1 row-cols-md-1 g-0 m-0 b-0 pt-3 justify-content-center">
         <div>
             <hr class="border border-1 border-black">
         </div>
@@ -44,7 +48,6 @@
         <br>
     </div>
 
-    <!-- <div class="text-light"> -->
     <div class="row cols-12 row-cols-1 row-cols-md-1 row-cols-lg-3 g-0 m-0 b-0 p-0 text-center align-self-center text-light">
         <div class="row col">
             <h1>Like & Follow</h1>
@@ -68,19 +71,18 @@
             </a>
             <hr>
             <ul class="d-flex justify-content-center" style="list-style-type:none;">
-                <li class="p-0 m-2">Connexion</li>
-                <li class="p-0 m-2">Inscription</li>
+                <li class="p-0 m-2"><a href="connexion.html.php">Connexion</a></li>
+                <li class="p-0 m-2"><a href="/tfg/inscription.html.php">Inscription</a></li>
             </ul>
         </div>
         <div class="text-center mt-4">
             <p> &#169; Copyright 2024 réservé à True Fighters Gaming</p>
         </div>
     </div>
-    <!-- </div> -->
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script src="assets/js/javascript.js"></script>
+<script src="/tfg/assets/js/javascript.js"></script>
 </body>
 
 </html>

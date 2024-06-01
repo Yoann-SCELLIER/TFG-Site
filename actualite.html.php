@@ -1,6 +1,9 @@
 <?php
+require_once dirname(__DIR__) . '\TFG\controller\db.fn.php';
 
 require_once dirname(__DIR__) . '\TFG\components\header.html.php';
+
+require_once dirname(__DIR__) . '\TFG\crud\post.fn.php';
 
 require_once dirname(__DIR__) . '\TFG\components\banniere_actu.html.php';
 
