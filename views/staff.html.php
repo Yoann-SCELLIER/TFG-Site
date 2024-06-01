@@ -40,12 +40,12 @@
     <!-- Début de la section pour afficher les membres -->
     <div class="container">
         <div class="row d-flex justify-content-evenly">
-        
-        <?php
+
+            <?php
             $members = viewMembers($bdd);
             if ($members) {
                 foreach ($members as $member) {
-                    ?>
+            ?>
 
                     <div class="col-md-4" width="50px" height="auto">
                         <!-- Afficher l'image du membre -->
@@ -56,11 +56,14 @@
                             <div class="card-body">
                                 <!-- Afficher le nom du membre -->
                                 <h5 class="card-title"><?= $member['username'] ?></h5>
+                                <!-- Bouton pour afficher les détails du membre -->
+                                <a href="member.html.php?id=<?= $member['member_id'] ?>" class="btn btn-primary">Détails du Membre</a>
                             </div>
                         </div>
                     </div>
-                    
-                    <?php }
+
+
+            <?php }
             }; ?>
 
         </div>

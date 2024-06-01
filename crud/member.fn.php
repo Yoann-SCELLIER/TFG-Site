@@ -70,3 +70,19 @@ function viewMembers($bdd) {
     
     return $members;
 }
+
+// Fonction pour lire les détails d'un membre spécifique
+function readMember($bdd, $member_id) {
+    // Préparer la requête SQL
+    $sql = "SELECT * FROM member WHERE member_id = ?";
+    
+    // Préparer et exécuter la requête
+    $stmt = $bdd->prepare($sql);
+    $stmt->execute([$member_id]);
+    
+    // Récupérer le membre
+    $member = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    // Retourner le membre
+    return $member;
+}

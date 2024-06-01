@@ -4,19 +4,11 @@ require_once dirname(__DIR__) . '/controller/db.fn.php';
 require_once dirname(__DIR__) . '\crud\member.fn.php'; // Modifier le chemin si nécessaire
 
 
-if (isset($_GET['id'])) {
-    $id = intval($_GET['id']);
-    $sql = "SELECT * FROM users WHERE id = $id";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        $member = $result->fetch_assoc();
-    } else {
-        echo "Aucun membre trouvé avec cet ID.";
-        exit;
-    }
-} else {
-    echo "ID de membre non spécifié.";
-    exit;
+// Vérifier si l'ID du membre est défini dans l'URL
+if(isset($_GET['id']) && !empty($_GET['id'])) {
+    // Récupérer l'ID du membre depuis l'URL
+    $member_id = $_GET['id'];
+    
+    // Récupérer les détails du membre en utilisant l'ID
+    $member = readMember($bdd, $member_id);
 }
-?>
