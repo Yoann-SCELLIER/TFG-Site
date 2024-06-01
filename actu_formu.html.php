@@ -1,44 +1,40 @@
 <?php
 require_once dirname(__DIR__) . '\TFG\controller\db.fn.php';
-
 require_once dirname(__DIR__) . '\TFG\components\header.html.php';
-
-require_once dirname(__DIR__) . '\TFG\controllers\view_actu.php';
-
-// Vérifier si un ID est présent dans l'URL
-$id = isset($_GET['id']) ? $_GET['id'] : null;
-$post = null;
-
-// Si un ID est présent, récupérer les informations du post pour modification
-if ($id) {
-    $post = getPostById($bdd, $id);
-}
-
-$formTitle = $id ? "Modifier le Post" : "Ajouter un Post";
-$action = $id ? "update_post.php?id=" . $id : "add_post.php";
-$titre = $post ? $post['title'] : '';
-$contenu = $post ? $post['content'] : '';
-$image_url = $post ? $post['image_url'] : '';
+require_once dirname(__DIR__) . '\TFG\controllers\views_actu.php';
+require_once dirname(__DIR__) . '\TFG\controllers\post_form_handler.php';
 ?>
 
-<h1 id="formTitle"><?= $formTitle ?></h1>
-<form id="postForm" action="<?= $action ?>" method="post">
-    <label for="titre">Titre :</label>
-    <input type="text" id="titre" name="titre" value="<?= htmlspecialchars($titre) ?>" required><br>
+<div class="container text-center">
+    <div class="row align-items-center p-5">
+        <div class="col m-2 b-0 p-0 g-0 border border-1 p-5 bg-grey">
+            <h1 id="formTitle" class="text-white"><?= htmlspecialchars($formTitle) ?></h1>
+            <form id="postForm" action="<?= htmlspecialchars($action) ?>" method="post">
 
-    <label for="contenu">Contenu :</label>
-    <textarea id="contenu" name="contenu" required><?= htmlspecialchars($contenu) ?></textarea><br>
+                <div class="mb-3">
+                    <label for="titre" class="form-label text-white">Titre :</label><br>
+                    <input type="text" name="titre" class="form-control" id="titre" aria-describedby="titre" value="<?= htmlspecialchars($titre) ?>" required><br>
+                </div>
+                <div class="mb-3">
+                    <label for="contenu" class="form-label text-white">Contenu :</label><br>
+                    <textarea name="contenu" class="form-control" id="contenu" rows="6" required><?= htmlspecialchars($contenu) ?></textarea><br>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-white" for="image_url">URL de l'image :</label><br>
+                    <input type="text" class="form-control" id="image_url" name="image_url" value="<?= htmlspecialchars($image_url) ?>"><br>
+                </div>
 
-    <label for="image_url">URL de l'image :</label>
-    <input type="text" id="image_url" name="image_url" value="<?= htmlspecialchars($image_url) ?>"><br>
 
-    <input type="submit" value="<?= $id ? "Modifier le Post" : "Ajouter le Post" ?>">
-</form>
+                <input type="submit" value="<?= $id ? "Modifier l'actualité" : "Ajouter l'actualité" ?>" class="p-3">
 
-<?php if ($id): ?>
-    <a href="controllers/delete_post.php?id=<?= $id ?>" class="btn btn-danger">Supprimer</a>
-<?php endif;
+                <?php if ($id) : ?>
+                    <input type="submit" href="controllers/delete_post.php?id=<?= htmlspecialchars($id) ?>" class="p-3 bg-danger" value="Supprimer">
+                <?php endif; ?>
+            </form>
+        </div>
+    </div>
+</div>
 
+<?php
 require_once dirname(__DIR__) . '\TFG\components\footer.html.php';
-
-?> 
+?>

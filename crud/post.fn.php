@@ -15,7 +15,7 @@ function addPost($bdd, $titre, $contenu, $image_url) {
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 // Fonction pour récupérer tous les posts de la base de données
-function viewPost($bdd) {
+function viewsPost($bdd) {
     $sqlQuery = 'SELECT * FROM post';
     $stmt = $bdd->prepare($sqlQuery);
     $stmt->execute();
@@ -52,9 +52,8 @@ function getPostById($bdd, $id) {
 
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-// Fonction pour mettre à jour les informations d'un post dans la base de données
 function updatePost($bdd, $id, $titre, $contenu, $image_url) {
-    $sql = "UPDATE post SET title = :titre, content = :contenu, image_url = :image_url WHERE post_id = :id";
+    $sql = "UPDATE post SET title = :titre, content = :contenu, image_url = :image_url, modif_at = CURRENT_TIMESTAMP WHERE post_id = :id";
     $stmt = $bdd->prepare($sql);
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
     $stmt->bindValue(':titre', $titre);

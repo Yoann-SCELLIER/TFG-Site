@@ -31,7 +31,7 @@
     <div class="row row-cols-1 row-cols-sm-3 row-cols-md-5 m-5 g-4 d-flex justify-content-evenly">
 
         <?php
-        $posts = viewPost($bdd);
+        $posts = viewsPost($bdd);
         if ($posts) {
             foreach ($posts as $post) {
         ?>
@@ -45,12 +45,12 @@
                             <p class="card-text"><?= $post['content'] ?></p>
                         </div>
                         <div class="card-footer">
-                            <small class="text-body-secondary"><?= $post['created_at'] ?></small>
+                            <small class="text-body-secondary"><?= $post['created_at'] ?></small><br>
                             <small class="text-body-secondary"><?= $post['modif_at'] ?></small>
                         </div>
                         <div class="btn-group" role="group" aria-label="Actions">
-                            <a href="actu_formu.html.php?id=<?= $post['post_id'] ?>" class="btn btn-warning">Détail</a>
-%                        </div>
+                            <a href="\TFG\actu_read.html.php?id=<?= $post['post_id'] ?>" class="btn btn-warning">Détail</a>
+                        </div>
                     </div>
                 </div>
 

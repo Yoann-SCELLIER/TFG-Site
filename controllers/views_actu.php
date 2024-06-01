@@ -16,7 +16,7 @@ $submitValue = 'Ajouter le Post';
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     // Récupère tous les posts
-    $posts = viewPost($bdd);
+    $posts = viewsPost($bdd);
 
     // Recherche le post correspondant à l'ID spécifié
     foreach ($posts as $post) {
