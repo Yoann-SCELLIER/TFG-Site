@@ -52,3 +52,9 @@ background-color: #3b3b3b !important;
     padding: 15px;
     border-radius: 10px;
   }
+
+  /* ___________________________________________________________________________________________________________________ */
+
+  .bg-military {
+    background-color: #024e15 !important;
+  }

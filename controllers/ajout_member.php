@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         move_uploaded_file($_FILES['cover']['tmp_name'], $cover_path);
     } else {
         // Utiliser une image par défaut si aucun fichier n'est uploadé
-        $cover_path = 'path/to/default/image.jpg';
+        $cover_path = '/tfg/assets/images/Default_esports_player_silhouette_face_not_visible_light_in_th_2.jpg';
     }
 
     // Appel de la fonction d'inscription
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result) {
         // Redirection vers la page d'accueil après inscription réussie
-        header('Location: ../index.html.php');
+        header('Location: ../index.php');
         exit();
     } else {
         // Gérer les erreurs si l'inscription a échoué

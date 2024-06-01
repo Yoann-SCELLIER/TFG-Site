@@ -7,7 +7,7 @@ require_once dirname(__DIR__) . '\TFG\controllers\post_form_handler.php';
 
 <div class="container text-center">
     <div class="row align-items-center p-5">
-        <div class="col m-2 b-0 p-0 g-0 border border-1 p-5 bg-grey">
+        <div class="col m-2 b-0 p-0 g-0 border border-1 p-5 bg-grey border border-4 border-danger">
             <h1 id="formTitle" class="text-white"><?= htmlspecialchars($formTitle) ?></h1>
             <form id="postForm" action="<?= htmlspecialchars($action) ?>" method="post">
 

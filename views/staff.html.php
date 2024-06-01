@@ -5,7 +5,7 @@
         <div class="col align-self-center text-end m-0 text-white order-2 order-sm-2 order-md-1">
             <h1 class="fs-4">Staff & Membres</h1>
             <p class="fs-6">Présentation du personnel "STAFF & MEMBRES", leurs rôles, leurs importances, ainsi que
-                la spécialités de chacun.</p>
+                la spécialité de chacun.</p>
         </div>
         <div class="col order-1 order-sm-1 order-md-2">
             <img class="p-0 m-0 b-0 g-0" width="40%" height="auto" src="assets/images/img-member.png" alt="image pour la section membres et staff">
@@ -50,7 +50,7 @@
                     <div class="col-md-4" width="50px" height="auto">
                         <!-- Afficher l'image du membre -->
                         <div width="50%" height="auto">
-                            <img src="https://th.bing.com/th/id/OIG4.w7UtocGTf5TpQcOEbG0X?pid=ImgGn" class="card-img-top" alt="Photo de <?= $member['username'] ?>">
+                            <img src="<?= $member['cover'] ?>" class="card-img-top" alt="Photo de <?= $member['username'] ?>">
                         </div>
                         <div class="card mb-4 shadow-sm">
                             <div class="card-body">

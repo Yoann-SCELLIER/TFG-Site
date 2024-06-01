@@ -27,7 +27,6 @@ function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $passwo
 }
 
 
-
 function isUsernameTaken($bdd, $username)
 {
     $sql = "SELECT COUNT(*) AS count FROM member WHERE username = ?";
