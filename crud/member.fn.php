@@ -2,6 +2,7 @@
 // Inclure le fichier de configuration de la base de données
 require_once dirname(__DIR__) . '\controller\db.fn.php';
 
+// Fonction pour ajouter un membre à la base de données
 function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover) {
     // Hacher le mot de passe
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
@@ -26,7 +27,7 @@ function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $passwo
     return $stmt->execute();
 }
 
-
+// Fonction pour vérifier si un nom d'utilisateur est déjà pris
 function isUsernameTaken($bdd, $username)
 {
     $sql = "SELECT COUNT(*) AS count FROM member WHERE username = ?";
@@ -36,6 +37,7 @@ function isUsernameTaken($bdd, $username)
     return $row['count'] > 0;
 }
 
+// Fonction pour vérifier si une adresse e-mail est déjà prise
 function isEmailTaken($bdd, $email)
 {
     $sql = "SELECT COUNT(*) AS count FROM member WHERE email = ?";
@@ -45,9 +47,9 @@ function isEmailTaken($bdd, $email)
     return $row['count'] > 0;
 }
 
+// Fonction pour connecter un utilisateur en vérifiant ses informations d'identification
 function connexion($bdd, $email, $hashed_password)
 {
-
     $sql = "SELECT * FROM member WHERE email = :email";
     $stmt = $bdd->prepare($sql);
     $stmt->execute(['email' => $email]);
@@ -59,6 +61,7 @@ function connexion($bdd, $email, $hashed_password)
     }
 }
 
+// Fonction pour afficher tous les membres
 function viewMembers($bdd) {
     // Requête pour récupérer tous les membres
     $sqlQuery = 'SELECT * FROM member';
@@ -67,4 +70,3 @@ function viewMembers($bdd) {
     
     return $members;
 }
-
