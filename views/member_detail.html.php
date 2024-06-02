@@ -38,7 +38,7 @@ require_once dirname(__DIR__) . '\controllers\reade_member.php';
     </form>
 
     <!-- Bouton pour retourner à la liste -->
-    <a href="index.php" class="btn btn-secondary">Retour à la liste</a>
+    <a href="index#staff.php" class="btn btn-secondary">Retour à la liste</a>
 </div>
 
     </section>

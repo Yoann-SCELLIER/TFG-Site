@@ -43,7 +43,7 @@
                             <small class="text-body-secondary"><?= $post['modif_at'] ?></small>
                         </div>
                         <div class="btn-group" role="group" aria-label="Actions">
-                            <a href="\TFG\actu_read.html.php?id=<?= $post['post_id'] ?>" class="btn btn-warning">Détail</a>
+                            <a href="actu_read.php?id=<?= $post['post_id'] ?>" class="btn btn-warning">Détail</a>
                         </div>
                     </div>
                 </div>

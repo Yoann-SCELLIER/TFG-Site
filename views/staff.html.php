@@ -57,7 +57,7 @@
                                 <!-- Afficher le nom du membre -->
                                 <h5 class="card-title"><?= $member['username'] ?></h5>
                                 <!-- Bouton pour afficher les détails du membre -->
-                                <a href="member.html.php?id=<?= $member['member_id'] ?>" class="btn btn-primary">Détails du Membre</a>
+                                <a href="member.php?id=<?= $member['member_id'] ?>" class="btn btn-primary">Détails du Membre</a>
                             </div>
                         </div>
                     </div>

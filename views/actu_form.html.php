@@ -1,10 +1,3 @@
-<?php
-require_once dirname(__DIR__) . '\TFG\controller\db.fn.php';
-require_once dirname(__DIR__) . '\TFG\components\header.html.php';
-require_once dirname(__DIR__) . '\TFG\controllers\views_actu.php';
-require_once dirname(__DIR__) . '\TFG\controllers\post_form_handler.php';
-?>
-
 <div class="container text-center">
     <div class="row align-items-center p-5">
         <div class="col m-2 b-0 p-0 g-0 border border-1 p-5 bg-grey border border-4 border-danger">
@@ -34,7 +27,3 @@ require_once dirname(__DIR__) . '\TFG\controllers\post_form_handler.php';
         </div>
     </div>
 </div>
-
-<?php
-require_once dirname(__DIR__) . '\TFG\components\footer.html.php';
-?>

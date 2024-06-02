@@ -1,7 +1,4 @@
 <?php
-require_once dirname(__DIR__) . '\TFG\controller\db.fn.php';
-require_once dirname(__DIR__) . '\TFG\components\header.html.php';
-require_once dirname(__DIR__) . '\TFG\controllers\views_actu.php';
 
 // Récupération de l'ID pour la modification de la signature ciblée
 $id = $_GET['id'];
@@ -29,7 +26,7 @@ if ($post) {
                 <?php endif; ?>
             </div>
             <div aria-label="Actions" class="text-center m-3">
-                <a href="actu_formu.html.php?id=<?= $post['post_id'] ?>" class="btn btn-warning">Modifier l'article</a>
+                <a href="actu_formu.php?id=<?= $post['post_id'] ?>" class="btn btn-warning">Modifier l'article</a>
             </div>
         </div>
     </div>
@@ -39,6 +36,3 @@ if ($post) {
     // Afficher un message si l'article n'existe pas
     echo "L'article demandé n'existe pas.";
 }
-
-require_once dirname(__DIR__) . '\TFG\components\footer.html.php';
-?>

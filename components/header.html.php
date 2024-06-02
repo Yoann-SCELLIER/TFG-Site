@@ -33,7 +33,7 @@
                             <a class="nav-link text-white" href="index.php#gamingSection">GAMING</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="actualite.html.php">ACTUALITÉ</a>
+                            <a class="nav-link text-white" href="actualite.php">ACTUALITÉ</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="#" id="contactButton">CONTACT</a>
