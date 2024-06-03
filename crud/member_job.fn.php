@@ -17,19 +17,19 @@ function addMemberJob($bdd, $member_id, $job_id) {
     }
 }
 
-function getMemberJobs($member_id, $bdd) {
+
+// Fonction pour récupérer les titres des emplois d'un membre
+function getMemberJobsTitles($bdd, $member_id) {
     try {
-        $sql = "SELECT job.title, job.content, member.username 
+        $sql = "SELECT job.title 
                 FROM job 
                 INNER JOIN member_job ON job.job_id = member_job.job_id 
-                INNER JOIN member ON member_job.member_id = member.member_id 
                 WHERE member_job.member_id = ?";
         $stmt = $bdd->prepare($sql);
         $stmt->execute([$member_id]);
-        $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        // var_dump($jobs); // Pour déboguer, vous pouvez le supprimer en production
-        return $jobs;
+        $titles = $stmt->fetchAll(PDO::FETCH_COLUMN); // Récupère seulement les titres des jobs
+        return $titles;
     } catch (PDOException $e) {
-        exit("Erreur lors de la récupération des emplois du membre: " . $e->getMessage());
+        exit("Erreur lors de la récupération des titres des emplois du membre: " . $e->getMessage());
     }
 }
