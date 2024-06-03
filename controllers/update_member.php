@@ -13,7 +13,7 @@ if ($member_id === null) {
 }
 
 // Récupération du membre à partir de l'ID
-$member = get_member_by_id($bdd, $member_id);
+$member = getMemberById($bdd, $member_id);
 
 // Vérification si le membre existe
 if ($member === null) {

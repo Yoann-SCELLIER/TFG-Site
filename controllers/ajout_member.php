@@ -26,11 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Appel de la fonction d'inscription
-    $result = ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover_path);
+    $member_id = ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover_path);
 
-    if ($result) {
-        // Redirection vers la page d'accueil après inscription réussie
-        header('Location: ../index.php');
+    if ($member_id) {
+        // Redirection vers la page de profil du membre après inscription réussie
+        header('Location: \TFG\index.php');
         exit();
     } else {
         // Gérer les erreurs si l'inscription a échoué

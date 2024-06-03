@@ -1,4 +1,4 @@
-<?php $jobs = getJobs($bdd); ?>
+<?php $jobs = getMemberById($bdd, $member_id); ?>
 
 <div class="container text-center">
     <div class="row align-items-center p-5">

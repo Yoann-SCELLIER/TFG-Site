@@ -50,5 +50,5 @@ require_once dirname(__DIR__) . '\controller\db.fn.php';
     </section>
 <?php else : ?>
     <p>Le membre n'existe pas ou l'ID du membre n'a pas été spécifié.</p>
-    <a href="index.php">Retour à la liste</a>
+    <a href="\TFG\index.php">Retour à la liste</a>
 <?php endif; ?>

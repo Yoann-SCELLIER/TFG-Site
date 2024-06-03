@@ -77,29 +77,13 @@ function viewMembers($bdd) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
-// function getMemberById($bdd, $member_id) {
-//     try {
-//         $sql = "SELECT member
-//                 FROM job 
-//                 INNER JOIN member_job ON job.job_id = member_job.job_id 
-//                 WHERE member_job.member_id = ?";
-//         $stmt = $bdd->prepare($sql);
-//         $stmt->execute([$member_id]);
-//         $member = $stmt->fetchAll(PDO::FETCH_COLUMN); // Récupère seulement les titres des jobs
-//         // var_dump($member);
-//         return $member;
-//     } catch (PDOException $e) {
-//         exit("Erreur lors de la récupération des titres des emplois du membre: " . $e->getMessage());
-//     }
-// }
-
 function getMemberById($bdd, $member_id) {
     try {
         $sql = "SELECT member.*,
                 GROUP_CONCAT(job.title SEPARATOR ', ') AS jobs
                 FROM job 
                 INNER JOIN member_job ON job.job_id = member_job.job_id 
-                INNER JOIN member ON member_job.member_id = member.member_id 
+                RIGHT JOIN member ON member_job.member_id = member.member_id 
                 WHERE member_job.member_id = ?
                 GROUP BY member.member_id";
         $stmt = $bdd->prepare($sql);
