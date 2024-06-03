@@ -79,12 +79,12 @@ function viewMembers($bdd) {
 //---------------------------------------------------------------------------------------------------------------------------------------------
 function getMemberById($bdd, $member_id) {
     try {
-        $sql = "SELECT member.*,
+        $sql = "SELECT member.*, 
                 GROUP_CONCAT(job.title SEPARATOR ', ') AS jobs
-                FROM job 
-                INNER JOIN member_job ON job.job_id = member_job.job_id 
-                RIGHT JOIN member ON member_job.member_id = member.member_id 
-                WHERE member_job.member_id = ?
+                FROM member
+                LEFT JOIN member_job ON member.member_id = member_job.member_id
+                LEFT JOIN job ON member_job.job_id = job.job_id
+                WHERE member.member_id = ?
                 GROUP BY member.member_id";
         $stmt = $bdd->prepare($sql);
         $stmt->execute([$member_id]);
@@ -95,6 +95,7 @@ function getMemberById($bdd, $member_id) {
         exit("Erreur lors de la récupération des spécialité du membre: " . $e->getMessage());
     }
 }
+
 
 function addMemberJob($bdd, $member_id, $job_id) {
     try {
