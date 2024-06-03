@@ -108,7 +108,7 @@ function getMemberById($bdd, $member_id) {
         // var_dump($member); // Pour déboguer, vous pouvez le supprimer en production
         return $member;
     } catch (PDOException $e) {
-        exit("Erreur lors de la récupération des emplois du membre: " . $e->getMessage());
+        exit("Erreur lors de la récupération des spécialité du membre: " . $e->getMessage());
     }
 }
 

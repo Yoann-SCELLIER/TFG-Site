@@ -1,8 +1,6 @@
 <?php
 // Inclure le fichier de configuration de la base de données
 require_once dirname(__DIR__) . '\controller\db.fn.php';
-// var_dump($member);
-// var_dump($member_jobs);
 
 ?>
 
@@ -23,9 +21,9 @@ require_once dirname(__DIR__) . '\controller\db.fn.php';
                         <h5 class="card-title">Username : <?php echo $member['username']; ?></h5>
                         <p><strong>Spécialités :</strong> 
                             <?php if (!empty($member['jobs'])) : ?>
-                                    <?php echo htmlspecialchars($member['jobs']); ?>,
+                                    <?php echo htmlspecialchars($member['jobs']); ?>
                             <?php else : ?>
-                                Aucun emploi associé
+                                Aucune spécialité.
                             <?php endif; ?>
                         </p>
                         <p class="card-text">Description : <?php echo $member['content']; ?></p>
