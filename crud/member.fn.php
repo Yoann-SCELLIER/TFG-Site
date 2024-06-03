@@ -77,31 +77,52 @@ function viewMembers($bdd) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
-// Fonction pour lire les détails d'un membre spécifique
-function readMember($bdd, $member_id) {
-    // Préparer la requête SQL
-    $sql = "SELECT * FROM member WHERE member_id = ?";
-    
-    // Préparer et exécuter la requête
-    $stmt = $bdd->prepare($sql);
-    $stmt->execute([$member_id]);
-    
-    // Récupérer le membre
-    $member = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-    // Retourner le membre
-    return $member;
+// function getMemberById($bdd, $member_id) {
+//     try {
+//         $sql = "SELECT member
+//                 FROM job 
+//                 INNER JOIN member_job ON job.job_id = member_job.job_id 
+//                 WHERE member_job.member_id = ?";
+//         $stmt = $bdd->prepare($sql);
+//         $stmt->execute([$member_id]);
+//         $member = $stmt->fetchAll(PDO::FETCH_COLUMN); // Récupère seulement les titres des jobs
+//         // var_dump($member);
+//         return $member;
+//     } catch (PDOException $e) {
+//         exit("Erreur lors de la récupération des titres des emplois du membre: " . $e->getMessage());
+//     }
+// }
+
+function getMemberById($bdd, $member_id) {
+    try {
+        $sql = "SELECT member.*,
+                GROUP_CONCAT(job.title SEPARATOR ', ') AS jobs
+                FROM job 
+                INNER JOIN member_job ON job.job_id = member_job.job_id 
+                INNER JOIN member ON member_job.member_id = member.member_id 
+                WHERE member_job.member_id = ?
+                GROUP BY member.member_id";
+        $stmt = $bdd->prepare($sql);
+        $stmt->execute([$member_id]);
+        $member = $stmt->fetch(PDO::FETCH_ASSOC);
+        // var_dump($member); // Pour déboguer, vous pouvez le supprimer en production
+        return $member;
+    } catch (PDOException $e) {
+        exit("Erreur lors de la récupération des emplois du membre: " . $e->getMessage());
+    }
 }
 
-//---------------------------------------------------------------------------------------------------------------------------------------------
-// Modification d'un membre
-function get_member_by_id($bdd, $member_id) {
-    // Prépare et exécute la requête SQL pour récupérer les informations du membre par son ID
-    $sql = "SELECT * FROM member WHERE member_id = ?";
-    $stmt = $bdd->prepare($sql);
-    $stmt->execute([$member_id]);
-    // Renvoie le résultat de la requête sous forme de tableau associatif
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+function addMemberJob($bdd, $member_id, $job_id) {
+    try {
+        // Requête SQL pour ajouter un emploi à un membre dans la table de liaison
+        $sql = "INSERT INTO member_job (member_id, job_id) VALUES (?, ?)";
+        $stmt = $bdd->prepare($sql);
+        $stmt->execute([$member_id, $job_id]);
+        return true;
+    } catch (PDOException $e) {
+        // Gérer les erreurs de requête SQL
+        exit("Erreur lors de l'ajout de l'emploi au membre: " . $e->getMessage());
+    }
 }
 
 function update_member($bdd, $member_id, $cover = null, $username = null, $email = null, $job = null, $content = null) {

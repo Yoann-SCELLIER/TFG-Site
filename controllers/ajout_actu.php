@@ -14,6 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     addPost($bdd, $titre, $contenu, $image_url);
 
     // Redirige vers la page d'actualités après l'ajout du post
-    header('Location: /tfg/actualite.html.php');
+    header('Location: \TFG\actualite.php');
     exit;
 }

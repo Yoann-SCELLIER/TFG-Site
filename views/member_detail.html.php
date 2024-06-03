@@ -1,7 +1,6 @@
 <?php
 // Inclure le fichier de configuration de la base de données
 require_once dirname(__DIR__) . '\controller\db.fn.php';
-require_once dirname(__DIR__) . '\controllers\reade_member.php';
 // var_dump($member);
 // var_dump($member_jobs);
 
@@ -23,10 +22,8 @@ require_once dirname(__DIR__) . '\controllers\reade_member.php';
                     <div class="card-body">
                         <h5 class="card-title">Username : <?php echo $member['username']; ?></h5>
                         <p><strong>Spécialités :</strong> 
-                            <?php if (!empty($member_job_titles)) : ?>
-                                <?php foreach ($member_job_titles as $title) : ?>
-                                    <?php echo htmlspecialchars($title); ?>,
-                                <?php endforeach; ?>
+                            <?php if (!empty($member['jobs'])) : ?>
+                                    <?php echo htmlspecialchars($member['jobs']); ?>,
                             <?php else : ?>
                                 Aucun emploi associé
                             <?php endif; ?>

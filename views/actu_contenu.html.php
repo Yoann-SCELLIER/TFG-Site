@@ -15,7 +15,7 @@
     </div>
     <hr class="border-2">
     <!-- Bouton pour ajouter une actualité -->
-    <a href="/tfg/actu_formu.html.php" class="btn btn-primary">Ajouter une actualité</a>
+    <a href="/tfg/actu_formu.php" class="btn btn-primary">Ajouter une actualité</a>
 </div>
 
 <!-- Affichage des actualités -->

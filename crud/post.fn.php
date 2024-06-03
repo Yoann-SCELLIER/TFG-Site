@@ -1,7 +1,6 @@
 <?php
 
 //--------------------------------------------------------------------------------------------------------------------------------------
-
 // Fonction pour ajouter un nouveau post dans la base de données
 function addPost($bdd, $titre, $contenu, $image_url) {
     $sql = "INSERT INTO post (title, content, image_url) VALUES (:titre, :contenu, :image_url)";
@@ -26,9 +25,8 @@ function viewsPost($bdd) {
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 // Fonction pour supprimer un post de la base de données en utilisant son ID
-function deletePost($bdd) {
+function deletePost($bdd, $id) {
     try {
-        $id = $_GET['id'];
         $sql = "DELETE FROM `post` WHERE `post_id` = :id";
         $stmt = $bdd->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
@@ -38,6 +36,7 @@ function deletePost($bdd) {
         echo "Erreur : " . $e->getMessage();
     }
 }
+
 
 //--------------------------------------------------------------------------------------------------------------------------------------
 
