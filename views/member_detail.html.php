@@ -1,9 +1,9 @@
 <?php
 // Inclure le fichier de configuration de la base de données
 require_once dirname(__DIR__) . '\controller\db.fn.php';
-
 require_once dirname(__DIR__) . '\controllers\reade_member.php';
 ?>
+
 <div class="text-center">
     <h1 class="p-5 mb-0">Détails du Membre</h1>
 </div>
@@ -20,8 +20,9 @@ require_once dirname(__DIR__) . '\controllers\reade_member.php';
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">Username :</strong> <?php echo $member['username']; ?></h5>
-                        <!-- <p><strong>Role :</strong> <?php //  echo $member['role']; ?></p> -->
-                        <p><strong>Spécialité :</strong> <?php echo $job['title']; ?></p> 
+                        <!-- <p><strong>Role :</strong> <?php //  echo $member['role']; 
+                                                        ?></p> -->
+                        <p><strong>Spécialité :</strong> <?php echo $job['title']; ?></p>
                         <p class="card-text">Description :</strong> <?php echo $member['content']; ?></p>
                     </div>
                 </div>
@@ -29,17 +30,25 @@ require_once dirname(__DIR__) . '\controllers\reade_member.php';
         </div>
         <div class="d-flex justify-content-evenly p-3">
             <!-- Bouton pour modifier le membre -->
-            <a href="member_form.php?id=<?php echo $member['member_id']; ?>" class="btn btn-success">Modifier</a>
+            <form action="member_form.php" method="get" style="display: inline;">
+                <input type="hidden" name="id" value="<?php echo $member['member_id']; ?>">
+                <button type="submit" class="btn btn-success">Modifier</button>
+            </form>
 
             <!-- Bouton pour supprimer le membre -->
-            <form action="supprimer_membre.php" method="post" class="d-inline">
+            <form action="supprimer_membre.php" method="post" style="display: inline;">
                 <input type="hidden" name="member_id" value="<?php echo $member['member_id']; ?>">
                 <button type="submit" class="btn btn-danger">Supprimer</button>
             </form>
 
-            <!-- Bouton pour retourner à la liste -->
-            <a href="index.php#staffSection" class="btn btn-secondary">Retour à la liste</a>
+            <!-- Formulaire pour le bouton Retour à la liste -->
+            <form action="index.php#staffSection" method="get" style="display: inline;">
+                <button type="submit" class="btn btn-secondary">Retour à la liste</button>
+            </form>
         </div>
+
+        </div>
+
 
     </section>
 
