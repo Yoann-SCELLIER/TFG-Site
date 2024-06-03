@@ -2,6 +2,7 @@
 // Inclure le fichier de configuration de la base de données
 require_once dirname(__DIR__) . '\controller\db.fn.php';
 
+//---------------------------------------------------------------------------------------------------------------------------------------------
 // Fonction pour ajouter un membre à la base de données
 function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover) {
     // Hacher le mot de passe
@@ -27,6 +28,7 @@ function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $passwo
     return $stmt->execute();
 }
 
+//---------------------------------------------------------------------------------------------------------------------------------------------
 // Fonction pour vérifier si un nom d'utilisateur est déjà pris
 function isUsernameTaken($bdd, $username)
 {
@@ -37,6 +39,7 @@ function isUsernameTaken($bdd, $username)
     return $row['count'] > 0;
 }
 
+//---------------------------------------------------------------------------------------------------------------------------------------------
 // Fonction pour vérifier si une adresse e-mail est déjà prise
 function isEmailTaken($bdd, $email)
 {
@@ -47,6 +50,7 @@ function isEmailTaken($bdd, $email)
     return $row['count'] > 0;
 }
 
+//---------------------------------------------------------------------------------------------------------------------------------------------
 // Fonction pour connecter un utilisateur en vérifiant ses informations d'identification
 function connexion($bdd, $email, $hashed_password)
 {
@@ -61,6 +65,7 @@ function connexion($bdd, $email, $hashed_password)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------------------------------
 // Fonction pour afficher tous les membres
 function viewMembers($bdd) {
     // Requête pour récupérer tous les membres
@@ -71,6 +76,7 @@ function viewMembers($bdd) {
     return $members;
 }
 
+//---------------------------------------------------------------------------------------------------------------------------------------------
 // Fonction pour lire les détails d'un membre spécifique
 function readMember($bdd, $member_id) {
     // Préparer la requête SQL
@@ -86,3 +92,64 @@ function readMember($bdd, $member_id) {
     // Retourner le membre
     return $member;
 }
+
+//---------------------------------------------------------------------------------------------------------------------------------------------
+// Modification d'un membre
+function get_member_by_id($bdd, $member_id) {
+    // Prépare et exécute la requête SQL pour récupérer les informations du membre par son ID
+    $sql = "SELECT * FROM member WHERE member_id = ?";
+    $stmt = $bdd->prepare($sql);
+    $stmt->execute([$member_id]);
+    // Renvoie le résultat de la requête sous forme de tableau associatif
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+function update_member($bdd, $member_id, $cover = null, $username = null, $email = null, $job = null, $content = null) {
+    // Construction de la requête SQL de mise à jour en fonction des champs soumis
+    $sql = "UPDATE member SET ";
+    $params = [];
+
+    if ($cover !== null) {
+        $sql .= "cover = ?, ";
+        $params[] = $cover;
+    }
+    if ($username !== null) {
+        $sql .= "username = ?, ";
+        $params[] = $username;
+    }
+    if ($email !== null) {
+        $sql .= "email = ?, ";
+        $params[] = $email;
+    }
+    if ($job !== null) {
+        // Assurez-vous que $job est un tableau
+        if (!is_array($job)) {
+            $job = [$job];
+        }
+        $sql .= "job = ?, ";
+        $params[] = implode(',', $job);
+    }
+    if ($content !== null) {
+        $sql .= "content = ?, ";
+        $params[] = $content;
+    }
+
+    // Supprime la virgule et l'espace en trop à la fin de la requête
+    $sql = rtrim($sql, ", ");
+
+    // Ajoute la clause WHERE pour la mise à jour du membre spécifique
+    $sql .= " WHERE member_id = ?";
+
+    // Ajoute l'ID du membre à la liste des paramètres
+    $params[] = $member_id;
+
+    // Prépare la requête SQL
+    $stmt = $bdd->prepare($sql);
+
+    // Exécute la requête en liant les valeurs
+    $stmt->execute($params);
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------

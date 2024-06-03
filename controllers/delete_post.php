@@ -10,5 +10,5 @@ if (isset($_GET['id'])) {
 }
 
 // Redirige vers la page d'actualités après la suppression du post
-header('Location: /tfg/actualite.html.php');
+header('Location: /tfg/actualite.php');
 exit;

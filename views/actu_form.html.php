@@ -20,9 +20,7 @@
 
                 <input type="submit" value="<?= $id ? "Modifier l'actualité" : "Ajouter l'actualité" ?>" class="p-3">
 
-                <?php if ($id) : ?>
-                    <input type="submit" href="controllers/delete_post.php?id=<?= htmlspecialchars($id) ?>" class="p-3 bg-danger" value="Supprimer">
-                <?php endif; ?>
+
             </form>
         </div>
     </div>

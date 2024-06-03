@@ -15,6 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['id'])) {
     updatePost($bdd, $id, $titre, $contenu, $image_url);
 
     // Redirige vers la page d'actualités après la mise à jour du post
-    header('Location: /tfg/actualite.html.php');
+    header('Location: /tfg/actualite.php');
     exit;
 }

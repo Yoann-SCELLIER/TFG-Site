@@ -21,25 +21,25 @@ require_once dirname(__DIR__) . '\controllers\reade_member.php';
                     <div class="card-body">
                         <h5 class="card-title">Username :</strong> <?php echo $member['username']; ?></h5>
                         <!-- <p><strong>Role :</strong> <?php //  echo $member['role']; ?></p> -->
-                        <!-- <p><strong>Spécialité :</strong> <?php // echo $member['job']; ?></p> -->
+                        <p><strong>Spécialité :</strong> <?php echo $job['title']; ?></p> 
                         <p class="card-text">Description :</strong> <?php echo $member['content']; ?></p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="d-flex justify-content-evenly p-3">
-    <!-- Bouton pour modifier le membre -->
-    <a href="modifier_membre.php?id=<?php echo $member['member_id']; ?>" class="btn btn-success">Modifier</a>
+            <!-- Bouton pour modifier le membre -->
+            <a href="member_form.php?id=<?php echo $member['member_id']; ?>" class="btn btn-success">Modifier</a>
 
-    <!-- Bouton pour supprimer le membre -->
-    <form action="supprimer_membre.php" method="post" class="d-inline">
-        <input type="hidden" name="member_id" value="<?php echo $member['member_id']; ?>">
-        <button type="submit" class="btn btn-danger">Supprimer</button>
-    </form>
+            <!-- Bouton pour supprimer le membre -->
+            <form action="supprimer_membre.php" method="post" class="d-inline">
+                <input type="hidden" name="member_id" value="<?php echo $member['member_id']; ?>">
+                <button type="submit" class="btn btn-danger">Supprimer</button>
+            </form>
 
-    <!-- Bouton pour retourner à la liste -->
-    <a href="index.php#staffSection" class="btn btn-secondary">Retour à la liste</a>
-</div>
+            <!-- Bouton pour retourner à la liste -->
+            <a href="index.php#staffSection" class="btn btn-secondary">Retour à la liste</a>
+        </div>
 
     </section>
 
