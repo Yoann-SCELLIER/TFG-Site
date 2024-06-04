@@ -184,3 +184,12 @@ function updateMember($bdd, $member_id, $cover = null, $username = null, $email 
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
+function listJobs($bdd) {
+
+    // On récupère tout le contenu de la table job
+    $sqlQuery = 'SELECT * FROM job';
+    $recipesStatement1 = $bdd->prepare($sqlQuery);
+    $recipesStatement1->execute();
+    $listJobs = $recipesStatement1->fetchAll();
+    return $listJobs;
+}

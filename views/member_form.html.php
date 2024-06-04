@@ -1,3 +1,7 @@
+<?php
+$jobs = listJobs($bdd);
+?>
+
 <div class="container text-center">
     <div class="row align-items-center p-5">
         <div class="col m-2 b-0 p-0 g-0 border border-1 p-5 bg-grey border border-4 border-danger">
@@ -13,12 +17,24 @@
                     <input type="email" name="email" class="form-control" id="email" value="<?= htmlspecialchars($member['email'] ?? '') ?>" required><br>
                 </div>
                 <div class="mb-3">
-                <div class="mb-3">
-    <label for="job" class="form-label text-white">Vos compétences :</label><br>
-    <?php foreach ($all_jobs as $job) : ?>
-        <div><?= $job['title'] ?></div>
-    <?php endforeach; ?>
-</div>
+                    <label for="job" class="form-label text-white">Vos compétences :</label>
+                    <hr class="border border-white"><br>
+                <div class="d-flex align-items-center justify-content-evenly">
+                    <div>
+                        <?php foreach ($jobs as $job) : ?>
+    
+                            <div class="form-check text-start">
+                                <label class="form-check-label text-white" for="flexCheckDefault"><?= $job['title'] ?></label>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            </div>
+
+                        <?php endforeach; ?>
+                    </div>
+                    <div>
+                            <img src="\tfg\assets\images\logo_competence.png" alt="Image compétence" width="300px;" height="auto">
+                    </div>
+                </div>
+                </div>
                 <div class="mb-3">
                     <label for="content" class="form-label text-white">Description :</label><br>
                     <textarea name="content" class="form-control" id="content" rows="6" required><?= htmlspecialchars($member['content'] ?? 'Description par défaut') ?></textarea><br>
