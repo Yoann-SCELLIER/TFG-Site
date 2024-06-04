@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $content);
 
     // Redirige vers la page de détails du membre après la mise à jour
-    header('Location: /TFG/views/member_detail.html.php?id=' . $member_id);
+    header('Location: /TFG/index.php');
     exit;
 }
 

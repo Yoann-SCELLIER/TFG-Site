@@ -19,21 +19,21 @@ $jobs = listJobs($bdd);
                 <div class="mb-3">
                     <label for="job" class="form-label text-white">Vos compétences :</label>
                     <hr class="border border-white"><br>
-                <div class="d-flex align-items-center justify-content-evenly">
-                    <div>
-                        <?php foreach ($jobs as $job) : ?>
-    
-                            <div class="form-check text-start">
-                                <label class="form-check-label text-white" for="flexCheckDefault"><?= $job['title'] ?></label>
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            </div>
-
-                        <?php endforeach; ?>
+                    <div class="d-flex align-items-center justify-content-evenly">
+                        <div class=" row col-6">
+                            <?php foreach ($jobs as $job) : ?>
+                                <div class="form-check text-start">
+                                    <label class="form-check-label text-white" for="job<?= $job['job_id'] ?>">
+                                        <?= $job['title'] ?>
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" name="jobs[]" id="job<?= $job['job_id'] ?>" value="<?= $job['job_id'] ?>" <?php if (isset($member['selected_jobs']) && in_array($job['id'], $member['selected_jobs'])) echo "checked"; ?>>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="row col-6" width="150px;" height="auto">
+                            <img src="\tfg\assets\images\logo_competence.png" alt="Image compétence">
+                        </div>
                     </div>
-                    <div>
-                            <img src="\tfg\assets\images\logo_competence.png" alt="Image compétence" width="300px;" height="auto">
-                    </div>
-                </div>
                 </div>
                 <div class="mb-3">
                     <label for="content" class="form-label text-white">Description :</label><br>
