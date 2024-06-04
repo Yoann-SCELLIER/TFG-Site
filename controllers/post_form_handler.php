@@ -11,8 +11,14 @@ if ($id) {
     $post = getPostById($bdd, $id);
 }
 
-$formTitle = $id ? "Modifier l'actualitée'" : "Ajouter une actualitée";
+// Déterminer le titre du formulaire en fonction de l'action (ajout ou modification)
+$formTitle = $id ? "Modifier l'actualité" : "Ajouter une actualité";
+
+// Déterminer l'action du formulaire en fonction de l'action (ajout ou modification)
 $action = $id ? "\TFG\controllers\update_post.php?id=" . $id : "\TFG\controllers\ajout_actu.php";
+
+// Récupérer les valeurs des champs du formulaire
 $titre = $post ? $post['title'] : '';
 $contenu = $post ? $post['content'] : '';
 $image_url = $post ? $post['image_url'] : '';
+?>

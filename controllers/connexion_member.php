@@ -36,4 +36,7 @@ if (isset($_SESSION['inscrit'])) {
     $message = $_SESSION['inscrit'];
     unset($_SESSION['inscrit']); // Suppression du message de la session après affichage
 }
+
+var_dump($member);
+
 ?>

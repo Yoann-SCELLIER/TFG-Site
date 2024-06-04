@@ -47,10 +47,10 @@
                 foreach ($members as $member) {
             ?>
 
-                    <div class="col-md-4" width="50px" height="auto">
+                    <div class="col-md-4" style="width: 310px;">
                         <!-- Afficher l'image du membre -->
-                        <div width="50%" height="auto">
-                            <img src="<?= $member['cover'] ?>" class="card-img-top" alt="Photo de <?= $member['username'] ?>">
+                        <div style="width: 100%; height: auto;">
+                            <img src="<?= $member['cover'] ?>" class="card-img-top" alt="Photo de <?= $member['username'] ?>" style="width: 100%; height: auto;">
                         </div>
                         <div class="card mb-4 shadow-sm">
                             <div class="card-body">
@@ -61,6 +61,7 @@
                             </div>
                         </div>
                     </div>
+
 
 
             <?php }

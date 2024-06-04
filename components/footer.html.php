@@ -70,7 +70,7 @@
                 <img src="assets/images/true-fighters-gaming.png" width="600rem" widht="auto" class="p-3" alt="image true fighters gaming">
             </a>
             <hr>
-            <ul class="d-flex justify-content-center" style="list-style-type:none;">
+            <ul class="d-flex justify-content-center style-none text-white" style="list-style-type:none;">
                 <li class="p-0 m-2"><a href="/tfg/log.html.php">Connexion</a></li>
                 <li class="p-0 m-2"><a href="/tfg/log.html.php">Inscription</a></li>
             </ul>
