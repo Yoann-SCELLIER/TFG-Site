@@ -1,50 +1,41 @@
-<?php $jobs = getMemberById($bdd, $member_id); ?>
-
-<div class="text-center">
-    <h1 class="p-5 mb-0">Détails du Membre</h1>
+<div class="container text-center">
+    <div class="row align-items-center p-5">
+        <div class="col m-2 b-0 p-0 g-0 border border-1 p-5 bg-grey border border-4 border-danger">
+            <h1 id="formTitle" class="text-white">Modifier le Membre</h1>
+            <form id="memberForm" action="controllers\update_member.php?id=<?= $_GET['id'] ?>" method="post">
+                <input type="hidden" name="member_id" value="<?= $member['member_id'] ?? '' ?>">
+                <div class="mb-3">
+                    <label for="username" class="form-label text-white">Nom d'utilisateur :</label><br>
+                    <input type="text" name="username" class="form-control" id="username" value="<?= htmlspecialchars($member['username'] ?? '') ?>" required><br>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label text-white">Email :</label><br>
+                    <input type="email" name="email" class="form-control" id="email" value="<?= htmlspecialchars($member['email'] ?? '') ?>" required><br>
+                </div>
+                <div class="mb-3">
+                <div class="mb-3">
+    <label for="job" class="form-label text-white">Vos compétences :</label><br>
+    <?php foreach ($all_jobs as $job) : ?>
+        <div><?= $job['title'] ?></div>
+    <?php endforeach; ?>
 </div>
-<?php if (isset($member) && !empty($member)) : ?>
-    <section class="p-5">
-        <div class="card border border-3">
-            <div class="row g-0">
-                <div class="col-md-3 m-2 text-center">
-                    <img src="<?php echo htmlspecialchars($member['cover']); ?>" class="img-fluid rounded-start" alt="Image de <?php echo htmlspecialchars($member['username']); ?>">
-                    <p class="card-text"><small class="text-body-secondary">Créé le : <?php echo htmlspecialchars($member['created_at']); ?></small></p>
-                    <p class="card-text"><small class="text-body-secondary">Mis à jour le : <?php echo htmlspecialchars($member['modif_at']); ?></small></p>
+                <div class="mb-3">
+                    <label for="content" class="form-label text-white">Description :</label><br>
+                    <textarea name="content" class="form-control" id="content" rows="6" required><?= htmlspecialchars($member['content'] ?? 'Description par défaut') ?></textarea><br>
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">Username : <?php echo htmlspecialchars($member['username']); ?></h5>
-                        <p><strong>Spécialités :</strong> 
-                            <?php if (!empty($member['jobs'])) : ?>
-                                <?php echo htmlspecialchars($member['jobs']); ?>
-                            <?php else : ?>
-                                Aucune spécialité.
-                            <?php endif; ?>
-                        </p>
-                        <p class="card-text">Description : <?php echo htmlspecialchars($member['content']); ?></p>
-                    </div>
+                <div class="mb-3">
+                    <label for="cover" class="form-label text-white">URL de votre avatar :</label><br>
+                    <input type="text" name="cover" class="form-control" id="cover" value="<?= htmlspecialchars($member['cover'] ?? 'URL par défaut') ?>" required><br>
                 </div>
-            </div>
-        </div>
-        <div class="d-flex justify-content-evenly p-3">
-            <!-- Bouton pour modifier le membre -->
-            <form action="member_form.php" method="get" style="display: inline;">
-                <input type="hidden" name="id" value="<?php echo htmlspecialchars($member['id']); ?>">
-                <button type="submit" class="btn btn-success">Modifier</button>
-            </form>
-            <!-- Bouton pour supprimer le membre -->
-            <form action="supprimer_membre.php" method="post" style="display: inline;">
-                <input type="hidden" name="id" value="<?php echo htmlspecialchars($member['id']); ?>">
-                <button type="submit" class="btn btn-danger">Supprimer</button>
-            </form>
-            <!-- Formulaire pour le bouton Retour à la liste -->
-            <form action="index.php#staffSection" method="get" style="display: inline;">
-                <button type="submit" class="btn btn-secondary">Retour à la liste</button>
+                <input type="submit" value="Modifier le Membre" class="btn btn-secondary p-3">
+                <a href="index.php" class="btn btn-secondary p-3">Annuler</a>
+                <?php if (isset($member)) : ?>
+                    <form action="supprimer_membre.php" method="post" class="d-inline">
+                        <input type="hidden" name="member_id" value="<?= htmlspecialchars($member['member_id']) ?>">
+                        <button type="submit" class="btn btn-danger p-3">Supprimer</button>
+                    </form>
+                <?php endif; ?>
             </form>
         </div>
-    </section>
-<?php else : ?>
-    <p>Le membre n'existe pas ou l'ID du membre n'a pas été spécifié.</p>
-    <a href="\TFG\index.php">Retour à la liste</a>
-<?php endif; ?>
+    </div>
+</div>

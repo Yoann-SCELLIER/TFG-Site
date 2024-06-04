@@ -89,14 +89,23 @@ function getMemberById($bdd, $member_id) {
         $stmt = $bdd->prepare($sql);
         $stmt->execute([$member_id]);
         $member = $stmt->fetch(PDO::FETCH_ASSOC);
-        // var_dump($member); // Pour déboguer, vous pouvez le supprimer en production
+        
+        // Sélectionner la liste de tous les jobs disponibles
+        $sql_jobs = "SELECT * FROM job";
+        $stmt_jobs = $bdd->prepare($sql_jobs);
+        $stmt_jobs->execute();
+        $jobs = $stmt_jobs->fetchAll(PDO::FETCH_ASSOC);
+
+        // Ajouter la liste de tous les jobs disponibles aux détails du membre
+        $member['all_jobs'] = $jobs;
+        
         return $member;
     } catch (PDOException $e) {
-        exit("Erreur lors de la récupération des spécialité du membre: " . $e->getMessage());
+        exit("Erreur lors de la récupération des détails du membre : " . $e->getMessage());
     }
 }
 
-
+//---------------------------------------------------------------------------------------------------------------------------------------------
 function addMemberJob($bdd, $member_id, $job_id) {
     try {
         // Requête SQL pour ajouter un emploi à un membre dans la table de liaison
@@ -110,52 +119,68 @@ function addMemberJob($bdd, $member_id, $job_id) {
     }
 }
 
-function update_member($bdd, $member_id, $cover = null, $username = null, $email = null, $job = null, $content = null) {
-    // Construction de la requête SQL de mise à jour en fonction des champs soumis
-    $sql = "UPDATE member SET ";
-    $params = [];
+//---------------------------------------------------------------------------------------------------------------------------------------------
+function updateMember($bdd, $member_id, $cover = null, $username = null, $email = null, $jobs = null, $content = null) {
+    try {
+        // Démarrer une transaction
+        $bdd->beginTransaction();
 
-    if ($cover !== null) {
-        $sql .= "cover = ?, ";
-        $params[] = $cover;
-    }
-    if ($username !== null) {
-        $sql .= "username = ?, ";
-        $params[] = $username;
-    }
-    if ($email !== null) {
-        $sql .= "email = ?, ";
-        $params[] = $email;
-    }
-    if ($job !== null) {
-        // Assurez-vous que $job est un tableau
-        if (!is_array($job)) {
-            $job = [$job];
+        // Construction de la requête SQL de mise à jour en fonction des champs soumis
+        $sql = "UPDATE member SET ";
+        $params = [];
+
+        if ($cover !== null) {
+            $sql .= "cover = ?, ";
+            $params[] = $cover;
         }
-        $sql .= "job = ?, ";
-        $params[] = implode(',', $job);
+        if ($username !== null) {
+            $sql .= "username = ?, ";
+            $params[] = $username;
+        }
+        if ($email !== null) {
+            $sql .= "email = ?, ";
+            $params[] = $email;
+        }
+        if ($content !== null) {
+            $sql .= "content = ?, ";
+            $params[] = $content;
+        }
+
+        // Supprime la virgule et l'espace en trop à la fin de la requête
+        $sql = rtrim($sql, ", ");
+
+        // Ajoute la clause WHERE pour la mise à jour du membre spécifique
+        $sql .= " WHERE member_id = ?";
+        $params[] = $member_id;
+
+        // Prépare la requête SQL
+        $stmt = $bdd->prepare($sql);
+
+        // Exécute la requête en liant les valeurs
+        $stmt->execute($params);
+
+        // Mise à jour des jobs du membre
+        if ($jobs !== null) {
+            // Supprime les anciens jobs
+            $sqlDelete = "DELETE FROM member_job WHERE member_id = ?";
+            $stmtDelete = $bdd->prepare($sqlDelete);
+            $stmtDelete->execute([$member_id]);
+
+            // Ajoute les nouveaux jobs
+            $sqlInsert = "INSERT INTO member_job (member_id, job_id) VALUES (?, ?)";
+            $stmtInsert = $bdd->prepare($sqlInsert);
+            foreach ($jobs as $job_id) {
+                $stmtInsert->execute([$member_id, $job_id]);
+            }
+        }
+
+        // Commit la transaction
+        $bdd->commit();
+    } catch (PDOException $e) {
+        // Rollback la transaction en cas d'erreur
+        $bdd->rollBack();
+        exit("Erreur lors de la mise à jour du membre: " . $e->getMessage());
     }
-    if ($content !== null) {
-        $sql .= "content = ?, ";
-        $params[] = $content;
-    }
-
-    // Supprime la virgule et l'espace en trop à la fin de la requête
-    $sql = rtrim($sql, ", ");
-
-    // Ajoute la clause WHERE pour la mise à jour du membre spécifique
-    $sql .= " WHERE member_id = ?";
-
-    // Ajoute l'ID du membre à la liste des paramètres
-    $params[] = $member_id;
-
-    // Prépare la requête SQL
-    $stmt = $bdd->prepare($sql);
-
-    // Exécute la requête en liant les valeurs
-    $stmt->execute($params);
 }
-
-
 
 //---------------------------------------------------------------------------------------------------------------------------------------------

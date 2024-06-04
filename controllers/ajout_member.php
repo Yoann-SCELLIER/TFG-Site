@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $departement_id = $_POST['departement_id'];
+    $cover = $_POST['cover'];
 
     // Vérifier si un fichier a été uploadé
     if (isset($_FILES['cover']) && $_FILES['cover']['error'] == 0) {
@@ -26,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Appel de la fonction d'inscription
-    $member_id = ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover_path);
+    $member_id = ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover, $cover_path);
 
     if ($member_id) {
         // Redirection vers la page de profil du membre après inscription réussie

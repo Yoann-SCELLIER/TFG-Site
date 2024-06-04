@@ -7,8 +7,6 @@ $member_id = $_GET['id'] ?? null;
 
 // Vérification si l'ID est valide
 if ($member_id === null) {
-    // Gérer le cas où l'ID n'est pas spécifié dans l'URL
-    // Par exemple, rediriger vers une page d'erreur ou afficher un message d'erreur
     exit("ID du membre non spécifié.");
 }
 
@@ -17,8 +15,6 @@ $member = getMemberById($bdd, $member_id);
 
 // Vérification si le membre existe
 if ($member === null) {
-    // Gérer le cas où le membre n'est pas trouvé
-    // Par exemple, rediriger vers une page d'erreur ou afficher un message d'erreur
     exit("Membre non trouvé.");
 }
 
@@ -28,15 +24,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cover = $_POST['cover'] ?? $member['cover'] ?? '';
     $username = $_POST['username'] ?? $member['username'] ?? '';
     $email = $_POST['email'] ?? $member['email'] ?? '';
-    $job = $_POST['job'] ?? $member['job'] ?? array(); // Assurez-vous que $job est un tableau
+    $jobs = $_POST['jobs'] ?? array(); // Assurez-vous que $jobs est un tableau
     $content = $_POST['content'] ?? $member['content'] ?? '';
 
     // Appelle la fonction pour mettre à jour le membre dans la base de données
-    update_member($bdd, $member_id, $cover, $username, $email, $job, $content);
+    updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $content);
 
     // Redirige vers la page de détails du membre après la mise à jour
-    header('Location: \TFG\index.php');
+    header('Location: /TFG/views/member_detail.html.php?id=' . $member_id);
     exit;
 }
 
 // Inclure le fichier de vue du formulaire de modification
+require_once dirname(__DIR__) . '/components/header.html.php';
+require_once dirname(__DIR__) . '/views/member_form.html.php';
+require_once dirname(__DIR__) . '/components/footer.html.php';
+?>
