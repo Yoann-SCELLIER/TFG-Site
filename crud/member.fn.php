@@ -193,3 +193,20 @@ function listJobs($bdd) {
     $listJobs = $recipesStatement1->fetchAll();
     return $listJobs;
 }
+
+//---------------------------------------------------------------------------------------------------------------------------------------------
+function deleteMember($bdd, $member_id) {
+    try {
+        // Préparer la requête SQL pour supprimer le membre
+        $sql = "DELETE FROM member WHERE member_id = ?";
+        $stmt = $bdd->prepare($sql);
+        // Exécuter la requête en liant le paramètre du membre_id
+        $stmt->execute([$member_id]);
+        // Retourner vrai si la suppression a réussi
+        return true;
+    } catch (PDOException $e) {
+        // En cas d'erreur, afficher un message d'erreur et retourner faux
+        exit("Erreur lors de la suppression du membre : " . $e->getMessage());
+        return false;
+    }
+}
