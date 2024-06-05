@@ -34,7 +34,7 @@
             </select><br>
             <label for="cover" class="form-label text-white">Image de profil :</label><br>
             <input type="text" class="form-control " id="cover" name="cover" placeholder="Lien de votre image"><br>
-            <button type="submit" class="mt-3 p-2 btn btn-primary">Se connecter</button><br>
+            <button type="submit" class="mt-3 p-2 btn btn-primary">S'inscrire'</button><br>
         </form>
     </div>
 

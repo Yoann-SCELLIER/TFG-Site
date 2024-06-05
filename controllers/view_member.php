@@ -1,6 +1,7 @@
 <?php
-require_once dirname(__DIR__) . '/TFG/controller/db.fn.php';
-require_once dirname(__DIR__) . '/TFG/crud/member.fn.php';
+require_once dirname(__DIR__) . '\crud\member.fn.php';
+
+$member = getMemberById($bdd, $_GET['id']);
 
 // Récupérer les détails du membre
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
@@ -15,10 +16,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $stmt_jobs->execute();
     $all_jobs = $stmt_jobs->fetchAll(PDO::FETCH_ASSOC);
     
-    // Inclure le fichier de vue pour afficher les détails du membre avec la liste des jobs
-    require_once dirname(__DIR__) . '/TFG/components/header.html.php';
-    require_once dirname(__DIR__) . '/TFG/views/member_form.html.php';
-    require_once dirname(__DIR__) . '/TFG/components/footer.html.php';
+ 
 } else {
     echo "ID du membre invalide.";
 }
