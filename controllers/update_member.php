@@ -1,8 +1,9 @@
 <?php
-require_once dirname(__DIR__) . '/controller/db.fn.php';
 require_once dirname(__DIR__) . '/crud/member.fn.php';
 
-// Récupération de l'ID du membre depuis l'URL
+$member = getMemberById($bdd, $_GET['id']);
+
+// Récupération de l'ID du membre depuis l'URL 
 $member_id = $_GET['id'] ?? null;
 
 // Vérification si l'ID est valide

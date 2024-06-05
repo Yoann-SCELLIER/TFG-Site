@@ -11,7 +11,7 @@ $jobs = listJobs($bdd);
                 <div class="mb-3">
                     <label for="username" class="form-label text-white">Nom d'utilisateur :</label><br>
                     <input type="text" name="username" class="form-control" id="username" value="<?= htmlspecialchars($member['username'] ?? '') ?>" required><br>
-                </div>
+                </div> 
                 <div class="mb-3">
                     <label for="email" class="form-label text-white">Email :</label><br>
                     <input type="email" name="email" class="form-control" id="email" value="<?= htmlspecialchars($member['email'] ?? '') ?>" required><br>

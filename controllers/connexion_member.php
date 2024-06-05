@@ -1,6 +1,5 @@
 <?php
-// Inclusion des fichiers de configuration de la base de données et des fonctions de gestion des membres
-require_once dirname(__DIR__) . '\controller\db.fn.php';
+
 require_once dirname(__DIR__) . '\crud\member.fn.php';
 
 // Vérification si les données du formulaire sont soumises via la méthode POST

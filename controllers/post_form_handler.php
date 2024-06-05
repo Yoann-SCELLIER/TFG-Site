@@ -1,5 +1,4 @@
 <?php
-require_once dirname(__DIR__) . '/controller/db.fn.php';
 require_once dirname(__DIR__) . '/crud/post.fn.php';
 
 // Vérifier si un ID est présent dans l'URL
@@ -20,5 +19,5 @@ $action = $id ? "\TFG\controllers\update_post.php?id=" . $id : "\TFG\controllers
 // Récupérer les valeurs des champs du formulaire
 $titre = $post ? $post['title'] : '';
 $contenu = $post ? $post['content'] : '';
-$image_url = $post ? $post['image_url'] : '';
+$image_url = $post ? $post['image_url'] : ''; 
 ?>

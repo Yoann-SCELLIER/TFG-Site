@@ -1,6 +1,5 @@
 <?php
-// Inclure le fichier de configuration de la base de données
-require_once dirname(__DIR__) . '\controller\db.fn.php';
+
 require_once dirname(__DIR__) . '\crud\member.fn.php';
 
 // Vérifie si l'ID du membre est spécifié dans les paramètres de requête ou dans les données postées

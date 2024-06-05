@@ -1,7 +1,6 @@
 <?php
-// Inclure le fichier de configuration de la base de données
-require_once dirname(__DIR__) . '/controller/db.fn.php';
-// Inclure la fonction pour récupérer la liste des emplois
+
+// Inclure la fonction pour récupérer la liste des emplois 
 require_once dirname(__DIR__) . '/crud/member.fn.php';
 
 try {

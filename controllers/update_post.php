@@ -1,5 +1,4 @@
 <?php
-require_once dirname(__DIR__) . '\controller\db.fn.php';
 require_once dirname(__DIR__) . '\crud\post.fn.php';
 
 // Vérifie si un ID est présent dans l'URL et si les données sont soumises via la méthode POST
