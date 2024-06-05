@@ -1,5 +1,4 @@
 <?php
-
 // Inclure les fonctions de gestion des membres
 require_once dirname(__DIR__) . '\crud\member.fn.php';
 
@@ -12,21 +11,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $departement_id = $_POST['departement_id'];
-    $cover = $_POST['cover'];
 
     // Vérifier si un fichier a été uploadé
-    if (isset($_FILES['cover']) && $_FILES['cover']['error'] == 0) {
+    if (isset($_FILES['cover']) && $_FILES['cover']['error'] == 0 && $_FILES['cover']['size'] > 0) {
+        // Récupérer les données du fichier
+        $cover = $_FILES['cover'];
+
         // Définir le chemin du fichier de couverture
-        $cover_path = 'uploads/' . basename($_FILES['cover']['name']);
+        $cover_path = 'uploads/' . basename($cover['name']);
+
         // Déplacer le fichier uploadé vers le répertoire spécifié
-        move_uploaded_file($_FILES['cover']['tmp_name'], $cover_path);
+        move_uploaded_file($cover['tmp_name'], $cover_path);
     } else {
         // Utiliser une image par défaut si aucun fichier n'est uploadé
         $cover_path = '/tfg/assets/images/Default_esports_player_silhouette_face_not_visible_light_in_th_2.jpg';
     }
 
     // Appel de la fonction d'inscription
-    $member_id = ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover, $cover_path);
+    $member_id = ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover_path);
 
     if ($member_id) {
         // Redirection vers la page de profil du membre après inscription réussie
@@ -37,3 +39,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "L'inscription a échoué. Veuillez réessayer.";
     }
 }
+?>
