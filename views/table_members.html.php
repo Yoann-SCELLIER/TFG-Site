@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="text-center">Liste des Membres</h1>
+    <h1 class="text-center p-5">Liste des Membres</h1>
     <table class="table table-bordered border border-2 border-dark">
         <thead>
             <tr>
@@ -8,7 +8,7 @@
                 <th>Prénom</th>
                 <th>Nom</th>
                 <th>Email</th>
-                <th>Actions</th>
+                <th class="text-center">Actions</th>
             </tr>
         </thead>
         <tbody>
