@@ -15,7 +15,3 @@ if ($member_id) {
     $consoles = [];
     $hasConsoles = false;
 }
-
-// Inclure la vue pour afficher les détails du membre avec les consoles
-require_once dirname(__DIR__) . '\views\member_detail.html.php';
-?>

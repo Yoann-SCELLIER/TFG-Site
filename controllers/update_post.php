@@ -12,9 +12,4 @@ if (isset($_GET['id']) && $_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Appelle la fonction pour mettre à jour le post dans la base de données
     updatePost($bdd, $id, $titre, $contenu, $image_url);
-
-    // Redirige vers la page d'actualités après la mise à jour du post
-    header('Location: /TFG/actualite.php');
-    exit;
 }
-?>

@@ -30,14 +30,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Appelle la fonction pour mettre à jour le membre dans la base de données
     updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $content);
-
-    // Redirige vers la page de détails du membre après la mise à jour
-    header('Location: /TFG/index.php');
-    exit;
 }
-
-// Inclure le fichier de vue du formulaire de modification
-require_once dirname(__DIR__) . '/components/header.html.php';
-require_once dirname(__DIR__) . '/views/member_form.html.php';
-require_once dirname(__DIR__) . '/components/footer.html.php';
-?>
