@@ -34,7 +34,7 @@
             </select><br>
             <label for="cover" class="form-label text-white">Image de profil :</label><br>
             <input type="text" class="form-control " id="cover" name="cover" placeholder="Lien de votre image"><br>
-            <button type="submit" class="mt-3 p-2 btn btn-primary">S'inscrire'</button><br>
+            <button type="submit" class="mt-3 p-2 btn btn-primary">S'inscrire</button><br>
         </form>
     </div>
 
@@ -56,7 +56,10 @@
             participer à des tournois et développer des compétences de jeu dans un environnement convivial et compétitif.<br>
             <br>
             Comment s'inscrire?<br>
-            L'inscription à True Fighters Gaming est simple et rapide. Suivez ces étapes pour rejoindre notre communauté :</p>
+            L'inscription à True Fighters Gaming est simple et rapide. Suivez ces étapes pour rejoindre notre communauté <span class="text-danger">*</span></p>
         </section>
+        <div>
+            <p class="fst-italic text-danger">"* Pour plus de détail dans votre profile pensez à aller le modifier !"</p>
+        </div>
     </div>
 </div>
