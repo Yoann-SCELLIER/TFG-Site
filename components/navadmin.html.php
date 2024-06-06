@@ -24,7 +24,7 @@
                         <h1>DASHBOARD ADMINISTRATEUR</h1>
                     </li>
                 </ul>
-                <ul class="navbar-nav">
+                <ul class="navbar-nav fw-bold">
                     <li class="nav-item">
                         <a class="nav-link" href="/TFG/index.php">ACCUEIL</a> <!-- Chemin absolu pour index.php -->
                     </li>
