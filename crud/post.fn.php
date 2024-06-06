@@ -54,11 +54,16 @@ function getPostById($bdd, $id) {
 
 //--------------------------------------------------------------------------------------------------------------------------------------
 function updatePost($bdd, $id, $titre, $contenu, $image_url) {
-    $sql = "UPDATE post SET title = :titre, content = :contenu, image_url = :image_url, modif_at = CURRENT_TIMESTAMP WHERE post_id = :id";
-    $stmt = $bdd->prepare($sql);
-    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-    $stmt->bindValue(':titre', $titre);
-    $stmt->bindValue(':contenu', $contenu);
-    $stmt->bindValue(':image_url', $image_url);
-    $stmt->execute();
+    try {
+        $sql = "UPDATE post SET title = :titre, content = :contenu, image_url = :image_url, modif_at = CURRENT_TIMESTAMP WHERE post_id = :id";
+        $stmt = $bdd->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->bindValue(':titre', $titre);
+        $stmt->bindValue(':contenu', $contenu);
+        $stmt->bindValue(':image_url', $image_url);
+        $stmt->execute();
+    } catch (PDOException $e) {
+        // Gérer les erreurs PDO ici
+        echo "Erreur lors de la mise à jour du post : " . $e->getMessage();
+    }
 }

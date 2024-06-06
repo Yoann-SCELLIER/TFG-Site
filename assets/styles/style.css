@@ -1,3 +1,10 @@
+#colorAdmin {
+      background-color: #ff0084 !important;
+      background-size: cover; /* Cette propriété permet à l'image de s'adapter à la taille de l'écran */
+      background-position: center; /* Cette propriété centre l'image sur l'écran */
+      background-repeat: no-repeat; /* Cette propriété évite la répétition de l'image */
+}
+
 .bg-grey {
 background-color: #3b3b3b !important;
 }
@@ -51,10 +58,11 @@ background-color: #3b3b3b !important;
     cursor: pointer;
     padding: 15px;
     border-radius: 10px;
-  }
+}
 
-  /* ___________________________________________________________________________________________________________________ */
-
-  .bg-military {
+/* ___________________________________________________________________________________________________________________ */
+.bg-military {
     background-color: #024e15 !important;
-  }
+}
+
+/* ___________________________________________________________________________________________________________________ */

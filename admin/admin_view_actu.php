@@ -6,9 +6,8 @@ require_once dirname(__DIR__) . '/components/navadmin.html.php';
 
 require_once dirname(__DIR__) . '\views\admin_button_form.html.php';
 
-require_once dirname(__DIR__) . '/controllers/view_list_member.php';
+require_once dirname(__DIR__) . '\controllers\view_list_post.php';
 
-require_once dirname(__DIR__) . '\views\table_members.html.php';
+require_once dirname(__DIR__) . '\views\table_posts.html.php';
 
 require_once dirname(__DIR__) . '/components/footeradmin.html.php';
-

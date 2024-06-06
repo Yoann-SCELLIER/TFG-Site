@@ -6,7 +6,7 @@
                     <h5 class="card-title"><?= htmlspecialchars($formTitle) ?></h5>
                 </div>
                 <div class="card-body">
-                    <form id="gameForm" action="<?= htmlspecialchars($action) ?>" method="post">
+                    <form id="gameForm" action="<?= $action ?>" method="post">
                         <div class="mb-3">
                             <label for="title" class="form-label">Titre :</label>
                             <input type="text" name="title" class="form-control" id="title" value="<?= isset($title) ? htmlspecialchars($title) : '' ?>" required>

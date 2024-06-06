@@ -1,16 +1,16 @@
 <div class="container text-center">
     <div class="row align-items-center p-5">
         <div class="col m-2 b-0 p-0 g-0 border border-1 p-5 bg-grey border border-4 border-danger">
-            <h1 id="formTitle" class="text-white"><?= htmlspecialchars($formTitle) ?></h1>
-            <form id="postForm" action="<?= $action ?>" method="post">
+            <h1 id="formTitle" class="text-white"><?= isset($formTitle) ? htmlspecialchars($formTitle) : '' ?></h1>
+            <form id="postForm" action="/TFG/controllers/post_form_handler.php<?= $id ? "?id=$id" : '' ?>" method="post">
 
                 <div class="mb-3">
-                    <label for="titre" class="form-label text-white">Titre :</label><br>
-                    <input type="text" name="titre" class="form-control" id="titre" aria-describedby="titre" value="<?= isset($titre) ? htmlspecialchars($titre) : '' ?>" required><br>
+                    <label for="title" class="form-label text-white">Titre :</label><br>
+                    <input type="text" name="title" class="form-control" id="title" aria-describedby="titre" value="<?= isset($title) ? htmlspecialchars($title) : '' ?>" required><br>
                 </div>
                 <div class="mb-3">
-                    <label for="contenu" class="form-label text-white">Contenu :</label><br>
-                    <textarea name="contenu" class="form-control" id="contenu" rows="6" required><?= isset($contenu) ? htmlspecialchars($contenu) : '' ?></textarea><br>
+                    <label for="content" class="form-label text-white">Contenu :</label><br>
+                    <textarea name="content" class="form-control" id="content" rows="6" required><?= isset($content) ? htmlspecialchars($content) : '' ?></textarea><br>
                 </div>
                 <div class="mb-3">
                     <label class="form-label text-white" for="image_url">URL de l'image :</label><br>

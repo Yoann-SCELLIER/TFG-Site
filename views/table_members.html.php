@@ -22,7 +22,7 @@
                     <td class="text-center">
                         <a href="/TFG/admin/admin_view_member.php?id=<?php echo $member['member_id']; ?>" class="btn btn-primary fw-bold">Détail</a>
                         <a href="/TFG/admin/admin_update_member.php?id=<?php echo $member['member_id']; ?>" class="btn btn-warning fw-bold">Modifier</a>
-                        <a href="\TFG\controllers\admin_delete_member.php?id=<?php echo $member['member_id']; ?>" class="btn btn-danger fw-bold">Supprimer</a>
+                        <a href="/TFG/controllers/admin_delete_member.php?id=<?php echo $member['member_id']; ?>" class="btn btn-danger fw-bold">Supprimer</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

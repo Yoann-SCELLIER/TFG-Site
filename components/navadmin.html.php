@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/TFG/assets/styles/style.css"> <!-- Utilisation d'un chemin absolu pour le CSS -->
     <title>TF - True Fighters Gaming</title>
 </head>
-<body>
+<body id="colorAdmin">
 <!-- Contenu NAVBAR -->
 <header>
     <nav class="navbar navbar-expand-lg bg-success">
@@ -29,7 +29,10 @@
                         <a class="nav-link" href="/TFG/index.php">ACCUEIL</a> <!-- Chemin absolu pour index.php -->
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/TFG/actualite.php">ACTUALITÉ</a> <!-- Chemin absolu pour actualite.php -->
+                        <a class="nav-link" href="/TFG/admin/dashboard.php">MEMBRE ET STAFF</a> <!-- Chemin absolu pour actualite.php -->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/TFG/admin/admin_view_actu.php">ACTUALITÉ</a> <!-- Chemin absolu pour actualite.php -->
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/TFG/log.php">CONNEXION</a> <!-- Chemin absolu pour log.php -->
@@ -42,4 +45,4 @@
 
 <!-- Contenu principal -->
 <main>
-    <div class="bg-success-subtle">
+    <div>
