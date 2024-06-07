@@ -6,7 +6,7 @@ $jobs = listJobs($bdd);
     <div class="row align-items-center p-5">
         <div class="col m-2 b-0 p-0 g-0 border border-1 p-5 bg-grey border border-4 border-danger">
             <h1 id="formTitle" class="text-white">Modifier le Membre</h1>
-            <form id="memberForm" action="controllers\update_member.php?id=<?= $_GET['id'] ?>" method="post">
+            <form id="memberForm" action="\TFG\controllers\admin_update_member.php?id=<?= $_GET['id'] ?>" method="post">
                 <input type="hidden" name="member_id" value="<?= $member['member_id'] ?? '' ?>">
                 <div class="mb-3">
                     <label for="username" class="form-label text-white">Nom d'utilisateur :</label><br>
@@ -46,7 +46,7 @@ $jobs = listJobs($bdd);
                 <input type="submit" value="Modifier le Membre" class="btn btn-secondary p-3">
                 <a href="\TFG\admin\dashboard.php" class="btn btn-secondary p-3">Annuler</a>
                 <?php if (isset($member)) : ?>
-                    <form action="supprimer_membre.php" method="post" class="d-inline">
+                    <form action="\TFG\controllers\admin_delete_member.php" method="post" class="d-inline">
                         <input type="hidden" name="member_id" value="<?= htmlspecialchars($member['member_id']) ?>">
                         <button type="submit" class="btn btn-danger p-3">Supprimer</button>
                     </form>

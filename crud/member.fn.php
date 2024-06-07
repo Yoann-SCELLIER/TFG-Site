@@ -150,8 +150,6 @@ function updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $conte
     } catch (PDOException $e) {
         echo "Erreur lors de la mise à jour du membre : " . $e->getMessage();
     }
-    header('Location: /TFG/index.php');
-exit();
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------

@@ -44,7 +44,7 @@
                 <button type="submit" class="btn btn-success">Modifier</button>
             </form>
             <!-- Bouton pour supprimer le membre -->
-            <form action="\TFG\controllers\delete_member.php" method="post" style="display: inline;">
+            <form action="\TFG\controllers\admin_delete_member.php" method="post" style="display: inline;">
                 <input type="hidden" name="member_id" value="<?= $member['member_id']; ?>">
                 <button type="submit" class="btn btn-danger">Supprimer</button>
             </form>

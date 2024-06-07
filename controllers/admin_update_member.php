@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $content);
         // Redirection après mise à jour réussie
-        header('Location: /TFG/index.php');
+        header('Location: /TFG/admin/dashboard.php');
         exit();
     } catch (Exception $e) {
         // Gestion des erreurs (affichage du message d'erreur)
