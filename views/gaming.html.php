@@ -34,6 +34,25 @@
             </div>
         </div>
         <hr class="border-1 text-dark">
+
+        <div class="container">
+            <div class="row d-flex justify-content-evenly">
+                <?php foreach ($games as $game) : ?>
+                    <div class="col-md-4 d-flex flex-column align-items-center" style="width: 280px;">
+                        <!-- Afficher l'image du membre -->
+                        <div style="width: 60%; height: auto;">
+                            <img src="<?= htmlspecialchars($game['cover']) ?>" class="card-img-top h-auto" alt="<?= htmlspecialchars($game['title']) ?>">
+                        </div>
+                        <div class="card mb-4 border border-0">
+                            <div class="card-body p-0 m-0 b-0 g-0">
+                                <h5 class="card-title fs-6"><?= htmlspecialchars($game['title']) ?></h5>
+                                <a href="game.php?id=<?= $game['game_id'] ?>" class="btn btn-primary">Détails du jeu</a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
     </div>
 
     <div class="text-center bg-grey text-white">

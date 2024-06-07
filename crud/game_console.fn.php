@@ -56,3 +56,10 @@ function addOrUpdateGame($bdd, $game_id, $cover, $title, $content, $category_id)
         exit("Erreur lors de l'ajout/modification du jeu : " . $e->getMessage());
     }
 }
+
+function view_list_game($bdd) {
+    $sql = "SELECT * FROM game";
+    $stmt = $bdd->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}

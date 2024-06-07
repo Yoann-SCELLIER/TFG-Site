@@ -1,6 +1,5 @@
 <?php
-// Inclure le fichier de configuration de la base de données
-require_once dirname(__DIR__) . '/controller/db.fn.php';
+
 // Inclure la fonction pour récupérer les membres
 require_once dirname(__DIR__) . '/crud/member.fn.php';
 

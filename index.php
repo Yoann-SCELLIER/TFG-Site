@@ -6,6 +6,8 @@ require_once dirname(__DIR__) . '/TFG/components/navbar.html.php';
 
 require_once dirname(__DIR__) . '\TFG\controllers\view_list_member.php';
 
+require_once dirname(__DIR__) . '\TFG\controllers\view_list_game.php';
+
 require_once dirname(__DIR__) . '\TFG\components\banniere_index.html.php';
 
 require_once dirname(__DIR__) . '\TFG\views\story.html.php';
