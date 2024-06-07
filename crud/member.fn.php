@@ -120,67 +120,38 @@ function addMemberJob($bdd, $member_id, $job_id) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
-function updateMember($bdd, $member_id, $cover = null, $username = null, $email = null, $jobs = null, $content = null) {
+function updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $content) {
     try {
-        // Démarrer une transaction
-        $bdd->beginTransaction();
-
-        // Construction de la requête SQL de mise à jour en fonction des champs soumis
-        $sql = "UPDATE member SET ";
-        $params = [];
-
-        if ($cover !== null) {
-            $sql .= "cover = ?, ";
-            $params[] = $cover;
-        }
-        if ($username !== null) {
-            $sql .= "username = ?, ";
-            $params[] = $username;
-        }
-        if ($email !== null) {
-            $sql .= "email = ?, ";
-            $params[] = $email;
-        }
-        if ($content !== null) {
-            $sql .= "content = ?, ";
-            $params[] = $content;
-        }
-
-        // Supprime la virgule et l'espace en trop à la fin de la requête
-        $sql = rtrim($sql, ", ");
-
-        // Ajoute la clause WHERE pour la mise à jour du membre spécifique
-        $sql .= " WHERE member_id = ?";
-        $params[] = $member_id;
-
-        // Prépare la requête SQL
+        // Mise à jour du membre
+        $sql = "UPDATE member SET cover = :cover, username = :username, email = :email, content = :content, modif_at = CURRENT_TIMESTAMP WHERE member_id = :member_id";
         $stmt = $bdd->prepare($sql);
+        $stmt->bindValue(':cover', $cover);
+        $stmt->bindValue(':username', $username);
+        $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':content', $content);
+        $stmt->bindValue(':member_id', $member_id, PDO::PARAM_INT);
+        $stmt->execute();
 
-        // Exécute la requête en liant les valeurs
-        $stmt->execute($params);
+        // Suppression des anciennes compétences
+        $sql = "DELETE FROM member_job WHERE member_id = :member_id";
+        $stmt = $bdd->prepare($sql);
+        $stmt->bindValue(':member_id', $member_id, PDO::PARAM_INT);
+        $stmt->execute();
 
-        // Mise à jour des jobs du membre
-        if ($jobs !== null) {
-            // Supprime les anciens jobs
-            $sqlDelete = "DELETE FROM member_job WHERE member_id = ?";
-            $stmtDelete = $bdd->prepare($sqlDelete);
-            $stmtDelete->execute([$member_id]);
-
-            // Ajoute les nouveaux jobs
-            $sqlInsert = "INSERT INTO member_job (member_id, job_id) VALUES (?, ?)";
-            $stmtInsert = $bdd->prepare($sqlInsert);
-            foreach ($jobs as $job_id) {
-                $stmtInsert->execute([$member_id, $job_id]);
-            }
+        // Insertion des nouvelles compétences
+        $sql = "INSERT INTO member_job (member_id, job_id) VALUES (:member_id, :job_id)";
+        $stmt = $bdd->prepare($sql);
+        foreach ($jobs as $job_id) {
+            $stmt->bindValue(':member_id', $member_id, PDO::PARAM_INT);
+            $stmt->bindValue(':job_id', $job_id, PDO::PARAM_INT);
+            $stmt->execute();
         }
 
-        // Commit la transaction
-        $bdd->commit();
     } catch (PDOException $e) {
-        // Rollback la transaction en cas d'erreur
-        $bdd->rollBack();
-        exit("Erreur lors de la mise à jour du membre: " . $e->getMessage());
+        echo "Erreur lors de la mise à jour du membre : " . $e->getMessage();
     }
+    header('Location: /TFG/index.php');
+exit();
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------

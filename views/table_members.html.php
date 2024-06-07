@@ -36,8 +36,6 @@
                         <td class="m-0 b-0 p-0 g-0"><?php echo $member['role_id'] !== null ? htmlspecialchars($member['role_id']) : 'nul'; ?></td>
                         <td class="m-0 b-0 p-0 g-0">
                             <a href="/TFG/admin/admin_view_member.php?id=<?php echo $member['member_id']; ?>" class="btn btn-primary fw-bold">Détail</a>
-                            <a href="/TFG/admin/admin_update_member.php?id=<?php echo $member['member_id']; ?>" class="btn btn-warning fw-bold">Modifier</a>
-                            <a href="/TFG/controllers/admin_delete_member.php?id=<?php echo $member['member_id']; ?>" class="btn btn-danger fw-bold">Supprimer</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

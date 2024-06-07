@@ -1,28 +1,24 @@
-<div class="container">
-    <div class="row justify-content-center mt-5">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="card-title"><?= htmlspecialchars($formTitle) ?></h5>
+<div class="container text-center">
+    <div class="row align-items-center p-5">
+        <div class="col m-2 b-0 p-0 g-0 border border-1 p-5 bg-grey border border-4 border-danger">
+            <h1 id="formTitle" class="text-white"><?= isset($game_id) ? 'Modifier le jeu' : 'Ajouter un jeu' ?></h1>
+            <form id="gameForm" action="<?= htmlspecialchars($action) ?>" method="post">
+
+                <div class="mb-3">
+                    <label for="title" class="form-label text-white">Titre :</label><br>
+                    <input type="text" name="title" class="form-control" id="title" aria-describedby="titre" value="<?= isset($title) ? htmlspecialchars($title) : '' ?>" required><br>
                 </div>
-                <div class="card-body">
-                    <form id="gameForm" action="<?= htmlspecialchars($action) ?>" method="post">
-                        <div class="mb-3">
-                            <label for="title" class="form-label">Titre :</label>
-                            <input type="text" name="title" class="form-control" id="title" value="<?= isset($title) ? htmlspecialchars($title) : '' ?>" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="content" class="form-label">Contenu :</label>
-                            <textarea name="content" class="form-control" id="content" rows="6" required><?= isset($content) ? htmlspecialchars($content) : '' ?></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="cover">URL de l'image :</label>
-                            <input type="text" class="form-control" id="cover" name="cover" value="<?= isset($cover) ? htmlspecialchars($cover) : '' ?>">
-                        </div>
-                        <button type="submit" class="btn btn-primary"><?= $game_id ? "Modifier le jeu" : "Ajouter le jeu" ?></button>
-                    </form>
+                <div class="mb-3">
+                    <label for="content" class="form-label text-white">Contenu :</label><br>
+                    <textarea name="content" class="form-control" id="content" rows="6" required><?= isset($content) ? htmlspecialchars($content) : '' ?></textarea><br>
                 </div>
-            </div>
+                <div class="mb-3">
+                    <label class="form-label text-white" for="cover">URL de l'image :</label><br>
+                    <input type="text" class="form-control" id="cover" name="cover" value="<?= isset($cover) ? htmlspecialchars($cover) : '' ?>"><br>
+                </div>
+
+                <input type="submit" value="<?= isset($game_id) ? "Modifier le jeu" : "Ajouter le jeu" ?>" class="p-3">
+            </form>
         </div>
     </div>
 </div>
