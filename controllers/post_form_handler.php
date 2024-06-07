@@ -3,6 +3,12 @@ require_once dirname(__DIR__) . '/crud/post.fn.php';
 
 // Vérifier si un ID est présent dans l'URL
 $id = isset($_GET['id']) ? $_GET['id'] : null;
+$post = null;
+
+if ($id) {
+    // Récupérer les informations du post à modifier
+    $post = getPostById($bdd, $id);
+}
 
 // Si le formulaire est soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -25,4 +31,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: /TFG/actualite.php');
     exit();
 }
-?>

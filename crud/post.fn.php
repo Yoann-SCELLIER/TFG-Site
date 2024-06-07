@@ -2,7 +2,6 @@
 // Inclure le fichier de configuration de la base de données
 require_once dirname(__DIR__) . '\controller\db.fn.php';
 
-//--------------------------------------------------------------------------------------------------------------------------------------
 // Fonction pour ajouter un nouveau post dans la base de données
 function addPost($bdd, $titre, $contenu, $image_url) {
     try {
@@ -13,12 +12,10 @@ function addPost($bdd, $titre, $contenu, $image_url) {
         $stmt->bindValue(':image_url', $image_url);
         $stmt->execute();
     } catch (PDOException $e) {
-        // Gérer l'erreur de l'insertion du post
         exit("Erreur lors de l'ajout du post: " . $e->getMessage());
     }
 }
 
-//--------------------------------------------------------------------------------------------------------------------------------------
 // Fonction pour récupérer tous les posts de la base de données
 function viewsPost($bdd) {
     $sqlQuery = 'SELECT * FROM post';
@@ -28,7 +25,6 @@ function viewsPost($bdd) {
     return $posts;
 }
 
-//--------------------------------------------------------------------------------------------------------------------------------------
 // Fonction pour supprimer un post de la base de données en utilisant son ID
 function deletePost($bdd, $id) {
     try {
@@ -37,12 +33,10 @@ function deletePost($bdd, $id) {
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
     } catch (PDOException $e) {
-        // Gérer les erreurs, éventuellement les enregistrer ou afficher un message convivial à l'utilisateur
         echo "Erreur : " . $e->getMessage();
     }
 }
 
-//--------------------------------------------------------------------------------------------------------------------------------------
 // Fonction pour récupérer les informations d'un post spécifique en utilisant son ID
 function getPostById($bdd, $id) {
     $sql = "SELECT * FROM post WHERE post_id = :id";
@@ -52,7 +46,7 @@ function getPostById($bdd, $id) {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-//--------------------------------------------------------------------------------------------------------------------------------------
+// Fonction pour mettre à jour un post existant dans la base de données
 function updatePost($bdd, $id, $titre, $contenu, $image_url) {
     try {
         $sql = "UPDATE post SET title = :titre, content = :contenu, image_url = :image_url, modif_at = CURRENT_TIMESTAMP WHERE post_id = :id";
@@ -63,7 +57,6 @@ function updatePost($bdd, $id, $titre, $contenu, $image_url) {
         $stmt->bindValue(':image_url', $image_url);
         $stmt->execute();
     } catch (PDOException $e) {
-        // Gérer les erreurs PDO ici
         echo "Erreur lors de la mise à jour du post : " . $e->getMessage();
     }
 }
