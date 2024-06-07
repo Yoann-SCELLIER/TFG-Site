@@ -1,7 +1,7 @@
-<section>
+<section class="container-fluid px-5">
     <h1 class="text-center p-5">Liste des Membres</h1>
-    <div class="table-responsive">
-        <table class="table table-bordered border border-2 border-dark">
+    <div class="table-responsive text-center">
+        <table class="table table-bordered border border-2 border-dark align-self-center">
             <thead>
                 <tr>
                     <th class="m-0 b-0 p-0 g-0">ID</th>
@@ -24,7 +24,7 @@
                         <td class="m-0 b-0 p-0 g-0"><?php echo htmlspecialchars($member['member_id']); ?></td>
                         <td class="m-0 b-0 p-0 g-0"><?php echo htmlspecialchars($member['departement_id']); ?></td>
                         <td class="m-0 b-0 p-0 g-0">
-                            <img src="<?php echo htmlspecialchars($member['cover']); ?>" alt="Cover" class="img-thumbnail" style="width: 50px; height: 50px;">
+                            <img src="<?php echo htmlspecialchars($member['cover']); ?>" alt="Cover" class="img-thumbnail" style="width: 70px; height: 70px;">
                         </td>
                         <td class="m-0 b-0 p-0 g-0"><?php echo htmlspecialchars($member['username']); ?></td>
                         <td class="m-0 b-0 p-0 g-0"><?php echo htmlspecialchars($member['first_name']); ?></td>
@@ -34,10 +34,10 @@
                         <td class="m-0 b-0 p-0 g-0"><?php echo htmlspecialchars($member['created_at']); ?></td>
                         <td class="m-0 b-0 p-0 g-0"><?php echo htmlspecialchars($member['modif_at']); ?></td>
                         <td class="m-0 b-0 p-0 g-0"><?php echo $member['role_id'] !== null ? htmlspecialchars($member['role_id']) : 'nul'; ?></td>
-                        <td class="text-center m-0 b-0 p-0 g-0">
-                            <a href="/TFG/admin/admin_view_member.php?id=<?php echo $member['member_id']; ?>" class="btn btn-primary fw-bold m-0 b-0 p-0 g-0">Détail</a>
-                            <a href="/TFG/admin/admin_update_member.php?id=<?php echo $member['member_id']; ?>" class="btn btn-warning fw-bold m-0 b-0 p-0 g-0">Modifier</a>
-                            <a href="/TFG/controllers/admin_delete_member.php?id=<?php echo $member['member_id']; ?>" class="btn btn-danger fw-bold m-0 b-0 p-0 g-0">Supprimer</a>
+                        <td class="m-0 b-0 p-0 g-0">
+                            <a href="/TFG/admin/admin_view_member.php?id=<?php echo $member['member_id']; ?>" class="btn btn-primary fw-bold">Détail</a>
+                            <a href="/TFG/admin/admin_update_member.php?id=<?php echo $member['member_id']; ?>" class="btn btn-warning fw-bold">Modifier</a>
+                            <a href="/TFG/controllers/admin_delete_member.php?id=<?php echo $member['member_id']; ?>" class="btn btn-danger fw-bold">Supprimer</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
