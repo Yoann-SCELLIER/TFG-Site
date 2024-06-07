@@ -46,7 +46,6 @@
                         <div class="card mb-4 border border-0">
                             <div class="card-body p-0 m-0 b-0 g-0">
                                 <h5 class="card-title fs-6"><?= htmlspecialchars($game['title']) ?></h5>
-                                <a href="game.php?id=<?= $game['game_id'] ?>" class="btn btn-primary">Détails du jeu</a>
                             </div>
                         </div>
                     </div>
@@ -56,18 +55,22 @@
     </div>
 
     <div class="text-center bg-grey text-white">
-        <div class="d-flex justify-content-evenly text-center row cols-12 row-cols-2" background-size="10%">
-            <div class="col d-flex justify-content-end">
-                <img class="p-0 m-0 b-0 g-0 " width="18%" height="auto" src="assets/images/logo-esport.png" alt="image pour la section esport">
-            </div>
-            <div class="col align-self-center text-start">
-                <div>
                     <h1>Esport</h1>
                     <p>Les tournois proposés par la True Fighters (TF).</p>
-                </div>
+        <hr class="border-1 text-light">
+        <div class="container">
+            <div class="row d-flex justify-content-evenly">
+                    <div class="col-md-4 d-flex flex-column align-items-center" style="width: 400px;">
+                            <img src="assets\images\logo-tournament.png" class="card-img-top h-auto" alt="Logo tournois Guilty Gear -STRIVE-">
+                        <div class="card mb-4 border border-0 bg-transparent">
+                            <div class="card-body bg-transparent p-0 m-0 b-0 g-0">
+                                <h5 class="card-title fs-6 text-white">Tournament Guilty Gear -STRIVE- True Fighters</h5>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
-        <hr class="border-1 text-light">
+
         <div class="p-2">
             <i class="bi bi-chevron-double-up" id="showLessGaming">VOIR MOINS...</i> <!-- BOUTON QUI CACHE LE CONTENU ET AFFICHE LA PREMIÈRE PARTIE -->
         </div>
