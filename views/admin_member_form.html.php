@@ -45,12 +45,6 @@ $jobs = listJobs($bdd);
                 </div>
                 <input type="submit" value="Modifier le Membre" class="btn btn-secondary p-3">
                 <a href="\TFG\admin\dashboard.php" class="btn btn-secondary p-3">Annuler</a>
-                <?php if (isset($member)) : ?>
-                    <form action="\TFG\controllers\admin_delete_member.php" method="post" class="d-inline">
-                        <input type="hidden" name="member_id" value="<?= htmlspecialchars($member['member_id']) ?>">
-                        <button type="submit" class="btn btn-danger p-3">Supprimer</button>
-                    </form>
-                <?php endif; ?>
             </form>
         </div>
     </div>
