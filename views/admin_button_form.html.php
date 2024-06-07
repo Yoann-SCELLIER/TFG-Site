@@ -6,9 +6,6 @@
         <div class="col-3">
             <button class="btn bg-success fw-bold" type="button"><a href="/tfg/admin/admin_form_game.php" class="text-reset text-dark">Formulaire game</a></button>
         </div>
-        <div class="col-3">
-            <button class="btn bg-primary fw-bold" type="button">Formulaire tournois</button>
-        </div>
     </div>
 </div>
 
