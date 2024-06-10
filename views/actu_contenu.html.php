@@ -14,8 +14,7 @@
             Restez connectés pour ne rien rater de l'actualité brûlante de la TF - True Fighters Gaming !</p>
     </div>
     <hr class="border-2">
-    <!-- Bouton pour ajouter une actualité -->
-    <a href="/tfg/actu_formu.php" class="btn btn-primary">Ajouter une actualité</a>
+    <?php require_once dirname(__DIR__) . '\views\button_add_content.html.php'; ?>
 </div> 
 
 <!-- Affichage des actualités -->

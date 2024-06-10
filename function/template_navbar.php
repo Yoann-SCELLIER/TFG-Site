@@ -37,7 +37,8 @@ function navMemberOfficial()
                         <a class="nav-link text-white" href="#" id="contactButton">CONTACT</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#"><?php echo $username; ?></a>
+                        <p class="mb-0" style="font-size: 8px;">WELCOME</p>
+                        <p style="font-size: 13px;"><?php echo $username ?></p>
                     </li>
                 </ul>
             </div>

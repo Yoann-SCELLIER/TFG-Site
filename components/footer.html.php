@@ -61,13 +61,13 @@
             <h1>Conditions</h1>
             <ul style="list-style-type:none;">
                 <li>CGU</li>
-                <li>L'association</li>
+                <li>L'association</li> 
                 <li>Tournois</li>
             </ul>
         </div>
         <div class="row col">
-            <a href="index.html">
-                <img src="assets/images/true-fighters-gaming.png" width="600rem" widht="auto" class="p-3" alt="image true fighters gaming">
+            <a href="index.php">
+                <img src="assets/images/true-fighters-gaming.png" width="600rem" widht="auto" class="p-3 img-fluid" alt="image true fighters gaming">
             </a>
             <hr>
             <ul class="d-flex justify-content-center text-reset text-white" style="list-style-type:none;">
