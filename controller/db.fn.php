@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 // Informations de connexion à la base de données
 $servername = "localhost"; // Remplacez par le nom du serveur de votre base de données
 $username = "yoann"; // Remplacez par votre nom d'utilisateur de la base de données

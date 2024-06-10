@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['username'] = $member['username']; 
         
         // Redirection vers la page d'accueil après connexion réussie
-        // header("Location: ../index.html.php");
+        header("Location: ../index.php");
         
         // Sortie du script après redirection
         exit();
