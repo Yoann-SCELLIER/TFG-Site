@@ -7,7 +7,7 @@ $id = $_GET['id'];
 $post = getPostById($bdd, $id);
 
 // Vérifier si l'article existe
-if ($post) {
+if ($post) { 
 ?>
 
 <div class="col p-5">
@@ -26,7 +26,7 @@ if ($post) {
             <?php endif; ?>
         </div>
         <div aria-label="Actions" class="text-center m-3">
-            <a href="actu_formu.php?id=<?= $post['post_id'] ?>" class="btn btn-warning">Modifier l'article</a>
+            <a href="/TFG/admin/admin_form_actu.php?id=<?= $post['post_id'] ?>" class="btn btn-warning">Modifier l'article</a>
         </div>
         <?php if ($id) : ?>
             <div aria-label="Actions" class="text-center m-3">

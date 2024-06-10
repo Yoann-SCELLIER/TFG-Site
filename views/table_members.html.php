@@ -3,7 +3,7 @@
     <div class="table-responsive text-center">
         <table class="table table-bordered border border-2 border-dark align-self-center">
             <thead>
-                <tr>
+                <tr> 
                     <th class="m-0 b-0 p-0 g-0">ID</th>
                     <th class="m-0 b-0 p-0 g-0">Département</th>
                     <th class="m-0 b-0 p-0 g-0">Cover</th>
