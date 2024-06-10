@@ -21,7 +21,7 @@
 <div id="hiddenGamingContent" class="text-center" style="display: none;">
 
     <div class="text-center">
-        <div class="text-center d-flex justify-content-evenly row cols-12 row-cols-2" background-size="10%">
+        <div class="text-center d-flex justify-content-evenly row cols-12 row-cols-2 g-0 p-0 m-0 b-0" background-size="10%">
             <div class="col align-self-center text-end">
                 <div>
                     <h1>Gaming</h1>
@@ -29,7 +29,7 @@
                         plateformes précises où vous pouvez nous rejoindre.</p>
                 </div>
             </div>
-            <div class="col">
+            <div class="col g-0 p-0 m-0 b-0">
                 <img class="d-flex justify-content-end p-0 m-0 b-0 g-0" width="18%" height="auto" src="assets/images/img-gaming.png" alt="image pour la section gaming">
             </div>
         </div>
