@@ -63,3 +63,61 @@ function view_list_game($bdd) {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function getGameById($bdd, $id) {
+    try {
+        // Prépare la requête SQL pour récupérer un jeu par son ID
+        $stmt = $bdd->prepare("SELECT * FROM game WHERE game_id = :id");
+        // Exécute la requête en liant le paramètre ID
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        // Récupère le jeu sous forme de tableau associatif
+        $game = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        // Retourne le jeu s'il est trouvé, sinon null
+        return $game ? $game : null;
+    } catch (PDOException $e) {
+        // Gérer les erreurs potentielles
+        echo "Erreur: " . $e->getMessage();
+        return null;
+    }
+}
+
+function addGame($bdd, $title, $content, $image_url) {
+    try {
+        $sql = "INSERT INTO game (title, content, image_url) VALUES (:title, :content, :image_url)";
+        $stmt = $bdd->prepare($sql);
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':content', $content);
+        $stmt->bindParam(':image_url', $image_url);
+        $stmt->execute();
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
+    }
+}
+
+function updateGame($bdd, $id, $title, $content, $image_url) {
+    try {
+        $sql = "UPDATE game SET title = :title, content = :content, image_url = :image_url WHERE game_id = :id";
+        $stmt = $bdd->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':content', $content);
+        $stmt->bindParam(':image_url', $image_url);
+        $stmt->execute();
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
+    }
+}
+
+function deleteGame($bdd, $id) {
+    try {
+        $sql = "DELETE FROM game WHERE game_id = :id";
+        $stmt = $bdd->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
+    }
+}

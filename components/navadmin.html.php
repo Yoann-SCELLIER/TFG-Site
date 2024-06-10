@@ -32,6 +32,9 @@
                         <a class="nav-link" href="/TFG/admin/dashboard.php">MEMBRE ET STAFF</a> <!-- Chemin absolu pour actualite.php -->
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/TFG/admin/admin_view_list_game.php">GAME</a> <!-- Chemin absolu pour actualite.php -->
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/TFG/admin/admin_view_list_actu.php">ACTUALITÉ</a> <!-- Chemin absolu pour actualite.php -->
                     </li>
                     <li class="nav-item">
