@@ -8,5 +8,7 @@ if (empty($_SESSION['role_member'])) {
     echo navMemberGuest();
 } elseif ($_SESSION['role_member'] == 'memberOfficial') {
     echo navMemberOfficial();
+} elseif ($_SESSION['role_member'] == 'memberAdmin') {
+    echo navMemberAdmin();
 }
 ?>
