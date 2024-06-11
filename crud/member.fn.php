@@ -4,7 +4,8 @@ require_once dirname(__DIR__) . '\controller\db.fn.php';
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
 // Fonction pour ajouter un membre à la base de données
-function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover) {
+function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover) 
+{
     // Hacher le mot de passe
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
@@ -52,13 +53,18 @@ function isEmailTaken($bdd, $email)
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
 // Fonction pour connecter un utilisateur en vérifiant ses informations d'identification
-function connexion($bdd, $email, $hashed_password)
+function connexion($bdd, $email, $password)
 {
-    $sql = "SELECT * FROM member WHERE email = :email";
+    $sql = "SELECT member.*, role.* 
+    FROM member JOIN role 
+    ON member.role_id = role.id 
+    WHERE member.email = :email;";
     $stmt = $bdd->prepare($sql);
     $stmt->execute(['email' => $email]);
-    $member = $stmt->fetch();
-    if ($member && password_verify($hashed_password, $member['password'])) {
+    $member = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($member && password_verify($password, $member['password'])) {
+        // echo $password;
+        // die;
         return $member;
     } else {
         return false;
@@ -77,7 +83,8 @@ function viewMembers($bdd) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
-function getMemberById($bdd, $member_id) {
+function getMemberById($bdd, $member_id) 
+{
     try {
         $sql = "SELECT member.*, 
                 GROUP_CONCAT(job.title SEPARATOR ', ') AS jobs
@@ -106,7 +113,8 @@ function getMemberById($bdd, $member_id) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
-function addMemberJob($bdd, $member_id, $job_id) {
+function addMemberJob($bdd, $member_id, $job_id) 
+{
     try {
         // Requête SQL pour ajouter un emploi à un membre dans la table de liaison
         $sql = "INSERT INTO member_job (member_id, job_id) VALUES (?, ?)";
@@ -120,7 +128,8 @@ function addMemberJob($bdd, $member_id, $job_id) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
-function updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $content) {
+function updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $content) 
+{
     try {
         // Mise à jour du membre
         $sql = "UPDATE member SET cover = :cover, username = :username, email = :email, content = :content, modif_at = CURRENT_TIMESTAMP WHERE member_id = :member_id";
@@ -153,7 +162,8 @@ function updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $conte
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
-function listJobs($bdd) {
+function listJobs($bdd) 
+{
 
     // On récupère tout le contenu de la table job
     $sqlQuery = 'SELECT * FROM job';
@@ -164,7 +174,8 @@ function listJobs($bdd) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
-function deleteMember($bdd, $member_id) {
+function deleteMember($bdd, $member_id) 
+{
     try {
         // Préparer la requête SQL pour supprimer le membre
         $sql = "DELETE FROM member WHERE member_id = ?";

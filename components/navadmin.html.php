@@ -12,7 +12,7 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-success">
         <div class="container-fluid">
-            <a class="navbar-brand m-0 p-0 b-0 g-0" href="/TFG/index.php"> <!-- Chemin absolu pour index.php -->
+            <a class="navbar-brand m-0 p-0 b-0 g-0" href="/TFG/admin/dashboard.php"> <!-- Chemin absolu pour index.php -->
                 <img src="/TFG/assets/images/logoV1.gif" alt="Logo" width="80" height="auto" class="d-inline-block align-text-top">
             </a>
             <button class="navbar-toggler navbar-dark border-2" type="button" data-bs-theme="dark" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,9 +25,6 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav fw-bold">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/TFG/index.php">ACCUEIL</a> <!-- Chemin absolu pour index.php -->
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/TFG/admin/dashboard.php">MEMBRE ET STAFF</a> <!-- Chemin absolu pour actualite.php -->
                     </li>

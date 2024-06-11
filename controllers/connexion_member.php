@@ -6,23 +6,34 @@ require_once dirname(__DIR__) . '\crud\member.fn.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupération de l'e-mail et du mot de passe soumis via le formulaire de connexion
     $email = $_POST['email'];
-    $hashed_password = $_POST['password'];
+    $password = $_POST['password'];
     
     // Appel de la fonction de connexion pour vérifier les informations d'identification
-    $member = connexion($bdd, $email, $hashed_password);
+    $member = connexion($bdd, $email, $password);
     
     // Si les informations d'identification sont valides, connecter le membre et le rediriger
     if ($member) {
+        // echo "hello";
+        session_start();
+        
         // Enregistrement de l'ID du membre dans la session
         $_SESSION['member_id'] = $member['member_id'];
+        
+        $_SESSION['role_member'] = $member['role_member'];
+        // var_dump($_SESSION['role_member']);
+        // die;
+        
         // Enregistrement du nom d'utilisateur dans la session
         $_SESSION['username'] = $member['username']; 
+    // var_dump($_SESSION);
         
-        // Redirection vers la page d'accueil après connexion réussie
-        header("Location: ../index.php");
-        
-        // Sortie du script après redirection
-        exit();
+    if ($_SESSION['role_member'] === 'memberOfficial' || $_SESSION['role_member'] === 'memberGuest') {
+        header("Location: ../index.html.php");
+    } 
+    if ($_SESSION['role_member'] === 'memberAdmin') {
+        header("Location: /tfg/admin/dashboard.php");
+    } 
+    exit();
     } else {
         // Affichage d'un message d'erreur si les informations d'identification sont incorrectes
         $erreur = "Email ou mot de passe incorrect."; 
