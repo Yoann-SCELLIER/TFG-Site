@@ -14,7 +14,7 @@ function navMemberOfficial()
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center me-5">
                         <li class="nav-item"><a class="nav-link text-white" href="index.php">ACCUEIL</a></li>
                         <li class="nav-item"><a class="nav-link active text-white" aria-current="page" href="index.php#storySection">STORY</a></li>
                         <li class="nav-item"><a class="nav-link text-white" href="index.php#staffSection">STAFF</a></li>
@@ -57,7 +57,7 @@ function navMemberGuest()
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center me-5">
                         <li class="nav-item"><a class="nav-link text-white" href="index.php">ACCUEIL</a></li>
                         <li class="nav-item"><a class="nav-link active text-white" aria-current="page" href="index.php#storySection">STORY</a></li>
                         <li class="nav-item"><a class="nav-link text-white" href="index.php#staffSection">STAFF</a></li>
@@ -133,7 +133,7 @@ function navMemberAdmin()
                         </li>
                     </ul>
                     <ul class="navbar-nav fw-bold">
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center me-5">
                             <li class="nav-item">
                                 <a class="nav-link" href="/TFG/admin/dashboard.php">MEMBRE ET STAFF</a> <!-- Chemin absolu pour actualite.php -->
                             </li>
