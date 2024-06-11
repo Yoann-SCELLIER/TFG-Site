@@ -33,20 +33,6 @@
                 <img class="p-0 m-0 b-0 g-0" width="40%" height="auto" src="assets/images/img-gaming.png" alt="image pour la section gaming">
             </div>
         </div>
-
-
-
-    <!-- <div class="row row-cols-1 row-cols-md-2 text-center g-0 p-1">
-            <div class="col">
-                <img class="p-0 m-0 b-0 g-0" width="40%" height="auto" src="assets/images/img-story.png" alt="image pour la section story">
-            </div>
-            <div class="col row align-self-center text-start m-0">
-                <h1 class="fs-4">Histoire de la True Fighters Gaming</h1>
-                <p class="fs-6">Découvrez l'histoire de la True Fighters Gaming (TF), ainsi que ses débuts, sa
-                    vision de
-                    l'univers du gaming et ses objectifs communs.</p>
-            </div>
-        </div> -->
         <hr class="border-1 text-dark">
 
         <div class="container">
