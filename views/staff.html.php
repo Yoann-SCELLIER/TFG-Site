@@ -2,7 +2,7 @@
 <!------------------------------------------------------------------------------------------------------------------------------------>
 <div class="downStaff bg-grey text-white" id="staffSection">
     <div class="row row-cols-1 row-cols-md-2 row-clos-lg-2 text-center g-0 bg-grey p-1" id="staffSection">
-        <div class="col align-self-center text-end m-0 text-white order-2 order-sm-2 order-md-1">
+        <div class="col align-self-center text-end m-0 text-white order-2 order-sm-2 order-md-1 p-3">
             <h1 class="fs-4">Staff & Membres</h1>
             <p class="fs-6">Présentation du personnel "STAFF & MEMBRES", leurs rôles, leurs importances, ainsi que
                 la spécialité de chacun.</p>

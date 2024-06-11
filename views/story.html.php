@@ -23,7 +23,7 @@
         <img class="p-0 m-0 b-0 g-0" width="23%" height="auto" src="assets/images/img-story.png" alt="image pour la section story">
     </div>
     <h1>TF - True Fighters Gaming</h1>
-    <p>True Fighters Gaming (TF) est une association dynamique et inclusive, ancrée dans une passion commune pour
+    <p class="p-4">True Fighters Gaming (TF) est une association dynamique et inclusive, ancrée dans une passion commune pour
         les jeux vidéo.<br>
         Fondée en 2012 sur la plateforme Xbox 360, la TF a débuté sous la licence Halo.<br>
         Rapidement, l'équipe a gagné en popularité et s'est agrandie, menant à une évolution naturelle vers une

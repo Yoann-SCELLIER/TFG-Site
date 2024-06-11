@@ -10,7 +10,7 @@ $post = getPostById($bdd, $id);
 if ($post) {
 ?>
 
-<div class="col p-5">
+<div class="col p-1">
     <div class="card border-2 m-5">
         <img src="<?= $post['image_url'] ?>" class="card-img-top p-5" alt="Image <?= $post['title'] ?>">
         <div class="card-body text-center">
