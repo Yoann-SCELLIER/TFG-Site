@@ -10,7 +10,9 @@
             True Fighters Gaming est plus qu'une association, c'est une famille passionnée par l'esport et les jeux vidéo. <br>
             Restez connectés pour ne rien rater de l'actualité brûlante de la TF - True Fighters Gaming !</p>
     <hr class="border-2">
-    <?php require_once dirname(__DIR__) . '\views\button_add_content.html.php'; ?>
+    <?php 
+require_once dirname(__DIR__) . '\controllers\controller_button_actu.php';
+?>
 </div> 
 
 <!-- Affichage des actualités -->

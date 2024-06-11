@@ -2,10 +2,7 @@
 
 require_once dirname(__DIR__) . '\TFG\components\header.html.php';
 
-var_dump($_SESSION['member_id']);
-var_dump($_SESSION['username']);
-
-require_once dirname(__DIR__) . '/TFG/components/navbar.html.php';
+require_once dirname(__DIR__) . '\tfg\controllers\controller_nav.php';
 
 require_once dirname(__DIR__) . '\TFG\controllers\view_list_member.php';
 
