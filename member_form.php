@@ -5,6 +5,8 @@ require_once dirname(__DIR__) . '\tfg\controllers\controller_nav.php';
 
 require_once dirname(__DIR__) . '/TFG/controllers/update_member.php';
 
+require_once dirname(__DIR__) . '/TFG/controllers/controller_departement.php';
+
 require_once dirname(__DIR__) . '/TFG/controllers/update_member_job.php';
 
 require_once dirname(__DIR__) . '\TFG\views\member_form.html.php';

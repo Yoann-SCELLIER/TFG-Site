@@ -17,20 +17,9 @@
             <label for="departement_id" class="form-label text-white">Département :</label><br>
             <select id="departement_id" class="form-control" name="departement_id" required>
                 <option value="" disabled selected>Choisir un département</option>
-                <?php
-                // Inclusion du fichier de configuration de la base de données
-                require_once dirname(__DIR__) . '\controller\db.fn.php';
-
-                // Récupération des départements depuis la base de données
-                $sql = "SELECT departement_id, departement_name FROM departement";
-                $stmt = $bdd->prepare($sql);
-                $stmt->execute();
-
-                // Affichage des options
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    echo '<option value="' . $row['departement_id'] . '">' . $row['departement_name'] . '</option>';
-                }
-                ?>
+                <?php foreach ($departements as $departement) : ?>
+                    <option value="<?= $departement['departement_id'] ?>"><?= $departement['departement_name'] ?></option>
+                <?php endforeach; ?>
             </select><br>
             <label for="cover" class="form-label text-white">Image de profil :</label><br>
             <input type="text" class="form-control " id="cover" name="cover" placeholder="Lien de votre image"><br>
@@ -52,11 +41,12 @@
         <section class="m-2"><br>
             <h5>Inscription à True Fighters Gaming</h5>
             <p>Rejoignez True Fighters Gaming, la communauté <br>ultime pour les passionnés de jeux vidéo!<br>
-            Notre association est dédiée à rassembler les joueurs de tous horizons pour partager des expériences,<br>
-            participer à des tournois et développer des compétences de jeu dans un environnement convivial et compétitif.<br>
-            <br>
-            Comment s'inscrire?<br>
-            L'inscription à True Fighters Gaming est simple et rapide. Suivez ces étapes pour rejoindre notre communauté <span class="text-danger">*</span></p>
+                Notre association est dédiée à rassembler les joueurs de tous horizons pour partager des expériences,<br>
+                participer à des tournois et développer des compétences de jeu dans un environnement convivial et compétitif.<br>
+                <br>
+                Comment s'inscrire?<br>
+                L'inscription à True Fighters Gaming est simple et rapide. Suivez ces étapes pour rejoindre notre communauté <span class="text-danger">*</span>
+            </p>
         </section>
         <div>
             <p class="fst-italic text-danger">"* Pour plus de détail dans votre profile pensez à aller le modifier !"</p>

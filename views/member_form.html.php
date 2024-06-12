@@ -11,7 +11,7 @@ $jobs = listJobs($bdd);
                 <div class="mb-3">
                     <label for="username" class="form-label text-white">Nom d'utilisateur :</label><br>
                     <input type="text" name="username" class="form-control" id="username" value="<?= htmlspecialchars($member['username'] ?? '') ?>" required><br>
-                </div> 
+                </div>
                 <div class="mb-3">
                     <label for="email" class="form-label text-white">Email :</label><br>
                     <input type="email" name="email" class="form-control" id="email" value="<?= htmlspecialchars($member['email'] ?? '') ?>" required><br>
@@ -43,6 +43,12 @@ $jobs = listJobs($bdd);
                     <label for="cover" class="form-label text-white">URL de votre avatar :</label><br>
                     <input type="text" name="cover" class="form-control" id="cover" value="<?= htmlspecialchars($member['cover'] ?? 'URL par défaut') ?>" required><br>
                 </div>
+                <select id="departement_id" class="form-control" name="departement_id" required>
+                    <option value="" disabled selected>Choisir un département</option>
+                    <?php foreach ($departements as $departement) : ?>
+                        <option value="<?= $departement['departement_id'] ?>"><?= $departement['departement_name'] ?></option>
+                    <?php endforeach; ?>
+                </select><br>
                 <input type="submit" value="Modifier le Membre" class="btn btn-secondary p-3">
                 <a href="index.php" class="btn btn-secondary p-3">Annuler</a>
             </form>
