@@ -2,24 +2,16 @@
 // Inclure le fichier de configuration de la base de données
 require_once dirname(__DIR__) . '\controller\db.fn.php';
 
-//---------------------------------------------------------------------------------------------------------------------------------------------
 // Fonction pour ajouter un membre à la base de données
 function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover) 
 {
-    // Hacher le mot de passe
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-
-    // Définir le rôle par défaut (par exemple, 2)
     $role_id = 2;
 
-    // Préparer la requête SQL
     $sql = "INSERT INTO member (username, first_name, last_name, email, password, departement_id, cover, role_id) 
             VALUES (:username, :first_name, :last_name, :email, :password, :departement_id, :cover, :role_id)";
-
-    // Préparer la requête
     $stmt = $bdd->prepare($sql);
 
-    // Lier les valeurs
     $stmt->bindValue(':username', $username);
     $stmt->bindValue(':first_name', $first_name);
     $stmt->bindValue(':last_name', $last_name);
@@ -29,11 +21,9 @@ function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $passwo
     $stmt->bindValue(':cover', $cover);
     $stmt->bindValue(':role_id', $role_id, PDO::PARAM_INT);
 
-    // Exécuter la requête
     return $stmt->execute();
 }
 
-//---------------------------------------------------------------------------------------------------------------------------------------------
 // Fonction pour vérifier si un nom d'utilisateur est déjà pris
 function isUsernameTaken($bdd, $username)
 {
@@ -44,7 +34,6 @@ function isUsernameTaken($bdd, $username)
     return $row['count'] > 0;
 }
 
-//---------------------------------------------------------------------------------------------------------------------------------------------
 // Fonction pour vérifier si une adresse e-mail est déjà prise
 function isEmailTaken($bdd, $email)
 {
@@ -55,88 +44,67 @@ function isEmailTaken($bdd, $email)
     return $row['count'] > 0;
 }
 
-//---------------------------------------------------------------------------------------------------------------------------------------------
 // Fonction pour connecter un utilisateur en vérifiant ses informations d'identification
 function connexion($bdd, $email, $password)
 {
     $sql = "SELECT member.*, role.* 
-    FROM member JOIN role 
-    ON member.role_id = role.id 
-    WHERE member.email = :email;";
+            FROM member 
+            JOIN role ON member.role_id = role.id 
+            WHERE member.email = :email";
     $stmt = $bdd->prepare($sql);
     $stmt->execute(['email' => $email]);
     $member = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($member && password_verify($password, $member['password'])) {
-        // echo $password;
-        // die;
         return $member;
     } else {
         return false;
     }
 }
 
-//---------------------------------------------------------------------------------------------------------------------------------------------
 // Fonction pour afficher tous les membres
 function viewMembers($bdd) 
 {
-    // Requête pour récupérer tous les membres
     $sqlQuery = 'SELECT * FROM member';
     $stmt = $bdd->query($sqlQuery);
     $members = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
     return $members;
 }
 
-//---------------------------------------------------------------------------------------------------------------------------------------------
 function getMemberById($bdd, $member_id) 
 {
     try {
         $sql = "SELECT member.*, 
-                GROUP_CONCAT(job.title SEPARATOR ', ') AS jobs
+                       GROUP_CONCAT(job.title SEPARATOR ', ') AS jobs,
+                       role.role_member
                 FROM member
                 LEFT JOIN member_job ON member.member_id = member_job.member_id
                 LEFT JOIN job ON member_job.job_id = job.job_id
+                LEFT JOIN role ON member.role_id = role.id
                 WHERE member.member_id = ?
                 GROUP BY member.member_id";
         $stmt = $bdd->prepare($sql);
         $stmt->execute([$member_id]);
-        $member = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        // Sélectionner la liste de tous les jobs disponibles
-        $sql_jobs = "SELECT * FROM job";
-        $stmt_jobs = $bdd->prepare($sql_jobs);
-        $stmt_jobs->execute();
-        $jobs = $stmt_jobs->fetchAll(PDO::FETCH_ASSOC);
-
-        // Ajouter la liste de tous les jobs disponibles aux détails du membre
-        $member['all_jobs'] = $jobs;
-        
-        return $member;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         exit("Erreur lors de la récupération des détails du membre : " . $e->getMessage());
     }
 }
 
-//---------------------------------------------------------------------------------------------------------------------------------------------
 function addMemberJob($bdd, $member_id, $job_id) 
 {
     try {
-        // Requête SQL pour ajouter un emploi à un membre dans la table de liaison
         $sql = "INSERT INTO member_job (member_id, job_id) VALUES (?, ?)";
         $stmt = $bdd->prepare($sql);
         $stmt->execute([$member_id, $job_id]);
         return true;
     } catch (PDOException $e) {
-        // Gérer les erreurs de requête SQL
         exit("Erreur lors de l'ajout de l'emploi au membre: " . $e->getMessage());
     }
 }
 
-//---------------------------------------------------------------------------------------------------------------------------------------------
 function updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $content, $role_id) 
 {
     try {
-        // Mise à jour du membre
         $sql = "UPDATE member SET cover = :cover, username = :username, email = :email, content = :content, role_id = :role_id, modif_at = CURRENT_TIMESTAMP WHERE member_id = :member_id";
         $stmt = $bdd->prepare($sql);
         $stmt->bindValue(':cover', $cover);
@@ -147,13 +115,11 @@ function updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $conte
         $stmt->bindValue(':member_id', $member_id, PDO::PARAM_INT);
         $stmt->execute();
 
-        // Suppression des anciennes compétences
         $sql = "DELETE FROM member_job WHERE member_id = :member_id";
         $stmt = $bdd->prepare($sql);
         $stmt->bindValue(':member_id', $member_id, PDO::PARAM_INT);
         $stmt->execute();
 
-        // Insertion des nouvelles compétences
         $sql = "INSERT INTO member_job (member_id, job_id) VALUES (:member_id, :job_id)";
         $stmt = $bdd->prepare($sql);
         foreach ($jobs as $job_id) {
@@ -161,72 +127,49 @@ function updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $conte
             $stmt->bindValue(':job_id', $job_id, PDO::PARAM_INT);
             $stmt->execute();
         }
-
+        return true;
     } catch (PDOException $e) {
         echo "Erreur lors de la mise à jour du membre : " . $e->getMessage();
+        return false;
     }
 }
 
-
-//---------------------------------------------------------------------------------------------------------------------------------------------
 function listJobs($bdd) 
 {
-
-    // On récupère tout le contenu de la table job
     $sqlQuery = 'SELECT * FROM job';
-    $recipesStatement1 = $bdd->prepare($sqlQuery);
-    $recipesStatement1->execute();
-    $listJobs = $recipesStatement1->fetchAll();
-    return $listJobs;
+    $stmt = $bdd->prepare($sqlQuery);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-//---------------------------------------------------------------------------------------------------------------------------------------------
 function deleteMember($bdd, $member_id) 
 {
     try {
-        // Préparer la requête SQL pour supprimer le membre
         $sql = "DELETE FROM member WHERE member_id = ?";
         $stmt = $bdd->prepare($sql);
-        // Exécuter la requête en liant le paramètre du membre_id
         $stmt->execute([$member_id]);
-        // Retourner vrai si la suppression a réussi
         return true;
     } catch (PDOException $e) {
-        // En cas d'erreur, afficher un message d'erreur et retourner faux
         exit("Erreur lors de la suppression du membre : " . $e->getMessage());
-        return false;
     }
 }
 
 function getDepartements($bdd) 
 {
-    $departements = array();
-
+    $departements = [];
     $sql = "SELECT departement_id, departement_name FROM departement";
     $stmt = $bdd->prepare($sql);
     $stmt->execute();
-
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $departements[] = $row;
     }
-
     return $departements;
 }
 
 function getRolesFromDatabase($bdd) 
 {
-    // Requête SQL pour récupérer les rôles depuis la table "role"
     $sql = "SELECT * FROM role";
-    
-    // Préparation de la requête
     $stmt = $bdd->prepare($sql);
-    
-    // Exécution de la requête
     $stmt->execute();
-    
-    // Récupération des résultats
-    $roles = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-    // Retourner les rôles
-    return $roles;
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

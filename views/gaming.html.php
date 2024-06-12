@@ -25,8 +25,7 @@
             <div class="col align-self-center text-end order-2 order-sm-2 order-md-2 order-lg-2">
                 <div class="col row align-self-center text-start m-0">
                     <h1 class="fs-4">Gaming</h1>
-                    <p class="fs-6">Liste des jeux disponibles sur les <br>
-                        plateformes précises où vous pouvez nous rejoindre.</p>
+                    <p class="fs-6">Liste des jeux où vous pouvez nous rejoindre.</p>
                 </div>
             </div>
             <div class="col g-0 p-0 m-0 b-0 order-1 order-sm-1 order-md-1 order-lg-1">
@@ -34,6 +33,8 @@
             </div>
         </div>
         <hr class="border-1 text-dark">
+
+        <?php require_once 'caroussel.html.php'; ?>
 
         <div class="container">
             <div class="row d-flex justify-content-evenly">

@@ -86,3 +86,23 @@ table th, table td {
 .fs-7 {
     font-size: 12px !important;
 }
+
+/* styles.css */
+
+.role.admin {
+    font-size: 12px !important;
+    color: red;
+    font-weight: bold;
+}
+
+.role.tf-officiel {
+    font-size: 12px !important;
+    color: blue;
+    font-weight: bold;
+}
+
+.role.invité {
+    font-size: 12px !important;
+    color: green;
+    font-weight: bold;
+}
