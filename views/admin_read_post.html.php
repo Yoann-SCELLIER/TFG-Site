@@ -18,6 +18,9 @@ if ($post) {
             </div>
             <div class="card-body">
                 <p class="card-text"><?= $post['content'] ?></p>
+                <div class="d-flex justify-content-end">
+                    <p><small class="text-body-secondary"><?= $post['username'] ?></small></p>
+                </div>
             </div>
             <div class="card-footer text-center">
                 <p>Créé le : <small class="text-body-secondary"><?= $post['created_at'] ?></small></p>
@@ -38,7 +41,7 @@ if ($post) {
                     </div>
                 <?php endif; ?>
                 <div aria-label="Actions" class="text-center m-3">
-                    <a href="/TFG/admin/admin_view_list_post.php" class="btn btn-secondary">Retour à la liste</a>
+                    <a href="/TFG/admin/admin_view_list_actu.php" class="btn btn-secondary">Retour à la liste</a>
                 </div>
             </div>
         </div>

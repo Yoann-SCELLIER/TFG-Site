@@ -39,12 +39,16 @@ function deletePost($bdd, $id) {
 
 // Fonction pour récupérer les informations d'un post spécifique en utilisant son ID
 function getPostById($bdd, $id) {
-    $sql = "SELECT post.*, member.username FROM post JOIN member ON post.member_id = member.member_id WHERE post_id = :id";
+    $sql = "SELECT post.*, member.username 
+            FROM post 
+            JOIN member ON post.member_id = member.member_id 
+            WHERE post_id = :id";
     $stmt = $bdd->prepare($sql);
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+
 
 // Fonction pour mettre à jour un post existant dans la base de données
 function updatePost($bdd, $id, $titre, $contenu, $image_url, $member_id) {

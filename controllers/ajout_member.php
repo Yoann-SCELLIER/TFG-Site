@@ -1,6 +1,6 @@
 <?php
 // Inclure les fonctions de gestion des membres
-require_once dirname(__DIR__) . '\crud\member.fn.php';
+require_once dirname(__DIR__) . '/crud/member.fn.php';
 
 // Vérification si les données du formulaire sont soumises via la méthode POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -28,11 +28,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Appel de la fonction d'inscription
-    $member_id = ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover_path);
+    $result = ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover_path);
 
-    if ($member_id) {
+    if ($result) {
         // Redirection vers la page de profil du membre après inscription réussie
-        header('Location: \TFG\index.php');
+        header('Location: \TFG\log.php');
         exit();
     } else {
         // Gérer les erreurs si l'inscription a échoué

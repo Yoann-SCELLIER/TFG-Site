@@ -9,9 +9,12 @@ function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $passwo
     // Hacher le mot de passe
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
+    // Définir le rôle par défaut (par exemple, 2)
+    $role_id = 2;
+
     // Préparer la requête SQL
-    $sql = "INSERT INTO member (username, first_name, last_name, email, password, departement_id, cover) 
-            VALUES (:username, :first_name, :last_name, :email, :password, :departement_id, :cover)";
+    $sql = "INSERT INTO member (username, first_name, last_name, email, password, departement_id, cover, role_id) 
+            VALUES (:username, :first_name, :last_name, :email, :password, :departement_id, :cover, :role_id)";
 
     // Préparer la requête
     $stmt = $bdd->prepare($sql);
@@ -24,10 +27,12 @@ function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $passwo
     $stmt->bindValue(':password', $hashed_password);
     $stmt->bindValue(':departement_id', $departement_id, PDO::PARAM_INT);
     $stmt->bindValue(':cover', $cover);
+    $stmt->bindValue(':role_id', $role_id, PDO::PARAM_INT);
 
     // Exécuter la requête
     return $stmt->execute();
 }
+
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
 // Fonction pour vérifier si un nom d'utilisateur est déjà pris

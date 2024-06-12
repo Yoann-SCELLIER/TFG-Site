@@ -35,6 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Affichage d'un message d'erreur si les informations d'identification sont incorrectes
         $erreur = "Email ou mot de passe incorrect.";
+        header("Location: /TFG/log.php");
+        echo 'Erreur';
     }
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-function buttonCardActu($id)
+function buttonCardActu($id) 
 {
 ?>
     <div class="d-flex text-center justify-content-evenly">
@@ -16,6 +16,6 @@ function buttonCardActu($id)
             </div>
         <?php endif; ?>
     </div>
-    
 <?php
 }
+?>
