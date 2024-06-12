@@ -4,7 +4,7 @@ $jobs = listJobs($bdd);
 
 <div class="container text-center">
     <div class="row align-items-center p-5">
-        <div class="col m-2 b-0 p-0 g-0 border border-1 p-5 bg-grey border border-4 border-danger">
+        <div class="col m-2 b-0 p-0 g-0 border border-1 p-5 border border-4 border-danger">
             <h1 id="formTitle">Modifier le Membre</h1>
             <form id="memberForm" action="\TFG\controllers\admin_update_member.php?id=<?= $_GET['id'] ?>" method="post">
                 <input type="hidden" name="member_id" value="<?= $member['member_id'] ?? '' ?>">
@@ -43,7 +43,7 @@ $jobs = listJobs($bdd);
                     <label for="cover" class="form-label ">URL de votre avatar :</label><br>
                     <input type="text" name="cover" class="form-control border border-2 border-dark" id="cover" value="<?= htmlspecialchars($member['cover'] ?? 'URL par défaut') ?>" required><br>
                 </div>
-                <select id="departement_id" class="form-control" name="departement_id" required>
+                <select id="departement_id" class="form-control border border-1 border-dark text-center" name="departement_id" required>
                     <option value="" disabled selected>Choisir un département</option>
                     <?php foreach ($departements as $departement) : ?>
                         <option value="<?= $departement['departement_id'] ?>"><?= $departement['departement_name'] ?></option>

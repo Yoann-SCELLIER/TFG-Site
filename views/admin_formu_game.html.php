@@ -1,6 +1,6 @@
 <div class="container text-center">
-    <div class="row align-items-center bg-grey p-5">
-        <div class="col m-2 b-0 p-0 g-0 border border-1 p-5 bg-grey border border-4 border-danger">
+    <div class="row align-items-center p-5">
+        <div class="col m-2 b-0 p-0 g-0 border border-1 p-5 border border-4 border-danger">
             <h5 class="card-title"><?= htmlspecialchars($formTitle) ?></h5>
             <form id="gameForm" action="<?= $action ?>" method="post">
                 <div class="mb-3">

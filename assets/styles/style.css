@@ -82,3 +82,7 @@ table th, table td {
     height: 50px;
     object-fit: cover;
 }
+
+.fs-7 {
+    font-size: 12px !important;
+}

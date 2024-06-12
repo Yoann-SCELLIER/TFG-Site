@@ -133,16 +133,17 @@ function addMemberJob($bdd, $member_id, $job_id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
-function updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $content) 
+function updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $content, $role_id) 
 {
     try {
         // Mise à jour du membre
-        $sql = "UPDATE member SET cover = :cover, username = :username, email = :email, content = :content, modif_at = CURRENT_TIMESTAMP WHERE member_id = :member_id";
+        $sql = "UPDATE member SET cover = :cover, username = :username, email = :email, content = :content, role_id = :role_id, modif_at = CURRENT_TIMESTAMP WHERE member_id = :member_id";
         $stmt = $bdd->prepare($sql);
         $stmt->bindValue(':cover', $cover);
         $stmt->bindValue(':username', $username);
         $stmt->bindValue(':email', $email);
         $stmt->bindValue(':content', $content);
+        $stmt->bindValue(':role_id', $role_id, PDO::PARAM_INT);
         $stmt->bindValue(':member_id', $member_id, PDO::PARAM_INT);
         $stmt->execute();
 
@@ -165,6 +166,7 @@ function updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $conte
         echo "Erreur lors de la mise à jour du membre : " . $e->getMessage();
     }
 }
+
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
 function listJobs($bdd) 
@@ -196,7 +198,8 @@ function deleteMember($bdd, $member_id)
     }
 }
 
-function getDepartements($bdd) {
+function getDepartements($bdd) 
+{
     $departements = array();
 
     $sql = "SELECT departement_id, departement_name FROM departement";
@@ -210,3 +213,20 @@ function getDepartements($bdd) {
     return $departements;
 }
 
+function getRolesFromDatabase($bdd) 
+{
+    // Requête SQL pour récupérer les rôles depuis la table "role"
+    $sql = "SELECT * FROM role";
+    
+    // Préparation de la requête
+    $stmt = $bdd->prepare($sql);
+    
+    // Exécution de la requête
+    $stmt->execute();
+    
+    // Récupération des résultats
+    $roles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Retourner les rôles
+    return $roles;
+}
