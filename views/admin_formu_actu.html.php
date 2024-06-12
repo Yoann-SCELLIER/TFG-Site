@@ -17,7 +17,7 @@
                     <input type="text" class="form-control border border-2 border-dark" id="image_url" name="image_url" value="<?= isset($post['image_url']) ? htmlspecialchars($post['image_url']) : '' ?>"><br>
                 </div>
 
-                <input type="submit" value="<?= isset($post_id) ? "Modifier l'actualité" : "Ajouter une actualité" ?>" class="p-3 border border-1 border-dark">
+                <input type="submit" value="<?= isset($post_id) ? "Modifier l'actualité" : "Ajouter une actualité" ?>" class="btn btn-primary p-3 border border-1 border-dark">
             </form> 
         </div>
     </div>

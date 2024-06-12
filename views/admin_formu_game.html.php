@@ -15,7 +15,7 @@
                     <label class="form-label" for="image_url">URL de l'image :</label>
                     <input type="text" class="form-control border border-2 border-dark" id="image_url" name="image_url" value="<?= isset($image_url) ? htmlspecialchars($image_url) : '' ?>">
                 </div>
-                <button type="submit" class="btn btn-primary border border-1 border-dark"><?= $game_id ? "Modifier le jeu" : "Ajouter le jeu" ?></button>
+                <button type="submit"  class="btn btn-primary border border-1 border-dark"><?= $game_id ? "Modifier le jeu" : "Ajouter le jeu" ?></button>
             </form>
         </div>
     </div>

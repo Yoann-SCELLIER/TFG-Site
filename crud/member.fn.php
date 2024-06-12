@@ -33,7 +33,6 @@ function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $passwo
     return $stmt->execute();
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------------------------------
 // Fonction pour vérifier si un nom d'utilisateur est déjà pris
 function isUsernameTaken($bdd, $username)
@@ -195,5 +194,19 @@ function deleteMember($bdd, $member_id)
         exit("Erreur lors de la suppression du membre : " . $e->getMessage());
         return false;
     }
+}
+
+function getDepartements($bdd) {
+    $departements = array();
+
+    $sql = "SELECT departement_id, departement_name FROM departement";
+    $stmt = $bdd->prepare($sql);
+    $stmt->execute();
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $departements[] = $row;
+    }
+
+    return $departements;
 }
 
