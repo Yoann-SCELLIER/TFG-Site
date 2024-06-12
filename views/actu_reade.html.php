@@ -10,23 +10,27 @@ $post = getPostById($bdd, $id);
 if ($post) {
 ?>
 
-<div class="col p-1">
-    <div class="card border-2 m-5">
-        <img src="<?= $post['image_url'] ?>" class="card-img-top p-5" alt="Image <?= $post['title'] ?>">
-        <div class="card-body text-center">
-            <h5 class="card-title"><?= $post['title'] ?></h5>
-        </div>
-        <div class="card-body">
-            <p class="card-text"><?= $post['content'] ?></p>
-        </div>
-        <div class="card-footer text-center">
-            <p>Créé le : <small class="text-body-secondary"><?= $post['created_at'] ?></small></p>
-            <?php if (!empty($post['modif_at'])) : ?>
-                <p>Modifié le : <small class="text-body-secondary"><?= $post['modif_at'] ?></small></p>
-            <?php endif; ?>
+    <div class="col p-1">
+        <div class="card border-2 m-5">
+            <img src="<?= $post['image_url'] ?>" class="card-img-top p-5" alt="Image <?= $post['title'] ?>">
+            <div class="card-body text-center">
+                <h5 class="card-title"><?= $post['title'] ?></h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text"><?= $post['content'] ?></p>
+                <div class="d-flex justify-content-end">
+                    <p><small class="text-body-secondary"><?= $post['username'] ?></small></p>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <p>Créé le : <small class="text-body-secondary"><?= $post['created_at'] ?></small></p>
+                <?php if (!empty($post['modif_at'])) : ?>
+                    <p>Modifié le : <small class="text-body-secondary"><?= $post['modif_at'] ?></small></p>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
-</div>
+
 
 <?php
 } else {

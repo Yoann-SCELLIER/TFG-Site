@@ -1,15 +1,15 @@
 <?php
-// Inclure le fichier de configuration de la base de données
-require_once dirname(__DIR__) . '\controller\db.fn.php';
+require_once dirname(__DIR__) . '/controller/db.fn.php';
 
 // Fonction pour ajouter un nouveau post dans la base de données
-function addPost($bdd, $titre, $contenu, $image_url) {
+function addPost($bdd, $titre, $contenu, $image_url, $member_id) {
     try {
-        $sql = "INSERT INTO post (title, content, image_url) VALUES (:titre, :contenu, :image_url)";
+        $sql = "INSERT INTO post (title, content, image_url, member_id) VALUES (:titre, :contenu, :image_url, :member_id)";
         $stmt = $bdd->prepare($sql);
         $stmt->bindValue(':titre', $titre);
         $stmt->bindValue(':contenu', $contenu);
         $stmt->bindValue(':image_url', $image_url);
+        $stmt->bindValue(':member_id', $member_id, PDO::PARAM_INT);
         $stmt->execute();
     } catch (PDOException $e) {
         exit("Erreur lors de l'ajout du post: " . $e->getMessage());
@@ -39,7 +39,7 @@ function deletePost($bdd, $id) {
 
 // Fonction pour récupérer les informations d'un post spécifique en utilisant son ID
 function getPostById($bdd, $id) {
-    $sql = "SELECT * FROM post WHERE post_id = :id";
+    $sql = "SELECT post.*, member.username FROM post JOIN member ON post.member_id = member.member_id WHERE post_id = :id";
     $stmt = $bdd->prepare($sql);
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
@@ -47,14 +47,15 @@ function getPostById($bdd, $id) {
 }
 
 // Fonction pour mettre à jour un post existant dans la base de données
-function updatePost($bdd, $id, $titre, $contenu, $image_url) {
+function updatePost($bdd, $id, $titre, $contenu, $image_url, $member_id) {
     try {
-        $sql = "UPDATE post SET title = :titre, content = :contenu, image_url = :image_url, modif_at = CURRENT_TIMESTAMP WHERE post_id = :id";
+        $sql = "UPDATE post SET title = :titre, content = :contenu, image_url = :image_url, member_id = :member_id, modif_at = CURRENT_TIMESTAMP WHERE post_id = :id";
         $stmt = $bdd->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->bindValue(':titre', $titre);
         $stmt->bindValue(':contenu', $contenu);
         $stmt->bindValue(':image_url', $image_url);
+        $stmt->bindValue(':member_id', $member_id, PDO::PARAM_INT);
         $stmt->execute();
     } catch (PDOException $e) {
         echo "Erreur lors de la mise à jour du post : " . $e->getMessage();

@@ -73,7 +73,8 @@ function connexion($bdd, $email, $password)
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
 // Fonction pour afficher tous les membres
-function viewMembers($bdd) {
+function viewMembers($bdd) 
+{
     // Requête pour récupérer tous les membres
     $sqlQuery = 'SELECT * FROM member';
     $stmt = $bdd->query($sqlQuery);
@@ -190,3 +191,4 @@ function deleteMember($bdd, $member_id)
         return false;
     }
 }
+

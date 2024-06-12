@@ -7,7 +7,7 @@ $titre = '';
 $contenu = '';
 $image_url = '';
 $modif_at = '';
-$action = 'ajout_actu.php';
+$action = 'ajout_actu.php'; 
 $formTitle = 'Ajouter un Post';
 $submitValue = 'Ajouter le Post';
 

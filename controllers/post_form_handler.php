@@ -7,7 +7,7 @@ $post = null;
 
 if ($id) {
     // Récupérer les informations du post à modifier
-    $post = getPostById($bdd, $id);
+    $post = getPostById($bdd, $id, $member_id);
 }
 
 // Si le formulaire est soumis
@@ -16,15 +16,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titre = isset($_POST['title']) ? $_POST['title'] : '';
     $contenu = isset($_POST['content']) ? $_POST['content'] : '';
     $image_url = isset($_POST['image_url']) ? $_POST['image_url'] : '';
+    $member_id = isset($_POST['member_id']) ? $_POST['member_id'] : '';
 
     // Si un ID est présent, il s'agit d'une modification
     if ($id) {
         // Appeler la fonction pour mettre à jour le post dans la base de données
-        updatePost($bdd, $id, $titre, $contenu, $image_url);
+        updatePost($bdd, $id, $titre, $contenu, $image_url, $member_id);
     } else {
         // Sinon, il s'agit d'un ajout
         // Appeler la fonction pour ajouter un nouveau post dans la base de données
-        addPost($bdd, $titre, $contenu, $image_url);
+        addPost($bdd, $titre, $contenu, $image_url, $member_id);
     }
 
     // Rediriger vers la page d'actualités après le traitement
