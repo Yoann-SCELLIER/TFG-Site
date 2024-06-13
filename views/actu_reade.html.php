@@ -1,17 +1,15 @@
 <?php
-// Dans votre fichier de vue où vous affichez les articles
 
-// Récupération des posts depuis la base de données
-$posts = viewsPost($bdd);
+require_once dirname(__DIR__) . '/crud/post.fn.php';
 
-// Vérifier si des articles sont disponibles
-if ($posts) {
-    foreach ($posts as $post) {
-        // Convertir la date au format timestamp
-        $timestamp = strtotime($post['created_at']);
-        
-        // Formater la date en jour-mois-année
-        $dateFormatted = date('d-m-Y', $timestamp);
+// Récupération de l'ID pour la modification de la signature ciblée
+$id = $_GET['id'];
+
+// Récupération de la vue de l'article avec l'ID spécifié
+$post = getPostById($bdd, $id);
+
+// Vérifier si l'article existe
+if ($post) { 
 ?>
 
     <div class="col p-1">
@@ -27,20 +25,14 @@ if ($posts) {
                 </div>
             </div>
             <div class="card-footer text-center">
-                <p>Créé le : <small class="text-body-secondary"><?= $dateFormatted ?></small></p>
+                <p>Créé le : <small class="text-body-secondary"><?= $post['created_at'] ?></small></p>
                 <?php if (!empty($post['modif_at'])) : ?>
-                    <?php
-                    // Convertir la date de modification au format timestamp
-                    $modTimestamp = strtotime($post['modif_at']);
-                    // Formater la date de modification en jour-mois-année
-                    $modDateFormatted = date('d-m-Y', $modTimestamp);
-                    ?>
-                    <p>Modifié le : <small class="text-body-secondary"><?= $modDateFormatted ?></small></p>
+                    <p>Modifié le : <small class="text-body-secondary"><?= $post['modif_at'] ?></small></p>
                 <?php endif; ?>
                 <div class="d-flex align-items-center justify-content-center text-center">
-                    <!-- Boutons d'action -->
                     <?php
-                    $_GET['post_id'] = $post['post_id'];
+                    // Inclure le contrôleur pour vérifier et afficher les boutons
+                    $_GET['post_id'] = $id;
                     include dirname(__DIR__) . '/controllers/controller_button_card_actu.php';
                     ?>
                     <!-- Bouton de retour à la liste des articles -->
@@ -52,10 +44,9 @@ if ($posts) {
         </div>
     </div>
 
-<?php
-    }
+    <?php
 } else {
-    // Afficher un message si aucun article n'est trouvé
-    echo "Aucun article trouvé.";
+    // Afficher un message si l'article n'existe pas
+    echo "L'article demandé n'existe pas.";
 }
 ?>
