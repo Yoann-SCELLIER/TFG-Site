@@ -1,6 +1,3 @@
-<!-- PAGE ACTUALITÉ -->
-<!------------------------------------------------------------------------------------------------------------------------------------>
-
 <div class="text-center">
         <h1>ACTUALITÉS</h1>
         <p class="p-4">Bienvenue dans la section Actualités de True Fighters Gaming ! <br>
@@ -11,8 +8,8 @@
             Restez connectés pour ne rien rater de l'actualité brûlante de la TF - True Fighters Gaming !</p>
     <hr class="border-2">
     <?php 
-require_once dirname(__DIR__) . '\controllers\controller_button_actu.php';
-?>
+    require_once dirname(__DIR__) . '\controllers\controller_button_actu.php';
+    ?>
 </div> 
 
 <!-- Affichage des actualités -->
