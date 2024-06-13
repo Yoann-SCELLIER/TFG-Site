@@ -152,7 +152,7 @@ function deleteMember($bdd, $member_id)
     } catch (PDOException $e) {
         exit("Erreur lors de la suppression du membre : " . $e->getMessage());
     }
-}
+} 
 
 function getDepartements($bdd) 
 {
