@@ -7,7 +7,7 @@ if (isset($_SESSION['member_id'])) {
     // Vous pouvez rediriger l'utilisateur vers une page de connexion ou afficher un message d'erreur
     exit("Erreur : utilisateur non authentifié");
 }
-?>
+?> 
 
 <div class="container text-center">
     <div class="row align-items-center p-5">
@@ -39,3 +39,4 @@ if (isset($_SESSION['member_id'])) {
         </div>
     </div>
 </div>
+

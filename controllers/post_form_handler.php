@@ -1,12 +1,10 @@
 <?php
 require_once dirname(__DIR__) . '/crud/post.fn.php';
 
-// Vérifier si un ID est présent dans l'URL
-$id = isset($_GET['id']) ? $_GET['id'] : null;
-$post = null;
-$member_id = null; // Initialise $member_id à null par défaut
+// Vérifier si un post_id est présent dans $_GET
+$id = isset($_GET['post_id']) ? $_GET['post_id'] : null;
 
-// Si le formulaire est soumis
+// Vérifier si le formulaire est soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer les données du formulaire
     $titre = isset($_POST['title']) ? $_POST['title'] : '';
@@ -14,13 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $image_url = isset($_POST['image_url']) ? $_POST['image_url'] : '';
     $member_id = isset($_POST['member_id']) ? $_POST['member_id'] : '';
 
-    // Si un ID est présent, il s'agit d'une modification
+    // Si un post_id est présent, c'est une modification
     if ($id) {
         // Appeler la fonction pour mettre à jour le post dans la base de données
         updatePost($bdd, $id, $titre, $contenu, $image_url, $member_id);
     } else {
-        // Sinon, il s'agit d'un ajout
-        // Appeler la fonction pour ajouter un nouveau post dans la base de données
+        // Sinon, c'est un ajout
         addPost($bdd, $titre, $contenu, $image_url, $member_id);
     }
 
@@ -29,12 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 
-// Si un ID est présent, récupérer les informations du post à modifier
+// Si un post_id est présent, récupérer les informations du post à modifier
 if ($id) {
-    // Récupérer member_id à partir de la session si nécessaire
-    $member_id = $_SESSION['member_id'] ?? null;
-
     // Récupérer les informations du post à modifier
-    $post = getPostById($bdd, $id, $member_id);
+    $post = getPostById($bdd, $id);
 }
 ?>
