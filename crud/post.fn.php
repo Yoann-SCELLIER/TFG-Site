@@ -16,20 +16,23 @@ function addPost($bdd, $titre, $contenu, $image_url, $member_id) {
     }
 }
 
-function viewsPost($bdd) 
-{
-    $sqlQuery = 'SELECT *, DATE_FORMAT(created_at, "%d-%m-%Y") as created_at, DATE_FORMAT(modif_at, "%d-%m-%Y") as modif_at FROM post ORDER BY created_at DESC';
+
+function viewsPost($bdd) {
+    $sqlQuery = 'SELECT *, DATE_FORMAT(created_at, "%d-%m-%Y") as created_at_fr, DATE_FORMAT(modif_at, "%d-%m-%Y") as modif_at_fr 
+                 FROM post 
+                 ORDER BY created_at DESC';
     $stmt = $bdd->prepare($sqlQuery);
     $stmt->execute();
-    $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $posts;
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+
+
+
 // Fonction pour supprimer un post de la base de données en utilisant son ID
-function deletePost($bdd, $id) 
-{
+function deletePost($bdd, $id) {
     try {
-        $sql = "DELETE FROM `post` WHERE `post_id` = :id";
+        $sql = "DELETE FROM post WHERE post_id = :id";
         $stmt = $bdd->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -38,9 +41,9 @@ function deletePost($bdd, $id)
     }
 }
 
+
 // Fonction pour récupérer les informations d'un post spécifique en utilisant son ID
-function getPostById($bdd, $id) 
-{
+function getPostById($bdd, $id) {
     $sql = "SELECT post.*, 
                    member.username, 
                    DATE_FORMAT(post.created_at, '%d-%m-%Y %H:%i:%s') as created_at_fr, 
@@ -56,21 +59,27 @@ function getPostById($bdd, $id)
 
 
 // Fonction pour mettre à jour un post existant dans la base de données
-function updatePost($bdd, $id, $title, $content, $image_url, $member_id = null) 
-{
+function updatePost($bdd, $id, $title, $content, $image_url, $member_id = null) {
     try {
-        $sql = "UPDATE post SET title = :title, content = :content, image_url = :image_url";
+        $sql = "UPDATE post 
+                SET title = :title, 
+                    content = :content, 
+                    image_url = :image_url, 
+                    modif_at = CURRENT_TIMESTAMP";
+        
         // Ajouter member_id uniquement s'il est fourni
         if ($member_id !== null) {
             $sql .= ", member_id = :member_id";
         }
-        $sql .= ", modif_at = CURRENT_TIMESTAMP WHERE post_id = :id";
-        
+
+        $sql .= " WHERE post_id = :id";
+
         $stmt = $bdd->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->bindValue(':title', $title);
         $stmt->bindValue(':content', $content);
         $stmt->bindValue(':image_url', $image_url);
+        
         // Binder member_id uniquement s'il est fourni
         if ($member_id !== null) {
             $stmt->bindValue(':member_id', $member_id, PDO::PARAM_INT);

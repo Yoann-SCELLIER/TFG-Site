@@ -25,10 +25,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'] ?? $member['email'] ?? '';
     $jobs = $_POST['jobs'] ?? array(); // Assurez-vous que $jobs est un tableau
     $content = $_POST['content'] ?? $member['content'] ?? '';
+    $role_id = $_POST['role_id'] ?? $member['role_id'] ?? '';
 
     // Appelle la fonction pour mettre à jour le membre dans la base de données
     try {
-        updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $content);
+        updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $content, $role_id);
         // Redirection après mise à jour réussie
         header('Location: /TFG/admin/dashboard.php');
         exit();

@@ -13,7 +13,7 @@
                     <textarea name="content" class="form-control border border-2 border-dark" id="content" rows="6" required><?= isset($post['content']) ? htmlspecialchars($post['content']) : '' ?></textarea><br>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="cover">URL de l'image :</label><br>
+                    <label class="form-label" for="image_url">URL de l'image :</label><br>
                     <input type="text" class="form-control border border-2 border-dark" id="image_url" name="image_url" value="<?= isset($post['image_url']) ? htmlspecialchars($post['image_url']) : '' ?>"><br>
                 </div>
 
@@ -22,7 +22,7 @@
                 <!-- Champ caché pour conserver member_id -->
                 <input type="hidden" name="member_id" value="<?= isset($_SESSION['member_id']) ? $_SESSION['member_id'] : '' ?>">
 
-                <input type="submit" value="<?= isset($post_id) ? "Modifier l'actualité" : "Ajouter une actualité" ?>" class="btn btn-primary p-3 border border-1 border-dark">
+                <input type="submit" value="<?= isset($post['post_id']) ? "Modifier l'actualité" : "Ajouter une actualité" ?>" class="btn btn-primary p-3 border border-1 border-dark">
             </form> 
         </div>
     </div>

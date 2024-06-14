@@ -30,7 +30,7 @@
                         <div class="card-body">
                             <hr>
                             <h5 class="card-title"><?= $post['title'] ?></h5>
-                            <p class="card-text"><?= $post['content'] ?></p>
+                            <p class="card-text"><?= $post['content'] ?></p> 
                         </div>
                         <div class="card-footer">
                             <small class="text-body-secondary"><?= $post['created_at'] ?></small><br>

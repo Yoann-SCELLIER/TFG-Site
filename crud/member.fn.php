@@ -70,8 +70,7 @@ function viewMembers($bdd)
     return $members;
 }
 
-function getMemberById($bdd, $member_id) 
-{
+function getMemberById($bdd, $member_id) {
     try {
         $sql = "SELECT member.*, 
                        GROUP_CONCAT(job.title SEPARATOR ', ') AS jobs,
@@ -102,35 +101,50 @@ function addMemberJob($bdd, $member_id, $job_id)
     }
 }
 
-function updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $content, $role_id) 
+// Fonction pour mettre à jour les informations d'un membre
+function updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $content, $role_id)
 {
     try {
-        $sql = "UPDATE member SET cover = :cover, username = :username, email = :email, content = :content, role_id = :role_id, modif_at = CURRENT_TIMESTAMP WHERE member_id = :member_id";
+        // Préparer la requête SQL pour mettre à jour le membre
+        $sql = "UPDATE member 
+                SET cover = :cover, username = :username, email = :email, content = :content, role_id = :role_id, modif_at = CURRENT_TIMESTAMP 
+                WHERE member_id = :member_id";
         $stmt = $bdd->prepare($sql);
+
+        // Liaison des valeurs aux paramètres de la requête
         $stmt->bindValue(':cover', $cover);
         $stmt->bindValue(':username', $username);
         $stmt->bindValue(':email', $email);
         $stmt->bindValue(':content', $content);
         $stmt->bindValue(':role_id', $role_id, PDO::PARAM_INT);
         $stmt->bindValue(':member_id', $member_id, PDO::PARAM_INT);
+
+        // Exécution de la requête pour mettre à jour le membre
         $stmt->execute();
 
-        $sql = "DELETE FROM member_job WHERE member_id = :member_id";
-        $stmt = $bdd->prepare($sql);
-        $stmt->bindValue(':member_id', $member_id, PDO::PARAM_INT);
-        $stmt->execute();
+        // Suppression des anciens emplois associés au membre
+        $sql_delete_jobs = "DELETE FROM member_job WHERE member_id = :member_id";
+        $stmt_delete_jobs = $bdd->prepare($sql_delete_jobs);
+        $stmt_delete_jobs->bindValue(':member_id', $member_id, PDO::PARAM_INT);
+        $stmt_delete_jobs->execute();
 
-        $sql = "INSERT INTO member_job (member_id, job_id) VALUES (:member_id, :job_id)";
-        $stmt = $bdd->prepare($sql);
+        // Ajout des nouveaux emplois associés au membre
+        $sql_add_jobs = "INSERT INTO member_job (member_id, job_id) VALUES (:member_id, :job_id)";
+        $stmt_add_jobs = $bdd->prepare($sql_add_jobs);
         foreach ($jobs as $job_id) {
-            $stmt->bindValue(':member_id', $member_id, PDO::PARAM_INT);
-            $stmt->bindValue(':job_id', $job_id, PDO::PARAM_INT);
-            $stmt->execute();
+            $stmt_add_jobs->bindValue(':member_id', $member_id, PDO::PARAM_INT);
+            $stmt_add_jobs->bindValue(':job_id', $job_id, PDO::PARAM_INT);
+            $stmt_add_jobs->execute();
         }
+
+        // Retourner true si la mise à jour s'est effectuée avec succès
         return true;
     } catch (PDOException $e) {
-        echo "Erreur lors de la mise à jour du membre : " . $e->getMessage();
-        return false;
+        // Capturer les exceptions PDO (problèmes de base de données)
+        throw new Exception("Erreur PDO lors de la mise à jour du membre : " . $e->getMessage());
+    } catch (Exception $e) {
+        // Capturer les autres exceptions
+        throw new Exception("Erreur lors de la mise à jour du membre : " . $e->getMessage());
     }
 }
 
