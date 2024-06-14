@@ -18,7 +18,7 @@ function addPost($bdd, $titre, $contenu, $image_url, $member_id) {
 
 function viewsPost($bdd) 
 {
-    $sqlQuery = 'SELECT * FROM post ORDER BY created_at DESC';
+    $sqlQuery = 'SELECT *, DATE_FORMAT(created_at, "%d-%m-%Y") as created_at_fr, DATE_FORMAT(modif_at, "%d-%m-%Y") as modif_at_fr FROM post ORDER BY created_at DESC';
     $stmt = $bdd->prepare($sqlQuery);
     $stmt->execute();
     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -41,7 +41,10 @@ function deletePost($bdd, $id)
 // Fonction pour récupérer les informations d'un post spécifique en utilisant son ID
 function getPostById($bdd, $id) 
 {
-    $sql = "SELECT post.*, member.username 
+    $sql = "SELECT post.*, 
+                   member.username, 
+                   DATE_FORMAT(post.created_at, '%d-%m-%Y %H:%i:%s') as created_at_fr, 
+                   DATE_FORMAT(post.modif_at, '%d-%m-%Y %H:%i:%s') as modif_at_fr 
             FROM post 
             JOIN member ON post.member_id = member.member_id 
             WHERE post_id = :id";
@@ -50,6 +53,7 @@ function getPostById($bdd, $id)
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+
 
 // Fonction pour mettre à jour un post existant dans la base de données
 function updatePost($bdd, $id, $title, $content, $image_url, $member_id = null) 

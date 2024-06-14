@@ -4,11 +4,7 @@ require_once dirname(__DIR__) . '/crud/post.fn.php';
 // Vérifier si un ID est présent dans l'URL
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 $post = null;
-
-if ($id) {
-    // Récupérer les informations du post à modifier
-    $post = getPostById($bdd, $id, $member_id);
-}
+$member_id = null; // Initialise $member_id à null par défaut
 
 // Si le formulaire est soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -32,3 +28,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: /TFG/actualite.php');
     exit();
 }
+
+// Si un ID est présent, récupérer les informations du post à modifier
+if ($id) {
+    // Récupérer member_id à partir de la session si nécessaire
+    $member_id = $_SESSION['member_id'] ?? null;
+
+    // Récupérer les informations du post à modifier
+    $post = getPostById($bdd, $id, $member_id);
+}
+?>

@@ -25,7 +25,7 @@ if ($post) {
                 </div>
             </div>
             <div class="card-footer text-center">
-                <p>Créé le : <small class="text-body-secondary"><?= $post['created_at'] ?></small></p>
+                <p>Créé le : <small class="text-body-secondary"><?= $post['created_at_fr'] ?></small></p>
                 <?php if (!empty($post['modif_at'])) : ?>
                     <p>Modifié le : <small class="text-body-secondary"><?= $post['modif_at'] ?></small></p>
                 <?php endif; ?>
@@ -44,7 +44,7 @@ if ($post) {
         </div>
     </div>
 
-    <?php
+<?php
 } else {
     // Afficher un message si l'article n'existe pas
     echo "L'article demandé n'existe pas.";

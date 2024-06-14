@@ -20,7 +20,7 @@
                 <!-- Champ caché pour conserver post_id -->
                 <input type="hidden" name="post_id" value="<?= isset($post['post_id']) ? $post['post_id'] : '' ?>">
                 <!-- Champ caché pour conserver member_id -->
-                <input type="hidden" name="member_id" value="<?= isset($post['member_id']) ? $post['member_id'] : '' ?>">
+                <input type="hidden" name="member_id" value="<?= isset($_SESSION['member_id']) ? $_SESSION['member_id'] : '' ?>">
 
                 <input type="submit" value="<?= isset($post_id) ? "Modifier l'actualité" : "Ajouter une actualité" ?>" class="btn btn-primary p-3 border border-1 border-dark">
             </form> 

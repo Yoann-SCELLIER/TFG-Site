@@ -33,8 +33,8 @@
                             <p class="card-text"><?= $post['content'] ?></p>
                         </div>
                         <div class="card-footer">
-                            <small class="text-body-secondary"><?= $post['created_at'] ?></small><br>
-                            <small class="text-body-secondary"><?= $post['modif_at'] ?></small>
+                            <small class="text-body-secondary"><?= $post['created_at_fr'] ?></small><br>
+                            <small class="text-body-secondary"><?= $post['modif_at_fr'] ?></small>
                         </div>
                         <div class="btn-group" role="group" aria-label="Actions">
                             <a href="actu_read.php?id=<?= $post['post_id'] ?>" class="btn btn-warning">Détail</a>
