@@ -2,10 +2,10 @@
 
 require_once dirname(__DIR__) . '/crud/post.fn.php';
 
-// Récupération de l'ID pour la modification de la signature ciblée
+// Récupération de l'ID pour la visualisation de l'article ciblé
 $id = $_GET['id'];
 
-// Récupération de la vue de l'article avec l'ID spécifié
+// Récupération des détails de l'article avec l'ID spécifié
 $post = getPostById($bdd, $id);
 
 // Vérifier si l'article existe

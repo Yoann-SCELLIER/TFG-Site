@@ -18,7 +18,7 @@ function addPost($bdd, $titre, $contenu, $image_url, $member_id) {
 
 function viewsPost($bdd) 
 {
-    $sqlQuery = 'SELECT *, DATE_FORMAT(created_at, "%d-%m-%Y") as created_at_fr, DATE_FORMAT(modif_at, "%d-%m-%Y") as modif_at_fr FROM post ORDER BY created_at DESC';
+    $sqlQuery = 'SELECT *, DATE_FORMAT(created_at, "%d-%m-%Y") as created_at, DATE_FORMAT(modif_at, "%d-%m-%Y") as modif_at FROM post ORDER BY created_at DESC';
     $stmt = $bdd->prepare($sqlQuery);
     $stmt->execute();
     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
