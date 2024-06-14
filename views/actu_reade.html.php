@@ -1,7 +1,5 @@
 <?php
 
-require_once dirname(__DIR__) . '/crud/post.fn.php';
-
 // Récupération de l'ID pour la visualisation de l'article ciblé
 $id = $_GET['id'];
 

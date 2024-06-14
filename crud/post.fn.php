@@ -4,7 +4,8 @@ require_once dirname(__DIR__) . '/controller/db.fn.php';
 // Fonction pour ajouter un nouveau post dans la base de données
 function addPost($bdd, $titre, $contenu, $image_url, $member_id) {
     try {
-        $sql = "INSERT INTO post (title, content, image_url, member_id) VALUES (:titre, :contenu, :image_url, :member_id)";
+        $sql = "INSERT INTO post (title, content, image_url, member_id, created_at, modif_at) 
+                VALUES (:titre, :contenu, :image_url, :member_id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
         $stmt = $bdd->prepare($sql);
         $stmt->bindValue(':titre', $titre);
         $stmt->bindValue(':contenu', $contenu);
@@ -16,11 +17,18 @@ function addPost($bdd, $titre, $contenu, $image_url, $member_id) {
     }
 }
 
-
 function viewsPost($bdd) {
-    $sqlQuery = 'SELECT *, DATE_FORMAT(created_at, "%d-%m-%Y") as created_at_fr, DATE_FORMAT(modif_at, "%d-%m-%Y") as modif_at_fr 
-                 FROM post 
-                 ORDER BY created_at DESC';
+    $sqlQuery = 'SELECT 
+                    post.*, 
+                    DATE_FORMAT(post.created_at, "%d-%m-%Y") as created_at_fr, 
+                    DATE_FORMAT(post.modif_at, "%d-%m-%Y") as modif_at_fr,
+                    member.username
+                 FROM 
+                    post
+                 LEFT JOIN 
+                    member ON post.member_id = member.member_id
+                 ORDER BY 
+                    post.created_at DESC';
     $stmt = $bdd->prepare($sqlQuery);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
