@@ -20,8 +20,8 @@
             <tbody>
                 <?php foreach ($members as $member) : ?>
                     <tr>
-                        <td class="m-0 b-0 p-0 g-0"><?php echo htmlspecialchars($member['member_id']); ?></td>
-                        <td class="m-0 b-0 p-0 g-0"><?php echo htmlspecialchars($member['departement_id']); ?></td>
+                        <td class="m-0 b-0 p-0 g-0 fs-7"><?php echo htmlspecialchars($member['member_id']); ?></td>
+                        <td class="m-0 b-0 p-0 g-0 fs-7"><?php echo htmlspecialchars($member['departement_id']); ?></td>
                         <td class="m-0 b-0 p-0 g-0">
                             <img src="<?php echo htmlspecialchars($member['cover']); ?>" alt="Cover" class="img-thumbnail" style="width: 70px; height: 70px;">
                         </td>
