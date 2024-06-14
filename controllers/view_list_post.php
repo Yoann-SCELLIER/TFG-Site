@@ -25,5 +25,4 @@ foreach ($posts as &$post) {
 // Pour déboguer, vous pouvez var_dump($posts); ici pour vérifier que chaque élément $post contient bien 'image_url'
 
 // Inclure la vue pour afficher le tableau des publications
-include dirname(__DIR__) . '/views/table_posts.html.php';
 ?>
