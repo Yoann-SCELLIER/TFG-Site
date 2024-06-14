@@ -32,8 +32,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $consoles = getMemberConsoles($bdd, $member_id);
     $hasConsoles = !empty($consoles);
 
-    // Inclure la vue pour afficher les détails du membre
-    include dirname(__DIR__) . '\views\admin_view_member.html.php';
 } else {
     echo "ID du membre invalide.";
     exit;
