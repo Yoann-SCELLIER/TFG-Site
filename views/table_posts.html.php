@@ -8,7 +8,8 @@
                     <th>Titre</th>
                     <th>Image</th>
                     <th>Créé le</th>
-                    <th>Mis à jour le</th>
+                    <th>M.A.J le</th>
+                    <th>Username</th>
                     <th class="text-center">Actions</th>
                 </tr>
             </thead>
@@ -24,8 +25,9 @@
                             Aucune image
                         <?php endif; ?>
                     </td>
-                    <td><?php echo htmlspecialchars($post['created_at']); ?></td>
-                    <td><?php echo $post['modif_at'] !== null ? htmlspecialchars($post['modif_at']) : 'Aucune mise à jour à ce jour'; ?></td>
+                    <td><?php echo date('d/m/Y', strtotime($post['created_at'])); ?></td>
+                    <td><?php echo $post['modif_at'] !== null ? date('d/m/Y', strtotime($post['modif_at'])) : 'Aucune mise à jour à ce jour'; ?></td>
+                    <td><?php echo htmlspecialchars($post['username']); ?></td>
                     <td class="text-center">
                         <a href="/TFG/admin/admin_view_post.php?id=<?php echo $post['post_id']; ?>" class="btn btn-primary fw-bold">Détail</a>
                     </td>

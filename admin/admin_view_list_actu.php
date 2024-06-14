@@ -10,4 +10,4 @@ require_once dirname(__DIR__) . '\controllers\view_list_post.php';
 
 require_once dirname(__DIR__) . '\views\table_posts.html.php';
 
-require_once dirname(__DIR__) . '/components/footeradmin.html.php';
+require_once dirname(__DIR__) . '/components/footeradmin.html.php'; 
