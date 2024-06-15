@@ -106,3 +106,7 @@ table th, table td {
     color: green;
     font-weight: bold;
 }
+
+.bg-eggShell {
+    background: #ebe7e7;
+}

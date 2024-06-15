@@ -1,7 +1,7 @@
 </main>
 
 <!-- Bouton "Revenir en haut" -->
-<button id="backToTopBtn" class="btn btn-primary">↑</button>
+<button id="backToTopBtn" class="btn btn-primary" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
 
 <!-- FOOTER -->
 <footer class="bg-grey">
@@ -52,17 +52,17 @@
         <div class="row col">
             <h1>Like & Follow</h1>
             <ul style="list-style-type:none;">
-                <li>Facebook</li>
-                <li>YouTube</li>
-                <li>Twitter</li>
+                <li class="text-reset">Facebook</li>
+                <li class="text-reset">YouTube</li>
+                <li class="text-reset">Twitter</li>
             </ul>
         </div>
-        <div class="row col">
+        <div class="row col container">
             <h1>Conditions</h1>
-            <ul style="list-style-type:none;">
-                <li>CGU</li>
-                <li>L'association</li> 
-                <li>Tournois</li>
+            <ul class="list-unstyled">
+                <li><a class="text-reset" href="#" id="CGUButton" data-bs-toggle="modal" data-bs-target="#CGUModal">CGU</a></li>
+                <li><a class="text-reset" href="#" id="AssocButton" data-bs-toggle="modal" data-bs-target="#popup-association">L'association</a></li>
+                <li><a class="text-reset" href="#" id="TournamentButton" data-bs-toggle="modal" data-bs-target="#popup-tournois">Tournois</a></li>
             </ul>
         </div>
         <div class="row col">
@@ -70,7 +70,7 @@
                 <img src="assets/images/true-fighters-gaming.png" width="600rem" widht="auto" class="p-3 img-fluid" alt="image true fighters gaming">
             </a>
             <hr>
-            <ul class="d-flex justify-content-center text-reset text-white" style="list-style-type:none;">
+            <ul class="d-flex justify-content-center text-white" style="list-style-type:none;">
                 <li class="p-0 m-2"><a href="/tfg/log.html.php" class="text-reset">Connexion</a></li>
                 <li class="p-0 m-2"><a href="/tfg/log.html.php" class="text-reset">Inscription</a></li>
             </ul>
@@ -81,6 +81,8 @@
     </div>
 </footer>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="/tfg/assets/js/javascript.js"></script>
 </body>
