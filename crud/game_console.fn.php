@@ -11,7 +11,8 @@ function listConsoles($bdd) {
 }
 
 // Fonction pour récupérer les consoles sélectionnées pour un membre spécifique
-function getMemberConsoles($bdd, $member_id) {
+function getMemberConsoles($bdd, $member_id)
+{
     $sqlQuery = '
         SELECT console.*
         FROM console

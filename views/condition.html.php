@@ -54,7 +54,7 @@
 
 <!-- Contenu CONDITION ASSOC TF -->
 <div class="modal fade modal-xl" id="popup-association" tabindex="-1" aria-labelledby="popupAssociationLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-dialog modal-dialog-scrollable border border-2 border-white">
         <div class="modal-content">
             <div class="modal-header bg-grey justify-content-center">
                 <h5 class="modal-title text-white" id="popupAssociationLabel">Conditions de l'Association <span class="fw-bold">TF - True Fighters Gaming</span></h5>
@@ -118,7 +118,7 @@
 
 <!-- Contenu CONDITION TOURNOIS TF -->
 <div class="modal fade modal-xl" id="popup-tournois" tabindex="-1" aria-labelledby="popupTournoisLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-dialog modal-dialog-scrollable border border-2 border-white">
         <div class="modal-content">
             <div class="modal-header bg-grey justify-content-center">
                 <h5 class="modal-title text-white" id="popupTournoisLabel">Conditions des Tournois organisés par <span class="fw-bold">TF - True Fighters Gaming</span></h5>

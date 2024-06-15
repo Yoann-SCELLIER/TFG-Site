@@ -1,16 +1,16 @@
 <div class="text-center">
-        <h1>ACTUALITÉS</h1>
-        <p class="p-4">Bienvenue dans la section Actualités de True Fighters Gaming ! <br>
-            Ici, vous trouverez les dernières informations et mises à jour sur tout ce qui se passe dans notre communauté dynamique. <br>
-            Que ce soit les résultats de nos récents tournois, les annonces de nouveaux jeux et extensions, ou les présentations de nos nouveaux membres, cette rubrique est votre source principale pour rester informé. <br>
-            Ne manquez pas nos reportages exclusifs sur les événements à venir, les analyses de gameplay, et les interviews avec les joueurs et développeurs. <br>
-            True Fighters Gaming est plus qu'une association, c'est une famille passionnée par l'esport et les jeux vidéo. <br>
-            Restez connectés pour ne rien rater de l'actualité brûlante de la TF - True Fighters Gaming !</p>
+    <h1>ACTUALITÉS</h1>
+    <p class="p-4">Bienvenue dans la section Actualités de True Fighters Gaming ! <br>
+        Ici, vous trouverez les dernières informations et mises à jour sur tout ce qui se passe dans notre communauté dynamique. <br>
+        Que ce soit les résultats de nos récents tournois, les annonces de nouveaux jeux et extensions, ou les présentations de nos nouveaux membres, cette rubrique est votre source principale pour rester informé. <br>
+        Ne manquez pas nos reportages exclusifs sur les événements à venir, les analyses de gameplay, et les interviews avec les joueurs et développeurs. <br>
+        True Fighters Gaming est plus qu'une association, c'est une famille passionnée par l'esport et les jeux vidéo. <br>
+        Restez connectés pour ne rien rater de l'actualité brûlante de la TF - True Fighters Gaming !</p>
     <hr class="border-2">
-    <?php 
+    <?php
     require_once dirname(__DIR__) . '\controllers\controller_button_actu.php';
     ?>
-</div> 
+</div>
 
 <!-- Affichage des actualités -->
 <article class="text-center">
@@ -25,12 +25,12 @@
         ?>
 
                 <div class="col">
-                    <div class="card border-2">
+                    <div class="card border-2 fixed-size-card">
                         <img src="<?php echo $post['image_url'] ?>" class="card-img-top p-5" alt="Image <?= $post['title'] ?>">
                         <div class="card-body">
                             <hr>
                             <h5 class="card-title"><?= $post['title'] ?></h5>
-                            <p class="card-text"><?= $post['content'] ?></p> 
+                            <p class="card-text"><?= $post['content'] ?></p>
                         </div>
                         <div class="card-footer">
                             <small class="text-body-secondary"><?= $post['created_at'] ?></small><br>
@@ -41,6 +41,7 @@
                         </div>
                     </div>
                 </div>
+
 
         <?php
             }

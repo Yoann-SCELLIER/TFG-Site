@@ -36,13 +36,13 @@
 
         <?php require_once 'caroussel.html.php'; ?>
 
-        <div class="container">
+        <div class="container p-3">
             <div class="row d-flex justify-content-evenly">
                 <?php foreach ($games as $game) : ?>
                     <div class="col-md-4 d-flex flex-column align-items-center" style="width: 280px;">
                         <!-- Afficher l'image du membre -->
                         <div style="width: 60%; height: auto;">
-                            <img src="<?= htmlspecialchars($game['cover']) ?>" class="card-img-top h-auto" alt="<?= htmlspecialchars($game['title']) ?>">
+                            <img src="<?= !empty($game['cover']) ? htmlspecialchars($game['cover']) : htmlspecialchars($game['image_url']) ?>" class="card-img-top h-auto" alt="<?= htmlspecialchars($game['title']) ?>">
                         </div>
                         <div class="card mb-4 border border-0">
                             <div class="card-body p-0 m-0 b-0 g-0">
@@ -51,6 +51,7 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
+
             </div>
         </div>
     </div>
