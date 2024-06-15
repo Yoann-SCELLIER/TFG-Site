@@ -17,7 +17,7 @@ function addPost($bdd, $titre, $contenu, $image_url, $member_id) {
     }
 }
 
-function viewsPost($bdd) {
+function viewsPost($bdd) { 
     $sqlQuery = 'SELECT 
                     post.*, 
                     DATE_FORMAT(post.created_at, "%d-%m-%Y") as created_at_fr, 

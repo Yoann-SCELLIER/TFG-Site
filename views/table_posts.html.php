@@ -22,9 +22,13 @@
                         <td><?php echo htmlspecialchars($post['title']); ?></td>
                         <td>
                             <?php if (!empty($post['image_url'])) : ?>
-                                <img src="/TFG/<?php echo htmlspecialchars($post['image_url']); ?>" alt="Image du post" width="100" height="auto">
+                                <?php if (strpos($post['image_url'], 'http') === 0) : ?>
+                                    <img src="<?php echo htmlspecialchars($post['image_url']); ?>" alt="Image du post" width="100" height="auto">
+                                <?php else : ?>
+                                    <img src="/TFG/<?php echo htmlspecialchars($post['image_url']); ?>" alt="Image du post" width="100" height="auto">
+                                <?php endif; ?>
                             <?php else : ?>
-                                Aucune image
+                                <img src="/TFG/default-image.jpg" alt="Image par défaut" width="100" height="auto">
                             <?php endif; ?>
                         </td>
                         <td class="m-0 b-0 p-0 g-0 fs-7"><?php echo date('d/m/Y', strtotime($post['created_at'])); ?></td>

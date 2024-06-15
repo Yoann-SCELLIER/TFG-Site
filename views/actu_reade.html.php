@@ -13,13 +13,13 @@ if ($post) {
     <div class="col p-1">
         <div class="card border-2 m-5">
             <div class="align-self-center" style="width: 90rem">
-                <img src="<?= $post['image_url'] ?>" class="card-img-top p-5" alt="Image <?= $post['title'] ?>">
+                <img src="<?= $post['image_url'] ?>" class="card-img-top p-5" width="100" height="auto" alt="Image <?= $post['title'] ?>">
             </div>
             <div class="card-body text-center">
                 <h5 class="card-title"><?= $post['title'] ?></h5>
             </div>
             <div class="card-body">
-                <p class="card-text"><?= $post['content'] ?></p>
+                <p class="card-text p-3"><?= nl2br(htmlspecialchars($post['content'])) ?></p>
                 <div class="d-flex justify-content-end">
                     <p><small class="text-body-secondary"><?= $post['username'] ?></small></p>
                 </div>
@@ -27,7 +27,7 @@ if ($post) {
             <div class="card-footer text-center">
                 <p>Créé le : <small class="text-body-secondary"><?= $post['created_at_fr'] ?></small></p>
                 <?php if (!empty($post['modif_at'])) : ?>
-                    <p>Modifié le : <small class="text-body-secondary"><?= $post['modif_at'] ?></small></p>
+                    <p>Modifié le : <small class="text-body-secondary"><?= $post['modif_at_fr'] ?></small></p>
                 <?php endif; ?>
                 <div class="d-flex align-items-center justify-content-center text-center">
                     <?php
@@ -49,4 +49,5 @@ if ($post) {
     // Afficher un message si l'article n'existe pas
     echo "L'article demandé n'existe pas.";
 }
+
 ?>

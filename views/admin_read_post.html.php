@@ -1,23 +1,24 @@
 <?php
 
-// Récupération de l'ID pour la modification de l'article ciblé
+// Récupération de l'ID pour la modification de la signature ciblée
 $id = $_GET['id'];
 
-// Récupération des détails de l'article avec l'ID spécifié
+// Récupération de la vue de l'article avec l'ID spécifié
 $post = getPostById($bdd, $id);
 
 // Vérifier si l'article existe
 if ($post) {
 ?>
 
-    <div class="col p-5">
+    <div class="col p-5 ">
         <div class="card border-2 m-5">
-            <img src="<?= $post['image_url'] ?>" class="card-img-top p-5" alt="Image <?= $post['title'] ?>">
+            <img src="<?= $post['image_url'] ?>" class="card-img-top p-2 align-self-center" style="width:70rem; height:auto alt="Image <?= $post['title'] ?>">
             <div class="card-body text-center">
-                <h5 class="card-title"><?= $post['title'] ?></h5>
+                <h5 class="card-title fs-2"><?= $post['title'] ?></h5>
             </div>
+            <hr class="border border-2">
             <div class="card-body">
-                <p class="card-text"><?= $post['content'] ?></p>
+                <p class="card-text p-3 fs-5"><?= nl2br(htmlspecialchars($post['content'])) ?></p>
                 <div class="d-flex justify-content-end">
                     <p><small class="text-body-secondary"><?= $post['username'] ?></small></p>
                 </div>

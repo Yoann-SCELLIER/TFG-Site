@@ -26,15 +26,15 @@
 
                 <div class="col">
                     <div class="card border-2 fixed-size-card">
-                        <img src="<?php echo $post['image_url'] ?>" class="card-img-top p-5" alt="Image <?= $post['title'] ?>">
+                        <img src="<?php echo $post['image_url'] ?>" class="card-img-top p-2" alt="Image <?= $post['title'] ?>">
                         <div class="card-body">
                             <hr>
                             <h5 class="card-title"><?= $post['title'] ?></h5>
                             <p class="card-text"><?= $post['content'] ?></p>
                         </div>
                         <div class="card-footer">
-                            <small class="text-body-secondary"><?= $post['created_at'] ?></small><br>
-                            <small class="text-body-secondary"><?= $post['modif_at'] ?></small>
+                            <small class="text-body-secondary"><?= $post['created_at_fr'] ?></small><br>
+                            <small class="text-body-secondary"><?= $post['modif_at_fr'] ?></small>
                         </div>
                         <div class="btn-group" role="group" aria-label="Actions">
                             <a href="actu_read.php?id=<?= $post['post_id'] ?>" class="btn btn-warning">Détail</a>
