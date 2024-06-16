@@ -37,39 +37,70 @@
         <hr class="border border-1 border-black">
     </div>
 
-    <!-- Début de la section pour afficher les membres -->
-    <div class="container">
-        <div class="row d-flex justify-content-evenly">
-
-            <?php
-            $members = viewMembers($bdd);
-            if ($members) {
-                foreach ($members as $member) {
-            ?>
-
+<!-- Début de la section pour afficher les membres -->
+<div class="container">
+    <!-- Section pour les membres officiels (incluant admin) -->
+    <h2>Membres Officiels</h2>
+    <div class="row d-flex justify-content-evenly">
+        <?php
+        $members = viewMembers($bdd);
+        if ($members) {
+            foreach ($members as $member) {
+                if ($member['role_member'] === 'memberAdmin' || $member['role_member'] === 'memberOfficial') {
+        ?>
                     <div class="col-md-4" style="width: 310px;">
                         <!-- Afficher l'image du membre -->
                         <div style="width: 100%; height: auto;">
-                            <img src="<?= $member['cover'] ?>" class="card-img-top" alt="Photo de <?= $member['username'] ?>" style="width: 100%; height: auto;">
+                            <img src="<?= htmlspecialchars($member['cover']) ?>" class="card-img-top" alt="Photo de <?= htmlspecialchars($member['username']) ?>" style="width: 100%; height: auto;">
                         </div>
                         <div class="card mb-4 shadow-sm">
                             <div class="card-body">
                                 <!-- Afficher le nom du membre -->
-                                <h5 class="card-title"><?= $member['username'] ?></h5>
+                                <h5 class="card-title"><?= htmlspecialchars($member['username']) ?></h5>
                                 <!-- Bouton pour afficher les détails du membre -->
                                 <a href="member.php?id=<?= $member['member_id'] ?>" class="btn btn-primary">Détails du Membre</a>
                             </div>
                         </div>
                     </div>
-
-
-
-            <?php }
-            }; ?>
-
-        </div>
+        <?php
+                }
+            }
+        }
+        ?>
     </div>
-    <!-- Fin de la section pour afficher les membres -->
+
+    <!-- Section pour les membres invités -->
+    <h2>Membres Invités</h2>
+    <div class="row d-flex justify-content-evenly">
+        <?php
+        if ($members) {
+            foreach ($members as $member) {
+                if ($member['role_member'] === 'memberGuest') {
+        ?>
+                    <div class="col-md-4" style="width: 310px;">
+                        <!-- Afficher l'image du membre -->
+                        <div style="width: 100%; height: auto;">
+                            <img src="<?= htmlspecialchars($member['cover']) ?>" class="card-img-top" alt="Photo de <?= htmlspecialchars($member['username']) ?>" style="width: 100%; height: auto;">
+                        </div>
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-body">
+                                <!-- Afficher le nom du membre -->
+                                <h5 class="card-title"><?= htmlspecialchars($member['username']) ?></h5>
+                                <!-- Bouton pour afficher les détails du membre -->
+                                <a href="member.php?id=<?= $member['member_id'] ?>" class="btn btn-primary">Détails du Membre</a>
+                            </div>
+                        </div>
+                    </div>
+        <?php
+                }
+            }
+        }
+        ?>
+    </div>
+</div>
+<!-- Fin de la section pour afficher les membres -->
+
+
 
     <div class="text-center p-2">
         <i class="bi bi-chevron-double-up" id="showLessStaff">VOIR MOINS...</i>

@@ -64,7 +64,10 @@ function connexion($bdd, $email, $password)
 // Fonction pour afficher tous les membres
 function viewMembers($bdd) 
 {
-    $sqlQuery = 'SELECT * FROM member';
+    $sqlQuery = '
+        SELECT member.*, role.role_member
+        FROM member 
+        LEFT JOIN role ON member.role_id = role.id';
     $stmt = $bdd->query($sqlQuery);
     $members = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $members;
