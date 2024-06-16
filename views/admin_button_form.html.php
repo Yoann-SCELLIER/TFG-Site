@@ -1,11 +1,10 @@
 <div class="container text-center p-3">
     <div class="row d-flex justify-content-evenly">
         <div class="col-3">
-            <button class="btn bg-warning fw-bold" type="button"><a href="/tfg/admin/admin_form_actu" class="text-reset text-dark">Formulaire actualité</a></button>
+            <a href="/tfg/admin/admin_form_actu" class="btn bg-warning text-dark fw-bold">Formulaire actualité</a>
         </div>
         <div class="col-3">
-            <button class="btn bg-success fw-bold" type="button"><a href="/tfg/admin/admin_form_game.php" class="text-reset text-dark">Formulaire game</a></button>
+            <a href="/tfg/admin/admin_form_game.php" class="btn bg-success text-dark fw-bold">Formulaire game</a>
         </div>
     </div>
 </div>
-

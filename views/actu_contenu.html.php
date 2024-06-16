@@ -8,29 +8,26 @@
         Restez connectés pour ne rien rater de l'actualité brûlante de la TF - True Fighters Gaming !</p>
     <hr class="border-2">
     <?php
-    require_once dirname(__DIR__) . '\controllers\controller_button_actu.php';
+    require_once dirname(__DIR__) . '/controllers/controller_button_actu.php';
     ?>
 </div>
 
 <!-- Affichage des actualités -->
 <article class="text-center">
-
     <!-- Affichage des posts -->
     <div class="row row-cols-1 row-cols-xs-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 m-5 g-4 d-flex justify-content-evenly">
-
         <?php
         $posts = viewsPost($bdd);
         if ($posts) {
             foreach ($posts as $post) {
         ?>
-
                 <div class="col">
                     <div class="card border-2 fixed-size-card">
                         <img src="<?php echo $post['image_url'] ?>" class="card-img-top p-1" alt="Image <?= $post['title'] ?>">
                         <div class="card-body m-0 p-0 b-0 g-0" style="height: 4rem;">
                             <hr class=" m-0 p-0 b-0 g-0">
-                            <h5 class="card-title m-0 p-0 b-0 g-0"><?= $post['title'] ?></h5>
-                            <p class="card-text m-0 p-0 b-0 g-0"><?= $post['content'] ?></p>
+                            <h5 class="card-title m-0 p-0 b-0 g-0"><?= htmlspecialchars($post['title']) ?></h5>
+                            <p class="card-text m-0 p-0 b-0 g-0"><?= htmlspecialchars($post['content']) ?></p>
                         </div>
                         <div class="card-footer m-0 p-0 b-0 g-0">
                             <small class="text-body-secondary m-0 p-0 b-0 g-0"><?= $post['created_at_fr'] ?></small><br>
@@ -41,13 +38,11 @@
                         </div>
                     </div>
                 </div>
-
-
         <?php
             }
-        };
+        } else {
+            echo "<p>Aucune actualité disponible pour le moment.</p>";
+        }
         ?>
-
     </div>
-
 </article>
