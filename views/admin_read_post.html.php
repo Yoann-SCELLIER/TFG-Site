@@ -1,18 +1,25 @@
 <?php
-
-// Récupération de l'ID pour la modification de la signature ciblée
+// Récupération de l'ID pour la visualisation de l'article ciblé
 $id = $_GET['id'];
 
-// Récupération de la vue de l'article avec l'ID spécifié
+// Récupération des détails de l'article avec l'ID spécifié
 $post = getPostById($bdd, $id);
 
 // Vérifier si l'article existe
 if ($post) {
 ?>
 
-    <div class="col p-5 ">
+    <div class="col p-5">
         <div class="card border-2 m-5">
-            <img src="<?= $post['image_url'] ?>" class="card-img-top p-2 align-self-center" style="width:50rem; height:auto" alt="Image <?= $post['title'] ?>">
+            <?php if (!empty($post['image_url'])) : ?>
+                <?php if (strpos($post['image_url'], 'http') === 0) : ?>
+                    <img class="card-img-top p-2 align-self-center" src="<?php echo htmlspecialchars($post['image_url']); ?>" alt="Image <?= $post['title'] ?>" style="width:50rem; height:auto">
+                <?php else : ?>
+                    <img class="card-img-top p-2 align-self-center" src="/TFG/<?php echo htmlspecialchars($post['image_url']); ?>" alt="Image <?= $post['title'] ?>" style="width:50rem; height:auto">
+                <?php endif; ?>
+            <?php else : ?>
+                <img class="card-img-top p-2 align-self-center" src="/TFG/default-image.jpg" alt="Image <?= $post['title'] ?>" style="width:50rem; height:auto">
+            <?php endif; ?>
             <div class="card-body text-center">
                 <h5 class="card-title fs-2"><?= $post['title'] ?></h5>
             </div>

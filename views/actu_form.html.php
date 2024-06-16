@@ -11,7 +11,7 @@ if (isset($_SESSION['member_id'])) {
 
 <div class="container text-center">
     <div class="row align-items-center p-5">
-        <div class="col m-2 b-0 p-0 g-0 border border-1 p-5 bg-grey border border-4 border-danger">
+        <div class="col m-2 p-0 g-0 border border-1 p-5 bg-grey border border-4 border-danger">
             <h1 id="formTitle" class="text-white"><?= isset($post) ? 'Modifier l\'actualité' : 'Ajouter une actualité' ?></h1>
             <form id="postForm" action="/TFG/controllers/post_form_handler.php<?= isset($post['post_id']) ? "?post_id={$post['post_id']}" : '' ?>" method="post">
 
@@ -29,14 +29,15 @@ if (isset($_SESSION['member_id'])) {
                 </div>
 
                 <!-- Champ caché pour stocker le member_id -->
-                <input type="hidden" name="member_id" value="<?= $member_id ?>">
+                <input type="hidden" name="member_id" value="<?= htmlspecialchars($member_id) ?>">
 
-                <!-- Champ caché pour le post_id lors de la modification -->
-                <input type="hidden" name="post_id" value="<?= isset($post['post_id']) ? $post['post_id'] : '' ?>">
+                <!-- Champ caché pour le post_id lors de la modification uniquement -->
+                <?php if (isset($post['post_id'])): ?>
+                    <input type="hidden" name="post_id" value="<?= htmlspecialchars($post['post_id']) ?>">
+                <?php endif; ?>
 
-                <input type="submit" value="<?= isset($post['post_id']) ? "Modifier l'actualité" : "Ajouter l'actualité" ?>" class="p-3">
+                <input type="submit" value="<?= isset($post['post_id']) ? "Modifier l'actualité" : "Ajouter l'actualité" ?>" class="btn btn-primary p-3">
             </form>
         </div>
     </div>
 </div>
-

@@ -85,3 +85,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //------------------------------------------------------------------------------------------------------------------------------------------
 
+    // JavaScript pour validation de formulaire Bootstrap
+    (function () {
+        'use strict';
+
+        // Récupération des formulaires à valider
+        var forms = document.querySelectorAll('.needs-validation');
+
+        // Boucle sur les formulaires et prévention de la soumission
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();

@@ -9,7 +9,7 @@ $image_url = '';
 $modif_at = '';
 $action = 'ajout_actu.php'; 
 $formTitle = 'Ajouter un Post';
-$submitValue = 'Ajouter le Post';
+$submitValue = 'Ajouter le Post'; 
 
 // Vérifie si un ID est passé via les paramètres GET pour la modification
 if (isset($_GET['id'])) {

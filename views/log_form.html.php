@@ -1,3 +1,4 @@
+<!-- FORMULAIRE INSCRIPTION -->
 <div class="row row-cols-1 row-cols-xs-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 m-5 g-4 d-flex row justify-content-around text-center">
     <div class="card m-2 bg-grey border border-4 border-danger">
         <h2 class="text-white mt-2">Inscription</h2>
@@ -27,17 +28,44 @@
         </form>
     </div>
 
+    <!-- FORMULAIRE CONNEXION -->
     <div class="m-0 p-0 b-0 g-0">
-        <div class="card bg-grey border border-4 border-danger">
-            <h2 class="text-white mt-2">Connexion</h2>
-            <form action="/tfg/controllers/connexion_member.php" method="post" class="m-3">
-                <label for="email" class="text-white">Email :</label><br>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Votre email" required><br><br>
-                <label for="password" class="text-white">Mot de passe :</label><br>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Votre mot de passe" required><br>
-                <button type="submit" class="mt-3 p-2 btn btn-success">Se connecter</button><br>
-            </form><br>
-        </div><br>
+    <div class="card bg-grey border border-4 border-danger">
+    <h2 class="text-white mt-2">Connexion</h2>
+    <form action="/tfg/controllers/connexion_member.php" method="post" class="m-3">
+        <div class="mb-3">
+            <label for="email" class="form-label text-white">Email :</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Votre email" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label text-white">Mot de passe :</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Votre mot de passe" required>
+        </div>
+        <button type="submit" class="mt-3 btn btn-success">Se connecter</button>
+        <?php
+        // Affichage conditionnel du message d'erreur ou de succès
+        if (isset($_GET['error'])) {
+            $message = '';
+            switch ($_GET['error']) {
+                case 'email_invalid':
+                    $message = 'Adresse email invalide.';
+                    break;
+                case 'invalid_credentials':
+                    $message = 'Email ou mot de passe incorrect.';
+                    break;
+                default:
+                    $message = 'Erreur de connexion.';
+                    break;
+            }
+            echo '<div class="mt-3 alert alert-danger">' . $message . '</div>';
+        } elseif (isset($_GET['success'])) {
+        }
+        ?>
+    </form>
+</div>
+
+
+
         <section class="m-2"><br>
             <h5>Inscription à True Fighters Gaming</h5>
             <p>Rejoignez True Fighters Gaming, la communauté <br>ultime pour les passionnés de jeux vidéo!<br>

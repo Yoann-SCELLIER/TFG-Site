@@ -2,7 +2,8 @@
 require_once dirname(__DIR__) . '/controller/db.fn.php';
 
 // Fonction pour ajouter un nouveau post dans la base de données
-function addPost($bdd, $titre, $contenu, $image_url, $member_id) {
+function addPost($bdd, $titre, $contenu, $image_url, $member_id) 
+{
     try {
         $sql = "INSERT INTO post (title, content, image_url, member_id, created_at, modif_at) 
                 VALUES (:titre, :contenu, :image_url, :member_id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
@@ -19,7 +20,8 @@ function addPost($bdd, $titre, $contenu, $image_url, $member_id) {
 }
 
 // Fonction pour afficher tous les posts
-function viewsPost($bdd) {
+function viewsPost($bdd) 
+{
     try {
         $sqlQuery = 'SELECT 
                         post.*, 
@@ -41,7 +43,8 @@ function viewsPost($bdd) {
 }
 
 // Fonction pour supprimer un post de la base de données en utilisant son ID
-function deletePost($bdd, $id) {
+function deletePost($bdd, $id) 
+{
     try {
         $sql = "DELETE FROM post WHERE post_id = :id";
         $stmt = $bdd->prepare($sql);
@@ -54,15 +57,17 @@ function deletePost($bdd, $id) {
 }
 
 // Fonction pour récupérer les informations d'un post spécifique en utilisant son ID
-function getPostById($bdd, $id) {
+function getPostById($bdd, $id) 
+{
     try {
         $sql = "SELECT post.*, 
+                       post.image_url,  -- Sélection de l'URL de l'image
                        member.username, 
                        DATE_FORMAT(post.created_at, '%d-%m-%Y %H:%i:%s') as created_at_fr, 
                        DATE_FORMAT(post.modif_at, '%d-%m-%Y %H:%i:%s') as modif_at_fr 
                 FROM post 
                 JOIN member ON post.member_id = member.member_id 
-                WHERE post_id = :id";
+                WHERE post.post_id = :id";
         $stmt = $bdd->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -73,7 +78,8 @@ function getPostById($bdd, $id) {
 }
 
 // Fonction pour mettre à jour un post existant dans la base de données
-function updatePost($bdd, $id, $title, $content, $image_url, $member_id = null) {
+function updatePost($bdd, $id, $title, $content, $image_url, $member_id = null) 
+{
     try {
         $sql = "UPDATE post 
                 SET title = :title, 

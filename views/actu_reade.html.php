@@ -23,7 +23,7 @@ if ($post) {
                     <p><small class="text-body-secondary"><?= $post['username'] ?></small></p>
                 </div>
             </div>
-            <div class="card-footer text-center">
+            <div class="card-footer text-center"> 
                 <p>Créé le : <small class="text-body-secondary"><?= $post['created_at_fr'] ?></small></p>
                 <?php if (!empty($post['modif_at'])) : ?>
                     <p>Modifié le : <small class="text-body-secondary"><?= $post['modif_at_fr'] ?></small></p>
@@ -48,5 +48,4 @@ if ($post) {
     // Afficher un message si l'article n'existe pas
     echo "L'article demandé n'existe pas.";
 }
-
 ?>
