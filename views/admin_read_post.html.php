@@ -12,7 +12,7 @@ if ($post) {
 
     <div class="col p-5 ">
         <div class="card border-2 m-5">
-            <img src="<?= $post['image_url'] ?>" class="card-img-top p-2 align-self-center" style="width:70rem; height:auto alt="Image <?= $post['title'] ?>">
+            <img src="<?= $post['image_url'] ?>" class="card-img-top p-2 align-self-center" style="width:50rem; height:auto" alt="Image <?= $post['title'] ?>">
             <div class="card-body text-center">
                 <h5 class="card-title fs-2"><?= $post['title'] ?></h5>
             </div>

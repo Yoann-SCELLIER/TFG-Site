@@ -90,19 +90,19 @@ table th, table td {
 /* styles.css */
 
 .role.admin {
-    font-size: 12px !important;
+    font-size: 20px !important;
     color: red;
     font-weight: bold;
 }
 
 .role.tf-officiel {
-    font-size: 12px !important;
+    font-size: 20px !important;
     color: blue;
     font-weight: bold;
 }
 
 .role.invité {
-    font-size: 12px !important;
+    font-size: 20px !important;
     color: green;
     font-weight: bold;
 }
@@ -133,3 +133,5 @@ table th, table td {
     overflow: hidden;
     text-overflow: ellipsis; /* Ajouter des points de suspension (...) */
 }
+
+/*---------------------------------------------------------------------------------------------------------------------------*/

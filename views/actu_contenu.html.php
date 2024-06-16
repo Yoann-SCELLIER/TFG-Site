@@ -26,15 +26,15 @@
 
                 <div class="col">
                     <div class="card border-2 fixed-size-card">
-                        <img src="<?php echo $post['image_url'] ?>" class="card-img-top p-2" alt="Image <?= $post['title'] ?>">
-                        <div class="card-body">
-                            <hr>
-                            <h5 class="card-title"><?= $post['title'] ?></h5>
-                            <p class="card-text"><?= $post['content'] ?></p>
+                        <img src="<?php echo $post['image_url'] ?>" class="card-img-top p-1" alt="Image <?= $post['title'] ?>">
+                        <div class="card-body m-0 p-0 b-0 g-0" style="height: 4rem;">
+                            <hr class=" m-0 p-0 b-0 g-0">
+                            <h5 class="card-title m-0 p-0 b-0 g-0"><?= $post['title'] ?></h5>
+                            <p class="card-text m-0 p-0 b-0 g-0"><?= $post['content'] ?></p>
                         </div>
-                        <div class="card-footer">
-                            <small class="text-body-secondary"><?= $post['created_at_fr'] ?></small><br>
-                            <small class="text-body-secondary"><?= $post['modif_at_fr'] ?></small>
+                        <div class="card-footer m-0 p-0 b-0 g-0">
+                            <small class="text-body-secondary m-0 p-0 b-0 g-0"><?= $post['created_at_fr'] ?></small><br>
+                            <small class="text-body-secondary m-0 p-0 b-0 g-0"><?= $post['modif_at_fr'] ?></small>
                         </div>
                         <div class="btn-group" role="group" aria-label="Actions">
                             <a href="actu_read.php?id=<?= $post['post_id'] ?>" class="btn btn-warning">Détail</a>

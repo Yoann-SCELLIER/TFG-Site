@@ -7,27 +7,27 @@
             <div class="row g-0">
                 <div class="col-md-3 text-center">
                     <img src="<?= htmlspecialchars($member['cover']); ?>" class="img-fluid rounded-start" alt="Image de <?= htmlspecialchars($member['username']); ?>">
-                    <p class="card-text"><small class="text-body-secondary">Créé le : <?= htmlspecialchars($member['created_at']); ?></small></p>
-                    <p class="card-text"><small class="text-body-secondary">Mis à jour le : <?= htmlspecialchars($member['modif_at']); ?></small></p>
                 </div>
                 <div class="col-md-7">
                     <div class="card-body">
-                    <h5 class="card-title">Username : <?= htmlspecialchars($member['username'] ?? ''); ?>
-                    <span class="role <?= strtolower(str_replace(' ', '-', $member['role_member'] ?? '')); ?>">
-                        <?= htmlspecialchars($member['role_member'] ?? ''); ?>
-                    </span>
-                    </h5>                        <p><strong>Spécialités :</strong>
+                        <h5 class="card-title"><?= htmlspecialchars($member['username'] ?? ''); ?></h5>
+                        <p class="card-text">Description : <?= htmlspecialchars($member['content']); ?></p>
+                    </div>
+                </div>
+                <div class="col-md-2 text-white text-center">
+                    <div class="card-body bg-grey">
+                        <p>Membre :<br> <span class="role <?= strtolower(str_replace(' ', '-', $member['role_member'] ?? '')); ?>">
+                                <?= htmlspecialchars($member['role_member'] ?? ''); ?>
+                            </span></p>
+                        <p><strong>Spécialités :</strong><br>
                             <?php if (!empty($member['jobs'])) : ?>
-                                <?= htmlspecialchars($member['jobs']); ?>
+                                <ul>
+                                    <li><?= htmlspecialchars($member['jobs']); ?></li>
+                                </ul>
                             <?php else : ?>
                                 Aucune spécialité.
                             <?php endif; ?>
                         </p>
-                        <p class="card-text">Description : <?= htmlspecialchars($member['content']); ?></p>
-                    </div>
-                </div>
-                <div class="col-md-2 text-center">
-                    <div class="card-body bg-grey">
                         <h6 class="card-title text-white">Retrouver le sur :</h6>
                         <?php if ($hasConsoles) : ?>
                             <?php foreach ($consoles as $console) : ?>
@@ -38,8 +38,24 @@
                         <?php endif; ?>
                     </div>
                 </div>
+                <div class="col-md-3 text-center">
+                    <p class="card-text m-0 p-0 b-0 g-0"><small class="text-body-secondary">Créé le : <?= htmlspecialchars($member['created_at'] ?? ''); ?></small></p>
+                    <p class="card-text m-0 p-0 b-0 g-0"><small class="text-body-secondary">Mis à jour le : <?= htmlspecialchars($member['modif_at'] ?? ''); ?></small></p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <p class="card-text m-0 p-0 b-0 g-0">
+                        <small class="text-body-secondary">
+                            <a href="mailto:<?= htmlspecialchars($member['email'] ?? ''); ?>">
+                                <img src="/TFG/assets/images/mail.png" style="width: 5rem;" alt="Mail de <?= htmlspecialchars($member['username'] ?? ''); ?>">
+                            </a>
+                        </small>
+                    </p>
+                </div>
+                <div class="col-md-6 text-center">
+                    <p>Si vous le souhaitez, vous pouvez contacter le membre directement par e-mail. Il vous répondra dès que possible.</p>
+                </div>
             </div>
-        </div> 
+        </div>
         <div class="d-flex justify-content-evenly p-3">
             <!-- Bouton pour modifier le membre -->
             <form action="admin_update_member.php" method="get" style="display: inline;">

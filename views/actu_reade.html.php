@@ -7,19 +7,18 @@ $id = $_GET['id'];
 $post = getPostById($bdd, $id);
 
 // Vérifier si l'article existe
-if ($post) { 
+if ($post) {
 ?>
 
-    <div class="col p-1">
+<div class="col p-5 ">
         <div class="card border-2 m-5">
-            <div class="align-self-center" style="width: 90rem">
-                <img src="<?= $post['image_url'] ?>" class="card-img-top p-5" width="100" height="auto" alt="Image <?= $post['title'] ?>">
-            </div>
+            <img src="<?= $post['image_url'] ?>" class="card-img-top p-2 align-self-center" style="width:50rem; height:auto" alt="Image <?= $post['title'] ?>">
             <div class="card-body text-center">
-                <h5 class="card-title"><?= $post['title'] ?></h5>
+                <h5 class="card-title fs-2"><?= $post['title'] ?></h5>
             </div>
+            <hr class="border border-2">
             <div class="card-body">
-                <p class="card-text p-3"><?= nl2br(htmlspecialchars($post['content'])) ?></p>
+                <p class="card-text p-3 fs-5"><?= nl2br(htmlspecialchars($post['content'])) ?></p>
                 <div class="d-flex justify-content-end">
                     <p><small class="text-body-secondary"><?= $post['username'] ?></small></p>
                 </div>
