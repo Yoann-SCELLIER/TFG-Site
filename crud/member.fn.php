@@ -1,78 +1,99 @@
 <?php
 // Inclure le fichier de configuration de la base de données
-require_once dirname(__DIR__) . '\controller\db.fn.php';
+require_once dirname(__DIR__) . '/controller/db.fn.php';
 
 // Fonction pour ajouter un membre à la base de données
 function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover) 
 {
-    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-    $role_id = 2;
+    try {
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+        $role_id = 2;
 
-    $sql = "INSERT INTO member (username, first_name, last_name, email, password, departement_id, cover, role_id) 
-            VALUES (:username, :first_name, :last_name, :email, :password, :departement_id, :cover, :role_id)";
-    $stmt = $bdd->prepare($sql);
+        $sql = "INSERT INTO member (username, first_name, last_name, email, password, departement_id, cover, role_id) 
+                VALUES (:username, :first_name, :last_name, :email, :password, :departement_id, :cover, :role_id)";
+        $stmt = $bdd->prepare($sql);
 
-    $stmt->bindValue(':username', $username);
-    $stmt->bindValue(':first_name', $first_name);
-    $stmt->bindValue(':last_name', $last_name);
-    $stmt->bindValue(':email', $email);
-    $stmt->bindValue(':password', $hashed_password);
-    $stmt->bindValue(':departement_id', $departement_id, PDO::PARAM_INT);
-    $stmt->bindValue(':cover', $cover);
-    $stmt->bindValue(':role_id', $role_id, PDO::PARAM_INT);
+        $stmt->bindValue(':username', $username);
+        $stmt->bindValue(':first_name', $first_name);
+        $stmt->bindValue(':last_name', $last_name);
+        $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':password', $hashed_password);
+        $stmt->bindValue(':departement_id', $departement_id, PDO::PARAM_INT);
+        $stmt->bindValue(':cover', $cover);
+        $stmt->bindValue(':role_id', $role_id, PDO::PARAM_INT);
 
-    return $stmt->execute();
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        exit("Erreur lors de l'ajout du membre : " . $e->getMessage());
+    }
 }
 
 // Fonction pour vérifier si un nom d'utilisateur est déjà pris
 function isUsernameTaken($bdd, $username)
 {
-    $sql = "SELECT COUNT(*) AS count FROM member WHERE username = ?";
-    $stmt = $bdd->prepare($sql);
-    $stmt->execute([$username]);
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $row['count'] > 0;
+    try {
+        $sql = "SELECT COUNT(*) AS count FROM member WHERE username = ?";
+        $stmt = $bdd->prepare($sql);
+        $stmt->execute([$username]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['count'] > 0;
+    } catch (PDOException $e) {
+        exit("Erreur lors de la vérification du nom d'utilisateur : " . $e->getMessage());
+    }
 }
 
 // Fonction pour vérifier si une adresse e-mail est déjà prise
 function isEmailTaken($bdd, $email)
 {
-    $sql = "SELECT COUNT(*) AS count FROM member WHERE email = ?";
-    $stmt = $bdd->prepare($sql);
-    $stmt->execute([$email]);
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $row['count'] > 0;
+    try {
+        $sql = "SELECT COUNT(*) AS count FROM member WHERE email = ?";
+        $stmt = $bdd->prepare($sql);
+        $stmt->execute([$email]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['count'] > 0;
+    } catch (PDOException $e) {
+        exit("Erreur lors de la vérification de l'e-mail : " . $e->getMessage());
+    }
 }
 
 // Fonction pour connecter un utilisateur en vérifiant ses informations d'identification
 function connexion($bdd, $email, $password)
 {
-    $sql = "SELECT member.*, role.* 
-            FROM member 
-            JOIN role ON member.role_id = role.id 
-            WHERE member.email = :email";
-    $stmt = $bdd->prepare($sql);
-    $stmt->execute(['email' => $email]);
-    $member = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($member && password_verify($password, $member['password'])) {
-        return $member;
-    } else {
-        return false;
+    try {
+        $sql = "SELECT member.*, role.* 
+                FROM member 
+                JOIN role ON member.role_id = role.id 
+                WHERE member.email = :email";
+        $stmt = $bdd->prepare($sql);
+        $stmt->execute(['email' => $email]);
+        $member = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($member && password_verify($password, $member['password'])) {
+            return $member;
+        } else {
+            return false;
+        }
+    } catch (PDOException $e) {
+        exit("Erreur lors de la connexion : " . $e->getMessage());
     }
 }
 
 // Fonction pour afficher tous les membres
 function viewMembers($bdd) 
 {
-    $sqlQuery = '
-        SELECT member.*, role.role_member
-        FROM member 
-        LEFT JOIN role ON member.role_id = role.id';
-    $stmt = $bdd->query($sqlQuery);
-    $members = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $members;
+    try {
+        $sqlQuery = '
+            SELECT member.*, role.role_member
+            FROM member 
+            LEFT JOIN role ON member.role_id = role.id';
+        $stmt = $bdd->query($sqlQuery);
+        $members = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $members;
+    } catch (PDOException $e) {
+        exit("Erreur lors de la récupération des membres : " . $e->getMessage());
+    }
 }
 
+// Fonction pour récupérer un membre par ID
 function getMemberById($bdd, $member_id) {
     try {
         $sql = "SELECT member.*, 
@@ -92,6 +113,7 @@ function getMemberById($bdd, $member_id) {
     }
 }
 
+// Fonction pour ajouter un emploi à un membre
 function addMemberJob($bdd, $member_id, $job_id) 
 {
     try {
@@ -100,7 +122,7 @@ function addMemberJob($bdd, $member_id, $job_id)
         $stmt->execute([$member_id, $job_id]);
         return true;
     } catch (PDOException $e) {
-        exit("Erreur lors de l'ajout de l'emploi au membre: " . $e->getMessage());
+        exit("Erreur lors de l'ajout de l'emploi au membre : " . $e->getMessage());
     }
 }
 
@@ -151,14 +173,20 @@ function updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $conte
     }
 }
 
+// Fonction pour lister tous les emplois
 function listJobs($bdd) 
 {
-    $sqlQuery = 'SELECT * FROM job';
-    $stmt = $bdd->prepare($sqlQuery);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    try {
+        $sqlQuery = 'SELECT * FROM job';
+        $stmt = $bdd->prepare($sqlQuery);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        exit("Erreur lors de la récupération des emplois : " . $e->getMessage());
+    }
 }
 
+// Fonction pour supprimer un membre
 function deleteMember($bdd, $member_id) 
 {
     try {
@@ -171,22 +199,33 @@ function deleteMember($bdd, $member_id)
     }
 }
 
+// Fonction pour récupérer tous les départements
 function getDepartements($bdd) 
 {
-    $departements = [];
-    $sql = "SELECT departement_id, departement_name FROM departement";
-    $stmt = $bdd->prepare($sql);
-    $stmt->execute();
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $departements[] = $row;
+    try {
+        $departements = [];
+        $sql = "SELECT departement_id, departement_name FROM departement";
+        $stmt = $bdd->prepare($sql);
+        $stmt->execute();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $departements[] = $row;
+        }
+        return $departements;
+    } catch (PDOException $e) {
+        exit("Erreur lors de la récupération des départements : " . $e->getMessage());
     }
-    return $departements;
 }
 
+// Fonction pour récupérer tous les rôles
 function getRolesFromDatabase($bdd) 
 {
-    $sql = "SELECT * FROM role";
-    $stmt = $bdd->prepare($sql);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    try {
+        $sql = "SELECT * FROM role";
+        $stmt = $bdd->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        exit("Erreur lors de la récupération des rôles : " . $e->getMessage());
+    }
 }
+?>

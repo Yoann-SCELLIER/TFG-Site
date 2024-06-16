@@ -7,35 +7,38 @@ function addPost($bdd, $titre, $contenu, $image_url, $member_id) {
         $sql = "INSERT INTO post (title, content, image_url, member_id, created_at, modif_at) 
                 VALUES (:titre, :contenu, :image_url, :member_id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
         $stmt = $bdd->prepare($sql);
-        $stmt->bindValue(':titre', $titre);
-        $stmt->bindValue(':contenu', $contenu);
-        $stmt->bindValue(':image_url', $image_url);
+        $stmt->bindValue(':titre', htmlspecialchars($titre));
+        $stmt->bindValue(':contenu', htmlspecialchars($contenu));
+        $stmt->bindValue(':image_url', htmlspecialchars($image_url));
         $stmt->bindValue(':member_id', $member_id, PDO::PARAM_INT);
         $stmt->execute();
+        return true;
     } catch (PDOException $e) {
-        exit("Erreur lors de l'ajout du post: " . $e->getMessage());
+        exit("Erreur lors de l'ajout du post : " . $e->getMessage());
     }
 }
 
-function viewsPost($bdd) { 
-    $sqlQuery = 'SELECT 
-                    post.*, 
-                    DATE_FORMAT(post.created_at, "%d-%m-%Y") as created_at_fr, 
-                    DATE_FORMAT(post.modif_at, "%d-%m-%Y") as modif_at_fr,
-                    member.username
-                 FROM 
-                    post
-                 LEFT JOIN 
-                    member ON post.member_id = member.member_id
-                 ORDER BY 
-                    post.created_at DESC';
-    $stmt = $bdd->prepare($sqlQuery);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Fonction pour afficher tous les posts
+function viewsPost($bdd) {
+    try {
+        $sqlQuery = 'SELECT 
+                        post.*, 
+                        DATE_FORMAT(post.created_at, "%d-%m-%Y") as created_at_fr, 
+                        DATE_FORMAT(post.modif_at, "%d-%m-%Y") as modif_at_fr,
+                        member.username
+                    FROM 
+                        post
+                    LEFT JOIN 
+                        member ON post.member_id = member.member_id
+                    ORDER BY 
+                        post.created_at DESC';
+        $stmt = $bdd->prepare($sqlQuery);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        exit("Erreur lors de la récupération des posts : " . $e->getMessage());
+    }
 }
-
-
-
 
 // Fonction pour supprimer un post de la base de données en utilisant son ID
 function deletePost($bdd, $id) {
@@ -44,27 +47,30 @@ function deletePost($bdd, $id) {
         $stmt = $bdd->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
+        return true;
     } catch (PDOException $e) {
-        echo "Erreur : " . $e->getMessage();
+        exit("Erreur lors de la suppression du post : " . $e->getMessage());
     }
 }
 
-
 // Fonction pour récupérer les informations d'un post spécifique en utilisant son ID
 function getPostById($bdd, $id) {
-    $sql = "SELECT post.*, 
-                   member.username, 
-                   DATE_FORMAT(post.created_at, '%d-%m-%Y %H:%i:%s') as created_at_fr, 
-                   DATE_FORMAT(post.modif_at, '%d-%m-%Y %H:%i:%s') as modif_at_fr 
-            FROM post 
-            JOIN member ON post.member_id = member.member_id 
-            WHERE post_id = :id";
-    $stmt = $bdd->prepare($sql);
-    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    try {
+        $sql = "SELECT post.*, 
+                       member.username, 
+                       DATE_FORMAT(post.created_at, '%d-%m-%Y %H:%i:%s') as created_at_fr, 
+                       DATE_FORMAT(post.modif_at, '%d-%m-%Y %H:%i:%s') as modif_at_fr 
+                FROM post 
+                JOIN member ON post.member_id = member.member_id 
+                WHERE post_id = :id";
+        $stmt = $bdd->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        exit("Erreur lors de la récupération du post : " . $e->getMessage());
+    }
 }
-
 
 // Fonction pour mettre à jour un post existant dans la base de données
 function updatePost($bdd, $id, $title, $content, $image_url, $member_id = null) {
@@ -84,9 +90,9 @@ function updatePost($bdd, $id, $title, $content, $image_url, $member_id = null) 
 
         $stmt = $bdd->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-        $stmt->bindValue(':title', $title);
-        $stmt->bindValue(':content', $content);
-        $stmt->bindValue(':image_url', $image_url);
+        $stmt->bindValue(':title', htmlspecialchars($title));
+        $stmt->bindValue(':content', htmlspecialchars($content));
+        $stmt->bindValue(':image_url', htmlspecialchars($image_url));
         
         // Binder member_id uniquement s'il est fourni
         if ($member_id !== null) {
@@ -94,7 +100,9 @@ function updatePost($bdd, $id, $title, $content, $image_url, $member_id = null) 
         }
         
         $stmt->execute();
+        return true;
     } catch (PDOException $e) {
-        echo "Erreur lors de la mise à jour du post : " . $e->getMessage();
+        exit("Erreur lors de la mise à jour du post : " . $e->getMessage());
     }
 }
+?>
