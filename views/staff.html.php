@@ -50,10 +50,10 @@
         ?>
                     <div class="col-md-4" style="width: 310px;">
                         <!-- Afficher l'image du membre -->
-                        <div style="width: 100%; height: auto;">
+                        <div class=" border border-2 border-warning" style="width: 100%; height: auto;">
                             <img src="<?= htmlspecialchars($member['cover']) ?>" class="card-img-top" alt="Photo de <?= htmlspecialchars($member['username']) ?>" style="width: 100%; height: auto;">
                         </div>
-                        <div class="card mb-4 shadow-sm">
+                        <div class="card mb-4 shadow-sm border border-2 border-warning">
                             <div class="card-body">
                                 <!-- Afficher le nom du membre -->
                                 <h5 class="card-title"><?= htmlspecialchars($member['username']) ?></h5>
@@ -79,10 +79,10 @@
         ?>
                     <div class="col-md-4" style="width: 310px;">
                         <!-- Afficher l'image du membre -->
-                        <div style="width: 100%; height: auto;">
+                        <div class=" border border-2 border-primary" style="width: 100%; height: auto;">
                             <img src="<?= htmlspecialchars($member['cover']) ?>" class="card-img-top" alt="Photo de <?= htmlspecialchars($member['username']) ?>" style="width: 100%; height: auto;">
                         </div>
-                        <div class="card mb-4 shadow-sm">
+                        <div class="card mb-4 shadow-sm border border-2 border-primary">
                             <div class="card-body">
                                 <!-- Afficher le nom du membre -->
                                 <h5 class="card-title"><?= htmlspecialchars($member['username']) ?></h5>
