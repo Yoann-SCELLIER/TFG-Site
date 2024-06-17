@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-md-7">
                     <div class="card-body">
-                        <h5 class="card-title"><?= htmlspecialchars($member['username'] ?? ''); ?></h5>
+                        <h5 class="card-title">Username : <?= htmlspecialchars($member['username'] ?? ''); ?></h5>
                         <p class="card-text">Description : <?= htmlspecialchars($member['content']); ?></p>
                     </div>
                 </div>
@@ -19,23 +19,28 @@
                         <p>Membre :<br> <span class="role <?= strtolower(str_replace(' ', '-', $member['role_member'] ?? '')); ?>">
                                 <?= htmlspecialchars($member['role_member'] ?? ''); ?>
                             </span></p>
-                        <p><strong>Spécialités :</strong><br>
+                            <p><strong>Spécialités :</strong><br>
                             <?php if (!empty($member['jobs'])) : ?>
-                                <ul>
-                                    <li><?= htmlspecialchars($member['jobs']); ?></li>
-                                </ul>
-                            <?php else : ?>
-                                Aucune spécialité.
-                            <?php endif; ?>
-                        </p>
-                        <h6 class="card-title text-white">Retrouver le sur :</h6>
-                        <?php if ($hasConsoles) : ?>
-                            <?php foreach ($consoles as $console) : ?>
-                                <p class="text-white"><?= htmlspecialchars($console['title']); ?></p>
+                        <ul class="list-unstyled">
+                            <?php foreach ($member['jobs'] as $job_title) : ?>
+                                <li><?= htmlspecialchars($job_title); ?></li>
                             <?php endforeach; ?>
-                        <?php else : ?>
-                            <p class="text-white">Ce membre n'a aucune console pour le moment.</p>
-                        <?php endif; ?>
+                        </ul>
+                    <?php else : ?>
+                        Aucune spécialité.
+                    <?php endif; ?>
+                    </p>
+                    <!-- Affichage des jeux du membre -->
+                    <p><strong>Les jeux :</strong><br>
+                        <?php if ($hasGames) : ?>
+                            <?php foreach ($games as $game) : ?>
+                    <ul class="list-unstyled">
+                        <li class="text-white"><?= htmlspecialchars($game['title']); ?></li>
+                    </ul>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <p class="text-white">Ce membre n'a aucun jeu pour le moment.</p>
+            <?php endif; ?>
                     </div>
                 </div>
                 <div class="col-md-3 text-center">

@@ -7,26 +7,27 @@ function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $passwo
 {
     try {
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-        $role_id = 2;
+        $role_id = 2; // Exemple de rôle par défaut
 
         $sql = "INSERT INTO member (username, first_name, last_name, email, password, departement_id, cover, role_id) 
                 VALUES (:username, :first_name, :last_name, :email, :password, :departement_id, :cover, :role_id)";
         $stmt = $bdd->prepare($sql);
 
-        $stmt->bindValue(':username', $username);
-        $stmt->bindValue(':first_name', $first_name);
-        $stmt->bindValue(':last_name', $last_name);
-        $stmt->bindValue(':email', $email);
-        $stmt->bindValue(':password', $hashed_password);
-        $stmt->bindValue(':departement_id', $departement_id, PDO::PARAM_INT);
-        $stmt->bindValue(':cover', $cover);
-        $stmt->bindValue(':role_id', $role_id, PDO::PARAM_INT);
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':first_name', $first_name);
+        $stmt->bindParam(':last_name', $last_name);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $hashed_password);
+        $stmt->bindParam(':departement_id', $departement_id, PDO::PARAM_INT);
+        $stmt->bindParam(':cover', $cover);
+        $stmt->bindParam(':role_id', $role_id, PDO::PARAM_INT);
 
         return $stmt->execute();
     } catch (PDOException $e) {
         exit("Erreur lors de l'ajout du membre : " . $e->getMessage());
     }
 }
+
 
 // Fonction pour vérifier si un nom d'utilisateur est déjà pris
 function isUsernameTaken($bdd, $username)
@@ -94,81 +95,74 @@ function viewMembers($bdd)
 }
 
 // Fonction pour récupérer un membre par ID
-function getMemberById($bdd, $member_id) {
+function getMemberById($bdd, $member_id)
+{
     try {
-        $sql = "SELECT member.*, 
-                       GROUP_CONCAT(job.title SEPARATOR ', ') AS jobs,
-                       role.role_member
-                FROM member
-                LEFT JOIN member_job ON member.member_id = member_job.member_id
-                LEFT JOIN job ON member_job.job_id = job.job_id
-                LEFT JOIN role ON member.role_id = role.id
-                WHERE member.member_id = ?
-                GROUP BY member.member_id";
+        $sql = "
+            SELECT 
+                m.*, 
+                r.role_member,
+                j.title AS job_title
+            FROM member m
+            LEFT JOIN role r ON m.role_id = r.id
+            LEFT JOIN member_job mj ON m.member_id = mj.member_id
+            LEFT JOIN job j ON mj.job_id = j.job_id
+            WHERE m.member_id = :member_id
+        ";
+
         $stmt = $bdd->prepare($sql);
-        $stmt->execute([$member_id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->bindParam(':member_id', $member_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $member = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Récupérer les titres des emplois
+        $sqlJobs = "
+            SELECT j.title 
+            FROM job j
+            JOIN member_job mj ON j.job_id = mj.job_id
+            WHERE mj.member_id = :member_id
+        ";
+        $stmtJobs = $bdd->prepare($sqlJobs);
+        $stmtJobs->bindParam(':member_id', $member_id, PDO::PARAM_INT);
+        $stmtJobs->execute();
+        $jobs = $stmtJobs->fetchAll(PDO::FETCH_COLUMN);
+
+        $member['jobs'] = $jobs;
+
+        return $member;
     } catch (PDOException $e) {
-        exit("Erreur lors de la récupération des détails du membre : " . $e->getMessage());
+        exit("Erreur lors de la récupération du membre : " . $e->getMessage());
     }
 }
 
 // Fonction pour ajouter un emploi à un membre
-function addMemberJob($bdd, $member_id, $job_id) 
+function getMemberJobs(PDO $bdd, int $member_id): array 
 {
-    try {
-        $sql = "INSERT INTO member_job (member_id, job_id) VALUES (?, ?)";
-        $stmt = $bdd->prepare($sql);
-        $stmt->execute([$member_id, $job_id]);
-        return true;
-    } catch (PDOException $e) {
-        exit("Erreur lors de l'ajout de l'emploi au membre : " . $e->getMessage());
-    }
+    $query = "SELECT job_id FROM member_job WHERE member_id = :member_id";
+    $stmt = $bdd->prepare($query);
+    $stmt->execute(['member_id' => $member_id]);
+    return $stmt->fetchAll(PDO::FETCH_COLUMN);
 }
 
 // Fonction pour mettre à jour les informations d'un membre
-function updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $content, $role_id)
+function updateMember($bdd, $member_id, $cover, $username, $email, $content, $role_id, $departement_id)
 {
     try {
-        // Préparer la requête SQL pour mettre à jour le membre
-        $sql = "UPDATE member 
-                SET cover = :cover, username = :username, email = :email, content = :content, role_id = :role_id, modif_at = CURRENT_TIMESTAMP 
-                WHERE member_id = :member_id";
+        $sql = "UPDATE member SET cover = :cover, username = :username, email = :email, content = :content, role_id = :role_id WHERE member_id = :member_id";
         $stmt = $bdd->prepare($sql);
-
-        // Liaison des valeurs aux paramètres de la requête
-        $stmt->bindValue(':cover', $cover);
-        $stmt->bindValue(':username', $username);
-        $stmt->bindValue(':email', $email);
-        $stmt->bindValue(':content', $content);
-        $stmt->bindValue(':role_id', $role_id, PDO::PARAM_INT);
-        $stmt->bindValue(':member_id', $member_id, PDO::PARAM_INT);
-
-        // Exécution de la requête pour mettre à jour le membre
+        $stmt->bindParam(':cover', $cover);
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':content', $content);
+        $stmt->bindParam(':role_id', $role_id);
+        $stmt->bindParam(':member_id', $member_id);
         $stmt->execute();
 
-        // Suppression des anciens emplois associés au membre
-        $sql_delete_jobs = "DELETE FROM member_job WHERE member_id = :member_id";
-        $stmt_delete_jobs = $bdd->prepare($sql_delete_jobs);
-        $stmt_delete_jobs->bindValue(':member_id', $member_id, PDO::PARAM_INT);
-        $stmt_delete_jobs->execute();
-
-        // Ajout des nouveaux emplois associés au membre
-        $sql_add_jobs = "INSERT INTO member_job (member_id, job_id) VALUES (:member_id, :job_id)";
-        $stmt_add_jobs = $bdd->prepare($sql_add_jobs);
-        foreach ($jobs as $job_id) {
-            $stmt_add_jobs->bindValue(':member_id', $member_id, PDO::PARAM_INT);
-            $stmt_add_jobs->bindValue(':job_id', $job_id, PDO::PARAM_INT);
-            $stmt_add_jobs->execute();
-        }
-
-        // Retourner true si la mise à jour s'est effectuée avec succès
-        return true;
+        // Optionnel : Si vous avez besoin de récupérer des données après la mise à jour
+        // return getMemberById($bdd, $member_id); // Par exemple, pour retourner le membre mis à jour
+        return true; // Ou simplement true si la mise à jour réussit
     } catch (PDOException $e) {
-        // Capturer les exceptions PDO (problèmes de base de données)
-        throw new Exception("Erreur PDO lors de la mise à jour du membre : " . $e->getMessage());
-    } catch (Exception $e) {
-        // Capturer les autres exceptions
         throw new Exception("Erreur lors de la mise à jour du membre : " . $e->getMessage());
     }
 }
@@ -177,14 +171,14 @@ function updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $conte
 function listJobs($bdd) 
 {
     try {
-        $sqlQuery = 'SELECT * FROM job';
-        $stmt = $bdd->prepare($sqlQuery);
-        $stmt->execute();
+        $sql = 'SELECT * FROM job';
+        $stmt = $bdd->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         exit("Erreur lors de la récupération des emplois : " . $e->getMessage());
     }
 }
+
 
 // Fonction pour supprimer un membre
 function deleteMember($bdd, $member_id) 
@@ -228,4 +222,22 @@ function getRolesFromDatabase($bdd)
         exit("Erreur lors de la récupération des rôles : " . $e->getMessage());
     }
 }
-?>
+
+function updateMemberJobs($bdd, $member_id, $jobs_selected) 
+{
+    try {
+        // Supprimer les anciennes associations de jobs pour ce membre
+        $stmtDelete = $bdd->prepare("DELETE FROM member_job WHERE member_id = ?");
+        $stmtDelete->execute([$member_id]);
+
+        // Insérer les nouvelles associations de jobs sélectionnés
+        $stmtInsert = $bdd->prepare("INSERT INTO member_job (member_id, job_id) VALUES (?, ?)");
+        foreach ($jobs_selected as $job_id) {
+            // Insérer seulement si l'association n'existe pas déjà
+            $stmtInsert->execute([$member_id, $job_id]);
+        }
+    } catch (PDOException $e) {
+        throw new Exception("Erreur lors de la mise à jour des jobs du membre : " . $e->getMessage());
+    }
+}
+

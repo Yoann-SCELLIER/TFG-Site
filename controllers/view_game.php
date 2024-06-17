@@ -1,17 +1,18 @@
 <?php
 require_once dirname(__DIR__) . '/crud/game_console.fn.php'; // Chemin vers votre fichier contenant getGameById
 
-// Vérifier si un ID est présent dans l'URL
+// Initialisation des variables
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 $game = null;
 
+// Vérifier si un ID est fourni dans l'URL pour charger les détails du jeu existant
 if ($id) {
     // Récupérer les informations du jeu à modifier
     $game = getGameById($bdd, $id);
 }
 
-// Si le formulaire est soumis
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Si le formulaire est soumis (modification ou ajout)
+if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
     // Récupérer les données du formulaire
     $title = isset($_POST['title']) ? $_POST['title'] : '';
     $content = isset($_POST['content']) ? $_POST['content'] : '';
@@ -27,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         addGame($bdd, $title, $content, $image_url);
     }
 
-    // Rediriger vers la page de gestion des jeux après le traitement
-    header('Location: /TFG/admin/view_list_game.php');
+    // Redirection vers une autre page après traitement du formulaire
+    header('Location: index.php'); // Remplacez index.php par la page souhaitée
     exit();
 }

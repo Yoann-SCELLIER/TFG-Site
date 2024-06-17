@@ -1,8 +1,8 @@
 <?php
-
 require_once dirname(__DIR__) . '/crud/member.fn.php';
+require_once dirname(__DIR__) . '/crud/game_console.fn.php';
 
-// Récupération de l'ID du membre depuis l'URL 
+// Récupération de l'ID du membre depuis l'URL
 $member_id = $_GET['id'] ?? null;
 
 // Vérification si l'ID est valide
@@ -15,27 +15,52 @@ $member = getMemberById($bdd, $member_id);
 
 // Vérification si le membre existe
 if ($member === null) {
-    exit("Membre non trouvé.");
+    exit("Membre non trouvé."); 
 }
+
+// Récupération des jobs disponibles
+$jobs = listJobs($bdd);
+
+// Récupération des jeux disponibles
+$games = view_list_game($bdd);
+
+// Récupération des départements disponibles
+$departements = getDepartements($bdd);
+
+// Récupération des jeux sélectionnés pour le membre
+$selected_games = getMemberGames($bdd, $member_id);
+
+// Récupération des jobs sélectionnés pour le membre
+$jobs_selected = getMemberJobs($bdd, $member_id);
 
 // Vérifie si la méthode de requête est POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupère les données soumises par le formulaire
-    $cover = $_POST['cover'] ?? $member['cover'] ?? '';
-    $username = $_POST['username'] ?? $member['username'] ?? '';
-    $email = $_POST['email'] ?? $member['email'] ?? '';
-    $jobs = $_POST['jobs'] ?? array(); // Assurez-vous que $jobs est un tableau
-    $content = $_POST['content'] ?? $member['content'] ?? '';
-    $role_id = $_POST['role_id'] ?? $member['role_id'] ?? '';
-
-    // Appelle la fonction pour mettre à jour le membre dans la base de données
     try {
-        updateMember($bdd, $member_id, $cover, $username, $email, $jobs, $content, $role_id);
+        // Récupère les données soumises par le formulaire
+        $cover = $_POST['cover'] ?? $member['cover'] ?? '';
+        $username = $_POST['username'] ?? $member['username'] ?? '';
+        $email = $_POST['email'] ?? $member['email'] ?? '';
+        $content = $_POST['content'] ?? $member['content'] ?? '';
+        $role_id = $_POST['role_id'] ?? $member['role_id'] ?? '';
+        $departement_id = $_POST['departement_id'] ?? $member['departement_id'] ?? '';
+        $jobs_selected = isset($_POST['jobs']) ? $_POST['jobs'] : [];
+        $games_selected = isset($_POST['games']) ? $_POST['games'] : [];
+
+        // Mise à jour des détails du membre
+        updateMember($bdd, $member_id, $cover, $username, $email, $content, $role_id, $departement_id);
+
+        // Mise à jour des compétences (jobs) du membre
+        updateMemberJobs($bdd, $member_id, $jobs_selected);
+
+        // Mise à jour des jeux sélectionnés pour le membre
+        updateMemberGames($bdd, $member_id, $games_selected);
+
         // Redirection après mise à jour réussie
         header('Location: /TFG/index.php');
         exit();
-    } catch (Exception $e) {
+    } catch (PDOException $e) {
         // Gestion des erreurs (affichage du message d'erreur)
         echo "Erreur lors de la mise à jour du membre : " . $e->getMessage();
     }
 }
+?>

@@ -11,4 +11,3 @@ if (empty($_SESSION['role_member'])) {
 } elseif ($_SESSION['role_member'] == 'memberAdmin') {
     echo navMemberAdmin();
 }
-?>
