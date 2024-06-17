@@ -14,7 +14,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         exit;
     }
 
-    // Définir les noms de rôle
+    // Définir les noms de rôle 
     $role_names = [
         'memberAdmin' => 'Admin',
         'memberOfficial' => 'TF Officiel',
@@ -44,4 +44,3 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     echo "ID du membre invalide.";
     exit; 
 }
-?>

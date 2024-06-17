@@ -20,30 +20,31 @@
                         <p>Rôle :<br>
                             <span class="role <?= isset($member['role_member']) ? strtolower(str_replace(' ', '-', $member['role_member'])) : ''; ?>">
                                 <?= isset($member['role_member_name']) ? htmlspecialchars($member['role_member_name']) : ''; ?>
-                            </span>
+                            </span> 
                         </p>
                         <p><strong>Spécialités :</strong><br>
                             <?php if (!empty($member['jobs'])) : ?>
-                        <ul class="list-unstyled">
-                            <?php foreach ($member['jobs'] as $job_title) : ?>
-                                <li><?= htmlspecialchars($job_title); ?></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php else : ?>
-                        Aucune spécialité.
-                    <?php endif; ?>
-                    </p>
-                    <!-- Affichage des jeux du membre -->
-                    <p><strong>Les jeux :</strong><br>
-                        <?php if ($hasGames) : ?>
-                            <?php foreach ($games as $game) : ?>
-                    <ul class="list-unstyled">
-                        <li class="text-white"><?= htmlspecialchars($game['title']); ?></li>
-                    </ul>
-                <?php endforeach; ?>
-            <?php else : ?>
-                <p class="text-white">Ce membre n'a aucun jeu pour le moment.</p>
-            <?php endif; ?>
+                                <ul class="list-unstyled">
+                                    <?php foreach ($member['jobs'] as $job_title) : ?>
+                                        <li><?= htmlspecialchars($job_title); ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php else : ?>
+                                Aucune spécialité.
+                            <?php endif; ?>
+                        </p>
+                        <!-- Affichage des jeux du membre -->
+                        <p><strong>Les jeux :</strong><br>
+                            <?php if ($hasGames) : ?>
+                                <?php foreach ($games as $game) : ?>
+                                    <ul class="list-unstyled">
+                                        <li class="text-white"><?= htmlspecialchars($game['title']); ?></li>
+                                    </ul>
+                                <?php endforeach; ?>
+                            <?php else : ?>
+                                <p class="text-white">Ce membre n'a aucun jeu pour le moment.</p>
+                            <?php endif; ?>
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-3 text-center">
