@@ -2,42 +2,48 @@
 
 require_once dirname(__DIR__) . '\crud\member.fn.php';
 
-// Vérification si les données du formulaire sont soumises via la méthode POST
+// Vérification si le formulaire est soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupération de l'e-mail et du mot de passe soumis via le formulaire de connexion
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Validation de l'e-mail avec regex
+    // Validation de l'e-mail avec une regex simple
     $email_regex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
     if (!preg_match($email_regex, $email)) {
-        // Email invalide, rediriger avec un message d'erreur
         header("Location: /TFG/log.php");
         exit();
     }
 
-    // Appel de la fonction de connexion pour vérifier les informations d'identification
+    // Connexion avec les informations soumises
     $member = connexion($bdd, $email, $password);
 
-    // Si les informations d'identification sont valides, connecter le membre et le rediriger
+    // Si la connexion réussit
     if ($member) {
-        // Enregistrement des données du membre dans la session
         session_start();
         $_SESSION['member_id'] = $member['member_id'];
         $_SESSION['role_member'] = $member['role_member'];
         $_SESSION['username'] = $member['username'];
 
-        // Redirection en fonction du rôle de l'utilisateur
-        if ($_SESSION['role_member'] === 'memberOfficial' || $_SESSION['role_member'] === 'memberGuest') {
+        // Redirection en fonction du rôle
+        if ($_SESSION['role_member'] === 'memberAdmin') {
+            check_role('memberAdmin'); // Vérifie si l'utilisateur a le rôle d'administrateur
+            header("Location: /TFG/admin/dashboard.php");
+            exit();
+        } elseif ($_SESSION['role_member'] === 'memberOfficial' || $_SESSION['role_member'] === 'memberGuest') {
+            check_multiple_roles(['memberOfficial', 'memberGuest']); // Vérifie si l'utilisateur a l'un des rôles autorisés
             header("Location: /TFG/index.php");
             exit();
-        } elseif ($_SESSION['role_member'] === 'memberAdmin') {
-            header("Location: /tfg/admin/dashboard.php");
+        } else {
+            // Déconnexion et redirection en cas de rôle non reconnu
+            session_unset();
+            session_destroy();
+            header("Location: /TFG/log.php");
             exit();
         }
     } else {
-        // Affichage d'un message d'erreur si les informations d'identification sont incorrectes
+        // Redirection si la connexion échoue
         header("Location: /TFG/log.php");
         exit();
     }
 }
+?>

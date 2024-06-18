@@ -13,13 +13,13 @@
                     <input type="email" name="email" class="form-control border border-2 border-dark" id="email" value="<?= htmlspecialchars($member['email'] ?? '') ?>" required><br>
                 </div>
                 <div class="mb-3">
-                    <label for="job" class="form-label">Vos compétences :</label>
                     <hr class="border border-white"><br>
                     <div class="d-flex align-items-center justify-content-evenly">
-                        <div class="row col-6">
+                        <div class="row col-6 text-start">
+                        <label for="job" class="form-label fs-3">Vous êtes :</label>
                             <?php foreach ($jobs as $job) : ?>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="jobs[]" id="job<?= $job['job_id'] ?>" value="<?= $job['job_id'] ?>" <?php if (isset($jobs_selected) && is_array($jobs_selected) && in_array($job['job_id'], $jobs_selected)) echo "checked"; ?>>
+                                    <input class="form-check-input border boder-2 border-black" type="checkbox" name="jobs[]" id="job<?= $job['job_id'] ?>" value="<?= $job['job_id'] ?>" <?php if (isset($jobs_selected) && is_array($jobs_selected) && in_array($job['job_id'], $jobs_selected)) echo "checked"; ?>>
                                     <label class="form-check-label" for="job<?= $job['job_id'] ?>">
                                         <?= htmlspecialchars($job['title']) ?>
                                     </label>
@@ -45,11 +45,11 @@
                     <hr class="border border-white"><br>
                     <div class="row col-6">
                         <?php foreach ($games as $game) : ?>
-                            <div class="form-check text-start border boder-2 border-black">
+                            <div class="form-check text-start">
                                 <label class="form-check-label" for="game<?= $game['game_id'] ?>">
                                     <?= $game['title'] ?>
                                 </label>
-                                <input class="form-check-input" type="checkbox" name="games[]" id="game<?= $game['game_id'] ?>" value="<?= $game['game_id'] ?>" <?php if (in_array($game['game_id'], array_column($selected_games, 'game_id'))) echo "checked"; ?>>
+                                <input class="form-check-input border boder-2 border-black" type="checkbox" name="games[]" id="game<?= $game['game_id'] ?>" value="<?= $game['game_id'] ?>" <?php if (in_array($game['game_id'], array_column($selected_games, 'game_id'))) echo "checked"; ?>>
                             </div>
                         <?php endforeach; ?>
                     </div>

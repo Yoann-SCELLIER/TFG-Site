@@ -78,6 +78,32 @@ function connexion($bdd, $email, $password)
     }
 }
 
+function check_role($required_role) 
+{
+    if (!isset($_SESSION['member_id']) || !isset($_SESSION['role_member'])) {
+        header('Location: /TFG/log.php');
+        exit();
+    }
+
+    if ($_SESSION['role_member'] !== $required_role) {
+        header('Location: /TFG/index.php');
+        exit();
+    }
+}
+
+function check_multiple_roles($roles) 
+{
+    if (!isset($_SESSION['member_id']) || !isset($_SESSION['role_member'])) {
+        header('Location: /TFG/log.php');
+        exit();
+    }
+
+    if (!in_array($_SESSION['role_member'], $roles)) {
+        header('Location: /TFG/index.php');
+        exit();
+    }
+}
+
 // Fonction pour afficher tous les membres
 function viewMembers($bdd) 
 {
@@ -179,7 +205,6 @@ function listJobs($bdd)
     }
 }
 
-
 // Fonction pour supprimer un membre
 function deleteMember($bdd, $member_id) 
 {
@@ -240,4 +265,3 @@ function updateMemberJobs($bdd, $member_id, $jobs_selected)
         throw new Exception("Erreur lors de la mise à jour des jobs du membre : " . $e->getMessage());
     }
 }
-
