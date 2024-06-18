@@ -14,18 +14,20 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         exit;
     }
 
-    // Définir les noms de rôle 
-    $role_names = [
-        'memberAdmin' => 'Admin',
-        'memberOfficial' => 'TF Officiel',
-        'memberGuest' => 'Invité'
+    // Définir les noms de rôle et les classes CSS associées
+    $roles = [
+        'memberAdmin' => ['name' => 'Admin', 'class' => 'role-admin'],
+        'memberOfficial' => ['name' => 'TF Officiel', 'class' => 'role-tf-officiel'],
+        'memberGuest' => ['name' => 'Invité', 'class' => 'role-invite']
     ];
 
-    // Mapper le rôle du membre à un nom plus lisible
-    if (isset($member['role_member']) && isset($role_names[$member['role_member']])) {
-        $member['role_member_name'] = $role_names[$member['role_member']];
+    // Mapper le rôle du membre à un nom plus lisible et à une classe CSS
+    if (isset($member['role_member']) && isset($roles[$member['role_member']])) {
+        $member['role_member_name'] = $roles[$member['role_member']]['name'];
+        $member['role_member_class'] = $roles[$member['role_member']]['class'];
     } else {
-        $member['role_member_name'] = 'Non défini'; // Valeur par défaut si le rôle n'est pas défini
+        $member['role_member_name'] = 'Non défini';
+        $member['role_member_class'] = 'role-non-defini'; // Classe CSS par défaut si le rôle n'est pas défini
     }
 
     // Récupérer les consoles du membre

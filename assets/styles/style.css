@@ -87,25 +87,32 @@ table th, table td {
     font-size: 12px !important;
 }
 
-/* styles.css */
-
-.role.admin {
+/* style.css */
+.role-admin {
     font-size: 20px !important;
     color: red;
     font-weight: bold;
 }
 
-.role.tf-officiel {
+.role-tf-officiel {
     font-size: 20px !important;
     color: blue;
     font-weight: bold;
 }
 
-.role.invité {
+.role-invite {
     font-size: 20px !important;
     color: green;
     font-weight: bold;
 }
+
+/* Optionnel: Classe pour les rôles non définis */
+.role-non-defini {
+    font-size: 20px !important;
+    color: gray;
+    font-weight: bold;
+}
+
 
 .bg-eggShell {
     background: #ebe7e7;
