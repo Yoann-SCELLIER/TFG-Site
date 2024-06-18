@@ -15,15 +15,17 @@
                     </div>
                 </div>
                 <div class="col-md-2 text-white text-center">
-                    <div class="card-body bg-grey">
-                        <p>Membre :<br> <span class="role <?= strtolower(str_replace(' ', '-', $member['role_member'] ?? '')); ?>">
-                                <?= htmlspecialchars($member['role_member'] ?? ''); ?>
-                            </span></p>
-                            <p><strong>Spécialités :</strong><br>
+                <div class="card-body bg-grey">
+                        <p>Rôle :<br>
+                            <span class="<?= isset($member['role_member_class']) ? htmlspecialchars($member['role_member_class']) : ''; ?>">
+                                <?= isset($member['role_member_name']) ? htmlspecialchars($member['role_member_name']) : ''; ?>
+                            </span>
+                        </p>
+                        <p><strong>Spécialités :</strong><br>
                             <?php if (!empty($member['jobs'])) : ?>
                         <ul class="list-unstyled">
                             <?php foreach ($member['jobs'] as $job_title) : ?>
-                                <li><?= htmlspecialchars($job_title); ?></li>
+                                <li class="fs-7"><?= htmlspecialchars($job_title); ?></li>
                             <?php endforeach; ?>
                         </ul>
                     <?php else : ?>
@@ -35,12 +37,13 @@
                         <?php if ($hasGames) : ?>
                             <?php foreach ($games as $game) : ?>
                     <ul class="list-unstyled">
-                        <li class="text-white"><?= htmlspecialchars($game['title']); ?></li>
+                        <li class="text-white fs-7"><?= htmlspecialchars($game['title']); ?></li>
                     </ul>
                 <?php endforeach; ?>
             <?php else : ?>
                 <p class="text-white">Ce membre n'a aucun jeu pour le moment.</p>
             <?php endif; ?>
+            </p>
                     </div>
                 </div>
                 <div class="col-md-3 text-center">

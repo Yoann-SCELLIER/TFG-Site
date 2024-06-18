@@ -45,7 +45,7 @@
                     <hr class="border border-white"><br>
                     <div class="row col-6">
                         <?php foreach ($games as $game) : ?>
-                            <div class="form-check text-start">
+                            <div class="form-check text-start border boder-2 border-black">
                                 <label class="form-check-label" for="game<?= $game['game_id'] ?>">
                                     <?= $game['title'] ?>
                                 </label>

@@ -17,11 +17,11 @@
                 </div>
                 <div class="col-md-2 text-white text-center">
                     <div class="card-body bg-grey">
-                    <p>Rôle :<br>
-        <span class="<?= isset($member['role_member_class']) ? htmlspecialchars($member['role_member_class']) : ''; ?>">
-            <?= isset($member['role_member_name']) ? htmlspecialchars($member['role_member_name']) : ''; ?>
-        </span>
-    </p>
+                        <p>Rôle :<br>
+                            <span class="<?= isset($member['role_member_class']) ? htmlspecialchars($member['role_member_class']) : ''; ?>">
+                                <?= isset($member['role_member_name']) ? htmlspecialchars($member['role_member_name']) : ''; ?>
+                            </span>
+                        </p>
                         <p><strong>Spécialités :</strong><br>
                             <?php if (!empty($member['jobs'])) : ?>
                         <ul class="list-unstyled">
@@ -65,7 +65,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> 
 <?php else : ?>
     <p>Le membre n'existe pas ou l'ID du membre n'a pas été spécifié.</p>
     <a href="\TFG\index.php">Retour à la liste</a>
