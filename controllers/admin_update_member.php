@@ -46,6 +46,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $jobs_selected = isset($_POST['jobs']) ? $_POST['jobs'] : [];
         $games_selected = isset($_POST['games']) ? $_POST['games'] : [];
 
+        // Vérification du rôle pour la redirection
+        if ($role_id == 'officiel' || $role_id == 'invite') {
+            // Redirection vers actualite.php pour les officiels et invités
+            header('Location: /TFG/actualite.php');
+            exit();
+        }
+
         // Mise à jour des détails du membre
         updateMember($bdd, $member_id, $cover, $username, $email, $content, $role_id, $departement_id);
 
@@ -63,3 +70,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Erreur lors de la mise à jour du membre : " . $e->getMessage();
     }
 }
+?>

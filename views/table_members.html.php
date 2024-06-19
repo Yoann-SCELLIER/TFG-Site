@@ -30,7 +30,7 @@
                         <td class="m-0 b-0 p-0 g-0"><?php echo htmlspecialchars($member['last_name']); ?></td>
                         <td class="m-0 b-0 p-0 g-0"><?php echo htmlspecialchars($member['email']); ?></td>
                         <td class="m-0 b-0 pe-2 px-2 g-0">
-                            <form action="/TFG/controllers/update_member.php?id=<?php echo $member['member_id']; ?>" method="post" class="d-flex flex-column align-items-center">
+                            <form action="/TFG/controllers/admin_update_member.php?id=<?php echo $member['member_id']; ?>" method="post" class="d-flex flex-column align-items-center">
                                 <input type="hidden" name="member_id" value="<?php echo htmlspecialchars($member['member_id']); ?>">
                                 <select name="role_id" class="form-control text-center border border-1 border-black mb-2 w-auto">
                                     <?php if (isset($roles) && !empty($roles)) : ?>

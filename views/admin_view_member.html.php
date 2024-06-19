@@ -6,7 +6,8 @@
         <div class="card border border-3">
             <div class="row g-0">
                 <div class="col-md-3 text-center">
-                    <img src="<?= htmlspecialchars($member['cover']); ?>" class="img-fluid rounded-start" alt="Image de <?= htmlspecialchars($member['username']); ?>">
+                    <img src="<?= htmlspecialchars($member['cover']); ?>" class="img-fluid rounded-start" 
+                    alt="Image de <?= htmlspecialchars($member['username']); ?>">
                 </div>
                 <div class="col-md-7">
                     <div class="card-body">
