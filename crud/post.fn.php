@@ -78,7 +78,7 @@ function getPostById($bdd, $id)
 function updatePost($bdd, $id, $title, $content, $image_url, $member_id)
 {
     try {
-        $sql = "UPDATE post SET title = :title, content = :content, image_url = :image_url WHERE post_id = :id AND member_id = :member_id";
+        $sql = "UPDATE post SET title = :title, content = :content, image_url = :image_url, modif_at = NOW() WHERE post_id = :id AND member_id = :member_id";
         $stmt = $bdd->prepare($sql);
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':content', $content);
@@ -90,7 +90,6 @@ function updatePost($bdd, $id, $title, $content, $image_url, $member_id)
         exit("Erreur lors de la mise à jour du post : " . $e->getMessage());
     }
 }
-
 
 function getAllPosts($bdd)
 {
