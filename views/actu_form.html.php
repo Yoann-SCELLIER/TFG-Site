@@ -9,7 +9,7 @@ if (isset($_SESSION['member_id'])) {
 }
 ?> 
 
-<div class="container text-center">
+<div class="container text-center"> 
     <div class="row align-items-center p-5">
         <div class="col m-2 p-0 g-0 border border-1 p-5 bg-grey border border-4 border-danger">
             <h1 id="formTitle" class="text-white"><?= isset($post) ? 'Modifier l\'actualité' : 'Ajouter une actualité' ?></h1>

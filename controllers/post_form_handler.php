@@ -1,30 +1,41 @@
 <?php
+// Inclure le fichier des fonctions CRUD pour les posts
 require_once dirname(__DIR__) . '/crud/post.fn.php';
 
 // Vérifier si un post_id est présent dans $_GET
 $id = isset($_GET['post_id']) ? $_GET['post_id'] : null;
 
+// Démarrer la session si ce n'est pas déjà fait
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+// Vérifier si $member_id est défini dans la session
+if (isset($_SESSION['member_id'])) {
+    $member_id = $_SESSION['member_id'];
+} else {
+    // Gérer le cas où $member_id n'est pas défini
+    exit("Erreur : utilisateur non authentifié");
+}
+
 // Si le formulaire est soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer les données du formulaire
-    $titre = isset($_POST['title']) ? $_POST['title'] : '';
-    $contenu = isset($_POST['content']) ? $_POST['content'] : '';
+    $title = isset($_POST['title']) ? $_POST['title'] : '';
+    $content = isset($_POST['content']) ? $_POST['content'] : '';
     $image_url = isset($_POST['image_url']) ? $_POST['image_url'] : '';
 
-    // Vérifier si aucun URL d'image n'est spécifié, utiliser l'image par défaut
+    // Utiliser l'image par défaut si aucune URL n'est spécifiée
     if (empty($image_url)) {
-        $image_url = 'assets/images/TFACTU.png'; // Chemin de l'image par défaut
+        $image_url = 'assets/images/TFACTU.png';
     }
-
-    $member_id = isset($_POST['member_id']) ? $_POST['member_id'] : '';
 
     // Si un post_id est présent, c'est une modification
     if ($id) {
-        // Appeler la fonction pour mettre à jour le post dans la base de données
-        updatePost($bdd, $id, $titre, $contenu, $image_url, $member_id);
+        updatePost($bdd, $id, $title, $content, $image_url, $member_id);
     } else {
         // Sinon, c'est un ajout
-        addPost($bdd, $titre, $contenu, $image_url, $member_id);
+        addPost($bdd, $title, $content, $image_url, $member_id);
     }
 
     // Rediriger vers la page d'actualités après le traitement
@@ -34,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Si un post_id est présent, récupérer les informations du post à modifier
 if ($id) {
-    // Récupérer les informations du post à modifier
     $post = getPostById($bdd, $id);
 }
 ?>

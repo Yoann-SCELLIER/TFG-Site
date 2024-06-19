@@ -3,8 +3,8 @@
 require_once dirname(__DIR__) . '\TFG\components\header.html.php';
 
 require_once dirname(__DIR__) . '\tfg\controllers\controller_nav.php';
-
-require_once dirname(__DIR__) . '\TFG\controllers\views_actu.php';  
+ 
+require_once dirname(__DIR__) . '\TFG\controllers\view_actu.php';  
 
 require_once dirname(__DIR__) . '\TFG\views\actu_reade.html.php'; 
 

@@ -7,8 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id = $_POST['id'];
         
         // Appelle la fonction pour supprimer le post avec l'ID spécifié
-        deletePost($bdd, $id);
-
+        deletePost($bdd, $id, $member_id);
+        
         // Redirige vers la page d'actualités après la suppression du post
         header('Location: /tfg/actualite.php');
         exit;

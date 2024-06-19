@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $image_url = $_POST['image_url'];
 
     // Mettre à jour le post dans la base de données
-    updatePost($bdd, $id, $titre, $contenu, $image_url);
+    updatePost($bdd, $id, $title, $content, $image_url, $member_id);
 
     // Rediriger vers la page d'actualité après la mise à jour
     header('Location: /TFG/actualite.php');
