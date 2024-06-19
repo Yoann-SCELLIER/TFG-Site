@@ -7,7 +7,7 @@ require_once dirname(__DIR__) . '\controllers\controller_nav.php';
 
 require_once dirname(__DIR__) . '\controllers\admin_form_post.php'; 
  
-require_once dirname(__DIR__) . '/controllers/views_actu.php';
+require_once dirname(__DIR__) . '/controllers/view_actu.php';
 
 require_once dirname(__DIR__) . '\views\admin_formu_actu.html.php'; 
 

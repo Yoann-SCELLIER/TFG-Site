@@ -78,18 +78,31 @@ function getPostById($bdd, $id)
 function updatePost($bdd, $id, $title, $content, $image_url, $member_id)
 {
     try {
-        $sql = "UPDATE post SET title = :title, content = :content, image_url = :image_url, modif_at = NOW() WHERE post_id = :id AND member_id = :member_id";
+        $sql = "UPDATE post SET title = :title, content = :content, image_url = :image_url WHERE post_id = :id";
+        
+        // Si l'utilisateur n'est pas administrateur, restreindre à son member_id
+        if (isset($_SESSION['is_admin']) && !$_SESSION['is_admin']) {
+            $sql .= " AND member_id = :member_id";
+        }
+
         $stmt = $bdd->prepare($sql);
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':content', $content);
         $stmt->bindParam(':image_url', $image_url);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->bindParam(':member_id', $member_id, PDO::PARAM_INT);
+
+        // Si l'utilisateur n'est pas administrateur, binder son member_id
+        if (isset($_SESSION['is_admin']) && !$_SESSION['is_admin']) {
+            $stmt->bindParam(':member_id', $member_id, PDO::PARAM_INT);
+        }
+
         $stmt->execute();
     } catch (PDOException $e) {
         exit("Erreur lors de la mise à jour du post : " . $e->getMessage());
     }
 }
+
+
 
 function getAllPosts($bdd)
 {
