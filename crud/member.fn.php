@@ -2,32 +2,34 @@
 // Inclure le fichier de configuration de la base de données
 require_once dirname(__DIR__) . '/controller/db.fn.php';
 
-// Fonction pour ajouter un membre à la base de données
+// Fonction pour ajouter un membre avec mot de passe hashé
 function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover) 
 {
     try {
-        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-        $role_id = 2; // Exemple de rôle par défaut
-
-        $sql = "INSERT INTO member (username, first_name, last_name, email, password, departement_id, cover, role_id) 
-                VALUES (:username, :first_name, :last_name, :email, :password, :departement_id, :cover, :role_id)";
+        // Chemin de l'image par défaut
+        $default_cover = '/tfg/assets/images/Default_esports_player_silhouette_face_not_visible_light_in_th_2.jpg';
+        
+        // Requête SQL pour insérer le nouveau membre avec le mot de passe hashé
+        $sql = "INSERT INTO member (username, first_name, last_name, email, password, departement_id, cover) 
+                VALUES (:username, :first_name, :last_name, :email, :password, :departement_id, :cover)";
         $stmt = $bdd->prepare($sql);
-
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':first_name', $first_name);
-        $stmt->bindParam(':last_name', $last_name);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $hashed_password);
-        $stmt->bindParam(':departement_id', $departement_id, PDO::PARAM_INT);
-        $stmt->bindParam(':cover', $cover);
-        $stmt->bindParam(':role_id', $role_id, PDO::PARAM_INT);
-
-        return $stmt->execute();
+        $stmt->execute([
+            'username' => $username,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'email' => $email,
+            'password' => $password, // Utilisation du mot de passe hashé provenant du contrôleur
+            'departement_id' => $departement_id,
+            'cover' => $cover ? $cover : $default_cover // Utilisation de l'image de profil spécifiée ou par défaut
+        ]);
+        
+        return true; // Retourne true si l'insertion s'est bien déroulée
     } catch (PDOException $e) {
-        exit("Erreur lors de l'ajout du membre : " . $e->getMessage());
+        // En cas d'erreur PDO, enregistrez l'erreur dans les logs
+        error_log("Erreur lors de l'inscription : " . $e->getMessage());
+        return false; // Retourne false en cas d'erreur
     }
 }
-
 
 // Fonction pour vérifier si un nom d'utilisateur est déjà pris
 function isUsernameTaken($bdd, $username)
@@ -57,10 +59,11 @@ function isEmailTaken($bdd, $email)
     }
 }
 
-// Fonction pour connecter un utilisateur en vérifiant ses informations d'identification
-function connexion($bdd, $email, $password)
+// Fonction pour vérifier les informations d'identification et retourner le membre si elles correspondent
+function connexion($bdd, $email, $password) 
 {
     try {
+        // Sélectionner l'utilisateur depuis la base de données
         $sql = "SELECT member.*, role.* 
                 FROM member 
                 JOIN role ON member.role_id = role.id 
@@ -68,13 +71,29 @@ function connexion($bdd, $email, $password)
         $stmt = $bdd->prepare($sql);
         $stmt->execute(['email' => $email]);
         $member = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($member && password_verify($password, $member['password'])) {
-            return $member;
+        
+        if ($member) {
+            // Récupération du mot de passe hashé depuis la base de données
+            $hashed_password = $member['password'];
+            
+            // Vérification du mot de passe avec password_verify
+            if (password_verify($password, $hashed_password)) {
+                // Mot de passe correct : retourne les informations du membre
+                return $member;
+            } else {
+                // var_dump($member);
+                // die;
+                // Mot de passe incorrect
+                return false;
+            }
         } else {
+            // Aucun membre correspondant trouvé avec cet email
             return false;
         }
     } catch (PDOException $e) {
-        exit("Erreur lors de la connexion : " . $e->getMessage());
+        // Gestion des erreurs PDO
+        error_log("Erreur lors de la connexion : " . $e->getMessage());
+        return false;
     }
 }
 
@@ -93,13 +112,10 @@ function check_role($required_role)
 
 function check_multiple_roles($roles) 
 {
-    if (!isset($_SESSION['member_id']) || !isset($_SESSION['role_member'])) {
-        header('Location: /TFG/log.php');
-        exit();
-    }
-
     if (!in_array($_SESSION['role_member'], $roles)) {
-        header('Location: /TFG/index.php');
+        session_unset();
+        session_destroy();
+        header("Location: /TFG/log.php");
         exit();
     }
 }
@@ -142,25 +158,28 @@ function getMemberById($bdd, $member_id)
 
         $member = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Récupérer les titres des emplois
-        $sqlJobs = "
-            SELECT j.title 
-            FROM job j
-            JOIN member_job mj ON j.job_id = mj.job_id
-            WHERE mj.member_id = :member_id
-        ";
-        $stmtJobs = $bdd->prepare($sqlJobs);
-        $stmtJobs->bindParam(':member_id', $member_id, PDO::PARAM_INT);
-        $stmtJobs->execute();
-        $jobs = $stmtJobs->fetchAll(PDO::FETCH_COLUMN);
+        if ($member) {
+            // Récupérer les titres des emplois
+            $sqlJobs = "
+                SELECT j.title 
+                FROM job j
+                JOIN member_job mj ON j.job_id = mj.job_id
+                WHERE mj.member_id = :member_id
+            ";
+            $stmtJobs = $bdd->prepare($sqlJobs);
+            $stmtJobs->bindParam(':member_id', $member_id, PDO::PARAM_INT);
+            $stmtJobs->execute();
+            $jobs = $stmtJobs->fetchAll(PDO::FETCH_COLUMN);
 
-        $member['jobs'] = $jobs;
+            $member['jobs'] = $jobs;
+        }
 
         return $member;
     } catch (PDOException $e) {
         exit("Erreur lors de la récupération du membre : " . $e->getMessage());
     }
 }
+
 
 // Fonction pour ajouter un emploi à un membre
 function getMemberJobs(PDO $bdd, int $member_id): array 

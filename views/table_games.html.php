@@ -6,7 +6,6 @@
                 <tr>
                     <th>ID</th>
                     <th>Nom</th>
-                    <th>image</th>
                     <th>Image URL</th>
                     <th class="text-center">Actions</th>
                 </tr>
@@ -16,13 +15,6 @@
                 <tr>
                     <td><?php echo htmlspecialchars($game['game_id']); ?></td>
                     <td><?php echo htmlspecialchars($game['title']); ?></td>
-                    <td>
-                        <?php if (!empty($game['cover'])) : ?>
-                            <img src="<?php echo htmlspecialchars($game['cover']); ?>" alt="image du jeu" width="100" height="auto">
-                        <?php else : ?>
-                            Aucune image
-                        <?php endif; ?>
-                    </td>
                     <td>
                         <?php if (!empty($game['image_url'])) : ?>
                             <img src="<?php echo htmlspecialchars($game['image_url']); ?>" alt="Image URL du jeu" width="100" height="auto">
