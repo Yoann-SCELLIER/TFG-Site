@@ -18,7 +18,6 @@ function addPost($bdd, $title, $content, $image_url, $member_id)
     }
 }
 
- 
 // Fonction pour afficher tous les posts
 function viewsPost($bdd) 
 {
@@ -43,19 +42,37 @@ function viewsPost($bdd)
 }
 
 // Fonction pour supprimer un post de la base de données en utilisant son ID
-function deletePost($bdd, $id, $member_id)
+function deletePost($bdd, $post_id, $member_id, $role_member)
 {
     try {
-        $sql = "DELETE FROM post WHERE post_id = :id AND member_id = :member_id";
-        $stmt = $bdd->prepare($sql);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->bindParam(':member_id', $member_id, PDO::PARAM_INT);
+        // Vérifier si l'utilisateur est administrateur ou propriétaire du post
+        $sql = "";
+        if ($role_member === 'memberAdmin') {
+            // Administrateur : supprime sans vérifier le propriétaire
+            $sql = "DELETE FROM post WHERE post_id = :post_id";
+            $stmt = $bdd->prepare($sql); 
+            $stmt->bindParam(':post_id', $post_id, PDO::PARAM_INT);
+        } else {
+            // Vérifier si le post appartient à ce membre
+            $sql = "DELETE FROM post WHERE post_id = :post_id AND member_id = :member_id";
+            $stmt = $bdd->prepare($sql);
+            $stmt->bindParam(':post_id', $post_id, PDO::PARAM_INT);
+            $stmt->bindParam(':member_id', $member_id, PDO::PARAM_INT);
+        }
+
         $stmt->execute();
+
+        // Vérifier si des lignes ont été affectées (post supprimé)
+        if ($stmt->rowCount() > 0) {
+            return true; // Suppression réussie
+        } else {
+            return false; // Aucune ligne n'a été supprimée (conditions non remplies)
+        }
     } catch (PDOException $e) {
-        exit("Erreur lors de la suppression du post : " . $e->getMessage());
+        error_log("Erreur SQL lors de la suppression du post : " . $e->getMessage());
+        exit("Erreur SQL lors de la suppression du post : " . $e->getMessage());
     }
 }
-
 
 // Fonction pour récupérer les informations d'un post spécifique en utilisant son ID
 function getPostById($bdd, $id)
@@ -101,8 +118,6 @@ function updatePost($bdd, $id, $title, $content, $image_url, $member_id)
         exit("Erreur lors de la mise à jour du post : " . $e->getMessage());
     }
 }
-
-
 
 function getAllPosts($bdd)
 {

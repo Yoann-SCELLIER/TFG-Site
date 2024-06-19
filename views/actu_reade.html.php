@@ -22,7 +22,7 @@
                         <div class="d-flex align-items-center justify-content-center text-center">
                             <!-- Inclure le contrôleur pour les boutons -->
                             <?php
-                            $_GET['post_id'] = $id; // Assurez-vous que $id est défini correctement
+                            $_GET['post_id'] = $post['post_id']; // Assurez-vous que $post['post_id'] est défini correctement
                             include dirname(__DIR__) . '/controllers/controller_button_card_actu.php';
                             ?>
                             <!-- Bouton de retour -->

@@ -1,11 +1,11 @@
 <?php
-// Récupération de l'ID pour la visualisation de l'article ciblé
+// Récupération de l'ID pour la visualisation du post ciblé
 $id = $_GET['id'];
 
-// Récupération des détails de l'article avec l'ID spécifié
+// Récupération des détails du post avec l'ID spécifié
 $post = getPostById($bdd, $id);
 
-// Vérifier si l'article existe
+// Vérifier si le post existe
 if ($post) {
 ?>
 
@@ -42,8 +42,8 @@ if ($post) {
                 </div>
                 <?php if ($id) : ?>
                     <div aria-label="Actions" class="text-center m-3">
-                        <form action="/TFG/controllers/delete_post.php" method="post" style="display: inline;">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
+                        <form action="/TFG/controllers/delete_post.php" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');">
+                            <input type="hidden" name="post_id" value="<?= htmlspecialchars($post['post_id']) ?>">
                             <button type="submit" class="btn btn-danger">Supprimer l'article</button>
                         </form>
                     </div>
@@ -57,7 +57,7 @@ if ($post) {
 
 <?php
 } else {
-    // Afficher un message si l'article n'existe pas
-    echo "L'article demandé n'existe pas.";
+    // Afficher un message si le post n'existe pas
+    echo "Le post demandé n'existe pas.";
 }
 ?>

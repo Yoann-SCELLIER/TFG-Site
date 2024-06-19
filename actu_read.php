@@ -12,6 +12,6 @@ require_once dirname(__DIR__) . '\TFG\controllers\controller_button_card_actu.ph
 
 require_once dirname(__DIR__) . '\TFG\views\formulaire.html.php';
 
-require_once dirname(__DIR__) . '\TFG\views\condition.html.php'; // Place conditions before footer
+require_once dirname(__DIR__) . '\TFG\views\condition.html.php';
 
 require_once dirname(__DIR__) . '\TFG\components\footer.html.php';

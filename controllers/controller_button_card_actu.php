@@ -8,7 +8,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 // Vérifier si l'utilisateur est connecté
-if (isset($_SESSION['member_id'])) {
+if (isset($_SESSION['member_id'])) { 
     $current_member_id = $_SESSION['member_id'];
 
     // Vérifier si l'ID du post est passé en paramètre

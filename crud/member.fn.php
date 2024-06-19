@@ -180,7 +180,6 @@ function getMemberById($bdd, $member_id)
     }
 }
 
-
 // Fonction pour ajouter un emploi à un membre
 function getMemberJobs(PDO $bdd, int $member_id): array 
 {
