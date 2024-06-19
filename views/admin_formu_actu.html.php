@@ -6,15 +6,18 @@
 
                 <div class="mb-3">
                     <label for="title" class="form-label">Titre :</label><br>
-                    <input type="text" name="title" class="form-control border border-2 border-dark" id="title" aria-describedby="titre" value="<?= isset($post['title']) ? htmlspecialchars($post['title']) : '' ?>" required><br>
+                    <input type="text" name="title" class="form-control border border-2 border-dark" 
+                    id="title" aria-describedby="titre" value="<?= isset($post['title']) ? htmlspecialchars($post['title']) : '' ?>" required><br>
                 </div>
                 <div class="mb-3">
                     <label for="content" class="form-label">Contenu :</label><br>
-                    <textarea name="content" class="form-control border border-2 border-dark" id="content" rows="6" required><?= isset($post['content']) ? htmlspecialchars($post['content']) : '' ?></textarea><br>
+                    <textarea name="content" class="form-control border border-2 border-dark" 
+                    id="content" rows="6" required><?= isset($post['content']) ? htmlspecialchars($post['content']) : '' ?></textarea><br>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="image_url">URL de l'image :</label><br>
-                    <input type="text" class="form-control border border-2 border-dark" id="image_url" name="image_url" value="<?= isset($post['image_url']) ? htmlspecialchars($post['image_url']) : '' ?>"><br>
+                    <input type="text" class="form-control border border-2 border-dark" 
+                    id="image_url" name="image_url" value="<?= isset($post['image_url']) ? htmlspecialchars($post['image_url']) : '' ?>"><br>
                 </div>
 
                 <!-- Champ caché pour conserver post_id -->
