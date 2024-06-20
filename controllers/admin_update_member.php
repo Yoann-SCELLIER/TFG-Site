@@ -1,4 +1,5 @@
 <?php
+// Inclusion des fichiers contenant les fonctions CRUD pour les membres et les jeux/consoles, situés dans le répertoire "crud" du répertoire parent.
 require_once dirname(__DIR__) . '/crud/member.fn.php';
 require_once dirname(__DIR__) . '/crud/game_console.fn.php';
 
@@ -15,7 +16,7 @@ $member = getMemberById($bdd, $member_id);
 
 // Vérification si le membre existe
 if ($member === null) {
-    exit("Membre non trouvé."); 
+    exit("Membre non trouvé.");
 }
 
 // Récupération des jobs disponibles
@@ -33,10 +34,10 @@ $selected_games = getMemberGames($bdd, $member_id);
 // Récupération des jobs sélectionnés pour le membre
 $jobs_selected = getMemberJobs($bdd, $member_id);
 
-// Vérifie si la méthode de requête est POST
+// Vérifie si la méthode de requête est POST (c'est-à-dire si le formulaire a été soumis)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-        // Récupère les données soumises par le formulaire
+        // Récupère les données soumises par le formulaire ou utilise les valeurs actuelles du membre si elles ne sont pas fournies
         $cover = $_POST['cover'] ?? $member['cover'] ?? '';
         $username = $_POST['username'] ?? $member['username'] ?? '';
         $email = $_POST['email'] ?? $member['email'] ?? '';

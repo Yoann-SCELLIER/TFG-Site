@@ -1,7 +1,8 @@
 <?php
+// Inclusion du fichier contenant les fonctions CRUD pour les posts, situé dans le répertoire "crud" du répertoire parent.
 require_once dirname(__DIR__) . '/crud/post.fn.php';
 
-// Vérifier si un ID est présent dans l'URL
+// Vérifier si un ID de post est présent dans l'URL
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 
 // Si le formulaire est soumis
@@ -36,3 +37,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if ($id) {
     $post = getPostById($bdd, $id);
 }
+?>

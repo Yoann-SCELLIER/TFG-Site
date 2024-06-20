@@ -13,8 +13,8 @@ if (!$id) {
 // Si le formulaire est soumis en méthode POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer les données du formulaire
-    $titre = $_POST['title'];
-    $contenu = $_POST['content'];
+    $title = $_POST['title'];
+    $content = $_POST['content'];
     $image_url = $_POST['image_url'];
 
     // Mettre à jour le post dans la base de données

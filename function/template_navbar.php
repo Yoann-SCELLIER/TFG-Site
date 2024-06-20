@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Affiche la barre de navigation pour les membres connectés.
+ */
 function navMemberOfficial()
 {
     $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'utilisateur';
@@ -40,9 +43,12 @@ function navMemberOfficial()
             </div>
         </div>
     </nav>
-<?php
+    <?php
 }
 
+/**
+ * Affiche la barre de navigation pour les visiteurs non connectés.
+ */
 function navMemberGuest()
 {
     $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'utilisateur';
@@ -57,7 +63,7 @@ function navMemberGuest()
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                <div class="d-flex align-items-center me-5">
+                    <div class="d-flex align-items-center me-5">
                         <li class="nav-item"><a class="nav-link text-white" href="index.php">ACCUEIL</a></li>
                         <li class="nav-item"><a class="nav-link active text-white" aria-current="page" href="index.php#storySection">STORY</a></li>
                         <li class="nav-item"><a class="nav-link text-white" href="index.php#staffSection">STAFF</a></li>
@@ -83,9 +89,12 @@ function navMemberGuest()
             </div>
         </div>
     </nav>
-<?php
+    <?php
 }
 
+/**
+ * Affiche la barre de navigation pour les visiteurs non connectés.
+ */
 function navVisitor()
 {
     ?>
@@ -110,9 +119,12 @@ function navVisitor()
             </div>
         </div>
     </nav>
-<?php
+    <?php
 }
 
+/**
+ * Affiche la barre de navigation pour les administrateurs connectés.
+ */
 function navMemberAdmin()
 {
     $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'utilisateur';
@@ -120,7 +132,7 @@ function navMemberAdmin()
     <header>
         <nav class="navbar navbar-expand-lg bg-success">
             <div class="container-fluid">
-                <a class="navbar-brand m-0 p-0 b-0 g-0" href="/TFG/admin/dashboard.php"> <!-- Chemin absolu pour index.php -->
+                <a class="navbar-brand m-0 p-0 b-0 g-0" href="/TFG/admin/dashboard.php">
                     <img src="/TFG/assets/images/logoV1.gif" alt="Logo" width="80" height="auto" class="d-inline-block align-text-top">
                 </a>
                 <button class="navbar-toggler navbar-dark border-2" type="button" data-bs-theme="dark" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -135,13 +147,13 @@ function navMemberAdmin()
                     <ul class="navbar-nav fw-bold">
                         <div class="d-flex align-items-center me-5">
                             <li class="nav-item">
-                                <a class="nav-link" href="/TFG/admin/dashboard.php">MEMBRE ET STAFF</a> <!-- Chemin absolu pour actualite.php -->
+                                <a class="nav-link" href="/TFG/admin/dashboard.php">MEMBRE ET STAFF</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/TFG/admin/admin_view_list_game.php">GAME</a> <!-- Chemin absolu pour actualite.php -->
+                                <a class="nav-link" href="/TFG/admin/admin_view_list_game.php">GAME</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/TFG/admin/admin_view_list_actu.php">ACTUALITÉ</a> <!-- Chemin absolu pour actualite.php -->
+                                <a class="nav-link" href="/TFG/admin/admin_view_list_actu.php">ACTUALITÉ</a>
                             </li>
                         </div>
                         <div class="nav-item text-center">
@@ -167,6 +179,7 @@ function navMemberAdmin()
     <!-- Contenu principal -->
     <main>
         <div>
+    <?php
+}
 
-        <?php
-    }
+?>

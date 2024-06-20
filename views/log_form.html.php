@@ -1,6 +1,6 @@
 <!-- FORMULAIRE INSCRIPTION -->
 <div class="row row-cols-1 row-cols-xs-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 m-5 g-4 d-flex row justify-content-around text-center">
-<div class="card m-2 bg-grey border border-4 border-danger">
+    <div class="card m-2 bg-grey border border-4 border-danger">
         <h2 class="text-white mt-2">Inscription</h2>
         <form action="/TFG/controllers/ajout_member.php" method="post" enctype="multipart/form-data" class="m-3">
             <label for="username" class="form-label text-white">Nom d'utilisateur :</label><br>
@@ -44,11 +44,12 @@
                 <button type="submit" class="mt-3 btn btn-success">Se connecter</button>
             </form>
         </div>
+    </div>
 
-
+    <!-- SECTION D'INSCRIPTION -->
     <section class="m-2"><br>
         <h5>Inscription à True Fighters Gaming</h5>
-        <p>Rejoignez True Fighters Gaming, la communauté <br>ultime pour les passionnés de jeux vidéo!<br>
+        <p>Rejoignez True Fighters Gaming, la communauté ultime pour les passionnés de jeux vidéo!<br>
             Notre association est dédiée à rassembler les joueurs de tous horizons pour partager des expériences,<br>
             participer à des tournois et développer des compétences de jeu dans un environnement convivial et compétitif.<br>
             <br>
@@ -56,8 +57,9 @@
             L'inscription à True Fighters Gaming est simple et rapide. Suivez ces étapes pour rejoindre notre communauté <span class="text-danger">*</span>
         </p>
     </section>
+    
+    <!-- MESSAGE COMPLÉMENTAIRE -->
     <div>
-        <p class="fst-italic text-danger">"* Pour plus de détail dans votre profile pensez à aller le modifier !"</p>
+        <p class="fst-italic text-danger">"* Pour plus de détails dans votre profil, pensez à aller le modifier !"</p>
     </div>
-</div>
 </div>

@@ -1,5 +1,4 @@
 <!-- Contenu GAMING -->
-<!------------------------------------------------------------------------------------------------------------------------------------>
 <div class="downGamingContent" id="gamingSection">
     <div class="row row-cols-1 row-cols-md-2 text-center g-0 p-1">
         <div class="col">
@@ -7,9 +6,7 @@
         </div>
         <div class="col row align-self-center text-start m-0">
             <h1 class="fs-4">Gaming et Tournois</h1>
-            <p class="fs-6">Découvrez les différents types de jeux vidéo que vous pouvez rencontrer en tant que
-                membre
-                de la True Fighters (TF), ainsi que les tournois proposés par notre communauté.</p>
+            <p class="fs-6">Découvrez les différents types de jeux vidéo que vous pouvez rencontrer en tant que membre de la True Fighters (TF), ainsi que les tournois proposés par notre communauté.</p>
         </div>
     </div>
     <div class="text-center p-2">
@@ -37,7 +34,7 @@
             <div class="row d-flex justify-content-evenly align-self-center">
                 <?php foreach ($games as $game) : ?>
                     <div class="col-md-4 d-flex flex-column align-items-center align-self-center" style="width: 280px;">
-                        <!-- Afficher l'image du membre -->
+                        <!-- Afficher l'image du jeu -->
                         <div style="width: 60%; height: auto;">
                             <img src="<?= !empty($game['cover']) ? htmlspecialchars($game['cover']) : htmlspecialchars($game['image_url']) ?>" class="card-img-top h-auto" alt="<?= htmlspecialchars($game['title']) ?>">
                         </div>
@@ -48,7 +45,6 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
-
             </div>
         </div>
     </div>

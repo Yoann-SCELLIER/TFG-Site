@@ -18,7 +18,7 @@ if (isset($_SESSION['member_id'])) {
     exit("Erreur : utilisateur non authentifié");
 }
 
-// Si le formulaire est soumis
+// Si le formulaire est soumis en méthode POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer les données du formulaire
     $title = isset($_POST['title']) ? $_POST['title'] : '';
@@ -46,5 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Si un post_id est présent, récupérer les informations du post à modifier
 if ($id) {
     $post = getPostById($bdd, $id);
+    // Vous pouvez utiliser $post pour pré-remplir le formulaire de modification
 }
 ?>

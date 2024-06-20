@@ -1,8 +1,9 @@
 <?php
 
-require_once dirname(__DIR__) . '\crud\member.fn.php';
+// Inclusion du fichier contenant les fonctions CRUD pour les membres
+require_once dirname(__DIR__) . '/crud/member.fn.php';
 
-// Vérifie si l'ID du membre est spécifié dans les paramètres de requête ou dans les données postées
+// Vérifie si l'ID du membre est spécifié dans les données postées ou les paramètres de requête
 if (isset($_POST['member_id'])) {
     $member_id = $_POST['member_id'];
 } elseif (isset($_GET['id'])) {
@@ -11,10 +12,10 @@ if (isset($_POST['member_id'])) {
     exit("ID du membre non spécifié.");
 }
 
-// Appeler la fonction pour supprimer le membre
+// Appeler la fonction pour supprimer le membre de la base de données
 deleteMember($bdd, $member_id);
 
-// Rediriger l'utilisateur vers une page appropriée après la suppression
+// Redirection vers une page appropriée après la suppression du membre
 header('Location: /TFG/index.php');
 exit;
 ?>

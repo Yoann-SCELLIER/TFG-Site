@@ -1,34 +1,38 @@
 <?php
+// Inclusion du fichier contenant les fonctions CRUD pour les jeux et consoles, situé dans le répertoire "crud" du répertoire parent.
 require_once dirname(__DIR__) . '/crud/game_console.fn.php';
 
-// Vérifier si un ID est présent dans l'URL
+// Vérifier si un ID de jeu est présent dans l'URL
 $game_id = isset($_GET['id']) ? (int)$_GET['id'] : null;
 
+// Si la requête est de type POST, cela signifie que le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $title = $_POST['title'];
-    $content = $_POST['content'];
-    $image_url = $_POST['image_url'];
+    $title = $_POST['title']; // Titre du jeu
+    $content = $_POST['content']; // Description ou contenu du jeu
+    $image_url = $_POST['image_url']; // URL de l'image du jeu
 
     // Définir l'URL de l'image par défaut
     $default_cover_path = '/TFG/assets/images/Default_video_game_cover_logo_0.jpg';
 
-    // Utiliser l'image par défaut si aucun lien n'est ajouté
+    // Utiliser l'image par défaut si aucun lien n'est fourni
     $cover = !empty($image_url) ? $image_url : $default_cover_path;
 
     if ($game_id) {
-        // Modifier le jeu existant
+        // Si un ID de jeu est présent, modifier le jeu existant
         updateGame($bdd, $game_id, $title, $content, $cover);
+        // Rediriger l'utilisateur vers la liste des jeux après la modification
         header('Location: /TFG/admin/admin_view_list_game.php');
         exit;
     } else {
-        // Ajouter un nouveau jeu
+        // Sinon, ajouter un nouveau jeu
         addGame($bdd, $title, $content, $cover);
+        // Rediriger l'utilisateur vers la liste des jeux après l'ajout
         header('Location: /TFG/admin/admin_view_list_game.php');
         exit;
     }
 } else {
     if ($game_id) {
-        // Charger les données du jeu existant pour modification
+        // Si un ID de jeu est présent, charger les données du jeu pour modification
         $game = getGameById($bdd, $game_id);
         if ($game) {
             $title = $game['title'];
@@ -39,15 +43,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Jeu non trouvé";
             exit;
         }
-        $formTitle = "Modifier le jeu";
-        $action = "/TFG/admin/admin_form_game.php?id=$game_id";
+        $formTitle = "Modifier le jeu"; // Titre du formulaire pour la modification
+        $action = "/TFG/admin/admin_form_game.php?id=$game_id"; // Action du formulaire pour la modification
     } else {
-        // Initialiser le formulaire pour ajouter un nouveau jeu
+        // Si aucun ID de jeu n'est présent, initialiser le formulaire pour ajouter un nouveau jeu
         $title = '';
         $content = '';
         $image_url = '';
-        $formTitle = "Ajouter un jeu";
-        $action = "/TFG/admin/admin_form_game.php";
+        $formTitle = "Ajouter un jeu"; // Titre du formulaire pour l'ajout
+        $action = "/TFG/admin/admin_form_game.php"; // Action du formulaire pour l'ajout
     }
 }
 

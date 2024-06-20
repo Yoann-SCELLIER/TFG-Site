@@ -11,6 +11,7 @@
                     <br>
                     Nom de l'association : <span class="fw-bold">TF - True Fighters Gaming</span><br>
                     Pays : France<br>
+                    <br>
                     2. Objet des CGU<br>
                     <br>
                     Ces CGU définissent les conditions d'utilisation des services proposés par True Fighters Gaming sur notre site web.<br>
@@ -65,8 +66,8 @@
                         <span class="fw-bold">TF - True Fighters Gaming</span> est une association à but non lucratif dédiée à la promotion de l'esport<br> et à la création d'une communauté inclusive et passionnée.<br>
                         Nous accueillons tous les amateurs de jeux vidéo, qu'ils soient novices ou experts, pour rejoindre notre association et participer à nos activités. <br>
                         Avant de devenir membre de <span class="fw-bold">TF - True Fighters Gaming</span>, veuillez lire attentivement les conditions suivantes :<br>
-                        <br>
                     </div>
+                    <br>
                     1. Adhésion<br>
                     1.1. L'adhésion à <span class="fw-bold">TF - True Fighters Gaming</span> est ouverte à toute personne partageant notre passion pour l'esport et notre engagement <br>
                     envers le fair-play.<br>

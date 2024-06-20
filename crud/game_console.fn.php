@@ -2,7 +2,11 @@
 // Inclure le fichier de configuration de la base de données
 require_once dirname(__DIR__) . '\controller\db.fn.php';
 
-// Fonction pour récupérer la liste des consoles depuis la base de données
+/**
+ * Fonction pour récupérer la liste des consoles depuis la base de données.
+ * @param PDO $bdd Connexion PDO à la base de données.
+ * @return array Tableau associatif des consoles avec leurs détails.
+ */
 function listConsoles($bdd) 
 {
     $sqlQuery = 'SELECT * FROM console';
@@ -11,7 +15,12 @@ function listConsoles($bdd)
     return $consoles;
 }
 
-// Fonction pour récupérer les consoles sélectionnées pour un membre spécifique
+/**
+ * Fonction pour récupérer les consoles sélectionnées pour un membre spécifique.
+ * @param PDO $bdd Connexion PDO à la base de données.
+ * @param int $member_id ID du membre pour lequel récupérer les consoles.
+ * @return array Tableau associatif des consoles associées au membre.
+ */
 function getMemberConsoles($bdd, $member_id)
 {
     $sqlQuery = '
@@ -26,7 +35,16 @@ function getMemberConsoles($bdd, $member_id)
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-// Fonction pour ajouter/modifier un jeu dans la table "game"
+/**
+ * Fonction pour ajouter ou mettre à jour un jeu dans la table "game".
+ * @param PDO $bdd Connexion PDO à la base de données.
+ * @param int|null $game_id ID du jeu à mettre à jour (null pour ajouter un nouveau jeu).
+ * @param string $cover Chemin de l'image de couverture du jeu.
+ * @param string $title Titre du jeu.
+ * @param string $content Description du jeu.
+ * @param int $category_id ID de la catégorie du jeu.
+ * @return int|null ID du jeu ajouté ou modifié, null en cas d'échec.
+ */
 function addOrUpdateGame($bdd, $game_id, $cover, $title, $content, $category_id) 
 {
     try {
@@ -52,7 +70,7 @@ function addOrUpdateGame($bdd, $game_id, $cover, $title, $content, $category_id)
 
         $stmt->execute();
 
-        // Renvoyer l'ID du jeu ajouté/modifié
+        // Renvoyer l'ID du jeu ajouté ou modifié
         return $bdd->lastInsertId();
     } catch (PDOException $e) {
         // Gérer les erreurs PDO
@@ -60,6 +78,11 @@ function addOrUpdateGame($bdd, $game_id, $cover, $title, $content, $category_id)
     }
 }
 
+/**
+ * Fonction pour récupérer la liste complète des jeux depuis la table "game".
+ * @param PDO $bdd Connexion PDO à la base de données.
+ * @return array Tableau associatif des jeux avec leurs détails.
+ */
 function view_list_game($bdd) 
 {
     $sql = "SELECT * FROM game";
@@ -68,6 +91,12 @@ function view_list_game($bdd)
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+/**
+ * Fonction pour récupérer les détails d'un jeu par son ID depuis la table "game".
+ * @param PDO $bdd Connexion PDO à la base de données.
+ * @param int $id ID du jeu à récupérer.
+ * @return array|null Tableau associatif des détails du jeu s'il est trouvé, sinon null.
+ */
 function getGameById($bdd, $id) 
 {
     try {
@@ -89,6 +118,13 @@ function getGameById($bdd, $id)
     }
 }
 
+/**
+ * Fonction pour ajouter un nouveau jeu dans la table "game".
+ * @param PDO $bdd Connexion PDO à la base de données.
+ * @param string $title Titre du jeu.
+ * @param string $content Description du jeu.
+ * @param string $image_url URL de l'image associée au jeu.
+ */
 function addGame($bdd, $title, $content, $image_url) 
 {
     try {
@@ -103,6 +139,14 @@ function addGame($bdd, $title, $content, $image_url)
     }
 }
 
+/**
+ * Fonction pour mettre à jour les détails d'un jeu dans la table "game".
+ * @param PDO $bdd Connexion PDO à la base de données.
+ * @param int $id ID du jeu à mettre à jour.
+ * @param string $title Nouveau titre du jeu.
+ * @param string $content Nouvelle description du jeu.
+ * @param string $image_url Nouvelle URL de l'image associée au jeu.
+ */
 function updateGame($bdd, $id, $title, $content, $image_url) 
 {
     try {
@@ -118,6 +162,11 @@ function updateGame($bdd, $id, $title, $content, $image_url)
     }
 }
 
+/**
+ * Fonction pour supprimer un jeu de la table "game".
+ * @param PDO $bdd Connexion PDO à la base de données.
+ * @param int $id ID du jeu à supprimer.
+ */
 function deleteGame($bdd, $id) 
 {
     try {
@@ -130,6 +179,12 @@ function deleteGame($bdd, $id)
     }
 }
 
+/**
+ * Fonction pour récupérer les jeux associés à un membre spécifique.
+ * @param PDO $bdd Connexion PDO à la base de données.
+ * @param int $member_id ID du membre pour lequel récupérer les jeux.
+ * @return array Tableau associatif des jeux associés au membre.
+ */
 function getMemberGames($bdd, $member_id)
 {
     try {
@@ -148,6 +203,13 @@ function getMemberGames($bdd, $member_id)
     }
 }
 
+/**
+ * Fonction pour mettre à jour les jeux associés à un membre spécifique.
+ * @param PDO $bdd Connexion PDO à la base de données.
+ * @param int $member_id ID du membre pour lequel mettre à jour les jeux.
+ * @param array $games_selected Tableau des ID des jeux sélectionnés pour le membre.
+ * @throws Exception En cas d'erreur lors de la mise à jour des jeux du membre.
+ */
 function updateMemberGames($bdd, $member_id, $games_selected) 
 {
     try {

@@ -1,4 +1,5 @@
 <?php
+// Inclusion du fichier contenant les fonctions CRUD pour les membres, situé dans le répertoire "crud" du répertoire parent.
 require_once dirname(__DIR__) . '/crud/member.fn.php';
 
 // Vérification si les données du formulaire sont soumises via la méthode POST
@@ -34,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Hashage du mot de passe
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    // Appel de la fonction d'inscription avec le mot de passe hashé
+    // Appel de la fonction pour ajouter un membre avec le mot de passe hashé
     $result = ajouterMembre($bdd, $username, $first_name, $last_name, $email, $hashed_password, $departement_id, $cover);
 
     if ($result) {
@@ -46,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "L'inscription a échoué. Veuillez réessayer.";
     }
 } else {
-    // Si la méthode HTTP n'est pas POST, rediriger vers la page de formulaire
+    // Si la méthode HTTP n'est pas POST, rediriger vers la page de formulaire d'inscription
     header('Location: /TFG/inscription.php');
     exit();
 }

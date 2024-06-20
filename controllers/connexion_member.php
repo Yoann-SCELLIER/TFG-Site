@@ -1,8 +1,10 @@
 <?php
+// Inclusion du fichier contenant les fonctions CRUD pour les membres, situé dans le répertoire "crud" du répertoire parent.
 require_once dirname(__DIR__) . '/crud/member.fn.php';
 
 // Vérification si le formulaire est soumis via la méthode POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupération des données du formulaire
     $email = $_POST['email'];
     $password = $_POST['password'];
 

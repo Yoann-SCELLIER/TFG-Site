@@ -1,10 +1,13 @@
 <!-- Contenu STORY -->
 <!------------------------------------------------------------------------------------------------------------------------------------>
 <div class="downStoryContent" id="storySection">
+    <!-- Section principale visible -->
     <div class="row row-cols-1 row-cols-md-2 text-center g-0 p-1">
+        <!-- Image illustrative -->
         <div class="col">
             <img class="p-0 m-0 b-0 g-0" width="40%" height="auto" src="assets/images/img-story.png" alt="image pour la section story">
         </div>
+        <!-- Introduction -->
         <div class="col row align-self-center text-start m-0">
             <h1 class="fs-4">Histoire de la True Fighters Gaming</h1>
             <p class="fs-6">Découvrez l'histoire de la True Fighters Gaming (TF), ainsi que ses débuts, sa
@@ -12,17 +15,20 @@
                 l'univers du gaming et ses objectifs communs.</p>
         </div>
     </div>
+    <!-- Bouton pour voir plus -->
     <div class="text-center p-2">
-        <i class="bi bi-chevron-double-down" id="showMoreStory">VOIR PLUS...</i> <!-- BOUTTON POUR FAIRE AFFICHER LE CONTENU -->
+        <i class="bi bi-chevron-double-down" id="showMoreStory">VOIR PLUS...</i>
     </div>
 </div>
 
-<!-- CONTENU CACHÉ -->
+<!-- CONTENU CACHÉ (pour voir plus) -->
 <div id="hiddenStoryContent" class="text-center" style="display: none;">
+    <!-- Image et titre de la TF -->
     <div class="text-center align-self-center text-center">
         <img class="p-0 m-0 b-0 g-0" width="23%" height="auto" src="assets/images/img-story.png" alt="image pour la section story">
     </div>
     <h1>TF - True Fighters Gaming</h1>
+    <!-- Paragraphe détaillant l'histoire et les valeurs -->
     <p class="p-4">True Fighters Gaming (TF) est une association dynamique et inclusive, ancrée dans une passion commune pour
         les jeux vidéo.<br>
         Fondée en 2012 sur la plateforme Xbox 360, la TF a débuté sous la licence Halo.<br>
@@ -57,7 +63,8 @@
         joueurs de tous horizons dans une aventure<br>
         collective et passionnante.
     </p>
+    <!-- Bouton pour voir moins -->
     <div class="text-center p-2">
-        <i class="bi bi-chevron-double-up" id="showLessStory">VOIR MOINS...</i> <!-- BOUTON QUI CACHE LE CONTENU ET AFFICHE LA PREMIÈRE PARTIE -->
+        <i class="bi bi-chevron-double-up" id="showLessStory">VOIR MOINS...</i>
     </div>
 </div>

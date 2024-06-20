@@ -2,7 +2,19 @@
 // Inclure le fichier de configuration de la base de données
 require_once dirname(__DIR__) . '/controller/db.fn.php';
 
-// Fonction pour ajouter un membre avec mot de passe hashé
+/**
+ * Fonction pour ajouter un membre avec mot de passe hashé
+ *
+ * @param PDO $bdd Instance de connexion PDO à la base de données
+ * @param string $username Nom d'utilisateur du membre à ajouter
+ * @param string $first_name Prénom du membre à ajouter
+ * @param string $last_name Nom de famille du membre à ajouter
+ * @param string $email Adresse email du membre à ajouter
+ * @param string $password Mot de passe hashé du membre à ajouter
+ * @param int $departement_id ID du département du membre à ajouter
+ * @param string $cover Chemin vers l'image de profil du membre à ajouter
+ * @return bool Retourne true si l'insertion s'est bien déroulée, sinon false
+ */
 function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover) 
 {
     try {
@@ -31,7 +43,13 @@ function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $passwo
     }
 }
 
-// Fonction pour vérifier si un nom d'utilisateur est déjà pris
+/**
+ * Fonction pour vérifier si un nom d'utilisateur est déjà pris
+ *
+ * @param PDO $bdd Instance de connexion PDO à la base de données
+ * @param string $username Nom d'utilisateur à vérifier
+ * @return bool Retourne true si le nom d'utilisateur est déjà pris, sinon false
+ */
 function isUsernameTaken($bdd, $username)
 {
     try {
@@ -45,7 +63,13 @@ function isUsernameTaken($bdd, $username)
     }
 }
 
-// Fonction pour vérifier si une adresse e-mail est déjà prise
+/**
+ * Fonction pour vérifier si une adresse e-mail est déjà prise
+ *
+ * @param PDO $bdd Instance de connexion PDO à la base de données
+ * @param string $email Adresse email à vérifier
+ * @return bool Retourne true si l'adresse email est déjà prise, sinon false
+ */
 function isEmailTaken($bdd, $email)
 {
     try {
@@ -59,7 +83,14 @@ function isEmailTaken($bdd, $email)
     }
 }
 
-// Fonction pour vérifier les informations d'identification et retourner le membre si elles correspondent
+/**
+ * Fonction pour vérifier les informations d'identification et retourner le membre si elles correspondent
+ *
+ * @param PDO $bdd Instance de connexion PDO à la base de données
+ * @param string $email Adresse email du membre à vérifier
+ * @param string $password Mot de passe à vérifier (non hashé)
+ * @return mixed Retourne les informations du membre si les identifiants sont valides, sinon false
+ */
 function connexion($bdd, $email, $password) 
 {
     try {
@@ -81,8 +112,6 @@ function connexion($bdd, $email, $password)
                 // Mot de passe correct : retourne les informations du membre
                 return $member;
             } else {
-                // var_dump($member);
-                // die;
                 // Mot de passe incorrect
                 return false;
             }
@@ -97,6 +126,12 @@ function connexion($bdd, $email, $password)
     }
 }
 
+/**
+ * Fonction pour vérifier le rôle de l'utilisateur actuel
+ *
+ * @param string $required_role Role requis pour accéder à la fonction
+ * @return void Redirige l'utilisateur s'il n'a pas le rôle requis
+ */
 function check_role($required_role) 
 {
     if (!isset($_SESSION['member_id']) || !isset($_SESSION['role_member'])) {
@@ -110,6 +145,12 @@ function check_role($required_role)
     }
 }
 
+/**
+ * Fonction pour vérifier si l'utilisateur actuel a au moins un des rôles spécifiés
+ *
+ * @param array $roles Liste des rôles autorisés
+ * @return void Redirige l'utilisateur s'il n'a pas au moins un des rôles spécifiés
+ */
 function check_multiple_roles($roles) 
 {
     if (!in_array($_SESSION['role_member'], $roles)) {
@@ -120,7 +161,12 @@ function check_multiple_roles($roles)
     }
 }
 
-// Fonction pour afficher tous les membres
+/**
+ * Fonction pour récupérer tous les membres avec leur rôle
+ *
+ * @param PDO $bdd Instance de connexion PDO à la base de données
+ * @return array Tableau contenant tous les membres et leur rôle
+ */
 function viewMembers($bdd) 
 {
     try {
@@ -136,7 +182,13 @@ function viewMembers($bdd)
     }
 }
 
-// Fonction pour récupérer un membre par ID
+/**
+ * Fonction pour récupérer un membre spécifique par son ID, incluant ses emplois associés
+ *
+ * @param PDO $bdd Instance de connexion PDO à la base de données
+ * @param int $member_id ID du membre à récupérer
+ * @return mixed Retourne les informations du membre si trouvé, sinon exit avec un message d'erreur
+ */
 function getMemberById($bdd, $member_id)
 {
     try {
@@ -159,7 +211,7 @@ function getMemberById($bdd, $member_id)
         $member = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($member) {
-            // Récupérer les titres des emplois
+            // Récupérer les titres des emplois associés au membre
             $sqlJobs = "
                 SELECT j.title 
                 FROM job j
@@ -171,7 +223,7 @@ function getMemberById($bdd, $member_id)
             $stmtJobs->execute();
             $jobs = $stmtJobs->fetchAll(PDO::FETCH_COLUMN);
 
-            $member['jobs'] = $jobs;
+            $member['jobs'] = $jobs; // Ajouter les emplois au tableau du membre
         }
 
         return $member;
@@ -180,7 +232,13 @@ function getMemberById($bdd, $member_id)
     }
 }
 
-// Fonction pour ajouter un emploi à un membre
+/**
+ * Fonction pour récupérer les ID des emplois d'un membre spécifique
+ *
+ * @param PDO $bdd Instance de connexion PDO à la base de données
+ * @param int $member_id ID du membre pour lequel récupérer les emplois
+ * @return array Tableau contenant les ID des emplois du membre
+ */
 function getMemberJobs(PDO $bdd, int $member_id): array 
 {
     $query = "SELECT job_id FROM member_job WHERE member_id = :member_id";
@@ -189,7 +247,19 @@ function getMemberJobs(PDO $bdd, int $member_id): array
     return $stmt->fetchAll(PDO::FETCH_COLUMN);
 }
 
-// Fonction pour mettre à jour les informations d'un membre
+/**
+ * Fonction pour mettre à jour les informations d'un membre
+ *
+ * @param PDO $bdd Instance de connexion PDO à la base de données
+ * @param int $member_id ID du membre à mettre à jour
+ * @param string $cover Chemin vers la nouvelle image de profil du membre
+ * @param string $username Nouveau nom d'utilisateur du membre
+ * @param string $email Nouvelle adresse email du membre
+ * @param string $content Nouveau contenu (optionnel) associé au membre
+ * @param int $role_id Nouvel ID de rôle du membre
+ * @param int $departement_id Nouvel ID de département du membre
+ * @return bool Retourne true si la mise à jour s'est bien déroulée, sinon lance une exception avec un message d'erreur
+ */
 function updateMember($bdd, $member_id, $cover, $username, $email, $content, $role_id, $departement_id)
 {
     try {
@@ -211,7 +281,12 @@ function updateMember($bdd, $member_id, $cover, $username, $email, $content, $ro
     }
 }
 
-// Fonction pour lister tous les emplois
+/**
+ * Fonction pour lister tous les emplois disponibles
+ *
+ * @param PDO $bdd Instance de connexion PDO à la base de données
+ * @return array Tableau contenant tous les emplois disponibles
+ */
 function listJobs($bdd) 
 {
     try {
@@ -223,20 +298,31 @@ function listJobs($bdd)
     }
 }
 
-// Fonction pour supprimer un membre
+/**
+ * Fonction pour supprimer un membre de la base de données
+ *
+ * @param PDO $bdd Instance de connexion PDO à la base de données
+ * @param int $member_id ID du membre à supprimer
+ * @return bool Retourne true si la suppression s'est bien déroulée, sinon lance une exception avec un message d'erreur
+ */
 function deleteMember($bdd, $member_id) 
 {
     try {
         $sql = "DELETE FROM member WHERE member_id = ?";
         $stmt = $bdd->prepare($sql);
         $stmt->execute([$member_id]);
-        return true;
+        return true; // Retourne true si la suppression s'est bien déroulée
     } catch (PDOException $e) {
-        exit("Erreur lors de la suppression du membre : " . $e->getMessage());
+        throw new Exception("Erreur lors de la suppression du membre : " . $e->getMessage());
     }
 }
 
-// Fonction pour récupérer tous les départements
+/**
+ * Fonction pour récupérer tous les départements disponibles
+ *
+ * @param PDO $bdd Instance de connexion PDO à la base de données
+ * @return array Tableau contenant tous les départements disponibles
+ */
 function getDepartements($bdd) 
 {
     try {
@@ -253,7 +339,12 @@ function getDepartements($bdd)
     }
 }
 
-// Fonction pour récupérer tous les rôles
+/**
+ * Fonction pour récupérer tous les rôles disponibles depuis la base de données
+ *
+ * @param PDO $bdd Instance de connexion PDO à la base de données
+ * @return array Tableau contenant tous les rôles disponibles
+ */
 function getRolesFromDatabase($bdd) 
 {
     try {
@@ -266,6 +357,14 @@ function getRolesFromDatabase($bdd)
     }
 }
 
+/**
+ * Fonction pour mettre à jour les emplois d'un membre dans la base de données
+ *
+ * @param PDO $bdd Instance de connexion PDO à la base de données
+ * @param int $member_id ID du membre dont les emplois sont mis à jour
+ * @param array $jobs_selected Tableau contenant les ID des nouveaux emplois sélectionnés
+ * @return void Lance une exception en cas d'erreur lors de la mise à jour des jobs du membre
+ */
 function updateMemberJobs($bdd, $member_id, $jobs_selected) 
 {
     try {

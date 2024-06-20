@@ -1,4 +1,5 @@
 <?php
+// Inclusion du fichier contenant les fonctions CRUD pour les posts, situé dans le répertoire "crud" du répertoire parent.
 require_once dirname(__DIR__) . '/crud/post.fn.php';
 
 // Vérifie si les données sont soumises via la méthode POST

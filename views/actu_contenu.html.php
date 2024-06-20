@@ -1,4 +1,5 @@
 <div class="text-center">
+    <!-- Titre et introduction de la section Actualités -->
     <h1>ACTUALITÉS</h1>
     <p class="p-4">Bienvenue dans la section Actualités de True Fighters Gaming ! <br>
         Ici, vous trouverez les dernières informations et mises à jour sur tout ce qui se passe dans notre communauté dynamique. <br>
@@ -7,6 +8,8 @@
         True Fighters Gaming est plus qu'une association, c'est une famille passionnée par l'esport et les jeux vidéo. <br>
         Restez connectés pour ne rien rater de l'actualité brûlante de la TF - True Fighters Gaming !</p>
     <hr class="border-2">
+
+    <!-- Inclusion du contrôleur pour les boutons d'action -->
     <?php
     require_once dirname(__DIR__) . '/controllers/controller_button_actu.php';
     ?>
@@ -14,25 +17,30 @@
 
 <!-- Affichage des actualités -->
 <article class="text-center">
-    <!-- Affichage des posts -->
+    <!-- Boucle pour afficher chaque post -->
     <div class="row row-cols-1 row-cols-xs-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 m-5 g-4 d-flex justify-content-evenly">
         <?php
+        // Récupération des posts depuis la base de données
         $posts = viewsPost($bdd);
         if ($posts) {
             foreach ($posts as $post) {
         ?>
                 <div class="col">
                     <div class="card border-2 fixed-size-card">
+                        <!-- Affichage de l'image associée au post -->
                         <img src="<?php echo $post['image_url'] ?>" class="card-img-top p-1" alt="Image <?= $post['title'] ?>">
                         <div class="card-body m-0 p-0 b-0 g-0" style="height: 4rem;">
                             <hr class=" m-0 p-0 b-0 g-0">
+                            <!-- Affichage du titre et du contenu du post -->
                             <h5 class="card-title m-0 p-0 b-0 g-0"><?= htmlspecialchars($post['title']) ?></h5>
                             <p class="card-text m-0 p-0 b-0 g-0"><?= htmlspecialchars($post['content']) ?></p>
                         </div>
                         <div class="card-footer m-0 p-0 b-0 g-0">
+                            <!-- Affichage des dates de création et de modification du post -->
                             <small class="text-body-secondary m-0 p-0 b-0 g-0"><?= $post['created_at_fr'] ?></small><br>
                             <small class="text-body-secondary m-0 p-0 b-0 g-0"><?= $post['modif_at_fr'] ?></small>
                         </div>
+                        <!-- Bouton de détail du post redirigeant vers actu_read.php avec l'ID du post -->
                         <div class="btn-group" role="group" aria-label="Actions">
                             <a href="actu_read.php?id=<?= $post['post_id'] ?>" class="btn btn-warning">Détail</a>
                         </div>
@@ -41,7 +49,8 @@
         <?php
             }
         } else {
-            echo "<p>Aucune actualité disponible pour le moment.</p>";
+            // Message affiché en cas d'absence de posts
+            header('Location: /TFG/404.php');
         }
         ?>
     </div>

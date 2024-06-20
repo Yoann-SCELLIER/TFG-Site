@@ -1,5 +1,5 @@
 <?php
-// Inclusion des fichiers nécessaires
+// Inclusion du fichier contenant les fonctions CRUD pour les membres
 require_once dirname(__DIR__) . '/crud/member.fn.php';
 
 // Récupération de l'ID du membre depuis l'URL
