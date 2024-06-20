@@ -3,5 +3,5 @@
     <img src="assets\images\erreur404.png" alt="Image erreur 404" style="width: 40rem">
 
     <!-- Message indiquant une redirection automatique vers la page d'accueil -->
-    <p>Redirection automatique vers la page d'accueil dans quelques secondes...</p>
+    <p>Le bot "TF" va vous ramener à l'accueil, patience !</p>
 </article>

@@ -44,22 +44,24 @@
                 <button type="submit" class="mt-3 btn btn-success">Se connecter</button>
             </form>
         </div>
+
+        <!-- SECTION D'INSCRIPTION -->
+        <section class="m-2"><br>
+            <h5>Inscription à True Fighters Gaming</h5>
+            <p>Rejoignez True Fighters Gaming, la communauté ultime pour les passionnés de jeux vidéo!<br>
+                Notre association est dédiée à rassembler les joueurs de tous horizons pour partager des expériences,<br>
+                participer à des tournois et développer des compétences de jeu dans un environnement convivial et compétitif.<br>
+                <br>
+                Comment s'inscrire?<br>
+                L'inscription à True Fighters Gaming est simple et rapide. Suivez ces étapes pour rejoindre notre communauté <span class="text-danger">*</span>
+            </p>
+        </section>
+
+        <!-- MESSAGE COMPLÉMENTAIRE -->
+        <div>
+            <p class="fst-italic text-danger">"* Pour plus de détails dans votre profil, pensez à aller le modifier !"</p>
+        </div>
     </div>
 
-    <!-- SECTION D'INSCRIPTION -->
-    <section class="m-2"><br>
-        <h5>Inscription à True Fighters Gaming</h5>
-        <p>Rejoignez True Fighters Gaming, la communauté ultime pour les passionnés de jeux vidéo!<br>
-            Notre association est dédiée à rassembler les joueurs de tous horizons pour partager des expériences,<br>
-            participer à des tournois et développer des compétences de jeu dans un environnement convivial et compétitif.<br>
-            <br>
-            Comment s'inscrire?<br>
-            L'inscription à True Fighters Gaming est simple et rapide. Suivez ces étapes pour rejoindre notre communauté <span class="text-danger">*</span>
-        </p>
-    </section>
-    
-    <!-- MESSAGE COMPLÉMENTAIRE -->
-    <div>
-        <p class="fst-italic text-danger">"* Pour plus de détails dans votre profil, pensez à aller le modifier !"</p>
-    </div>
+
 </div>
