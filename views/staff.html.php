@@ -20,25 +20,25 @@
 </div>
 
 <!-- Section détaillée (initialement cachée) -->
-<div id="hiddenStaff" class="text-center bg-grey text-white" style="display: none;">
+<article id="hiddenStaff" class="text-center bg-grey text-white" style="display: none;">
     <!-- Illustration -->
     <div class="text-center">
         <img class="p-0 m-0 b-0 g-0" width="23%" height="auto" src="assets/images/img-member.png" alt="image pour la section membre et staff">
     </div>
     <!-- Introduction détaillée -->
-    <h1>Explorez la Galerie des Membres du Staff de la TF - True Fighters Gaming</h1>
-    <p>Dans cette section dédiée, plongez au cœur de la communauté True Fighters Gaming (TF) et découvrez les
-        visages derrière cette passionnante aventure vidéoludique.<br>
-        Chaque membre de la TF apporte sa propre touche à notre communauté dynamique, enrichissant notre expérience
-        de jeu et renforçant nos liens d'amitié.<br>
-        Parcourez nos profils pour en apprendre davantage sur nos membres, leurs passions, leurs réalisations et
-        leurs contributions à l'univers TF.<br>
-        <br>
-        Que vous soyez un joueur chevronné, un novice passionné ou simplement curieux de découvrir de nouvelles
-        personnes, vous trouverez ici une galerie<br>
-        vivante et inspirante de passionnés de jeux vidéo.<br>
-        Rejoignez-nous dans cette aventure collective et faites partie de notre famille TF dès aujourd'hui !
-    </p>
+         <h1>Explorez la Galerie des Membres du Staff de la TF - True Fighters Gaming</h1>
+         <p class="p-4">Dans cette section dédiée, plongez au cœur de la communauté True Fighters Gaming (TF) et découvrez les
+             visages derrière cette passionnante aventure vidéoludique.<br>
+             Chaque membre de la TF apporte sa propre touche à notre communauté dynamique, enrichissant notre expérience
+             de jeu et renforçant nos liens d'amitié.<br>
+             Parcourez nos profils pour en apprendre davantage sur nos membres, leurs passions, leurs réalisations et
+             leurs contributions à l'univers TF.<br>
+             <br>
+             Que vous soyez un joueur chevronné, un novice passionné ou simplement curieux de découvrir de nouvelles
+             personnes, vous trouverez ici une galerie<br>
+             vivante et inspirante de passionnés de jeux vidéo.<br>
+             Rejoignez-nous dans cette aventure collective et faites partie de notre famille TF dès aujourd'hui !
+         </p>
     <div>
         <hr class="border border-1 border-black">
     </div>
@@ -110,4 +110,4 @@
     <div class="text-center p-2">
         <i class="bi bi-chevron-double-up" id="showLessStaff">VOIR MOINS...</i>
     </div>
-</div>
+</article>

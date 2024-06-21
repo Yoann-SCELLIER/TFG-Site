@@ -5,7 +5,7 @@
             <div class="col p-5">
                 <div class="card border-2 m-5">
                     <!-- Affichage de l'image associée au post -->
-                    <img src="<?= isset($post['image_url']) ? htmlspecialchars($post['image_url']) : '' ?>" class="card-img-top p-2 align-self-center" style="width:50rem; height:auto" alt="Image <?= isset($post['title']) ? htmlspecialchars($post['title']) : '' ?>">
+                    <img src="<?= isset($post['image_url']) ? htmlspecialchars($post['image_url']) : '' ?>" class="card-img-top p-4 align-self-center" alt="Image <?= isset($post['title']) ? htmlspecialchars($post['title']) : '' ?>">
                     <div class="card-body text-center">
                         <!-- Affichage du titre du post -->
                         <h5 class="card-title fs-2"><?= isset($post['title']) ? htmlspecialchars($post['title']) : '' ?></h5>

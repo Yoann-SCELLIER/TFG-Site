@@ -22,7 +22,7 @@
 </div>
 
 <!-- CONTENU CACHÉ (pour voir plus) -->
-<div id="hiddenStoryContent" class="text-center" style="display: none;">
+<article id="hiddenStoryContent" class="text-center" style="display: none;">
     <!-- Image et titre de la TF -->
     <div class="text-center align-self-center text-center">
         <img class="p-0 m-0 b-0 g-0" width="23%" height="auto" src="assets/images/img-story.png" alt="image pour la section story">
@@ -67,4 +67,4 @@
     <div class="text-center p-2">
         <i class="bi bi-chevron-double-up" id="showLessStory">VOIR MOINS...</i>
     </div>
-</div>
+</article>

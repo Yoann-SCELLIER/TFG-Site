@@ -25,7 +25,7 @@
         if ($posts) {
             foreach ($posts as $post) {
         ?>
-                <div class="col">
+                <div class="col m-1">
                     <div class="card border-2 fixed-size-card">
                         <!-- Affichage de l'image associée au post -->
                         <img src="<?php echo $post['image_url'] ?>" class="card-img-top p-1" alt="Image <?= $post['title'] ?>">
