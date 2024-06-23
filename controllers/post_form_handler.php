@@ -20,10 +20,10 @@ if (isset($_SESSION['member_id'])) {
 
 // Si le formulaire est soumis en méthode POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Récupérer les données du formulaire
-    $title = isset($_POST['title']) ? $_POST['title'] : '';
-    $content = isset($_POST['content']) ? $_POST['content'] : '';
-    $image_url = isset($_POST['image_url']) ? $_POST['image_url'] : '';
+    // Récupérer les données du formulaire et les valider
+    $title = isset($_POST['title']) ? htmlspecialchars(trim($_POST['title'])) : '';
+    $content = isset($_POST['content']) ? htmlspecialchars(trim($_POST['content'])) : '';
+    $image_url = isset($_POST['image_url']) ? filter_var($_POST['image_url'], FILTER_VALIDATE_URL) : '';
 
     // Utiliser l'image par défaut si aucune URL n'est spécifiée
     if (empty($image_url)) {
@@ -48,4 +48,3 @@ if ($id) {
     $post = getPostById($bdd, $id);
     // Vous pouvez utiliser $post pour pré-remplir le formulaire de modification
 }
-?>

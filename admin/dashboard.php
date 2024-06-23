@@ -1,6 +1,6 @@
 <?php
 // Inclusion du header pour démarrer la structure HTML de la page
-require_once dirname(__DIR__) . '\components\header.html.php';
+require_once dirname(__DIR__) . '\components\header.html.php'; 
 
 // Vérification des droits d'administration avant de permettre l'accès au tableau de bord
 require_once dirname(__DIR__) . '\controllers\verification_admin.php';

@@ -1,13 +1,13 @@
 <?php
 session_start(); // Démarrage de la session
 
-// Inclusion du fichier de meta-descriptions
+// Inclusion du fichier de meta-descriptions (assurez-vous que le chemin est correct)
 require_once dirname(__DIR__) . '/controllers/meta_descriptions.php';
 
 // Récupération de l'URL demandée
 $requestUri = $_SERVER['REQUEST_URI'];
 
-// Suppression des paramètres de requête
+// Suppression des paramètres de requête de l'URL
 $requestPath = parse_url($requestUri, PHP_URL_PATH);
 
 // Définition de la meta-description par défaut

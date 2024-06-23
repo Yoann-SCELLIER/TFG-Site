@@ -4,9 +4,9 @@ require_once dirname(__DIR__) . '/crud/member.fn.php';
 
 // Vérification si le formulaire est soumis via la méthode POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupération des données du formulaire
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    // Récupération des données du formulaire avec filtrage
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $password = $_POST['password']; // Le mot de passe n'est pas filtré car il sera vérifié avec password_verify()
 
     // Appel de la fonction connexion pour vérifier les informations d'identification
     $member = connexion($bdd, $email, $password);
@@ -33,8 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
     } else {
-        // Redirection si la connexion échoue
-        header("Location: /TFG/log.php");
+        // Redirection si la connexion échoue avec un message d'erreur
+        header("Location: /TFG/log.php?error=1"); // Ajoutez un paramètre d'erreur pour afficher un message approprié
         exit();
     }
 } else {

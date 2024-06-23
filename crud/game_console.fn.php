@@ -16,26 +16,6 @@ function listConsoles($bdd)
 }
 
 /**
- * Fonction pour récupérer les consoles sélectionnées pour un membre spécifique.
- * @param PDO $bdd Connexion PDO à la base de données.
- * @param int $member_id ID du membre pour lequel récupérer les consoles.
- * @return array Tableau associatif des consoles associées au membre.
- */
-function getMemberConsoles($bdd, $member_id)
-{
-    $sqlQuery = '
-        SELECT console.*
-        FROM console
-        INNER JOIN member_game ON console.console_id = member_game.console_id
-        WHERE member_game.member_id = :member_id
-    ';
-    $stmt = $bdd->prepare($sqlQuery);
-    $stmt->bindValue(':member_id', $member_id, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-/**
  * Fonction pour ajouter ou mettre à jour un jeu dans la table "game".
  * @param PDO $bdd Connexion PDO à la base de données.
  * @param int|null $game_id ID du jeu à mettre à jour (null pour ajouter un nouveau jeu).
@@ -92,47 +72,42 @@ function view_list_game($bdd)
 }
 
 /**
- * Fonction pour récupérer les détails d'un jeu par son ID depuis la table "game".
+ * Fonction pour récupérer les détails d'un jeu par son ID depuis la base de données.
+ *
  * @param PDO $bdd Connexion PDO à la base de données.
  * @param int $id ID du jeu à récupérer.
- * @return array|null Tableau associatif des détails du jeu s'il est trouvé, sinon null.
+ * @return mixed Tableau associatif contenant les détails du jeu, ou null si non trouvé.
  */
-function getGameById($bdd, $id) 
+function getGameById($bdd, $id)
 {
     try {
-        // Prépare la requête SQL pour récupérer un jeu par son ID
-        $stmt = $bdd->prepare("SELECT * FROM game WHERE game_id = :id");
-        // Exécute la requête en liant le paramètre ID
+        $sql = "SELECT * FROM game WHERE game_id = :id";
+        $stmt = $bdd->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
-        
-        // Récupère le jeu sous forme de tableau associatif
-        $game = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        // Retourne le jeu s'il est trouvé, sinon null
-        return $game ? $game : null;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
-        // Gérer les erreurs potentielles
-        echo "Erreur: " . $e->getMessage();
+        echo "Erreur : " . $e->getMessage();
         return null;
     }
 }
 
 /**
  * Fonction pour ajouter un nouveau jeu dans la table "game".
+ *
  * @param PDO $bdd Connexion PDO à la base de données.
- * @param string $title Titre du jeu.
- * @param string $content Description du jeu.
- * @param string $image_url URL de l'image associée au jeu.
+ * @param string $title Titre du nouveau jeu.
+ * @param string $content Description du nouveau jeu.
+ * @param string $image_url URL de l'image associée au nouveau jeu.
  */
-function addGame($bdd, $title, $content, $image_url) 
+function addGame($bdd, $title, $content, $image_url)
 {
     try {
         $sql = "INSERT INTO game (title, content, image_url) VALUES (:title, :content, :image_url)";
         $stmt = $bdd->prepare($sql);
-        $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':content', $content);
-        $stmt->bindParam(':image_url', $image_url);
+        $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+        $stmt->bindParam(':content', $content, PDO::PARAM_STR);
+        $stmt->bindParam(':image_url', $image_url, PDO::PARAM_STR);
         $stmt->execute();
     } catch (PDOException $e) {
         echo "Erreur : " . $e->getMessage();
@@ -141,6 +116,7 @@ function addGame($bdd, $title, $content, $image_url)
 
 /**
  * Fonction pour mettre à jour les détails d'un jeu dans la table "game".
+ *
  * @param PDO $bdd Connexion PDO à la base de données.
  * @param int $id ID du jeu à mettre à jour.
  * @param string $title Nouveau titre du jeu.
@@ -153,9 +129,9 @@ function updateGame($bdd, $id, $title, $content, $image_url)
         $sql = "UPDATE game SET title = :title, content = :content, image_url = :image_url WHERE game_id = :id";
         $stmt = $bdd->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':content', $content);
-        $stmt->bindParam(':image_url', $image_url);
+        $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+        $stmt->bindParam(':content', $content, PDO::PARAM_STR);
+        $stmt->bindParam(':image_url', $image_url, PDO::PARAM_STR);
         $stmt->execute();
     } catch (PDOException $e) {
         echo "Erreur : " . $e->getMessage();
@@ -170,12 +146,25 @@ function updateGame($bdd, $id, $title, $content, $image_url)
 function deleteGame($bdd, $id) 
 {
     try {
+        // Vérifier si l'ID est un entier positif
+        if (!is_int($id) || $id <= 0) {
+            throw new InvalidArgumentException("L'ID du jeu n'est pas valide.");
+        }
+
         $sql = "DELETE FROM game WHERE game_id = :id";
         $stmt = $bdd->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
     } catch (PDOException $e) {
-        echo "Erreur : " . $e->getMessage();
+        // Enregistrer l'erreur dans le journal des erreurs
+        error_log("Erreur lors de la suppression du jeu : " . $e->getMessage());
+        // Afficher un message d'erreur générique à l'utilisateur
+        echo "Erreur lors de la suppression du jeu.";
+    } catch (InvalidArgumentException $e) {
+        // Enregistrer l'erreur dans le journal des erreurs
+        error_log("Erreur lors de la suppression du jeu : " . $e->getMessage());
+        // Afficher un message d'erreur spécifique à l'utilisateur
+        echo $e->getMessage();
     }
 }
 
@@ -204,33 +193,32 @@ function getMemberGames($bdd, $member_id)
 }
 
 /**
- * Fonction pour mettre à jour les jeux associés à un membre spécifique.
- * @param PDO $bdd Connexion PDO à la base de données.
- * @param int $member_id ID du membre pour lequel mettre à jour les jeux.
- * @param array $games_selected Tableau des ID des jeux sélectionnés pour le membre.
- * @throws Exception En cas d'erreur lors de la mise à jour des jeux du membre.
+ * Fonction pour mettre à jour les jeux sélectionnés d'un membre dans la base de données
+ *
+ * @param PDO $bdd Instance de connexion PDO à la base de données
+ * @param int $member_id ID du membre à mettre à jour
+ * @param array $games_selected Tableau des IDs des jeux sélectionnés
  */
-function updateMemberGames($bdd, $member_id, $games_selected) 
+function updateMemberGames($bdd, $member_id, $games_selected)
 {
     try {
-        // Supprimer les anciennes associations de jeux pour ce membre
-        $stmtDelete = $bdd->prepare("DELETE FROM member_game WHERE member_id = ?");
-        $stmtDelete->execute([$member_id]);
+        // Suppression des jeux actuels du membre
+        $sqlDelete = "DELETE FROM member_game WHERE member_id = :member_id";
+        $stmtDelete = $bdd->prepare($sqlDelete);
+        $stmtDelete->bindParam(':member_id', $member_id, PDO::PARAM_INT);
+        $stmtDelete->execute();
 
-        // Insérer les nouvelles associations de jeux sélectionnés
-        $stmtInsert = $bdd->prepare("INSERT INTO member_game (member_id, game_id) VALUES (?, ?)");
+        // Insertion des nouveaux jeux sélectionnés
+        $sqlInsert = "INSERT INTO member_game (member_id, game_id) VALUES (:member_id, :game_id)";
+        $stmtInsert = $bdd->prepare($sqlInsert);
+        $stmtInsert->bindParam(':member_id', $member_id, PDO::PARAM_INT);
+        
         foreach ($games_selected as $game_id) {
-            // Vérifier si l'association existe déjà
-            $stmtCheck = $bdd->prepare("SELECT COUNT(*) AS count FROM member_game WHERE member_id = ? AND game_id = ?");
-            $stmtCheck->execute([$member_id, $game_id]);
-            $result = $stmtCheck->fetch(PDO::FETCH_ASSOC);
-
-            if ($result['count'] == 0) {
-                // Insérer seulement si l'association n'existe pas déjà
-                $stmtInsert->execute([$member_id, $game_id]);
-            }
+            $stmtInsert->bindParam(':game_id', $game_id, PDO::PARAM_INT);
+            $stmtInsert->execute();
         }
     } catch (PDOException $e) {
-        throw new Exception("Erreur lors de la mise à jour des jeux du membre : " . $e->getMessage());
+        // En cas d'erreur PDO, throw pour annuler la transaction
+        throw new PDOException("Erreur lors de la mise à jour des jeux du membre : " . $e->getMessage());
     }
 }

@@ -75,7 +75,7 @@ if (isset($_SESSION['member_id'])) {
                 <!-- Section pour les jeux -->
                 <div class="mb-3">
                     <label for="games" class="form-label">Jeux :</label>
-                    <hr class="border border-white"><br>
+                    <hr class="border border-black"><br> 
                     <div class="row col-6">
                         <!-- Boucle pour afficher les jeux -->
                         <?php foreach ($games as $game) : ?>
@@ -83,7 +83,8 @@ if (isset($_SESSION['member_id'])) {
                                 <label class="form-check-label" for="game<?= $game['game_id'] ?>">
                                     <?= $game['title'] ?>
                                 </label>
-                                <input class="form-check-input border boder-2 border-black" type="checkbox" name="games[]" id="game<?= $game['game_id'] ?>" value="<?= $game['game_id'] ?>" <?php if (in_array($game['game_id'], array_column($selected_games, 'game_id'))) echo "checked"; ?>>
+                                <?php $isChecked = in_array($game['game_id'], array_column($selected_games, 'game_id')); ?>
+                                <input class="form-check-input border boder-2 border-black" type="checkbox" name="games[]" id="game<?= $game['game_id'] ?>" value="<?= $game['game_id'] ?>" <?= $isChecked ? 'checked' : '' ?>>
                             </div>
                         <?php endforeach; ?>
                     </div>

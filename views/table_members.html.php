@@ -49,7 +49,7 @@
                                         <?php foreach ($roles as $role) : ?>
                                             <!-- Option pour chaque rôle -->
                                             <option value="<?php echo $role['id']; ?>" <?php if ($member['role_id'] === $role['id']) echo 'selected'; ?>><?php echo $role['role_member']; ?></option>
-                                        <?php endforeach; ?>
+                                        <?php endforeach; ?> 
                                     <?php else : ?>
                                         <!-- Aucun rôle disponible (option par défaut) -->
                                         <option value="">Aucun rôle disponible</option>

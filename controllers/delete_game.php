@@ -1,5 +1,15 @@
 <?php
 
+// Démarrer la session PHP
+session_start();
+
+// Vérifier si l'utilisateur est connecté et a les droits nécessaires
+if (!isset($_SESSION['member_id']) || $_SESSION['role_member'] !== 'memberAdmin') {
+    // Redirection vers la page de connexion si l'utilisateur n'est pas administrateur
+    header('Location: /TFG/log.php');
+    exit;
+}
+
 // Inclusion du fichier contenant les fonctions CRUD pour les jeux
 require_once dirname(__DIR__) . '/crud/game_console.fn.php';
 
@@ -18,4 +28,5 @@ if ($game_id) {
     // Si l'ID du jeu n'est pas valide, afficher un message d'erreur
     echo "ID de jeu invalide.";
 }
+
 ?>

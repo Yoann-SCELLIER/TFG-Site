@@ -3,21 +3,21 @@
 require_once dirname(__DIR__) . '/crud/post.fn.php';
 
 // Vérifier si un ID de post est présent dans l'URL
-$id = isset($_GET['id']) ? $_GET['id'] : null;
+$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
 // Si le formulaire est soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer les données du formulaire
-    $title = isset($_POST['title']) ? $_POST['title'] : '';
-    $content = isset($_POST['content']) ? $_POST['content'] : '';
-    $image_url = isset($_POST['image_url']) ? $_POST['image_url'] : '';
+    $title = filter_input(INPUT_POST, 'title');
+    $content = filter_input(INPUT_POST, 'content');
+    $image_url = filter_input(INPUT_POST, 'image_url', FILTER_SANITIZE_URL);
 
     // Vérifier si aucun URL d'image n'est spécifié, utiliser l'image par défaut
     if (empty($image_url)) {
         $image_url = 'assets/images/TFACTU.png'; // Chemin de l'image par défaut
     }
 
-    $member_id = isset($_POST['member_id']) ? $_POST['member_id'] : '';
+    $member_id = filter_input(INPUT_POST, 'member_id', FILTER_SANITIZE_NUMBER_INT);
 
     // Si un ID est présent, il s'agit d'une modification
     if ($id) {

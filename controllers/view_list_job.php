@@ -2,12 +2,17 @@
 // Inclusion du fichier contenant les fonctions CRUD pour les membres
 require_once dirname(__DIR__) . '/crud/member.fn.php';
 
-// Récupération de l'ID du membre depuis l'URL
-$member_id = $_GET['id'] ?? null;
+// Vérification de l'authentification de l'utilisateur
+if (!isset($_SESSION['member_id'])) {
+    header('Location: /log.php');
+    exit();
+} 
 
-// Vérification de la présence de l'ID du membre
-if ($member_id === null) {
-    exit("ID du membre non spécifié.");
+// Récupération et validation de l'ID du membre depuis l'URL 
+$member_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+if (!$member_id) {
+    exit("ID du membre non spécifié ou invalide.");
 }
 
 try {
@@ -27,6 +32,6 @@ try {
 
 } catch (PDOException $e) {
     // En cas d'erreur PDO, affichage du message d'erreur
-    exit("Erreur lors de la récupération des données du membre : " . $e->getMessage());
+    exit("Erreur lors de la récupération des données du membre : " . htmlspecialchars($e->getMessage()));
 }
 ?>

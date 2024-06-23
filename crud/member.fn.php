@@ -15,7 +15,7 @@ require_once dirname(__DIR__) . '/controller/db.fn.php';
  * @param string $cover Chemin vers l'image de profil du membre à ajouter
  * @return bool Retourne true si l'insertion s'est bien déroulée, sinon false
  */
-function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover) 
+function addMember($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover) 
 {
     try {
         // Chemin de l'image par défaut
@@ -41,6 +41,24 @@ function ajouterMembre($bdd, $username, $first_name, $last_name, $email, $passwo
         error_log("Erreur lors de l'inscription : " . $e->getMessage());
         return false; // Retourne false en cas d'erreur
     }
+}
+
+/**
+ * Valide les entrées de l'utilisateur.
+ *
+ * @param string $email L'adresse e-mail à valider.
+ * @param string $password Le mot de passe à valider.
+ * @return bool True si les entrées sont valides, False sinon.
+ */
+function validateInputs($email, $password) 
+{
+    // Vérifier si l'adresse e-mail contient un @ et se termine par .fr ou .com
+    $emailValid = preg_match('/^[^@]+@[^@]+\.(fr|com)$/i', $email);
+
+    // Vérifier si le mot de passe contient au moins une majuscule, un chiffre et un caractère spécial
+    $passwordValid = preg_match('/[A-Z]/', $password) && preg_match('/\d/', $password) && preg_match('/[\W_]/', $password);
+
+    return $emailValid && $passwordValid;
 }
 
 /**
@@ -187,7 +205,7 @@ function viewMembers($bdd)
  *
  * @param PDO $bdd Instance de connexion PDO à la base de données
  * @param int $member_id ID du membre à récupérer
- * @return mixed Retourne les informations du membre si trouvé, sinon exit avec un message d'erreur
+ * @return mixed Retourne les informations du membre si trouvé, sinon null
  */
 function getMemberById($bdd, $member_id)
 {
@@ -226,7 +244,7 @@ function getMemberById($bdd, $member_id)
             $member['jobs'] = $jobs; // Ajouter les emplois au tableau du membre
         }
 
-        return $member;
+        return $member ?: null; // Retourner null si aucun membre n'est trouvé
     } catch (PDOException $e) {
         exit("Erreur lors de la récupération du membre : " . $e->getMessage());
     }
@@ -248,36 +266,44 @@ function getMemberJobs(PDO $bdd, int $member_id): array
 }
 
 /**
- * Fonction pour mettre à jour les informations d'un membre
+ * Fonction pour mettre à jour les détails d'un membre dans la base de données
  *
  * @param PDO $bdd Instance de connexion PDO à la base de données
  * @param int $member_id ID du membre à mettre à jour
- * @param string $cover Chemin vers la nouvelle image de profil du membre
- * @param string $username Nouveau nom d'utilisateur du membre
- * @param string $email Nouvelle adresse email du membre
- * @param string $content Nouveau contenu (optionnel) associé au membre
- * @param int $role_id Nouvel ID de rôle du membre
- * @param int $departement_id Nouvel ID de département du membre
- * @return bool Retourne true si la mise à jour s'est bien déroulée, sinon lance une exception avec un message d'erreur
+ * @param string $cover URL de la photo de couverture du membre
+ * @param string $username Nom d'utilisateur du membre
+ * @param string $email Adresse email du membre
+ * @param string $content Description ou contenu associé au membre
+ * @param int $role_id ID du rôle du membre
+ * @param int $departement_id ID du département du membre
  */
 function updateMember($bdd, $member_id, $cover, $username, $email, $content, $role_id, $departement_id)
 {
     try {
-        $sql = "UPDATE member SET cover = :cover, username = :username, email = :email, content = :content, role_id = :role_id WHERE member_id = :member_id";
-        $stmt = $bdd->prepare($sql);
-        $stmt->bindParam(':cover', $cover);
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':content', $content);
-        $stmt->bindParam(':role_id', $role_id);
-        $stmt->bindParam(':member_id', $member_id);
-        $stmt->execute();
+        // Requête SQL pour mettre à jour les détails du membre
+        $sql = "
+            UPDATE member 
+            SET cover = :cover, 
+                username = :username, 
+                email = :email, 
+                content = :content, 
+                role_id = :role_id, 
+                departement_id = :departement_id 
+            WHERE member_id = :member_id
+        ";
 
-        // Optionnel : Si vous avez besoin de récupérer des données après la mise à jour
-        // return getMemberById($bdd, $member_id); // Par exemple, pour retourner le membre mis à jour
-        return true; // Ou simplement true si la mise à jour réussit
+        $stmt = $bdd->prepare($sql);
+        $stmt->bindParam(':cover', $cover, PDO::PARAM_STR);
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->bindParam(':content', $content, PDO::PARAM_STR);
+        $stmt->bindParam(':role_id', $role_id, PDO::PARAM_INT);
+        $stmt->bindParam(':departement_id', $departement_id, PDO::PARAM_INT);
+        $stmt->bindParam(':member_id', $member_id, PDO::PARAM_INT);
+        $stmt->execute();
     } catch (PDOException $e) {
-        throw new Exception("Erreur lors de la mise à jour du membre : " . $e->getMessage());
+        // En cas d'erreur PDO, throw pour annuler la transaction
+        throw new PDOException("Erreur lors de la mise à jour des détails du membre : " . $e->getMessage());
     }
 }
 
@@ -308,12 +334,23 @@ function listJobs($bdd)
 function deleteMember($bdd, $member_id) 
 {
     try {
+        // Validation de l'ID du membre
+        if (!filter_var($member_id, FILTER_VALIDATE_INT) || $member_id <= 0) {
+            throw new InvalidArgumentException("ID du membre invalide.");
+        }
+
         $sql = "DELETE FROM member WHERE member_id = ?";
         $stmt = $bdd->prepare($sql);
         $stmt->execute([$member_id]);
         return true; // Retourne true si la suppression s'est bien déroulée
     } catch (PDOException $e) {
-        throw new Exception("Erreur lors de la suppression du membre : " . $e->getMessage());
+        // Enregistrer l'erreur dans le journal des erreurs
+        error_log("Erreur lors de la suppression du membre : " . $e->getMessage());
+        throw new Exception("Erreur lors de la suppression du membre.");
+    } catch (InvalidArgumentException $e) {
+        // Enregistrer l'erreur dans le journal des erreurs
+        error_log("Erreur lors de la suppression du membre : " . $e->getMessage());
+        throw new Exception("Erreur lors de la suppression du membre.");
     }
 }
 
@@ -323,17 +360,13 @@ function deleteMember($bdd, $member_id)
  * @param PDO $bdd Instance de connexion PDO à la base de données
  * @return array Tableau contenant tous les départements disponibles
  */
-function getDepartements($bdd) 
+function getDepartements(PDO $bdd)
 {
     try {
-        $departements = [];
         $sql = "SELECT departement_id, departement_name FROM departement";
         $stmt = $bdd->prepare($sql);
         $stmt->execute();
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $departements[] = $row;
-        }
-        return $departements;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         exit("Erreur lors de la récupération des départements : " . $e->getMessage());
     }
@@ -358,27 +391,32 @@ function getRolesFromDatabase($bdd)
 }
 
 /**
- * Fonction pour mettre à jour les emplois d'un membre dans la base de données
+ * Fonction pour mettre à jour les compétences (jobs) d'un membre dans la base de données
  *
  * @param PDO $bdd Instance de connexion PDO à la base de données
- * @param int $member_id ID du membre dont les emplois sont mis à jour
- * @param array $jobs_selected Tableau contenant les ID des nouveaux emplois sélectionnés
- * @return void Lance une exception en cas d'erreur lors de la mise à jour des jobs du membre
+ * @param int $member_id ID du membre à mettre à jour
+ * @param array $jobs_selected Tableau des IDs des jobs sélectionnés
  */
-function updateMemberJobs($bdd, $member_id, $jobs_selected) 
+function updateMemberJobs($bdd, $member_id, $jobs_selected)
 {
     try {
-        // Supprimer les anciennes associations de jobs pour ce membre
-        $stmtDelete = $bdd->prepare("DELETE FROM member_job WHERE member_id = ?");
-        $stmtDelete->execute([$member_id]);
+        // Suppression des jobs actuels du membre
+        $sqlDelete = "DELETE FROM member_job WHERE member_id = :member_id";
+        $stmtDelete = $bdd->prepare($sqlDelete);
+        $stmtDelete->bindParam(':member_id', $member_id, PDO::PARAM_INT);
+        $stmtDelete->execute();
 
-        // Insérer les nouvelles associations de jobs sélectionnés
-        $stmtInsert = $bdd->prepare("INSERT INTO member_job (member_id, job_id) VALUES (?, ?)");
+        // Insertion des nouveaux jobs sélectionnés
+        $sqlInsert = "INSERT INTO member_job (member_id, job_id) VALUES (:member_id, :job_id)";
+        $stmtInsert = $bdd->prepare($sqlInsert);
+        $stmtInsert->bindParam(':member_id', $member_id, PDO::PARAM_INT);
+        
         foreach ($jobs_selected as $job_id) {
-            // Insérer seulement si l'association n'existe pas déjà
-            $stmtInsert->execute([$member_id, $job_id]);
+            $stmtInsert->bindParam(':job_id', $job_id, PDO::PARAM_INT);
+            $stmtInsert->execute();
         }
     } catch (PDOException $e) {
-        throw new Exception("Erreur lors de la mise à jour des jobs du membre : " . $e->getMessage());
+        // En cas d'erreur PDO, throw pour annuler la transaction
+        throw new PDOException("Erreur lors de la mise à jour des jobs du membre : " . $e->getMessage());
     }
 }

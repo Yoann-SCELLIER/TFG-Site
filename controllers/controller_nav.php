@@ -4,7 +4,7 @@
 require_once dirname(__DIR__) . '/function/template_navbar.php';
 
 // Inclusion du fichier contenant les fonctions liées aux membres, situé dans le répertoire "crud" du répertoire parent.
-require_once dirname(__DIR__) . '/crud/member.fn.php'; // Assurez-vous de l'emplacement correct du fichier
+require_once dirname(__DIR__) . '/crud/member.fn.php';
 
 // Vérifier si 'member_id' est défini dans la session
 if (isset($_SESSION['member_id'])) {
@@ -38,5 +38,3 @@ if (isset($_SESSION['member_id'])) {
 } else {
     echo navVisitor(); // Afficher la barre de navigation par défaut si l'utilisateur n'est pas connecté
 }
-
-?>

@@ -36,4 +36,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // À ce stade, la variable $game contient les détails du jeu à afficher ou à modifier s'il y a un ID valide
 // Si le formulaire est soumis en méthode POST, les données sont traitées pour mettre à jour ou ajouter un jeu dans la base de données
 // La redirection est effectuée après le traitement du formulaire pour éviter les soumissions multiples
-?>

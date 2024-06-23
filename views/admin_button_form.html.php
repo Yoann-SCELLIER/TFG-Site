@@ -15,7 +15,7 @@ if (isset($_SESSION['member_id'])) {
         <!-- Ligne avec des colonnes justifiées de manière équitable -->
         <div class="col-3">
             <!-- Colonne de largeur 3/12 (pour les petits écrans) -->
-            <a href="/tfg/admin/admin_form_actu" class="btn bg-warning text-dark fw-bold">Formulaire actualité</a>
+            <a href="/tfg/admin/admin_form_actu.php" class="btn bg-warning text-dark fw-bold">Formulaire actualité</a>
             <!-- Bouton pour accéder au formulaire d'actualité -->
         </div>
         <div class="col-3">

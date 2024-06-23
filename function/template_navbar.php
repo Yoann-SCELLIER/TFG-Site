@@ -104,7 +104,7 @@ function navMemberAdmin()
     <header>
         <nav class="navbar navbar-expand-lg bg-success">
             <div class="container-fluid">
-                <a class="navbar-brand m-0 p-0 b-0 g-0" href="/TFG/admin/dashboard.php"> <!-- Chemin absolu pour index.php -->
+                <a class="navbar-brand m-0 p-0 b-0 g-0" href="/TFG/admin/dashboard.php">
                     <img src="/TFG/assets/images/logoV1.gif" alt="Logo" width="80" height="auto" class="d-inline-block align-text-top">
                 </a>
                 <button class="navbar-toggler navbar-dark border-2" type="button" data-bs-theme="dark" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -115,11 +115,8 @@ function navMemberAdmin()
                         <li class="nav-item m-1">
                             <h1>DASHBOARD ADMINISTRATEUR</h1>
                         </li>
-                        <!-- Chemin absolu pour MEMBRE ET STAFF -->
                         <li class="nav-item m-1"><a class="nav-link" href="/TFG/admin/dashboard.php">MEMBRE ET STAFF</a></li>
-                        <!-- Chemin absolu pour GAME -->
                         <li class="nav-item m-1"><a class="nav-link" href="/TFG/admin/admin_view_list_game.php">GAME</a></li>
-                        <!-- Chemin absolu pour ACTUALITÉ -->
                         <li class="nav-item m-1"><a class="nav-link" href="/TFG/admin/admin_view_list_actu.php">ACTUALITÉ</a></li>
                         <li class="nav-item row text-center">
                             <p class="m-0 p-0 b-0 g-0" style="font-size: 8px;">WELCOME</p>
@@ -137,7 +134,6 @@ function navMemberAdmin()
 
     <!-- Contenu principal -->
     <main>
-        <div>
-
-        <?php
-    }
+        <!-- Ajoutez ici le contenu principal spécifique à la page d'administration -->
+<?php
+}

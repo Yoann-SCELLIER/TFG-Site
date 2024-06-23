@@ -7,9 +7,10 @@ $game_id = isset($_GET['id']) ? (int)$_GET['id'] : null;
 
 // Si la requête est de type POST, cela signifie que le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $title = $_POST['title']; // Titre du jeu
-    $content = $_POST['content']; // Description ou contenu du jeu
-    $image_url = $_POST['image_url']; // URL de l'image du jeu
+    // Valider et nettoyer les données du formulaire
+    $title = isset($_POST['title']) ? trim($_POST['title']) : '';
+    $content = isset($_POST['content']) ? trim($_POST['content']) : '';
+    $image_url = isset($_POST['image_url']) ? trim($_POST['image_url']) : '';
 
     // Définir l'URL de l'image par défaut
     $default_cover_path = '/TFG/assets/images/Default_video_game_cover_logo_0.jpg';
@@ -18,13 +19,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cover = !empty($image_url) ? $image_url : $default_cover_path;
 
     if ($game_id) {
-        // Si un ID de jeu est présent, modifier le jeu existant
+        // Si un ID de jeu est présent, modifier le jeu existant de manière sécurisée
         updateGame($bdd, $game_id, $title, $content, $cover);
         // Rediriger l'utilisateur vers la liste des jeux après la modification
         header('Location: /TFG/admin/admin_view_list_game.php');
         exit;
     } else {
-        // Sinon, ajouter un nouveau jeu
+        // Sinon, ajouter un nouveau jeu de manière sécurisée
         addGame($bdd, $title, $content, $cover);
         // Rediriger l'utilisateur vers la liste des jeux après l'ajout
         header('Location: /TFG/admin/admin_view_list_game.php');
@@ -35,9 +36,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Si un ID de jeu est présent, charger les données du jeu pour modification
         $game = getGameById($bdd, $game_id);
         if ($game) {
-            $title = $game['title'];
-            $content = isset($game['content']) ? $game['content'] : '';
-            $image_url = isset($game['image_url']) ? $game['image_url'] : '';
+            $title = htmlspecialchars($game['title']); // Échapper les données pour éviter les attaques XSS
+            $content = isset($game['content']) ? htmlspecialchars($game['content']) : '';
+            $image_url = isset($game['image_url']) ? htmlspecialchars($game['image_url']) : '';
         } else {
             // Gestion d'erreur si le jeu n'existe pas
             echo "Jeu non trouvé";

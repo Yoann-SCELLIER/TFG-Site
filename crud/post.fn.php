@@ -3,12 +3,13 @@
 require_once dirname(__DIR__) . '/controller/db.fn.php';
 
 /**
+ * Fonction pour ajouter un nouveau post dans la base de données
  * @param PDO $bdd Connexion PDO à la base de données
- * @param string $title Titre du post à ajouter
- * @param string $content Contenu du post à ajouter
- * @param string $image_url URL de l'image associée au post
- * @param int $member_id ID du membre associé au post
- * @return int ID du dernier post inséré
+ * @param string $title Titre du post
+ * @param string $content Contenu du post
+ * @param string $image_url URL de l'image du post
+ * @param int $member_id ID du membre ajoutant le post
+ * @return mixed Retourne l'ID du post ajouté en cas de succès, sinon false
  */
 function addPost($bdd, $title, $content, $image_url, $member_id)
 {
@@ -18,9 +19,9 @@ function addPost($bdd, $title, $content, $image_url, $member_id)
         $stmt = $bdd->prepare($sql);
         
         // Liaison des paramètres avec les valeurs
-        $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':content', $content);
-        $stmt->bindParam(':image_url', $image_url);
+        $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+        $stmt->bindParam(':content', $content, PDO::PARAM_STR);
+        $stmt->bindParam(':image_url', $image_url, PDO::PARAM_STR);
         $stmt->bindParam(':member_id', $member_id, PDO::PARAM_INT);
         
         // Exécution de la requête
@@ -29,12 +30,15 @@ function addPost($bdd, $title, $content, $image_url, $member_id)
         // Retourne l'ID du dernier post inséré
         return $bdd->lastInsertId();
     } catch (PDOException $e) {
-        // En cas d'erreur PDO, affiche l'erreur et termine le script
-        exit("Erreur lors de l'ajout du post : " . $e->getMessage());
+        // En cas d'erreur PDO, log l'erreur et termine le script
+        error_log("Erreur lors de l'ajout du post : " . $e->getMessage());
+        return false;
     }
 }
 
 /**
+ * Fonction pour récupérer tous les posts avec informations formatées depuis la base de données
+ *
  * @param PDO $bdd Connexion PDO à la base de données
  * @return array Tableau associatif contenant tous les posts avec informations formatées
  */
@@ -66,52 +70,52 @@ function viewsPost($bdd)
 }
 
 /**
- * @param PDO $bdd Connexion PDO à la base de données
- * @param int $post_id ID du post à supprimer
- * @param int $member_id ID du membre effectuant l'action
- * @param string $role_member Role du membre effectuant l'action
- * @return bool True si le post est supprimé avec succès, sinon False
+ * Supprime un post de la base de données.
+ *
+ * @param PDO $bdd La connexion PDO à la base de données.
+ * @param int $post_id L'ID du post à supprimer.
+ * @param int $member_id L'ID du membre effectuant la suppression.
+ * @param string $role_member Le rôle du membre effectuant la suppression.
+ * @return bool True si la suppression a réussi, False sinon.
  */
 function deletePost($bdd, $post_id, $member_id, $role_member)
 {
     try {
-        // Variable pour stocker la requête SQL
-        $sql = "";
-        
-        // Vérifie le rôle du membre pour déterminer la requête SQL appropriée
+        // Déterminer la requête SQL en fonction du rôle du membre
         if ($role_member === 'memberAdmin') {
             // Administrateur : supprime le post sans vérifier le propriétaire
             $sql = "DELETE FROM post WHERE post_id = :post_id";
-            $stmt = $bdd->prepare($sql); 
-            $stmt->bindParam(':post_id', $post_id, PDO::PARAM_INT);
         } else {
-            // Vérifie si le post appartient au membre avant de le supprimer
+            // Membre non administrateur : vérifie si le post appartient au membre avant de le supprimer
             $sql = "DELETE FROM post WHERE post_id = :post_id AND member_id = :member_id";
-            $stmt = $bdd->prepare($sql);
-            $stmt->bindParam(':post_id', $post_id, PDO::PARAM_INT);
+        }
+
+        $stmt = $bdd->prepare($sql);
+
+        // Liaison des paramètres
+        $stmt->bindParam(':post_id', $post_id, PDO::PARAM_INT);
+        if ($role_member !== 'memberAdmin') {
             $stmt->bindParam(':member_id', $member_id, PDO::PARAM_INT);
         }
 
-        // Exécute la requête SQL préparée
+        // Exécuter la requête
         $stmt->execute();
 
-        // Vérifie si des lignes ont été affectées (post supprimé)
-        if ($stmt->rowCount() > 0) {
-            return true; // Suppression réussie
-        } else {
-            return false; // Aucune ligne n'a été supprimée (conditions non remplies)
-        }
+        // Vérifier si des lignes ont été affectées (post supprimé)
+        return $stmt->rowCount() > 0;
     } catch (PDOException $e) {
-        // En cas d'erreur PDO, enregistre l'erreur et termine le script
+        // Enregistrer l'erreur dans les logs et afficher un message d'erreur
         error_log("Erreur SQL lors de la suppression du post : " . $e->getMessage());
-        exit("Erreur SQL lors de la suppression du post : " . $e->getMessage());
+        echo "<script>alert('Erreur SQL lors de la suppression du post.'); window.history.back();</script>";
+        exit();
     }
 }
 
 /**
+ * Fonction pour récupérer les informations d'un post par son ID
  * @param PDO $bdd Connexion PDO à la base de données
  * @param int $id ID du post à récupérer
- * @return array Tableau associatif contenant les informations du post spécifique
+ * @return mixed Retourne les informations du post sous forme de tableau associatif, ou false si non trouvé
  */
 function getPostById($bdd, $id)
 {
@@ -135,17 +139,19 @@ function getPostById($bdd, $id)
 }
 
 /**
+ * Fonction pour mettre à jour un post dans la base de données
  * @param PDO $bdd Connexion PDO à la base de données
  * @param int $id ID du post à mettre à jour
  * @param string $title Nouveau titre du post
  * @param string $content Nouveau contenu du post
  * @param string $image_url Nouvelle URL de l'image du post
  * @param int $member_id ID du membre effectuant l'action
+ * @return bool Retourne true si la mise à jour est réussie, sinon false
  */
 function updatePost($bdd, $id, $title, $content, $image_url, $member_id)
 {
     try {
-        // Requête SQL pour mettre à jour un post avec des conditions basées sur le rôle du membre
+        // Requête SQL pour mettre à jour un post
         $sql = "UPDATE post SET title = :title, content = :content, image_url = :image_url WHERE post_id = :id";
         
         // Vérifie si l'utilisateur n'est pas administrateur pour restreindre la mise à jour
@@ -154,9 +160,9 @@ function updatePost($bdd, $id, $title, $content, $image_url, $member_id)
         }
 
         $stmt = $bdd->prepare($sql);
-        $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':content', $content);
-        $stmt->bindParam(':image_url', $image_url);
+        $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+        $stmt->bindParam(':content', $content, PDO::PARAM_STR);
+        $stmt->bindParam(':image_url', $image_url, PDO::PARAM_STR);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
         // Si l'utilisateur n'est pas administrateur, bind son member_id pour la vérification
@@ -166,9 +172,11 @@ function updatePost($bdd, $id, $title, $content, $image_url, $member_id)
 
         // Exécute la requête SQL
         $stmt->execute();
+        return true;
     } catch (PDOException $e) {
-        // En cas d'erreur PDO, affiche l'erreur et termine le script
-        exit("Erreur lors de la mise à jour du post : " . $e->getMessage());
+        // En cas d'erreur PDO, log l'erreur et termine le script
+        error_log("Erreur lors de la mise à jour du post : " . $e->getMessage());
+        return false;
     }
 }
 

@@ -15,7 +15,7 @@ if (!isset($_SESSION['member_id'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Vérification si post_id est défini dans $_POST
     if (isset($_POST['post_id'])) {
-        $post_id = $_POST['post_id'];
+        $post_id = filter_input(INPUT_POST, 'post_id', FILTER_VALIDATE_INT);
         $member_id = $_SESSION['member_id'];
         $role_member = $_SESSION['role_member'];
 
@@ -29,10 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             exit();
         } else {
-            exit("Échec de la suppression du post."); // Message d'erreur si la suppression du post échoue
+            echo "<script>alert('Échec de la suppression du post.'); window.history.back();</script>";
+            exit();
         }
     } else {
-        exit("ID d'article manquant pour la suppression."); // Message d'erreur si l'ID du post n'est pas spécifié
+        echo "<script>alert('ID d\'article manquant pour la suppression.'); window.history.back();</script>";
+        exit();
     }
 } else {
     // Redirection si la méthode HTTP n'est pas POST

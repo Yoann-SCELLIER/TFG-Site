@@ -1,8 +1,8 @@
 <?php
-
+// Inclusion des fichiers des fonctions CRUD nécessaires
 require_once dirname(__DIR__) . '/crud/post.fn.php'; // Inclut le fichier des fonctions CRUD pour les posts
 
-// Variables initiales pour l'ajout d'un post
+// Variables initiales pour l'ajout ou la modification d'un post
 $titre = '';
 $contenu = '';
 $image_url = '';
@@ -13,7 +13,11 @@ $submitValue = 'Ajouter le Post'; // Valeur du bouton de soumission par défaut
 
 // Vérifie si un ID est passé via les paramètres GET pour la modification
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+    $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+    if ($id === null || $id === false) {
+        exit("ID de post non valide.");
+    }
 
     // Récupère tous les posts depuis la base de données
     $posts = viewsPost($bdd);
@@ -33,6 +37,3 @@ if (isset($_GET['id'])) {
         }
     }
 }
-
-// Le reste du code pour afficher le formulaire HTML ou effectuer d'autres traitements devrait suivre ici
-?>

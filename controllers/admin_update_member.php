@@ -9,9 +9,9 @@ $member_id = $_GET['id'] ?? null;
 // Vérification si l'ID est valide
 if ($member_id === null) {
     exit("ID du membre non spécifié.");
-}
+} 
 
-// Récupération du membre à partir de l'ID
+// Récupération du membre à partir de l'ID 
 $member = getMemberById($bdd, $member_id);
 
 // Vérification si le membre existe
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Redirection vers actualite.php pour les officiels et invités
             header('Location: /TFG/actualite.php');
             exit();
-        }
+        } 
 
         // Mise à jour des détails du membre
         updateMember($bdd, $member_id, $cover, $username, $email, $content, $role_id, $departement_id);

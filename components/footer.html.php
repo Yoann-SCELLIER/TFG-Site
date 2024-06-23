@@ -1,4 +1,7 @@
 <footer class="bg-grey">
+    <!-- Bouton "Revenir en haut" -->
+    <button id="backToTopBtn" class="btn btn-primary" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
+
     <div class="row row-cols-1 row-cols-md-1 g-0 m-0 b-0 pt-3 justify-content-center">
         <div>
             <hr class="border border-1 border-black">
@@ -71,13 +74,13 @@
             </a>
             <hr>
             <!-- Affichage conditionnel basé sur la session de l'utilisateur -->
-            <?php if (isset($_SESSION['member_id'])): ?>
+            <?php if (isset($_SESSION['member_id'])) : ?>
                 <!-- Lien vers la page de membre avec l'ID de l'utilisateur connecté -->
                 <ul class="d-flex justify-content-center text-white" style="list-style-type:none;">
                     <li class="p-0 m-2"><a href="/tfg/member.php?id=<?= htmlspecialchars($_SESSION['member_id']) ?>" class="text-reset"><?= htmlspecialchars($_SESSION['username']) ?></a></li>
                     <li class="p-0 m-2"><a href="/tfg/logout.php" class="text-reset">Déconnexion</a></li>
                 </ul>
-            <?php else: ?>
+            <?php else : ?>
                 <!-- Liens vers la connexion et l'inscription -->
                 <ul class="d-flex justify-content-center text-white" style="list-style-type:none;">
                     <li class="p-0 m-2"><a href="/tfg/log.html.php" class="text-reset">Connexion</a></li>
@@ -98,4 +101,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="/tfg/assets/js/javascript.js"></script>
 </body>
+
 </html>

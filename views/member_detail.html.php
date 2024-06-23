@@ -1,3 +1,5 @@
+<!-- member_detail.html.php -->
+
 <div class="text-center">
     <h1 class="p-5 mb-0">Détails du Membre</h1>
 </div>
@@ -40,14 +42,14 @@
                         </p>
                         <!-- Jeux associés au membre -->
                         <p><strong>Les jeux :</strong><br>
-                            <?php if ($hasGames) : ?>
-                                <?php foreach ($games as $game) : ?>
-                                    <ul class="list-unstyled">
-                                        <li class="text-white fs-7"><?= htmlspecialchars($game['title']); ?></li>
-                                    </ul>
-                                <?php endforeach; ?>
+                            <?php if (!empty($selected_games) && is_array($selected_games)) : ?>
+                                <ul class="list-unstyled">
+                                    <?php foreach ($selected_games as $game) : ?>
+                                        <li class="fs-7"><?= htmlspecialchars($game['title'] ?? ''); ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
                             <?php else : ?>
-                                <p class="text-white">Ce membre n'a aucun jeu pour le moment.</p>
+                                <p>Ce membre n'a aucun jeu pour le moment.</p>
                             <?php endif; ?>
                         </p>
                     </div>

@@ -10,4 +10,3 @@ $metaDescriptions = [
     '/tfg/actu_formu.php' => "Formulaire pour créer une nouvelle actualité.",
     // Ajoutez d'autres pages avec leurs meta-descriptions ici
 ];
-?>
