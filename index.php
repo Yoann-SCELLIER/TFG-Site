@@ -5,7 +5,6 @@ require_once dirname(__DIR__) . '\TFG\components\header.html.php';
 
 // Inclusion du contrôleur de navigation
 require_once dirname(__DIR__) . '\tfg\controllers\controller_nav.php';
-
 // Inclusion du contrôleur pour afficher la liste des membres
 require_once dirname(__DIR__) . '\TFG\controllers\view_list_member.php';
 
@@ -14,6 +13,7 @@ require_once dirname(__DIR__) . '\TFG\controllers\view_list_game.php';
 
 // Inclusion de la bannière pour la page d'accueil
 require_once dirname(__DIR__) . '\TFG\components\banniere_index.html.php';
+// die;
 
 // Inclusion de la vue pour afficher l'histoire (story)
 require_once dirname(__DIR__) . '\TFG\views\story.html.php';

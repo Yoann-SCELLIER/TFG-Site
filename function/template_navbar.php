@@ -7,7 +7,7 @@ function navMemberOfficial()
     <nav class="navbar navbar-expand-lg bg-grey">
         <div class="container-fluid">
             <a class="navbar-brand m-0 p-0 b-0 g-0" href="index.html.php">
-                <img src="assets/images/logoV1.gif" alt="Logo" width="80" height="auto" class="d-inline-block align-text-top">
+                <img src="assets/images/logoV1.webp" alt="Logo" width="80" height="auto" class="d-inline-block align-text-top">
             </a>
             <button class="navbar-toggler navbar-dark border-2" type="button" data-bs-theme="dark" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -42,7 +42,7 @@ function navMemberGuest()
     <nav class="navbar navbar-expand-lg bg-grey">
         <div class="container-fluid">
             <a class="navbar-brand m-0 p-0 b-0 g-0" href="index.php">
-                <img src="assets/images/logoV1.gif" alt="Logo" width="80" height="auto" class="d-inline-block align-text-top">
+                <img src="assets/images/logoV1.webp" alt="Logo" width="80" height="auto" class="d-inline-block align-text-top">
             </a>
             <button class="navbar-toggler navbar-dark border-2" type="button" data-bs-theme="dark" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -76,7 +76,7 @@ function navVisitor()
     <nav class="navbar navbar-expand-lg bg-grey">
         <div class="container-fluid">
             <a class="navbar-brand m-0 p-0 b-0 g-0" href="index.php">
-                <img src="assets/images/logoV1.gif" alt="Logo" width="80" height="auto" class="d-inline-block align-text-top">
+                <img src="assets/images/logoV1.webp" alt="Logo" width="80" height="auto" class="d-inline-block align-text-top">
             </a>
             <button class="navbar-toggler navbar-dark border-2" type="button" data-bs-theme="dark" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -105,7 +105,7 @@ function navMemberAdmin()
         <nav class="navbar navbar-expand-lg bg-success">
             <div class="container-fluid">
                 <a class="navbar-brand m-0 p-0 b-0 g-0" href="/TFG/admin/dashboard.php">
-                    <img src="/TFG/assets/images/logoV1.gif" alt="Logo" width="80" height="auto" class="d-inline-block align-text-top">
+                    <img src="/TFG/assets/images/logoV1.webp" alt="Logo" width="80" height="auto" class="d-inline-block align-text-top">
                 </a>
                 <button class="navbar-toggler navbar-dark border-2" type="button" data-bs-theme="dark" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

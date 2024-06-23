@@ -10,7 +10,7 @@
         </div>
         <!-- Image illustrative -->
         <div class="col order-1 order-sm-1 order-md-2">
-            <img class="p-0 m-0 b-0 g-0" width="40%" height="auto" src="assets/images/img-member.png" alt="image pour la section membres et staff">
+            <img class="p-0 m-0 b-0 g-0" width="40%" height="auto" src="assets/images/img-member.webp" alt="image pour la section membres et staff">
         </div>
     </div>
     <!-- Bouton pour voir plus de détails -->
@@ -23,7 +23,7 @@
 <article id="hiddenStaff" class="text-center bg-grey text-white" style="display: none;">
     <!-- Illustration -->
     <div class="text-center">
-        <img class="p-0 m-0 b-0 g-0" width="23%" height="auto" src="assets/images/img-member.png" alt="image pour la section membre et staff">
+        <img class="p-0 m-0 b-0 g-0" width="23%" height="auto" src="assets/images/img-member.webp" alt="image pour la section membre et staff">
     </div>
     <!-- Introduction détaillée -->
          <h1>Explorez la Galerie des Membres du Staff de la TF - True Fighters Gaming</h1>

@@ -5,7 +5,7 @@
 </div>
 
 <?php if (isset($member) && !empty($member)) : ?>
-    <section class="p-5">
+    <section class="p-5 pb-0 pt-0">
         <div class="card border border-3">
             <div class="row g-0">
                 <div class="col-md-3 text-center">
@@ -17,7 +17,7 @@
                         <!-- Nom d'utilisateur du membre -->
                         <h5 class="card-title"><?= isset($member['username']) ? htmlspecialchars($member['username']) : ''; ?></h5>
                         <!-- Description du membre -->
-                        <p class="card-text">Description : <?= isset($member['content']) ? htmlspecialchars($member['content']) : ''; ?></p>
+                        <p class="card-text">Description :<br> <?= isset($member['content']) ? htmlspecialchars($member['content']) : ''; ?></p>
                     </div>
                 </div>
                 <div class="col-md-2 text-white text-center">
@@ -64,7 +64,7 @@
                     <p class="card-text m-0 p-0 b-0 g-0">
                         <small class="text-body-secondary">
                             <a href="mailto:<?= isset($member['email']) ? htmlspecialchars($member['email']) : ''; ?>">
-                                <img src="assets/images/mail.png" style="width: 5rem;" alt="Mail de <?= isset($member['username']) ? htmlspecialchars($member['username']) : ''; ?>">
+                                <img src="assets/images/mail.webp" style="width: 5rem;" alt="Mail de <?= isset($member['username']) ? htmlspecialchars($member['username']) : ''; ?>">
                             </a>
                         </small>
                     </p>

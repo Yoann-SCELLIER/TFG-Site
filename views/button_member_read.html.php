@@ -9,7 +9,7 @@ if (isset($_SESSION['member_id'])) {
 }
 ?>
 
-<div class="d-flex justify-content-evenly p-3">
+<div class="d-flex justify-content-evenly p-3"> 
     <!-- Bouton pour modifier le membre -->
     <!-- <form action="member_form.php" method="get" style="display: inline;">
         <input type="hidden" name="id" value="<?= $member['member_id']; ?>">

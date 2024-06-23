@@ -2,7 +2,7 @@
 <div class="downGamingContent" id="gamingSection">
     <div class="row row-cols-1 row-cols-md-2 text-center g-0 p-1">
         <div class="col">
-            <img class="p-0 m-0 b-0 g-0" width="40%" height="auto" src="assets/images/img-gaming.png" alt="image pour la section gaming">
+            <img class="p-0 m-0 b-0 g-0" width="40%" height="auto" src="assets/images/img-gaming.webp" alt="image pour la section gaming">
         </div>
         <div class="col row align-self-center text-start m-0">
             <h1 class="fs-4">Gaming et Tournois</h1>
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="col g-0 p-0 m-0 b-0 order-1 order-sm-1 order-md-1 order-lg-1">
-                <img class="p-0 m-0 b-0 g-0" width="40%" height="auto" src="assets/images/img-gaming.png" alt="image pour la section gaming">
+                <img class="p-0 m-0 b-0 g-0" width="40%" height="auto" src="assets/images/img-gaming.webp" alt="image pour la section gaming">
             </div>
         </div>
         <hr class="border-1 text-dark">
@@ -56,7 +56,7 @@
         <div class="container">
             <div class="row d-flex justify-content-evenly">
                 <div class="col-md-4 d-flex flex-column align-items-center" style="width: 400px;">
-                    <img src="assets\images\logo-tournament.png" class="card-img-top h-auto" alt="Logo tournois Guilty Gear -STRIVE-">
+                    <img src="assets\images\logo-tournament.webp" class="card-img-top h-auto" alt="Logo tournois Guilty Gear -STRIVE-">
                     <div class="card mb-4 border border-0 bg-transparent">
                         <div class="card-body bg-transparent p-0 m-0 b-0 g-0">
                             <h5 class="card-title fs-6 text-white">Tournament Guilty Gear -STRIVE- True Fighters</h5>

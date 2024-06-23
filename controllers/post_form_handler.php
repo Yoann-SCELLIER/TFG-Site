@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Utiliser l'image par défaut si aucune URL n'est spécifiée
     if (empty($image_url)) {
-        $image_url = 'assets/images/TFACTU.png';
+        $image_url = 'assets/images/TFACTU.webp';
     }
 
     // Si un post_id est présent, c'est une modification

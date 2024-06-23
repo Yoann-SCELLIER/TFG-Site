@@ -3,5 +3,5 @@
 http_response_code(404);
 
 // Redirection vers index.php après quelques secondes
-header("Refresh: 3; url=/TFG/index.php");
+header("Refresh: 4; url=/TFG/index.php");
 ?>

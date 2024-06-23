@@ -10,32 +10,32 @@
             <!-- Liens vers les partenaires -->
             <div>
                 <a href="https://fr.jobs.game/entreprise-tf-true-fighters-gaming-20848/" target="_blank">
-                    <img src="assets/images/JobGame.gif" alt="logo JobGame" width="30%" height="auto">
+                    <img src="assets/images/JobGame.webp" alt="logo JobGame" width="30%" height="auto">
                 </a>
             </div>
             <div>
                 <a href="https://www.helloasso.com/associations/true-fighters-gaming" target="_blank">
-                    <img src="assets/images/helloasso.gif" alt="logo HelloAsso" width="30%" height="auto">
+                    <img src="assets/images/helloasso.webp" alt="logo HelloAsso" width="30%" height="auto">
                 </a>
             </div>
             <div>
                 <a href="https://www.facebook.com/True.Fighters.Gaming/" target="_blank">
-                    <img src="assets/images/logo-fb.gif" alt="logo Facebook" width="30%" height="auto">
+                    <img src="assets/images/logo-fb.webp" alt="logo Facebook" width="30%" height="auto">
                 </a>
             </div>
             <div>
                 <a href="https://www.youtube.com/user/TFMultiGaming" target="_blank">
-                    <img src="assets/images/YT.gif" alt="logo Youtube" width="30%" height="auto">
+                    <img src="assets/images/YouTube.webp" alt="logo Youtube" width="30%" height="auto">
                 </a>
             </div>
             <div>
                 <a href="https://twitter.com/TFG_Officiel" target="_blank">
-                    <img src="assets/images/Twitter.gif" alt="logo Twitter" width="30%" height="auto">
+                    <img src="assets/images/Twitter.webp" alt="logo Twitter" width="30%" height="auto">
                 </a>
             </div>
             <div>
                 <a href="https://www.twitch.tv/akito_soma" target="_blank">
-                    <img src="assets/images/twitch.gif" alt="logo Twitch" width="30%" height="auto">
+                    <img src="assets/images/twitch.webp" alt="logo Twitch" width="30%" height="auto">
                 </a>
             </div>
         </div>
@@ -70,7 +70,7 @@
         <!-- Section "Logo et liens" -->
         <div class="row col">
             <a href="index.php">
-                <img src="assets/images/true-fighters-gaming.png" width="600rem" widht="auto" class="p-3 img-fluid" alt="image true fighters gaming">
+                <img src="assets/images/tfg.webp" width="600rem" widht="auto" class="p-3 img-fluid" alt="image true fighters gaming">
             </a>
             <hr>
             <!-- Affichage conditionnel basé sur la session de l'utilisateur -->

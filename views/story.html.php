@@ -5,7 +5,7 @@
     <div class="row row-cols-1 row-cols-md-2 text-center g-0 p-1">
         <!-- Image illustrative -->
         <div class="col">
-            <img class="p-0 m-0 b-0 g-0" width="40%" height="auto" src="assets/images/img-story.png" alt="image pour la section story">
+            <img class="p-0 m-0 b-0 g-0" width="40%" height="auto" src="assets/images/img-story.webp" alt="image pour la section story">
         </div>
         <!-- Introduction -->
         <div class="col row align-self-center text-start m-0">
@@ -25,7 +25,7 @@
 <article id="hiddenStoryContent" class="text-center" style="display: none;">
     <!-- Image et titre de la TF -->
     <div class="text-center align-self-center text-center">
-        <img class="p-0 m-0 b-0 g-0" width="23%" height="auto" src="assets/images/img-story.png" alt="image pour la section story">
+        <img class="p-0 m-0 b-0 g-0" width="23%" height="auto" src="assets/images/img-story.webp" alt="image pour la section story">
     </div>
     <h1>TF - True Fighters Gaming</h1>
     <!-- Paragraphe détaillant l'histoire et les valeurs -->

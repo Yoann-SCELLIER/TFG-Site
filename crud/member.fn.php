@@ -19,7 +19,7 @@ function addMember($bdd, $username, $first_name, $last_name, $email, $password, 
 {
     try {
         // Chemin de l'image par défaut
-        $default_cover = '/tfg/assets/images/Default_esports_player_silhouette_face_not_visible_light_in_th_2.jpg';
+        $default_cover = '/tfg/assets/images/Default_esports_player_silhouette_face_not_visible_light_in_th_2.webp';
         
         // Requête SQL pour insérer le nouveau membre avec le mot de passe hashé
         $sql = "INSERT INTO member (username, first_name, last_name, email, password, departement_id, cover) 

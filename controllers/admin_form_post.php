@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Vérifier si aucun URL d'image n'est spécifié, utiliser l'image par défaut
     if (empty($image_url)) {
-        $image_url = 'assets/images/TFACTU.png'; // Chemin de l'image par défaut
+        $image_url = 'assets/images/TFACTU.webp'; // Chemin de l'image par défaut
     }
 
     $member_id = filter_input(INPUT_POST, 'member_id', FILTER_SANITIZE_NUMBER_INT);

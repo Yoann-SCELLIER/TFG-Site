@@ -16,7 +16,7 @@
                         <!-- Affichage du nom d'utilisateur -->
                         <h5 class="card-title">Username : <?= htmlspecialchars($member['username'] ?? ''); ?></h5>
                         <!-- Affichage de la description du membre -->
-                        <p class="card-text">Description : <?= isset($member['content']) ? htmlspecialchars($member['content']) : ''; ?></p>
+                        <p class="card-text">Description :<br> <?= isset($member['content']) ? htmlspecialchars($member['content']) : ''; ?></p>
                     </div>
                 </div>
                 <div class="col-md-2 text-white text-center"> 
@@ -63,7 +63,7 @@
                     <p class="card-text m-0 p-0 b-0 g-0">
                         <small class="text-body-secondary">
                             <a href="mailto:<?= htmlspecialchars($member['email'] ?? ''); ?>">
-                                <img src="/TFG/assets/images/mail.png" style="width: 5rem;" alt="Mail de <?= htmlspecialchars($member['username'] ?? ''); ?>">
+                                <img src="/TFG/assets/images/mail.webp" style="width: 5rem;" alt="Mail de <?= htmlspecialchars($member['username'] ?? ''); ?>">
                             </a>
                         </small>
                     </p>
@@ -79,7 +79,7 @@
             <form action="/TFG/admin/admin_update_member.php" method="get" style="display: inline;">
                 <input type="hidden" name="id" value="<?= htmlspecialchars($member['member_id']); ?>">
                 <button type="submit" class="btn btn-success">Modifier</button>
-            </form>
+            </form> 
             <!-- Formulaire pour supprimer le membre -->
             <form action="/TFG/controllers/admin_delete_member.php" method="post" style="display: inline;">
                 <input type="hidden" name="member_id" value="<?= htmlspecialchars($member['member_id']); ?>">

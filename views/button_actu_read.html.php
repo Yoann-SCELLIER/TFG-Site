@@ -9,7 +9,6 @@ if (isset($_SESSION['member_id'])) {
 }
 ?>
 
-
 <div class=" d-flex text-center justify-content-evenly">
     <!-- Bouton pour modifier l'article -->
     <div aria-label="Actions" class="text-center m-3">

@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $image_url = isset($_POST['image_url']) ? trim($_POST['image_url']) : '';
 
     // Définir l'URL de l'image par défaut
-    $default_cover_path = '/TFG/assets/images/Default_video_game_cover_logo_0.jpg';
+    $default_cover_path = '/TFG/assets/images/Default_video_game_cover_logo_0.webp';
 
     // Utiliser l'image par défaut si aucun lien n'est fourni
     $cover = !empty($image_url) ? $image_url : $default_cover_path;
