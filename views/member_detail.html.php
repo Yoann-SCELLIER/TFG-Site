@@ -1,7 +1,7 @@
 <!-- member_detail.html.php -->
 
 <div class="text-center">
-    <h1 class="p-5 mb-0">Détails du Membre</h1>
+    <h1 class="p-5 mb-0">Détails du Membre</h1> 
 </div>
 
 <?php if (isset($member) && !empty($member)) : ?>
@@ -56,12 +56,12 @@
                 </div>
                 <div class="col-md-3 text-center">
                     <!-- Informations temporelles -->
-                    <p class="card-text m-0 p-0 b-0 g-0"><small class="text-body-secondary">Créé le : <?= isset($member['created_at']) ? htmlspecialchars($member['created_at']) : ''; ?></small></p>
-                    <p class="card-text m-0 p-0 b-0 g-0"><small class="text-body-secondary">Mis à jour le : <?= isset($member['modif_at']) ? htmlspecialchars($member['modif_at']) : ''; ?></small></p>
+                    <p class="card-text"><small class="text-body-secondary">Créé le : <?= isset($member['created_at']) ? htmlspecialchars($member['created_at']) : ''; ?></small></p>
+                    <p class="card-text"><small class="text-body-secondary">Mis à jour le : <?= isset($member['modif_at']) ? htmlspecialchars($member['modif_at']) : ''; ?></small></p>
                 </div>
                 <div class="col-md-3 text-center">
                     <!-- Bouton pour envoyer un e-mail au membre -->
-                    <p class="card-text m-0 p-0 b-0 g-0">
+                    <p class="card-text">
                         <small class="text-body-secondary">
                             <a href="mailto:<?= isset($member['email']) ? htmlspecialchars($member['email']) : ''; ?>">
                                 <img src="assets/images/mail.webp" style="width: 5rem;" alt="Mail de <?= isset($member['username']) ? htmlspecialchars($member['username']) : ''; ?>">

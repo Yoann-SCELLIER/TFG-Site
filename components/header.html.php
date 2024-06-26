@@ -29,7 +29,4 @@ $metaDescription = isset($metaDescriptions[$requestPath]) ? htmlspecialchars($me
 </head>
 <body> <!-- Début du corps de la page HTML -->
 
-<!-- Votre contenu HTML ici -->
-
-</body>
-</html>
+<main>

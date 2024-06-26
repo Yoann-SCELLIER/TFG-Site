@@ -3,12 +3,6 @@
 require_once dirname(__DIR__) . '/crud/member.fn.php';
 require_once dirname(__DIR__) . '/crud/game_console.fn.php';
 
-// Vérification de l'authentification de l'utilisateur
-if (!isset($_SESSION['member_id'])) {
-    header('Location: /TFG/log.php');
-    exit();
-}
-
 // Récupération de l'ID du membre à afficher
 $member_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 

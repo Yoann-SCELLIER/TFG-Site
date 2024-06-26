@@ -40,10 +40,10 @@ if ($post) {
             </div>
             <div class="card-footer text-center">
                 <!-- Afficher la date de création de l'article -->
-                <p>Créé le : <small class="text-body-secondary"><?= htmlspecialchars($post['created_at']) ?></small></p>
+                <p>Créé le : <small class="text-body-secondary"><?= htmlspecialchars($post['created_at_fr']) ?></small></p>
                 <?php if (!empty($post['modif_at'])) : ?>
                     <!-- Afficher la date de modification si elle existe -->
-                    <p>Modifié le : <small class="text-body-secondary"><?= htmlspecialchars($post['modif_at']) ?></small></p>
+                    <p>Modifié le : <small class="text-body-secondary"><?= htmlspecialchars($post['modif_at_fr']) ?></small></p>
                 <?php endif; ?>
             </div>
             <div class="d-flex text-center align-self-center">

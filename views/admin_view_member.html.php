@@ -8,18 +8,21 @@
             <div class="row g-0">
                 <div class="col-md-3 text-center">
                     <!-- Affichage de l'image de couverture du membre -->
-                    <img src="<?= htmlspecialchars($member['cover']); ?>" class="img-fluid rounded-start" 
-                         alt="Image de <?= htmlspecialchars($member['username']); ?>">
+                    <img src="<?= htmlspecialchars($member['cover']); ?>" class="img-fluid rounded-start" alt="Image de <?= htmlspecialchars($member['username']); ?>">
                 </div>
                 <div class="col-md-7">
                     <div class="card-body">
                         <!-- Affichage du nom d'utilisateur -->
                         <h5 class="card-title">Username : <?= htmlspecialchars($member['username'] ?? ''); ?></h5>
                         <!-- Affichage de la description du membre -->
-                        <p class="card-text">Description :<br> <?= isset($member['content']) ? htmlspecialchars($member['content']) : ''; ?></p>
+                        <p class="card-text">Description :</p>
+                        <div class="card-text-content">
+                            <?= isset($member['content']) ? nl2br(htmlspecialchars($member['content'])) : ''; ?>
+                        </div>
                     </div>
+
                 </div>
-                <div class="col-md-2 text-white text-center"> 
+                <div class="col-md-2 text-white text-center">
                     <div class="card-body bg-grey">
                         <p>Rôle :<br>
                             <span class="<?= isset($member['role_member_class']) ? htmlspecialchars($member['role_member_class']) : ''; ?>">
@@ -29,28 +32,28 @@
                         <!-- Spécialités du membre -->
                         <p><strong>Spécialités :</strong><br>
                             <?php if (!empty($member['jobs'])) : ?>
-                                <ul class="list-unstyled">
-                                    <?php foreach ($member['jobs'] as $job_title) : ?>
-                                        <li class="fs-7"><?= htmlspecialchars($job_title); ?></li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            <?php else : ?>
-                                Aucune spécialité.
-                            <?php endif; ?>
-                        </p>
+                        <ul class="list-unstyled">
+                            <?php foreach ($member['jobs'] as $job_title) : ?>
+                                <li class="fs-7"><?= htmlspecialchars($job_title); ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php else : ?>
+                        Aucune spécialité.
+                    <?php endif; ?>
+                    </p>
 
-                        <!-- Affichage des jeux associés au membre -->
-                        <p><strong>Les jeux :</strong><br>
-                            <?php if (!empty($selected_games) && is_array($selected_games)) : ?>
-                                <ul class="list-unstyled">
-                                    <?php foreach ($selected_games as $game) : ?>
-                                        <li class="fs-7"><?= htmlspecialchars($game['title'] ?? ''); ?></li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            <?php else : ?>
-                                <p>Ce membre n'a aucun jeu pour le moment.</p>
-                            <?php endif; ?>
-                        </p>
+                    <!-- Affichage des jeux associés au membre -->
+                    <p><strong>Les jeux :</strong><br>
+                        <?php if (!empty($selected_games) && is_array($selected_games)) : ?>
+                    <ul class="list-unstyled">
+                        <?php foreach ($selected_games as $game) : ?>
+                            <li class="fs-7"><?= htmlspecialchars($game['title'] ?? ''); ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php else : ?>
+                    <p>Ce membre n'a aucun jeu pour le moment.</p>
+                <?php endif; ?>
+                </p>
                     </div>
                 </div>
                 <div class="col-md-3 text-center">
@@ -79,7 +82,7 @@
             <form action="/TFG/admin/admin_update_member.php" method="get" style="display: inline;">
                 <input type="hidden" name="id" value="<?= htmlspecialchars($member['member_id']); ?>">
                 <button type="submit" class="btn btn-success">Modifier</button>
-            </form> 
+            </form>
             <!-- Formulaire pour supprimer le membre -->
             <form action="/TFG/controllers/admin_delete_member.php" method="post" style="display: inline;">
                 <input type="hidden" name="member_id" value="<?= htmlspecialchars($member['member_id']); ?>">

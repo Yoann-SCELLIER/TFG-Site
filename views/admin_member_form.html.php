@@ -55,7 +55,7 @@ if (isset($_SESSION['member_id'])) {
                         </div>
                         <!-- Colonne droite pour l'image -->
                         <div class="row col-6" width="150px;" height="auto">
-                            <img src="\tfg\assets\images\logo_competence.webp" alt="Image compétence">
+                            <img src="\tfg\assets\images\logo-competence.webp" alt="Image compétence">
                         </div>
                     </div>
                 </div>

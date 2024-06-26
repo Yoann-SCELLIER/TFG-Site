@@ -152,7 +152,7 @@ function updatePost($bdd, $id, $title, $content, $image_url, $member_id)
 {
     try {
         // Requête SQL pour mettre à jour un post
-        $sql = "UPDATE post SET title = :title, content = :content, image_url = :image_url WHERE post_id = :id";
+        $sql = "UPDATE post SET title = :title, content = :content, image_url = :image_url, modif_at = NOW() WHERE post_id = :id";
         
         // Vérifie si l'utilisateur n'est pas administrateur pour restreindre la mise à jour
         if (isset($_SESSION['is_admin']) && !$_SESSION['is_admin']) {

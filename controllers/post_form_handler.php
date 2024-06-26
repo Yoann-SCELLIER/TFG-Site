@@ -14,7 +14,7 @@ if (!isset($_SESSION)) {
 if (isset($_SESSION['member_id'])) {
     $member_id = $_SESSION['member_id'];
 } else {
-    // Gérer le cas où $member_id n'est pas défini
+    // Gérer le cas où $member_id n'est pas défini 
     exit("Erreur : utilisateur non authentifié");
 }
 

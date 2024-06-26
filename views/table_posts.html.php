@@ -41,10 +41,10 @@
                             <?php endif; ?>
                         </td>
                         <!-- Date de création du post -->
-                        <td class="m-0 b-0 p-0 g-0 fs-7"><?php echo date('d/m/Y', strtotime($post['created_at'])); ?></td>
+                        <td class="m-0 b-0 p-0 g-0 fs-7"><?php echo date('d/m/Y', strtotime($post['created_at_fr'])); ?></td>
                         <!-- Date de dernière modification du post -->
                         <td class="m-0 b-0 p-0 g-0 fs-7">
-                            <?php echo $post['modif_at'] !== null ? date('d/m/Y', strtotime($post['modif_at'])) : 'Aucune mise à jour à ce jour'; ?>
+                            <?php echo $post['modif_at_fr'] !== null ? date('d/m/Y', strtotime($post['modif_at_fr'])) : 'Aucune mise à jour à ce jour'; ?>
                         </td>
                         <!-- Nom d'utilisateur associé au post -->
                         <td><?php echo htmlspecialchars($post['username'] ?? 'Utilisateur inconnu'); ?></td>

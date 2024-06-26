@@ -1,4 +1,4 @@
-<footer class="bg-grey">
+<footer class="bg-grey mt-3">
     <!-- Bouton "Revenir en haut" -->
     <button id="backToTopBtn" class="btn btn-primary" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
 
@@ -78,7 +78,7 @@
                 <!-- Lien vers la page de membre avec l'ID de l'utilisateur connecté -->
                 <ul class="d-flex justify-content-center text-white" style="list-style-type:none;">
                     <li class="p-0 m-2"><a href="/tfg/member.php?id=<?= htmlspecialchars($_SESSION['member_id']) ?>" class="text-reset"><?= htmlspecialchars($_SESSION['username']) ?></a></li>
-                    <li class="p-0 m-2"><a href="/tfg/logout.php" class="text-reset">Déconnexion</a></li>
+                    <li class="p-0 m-2"><a href="/tfg/controllers/deconnexion_member.php" class="text-reset">Déconnexion</a></li>
                 </ul>
             <?php else : ?>
                 <!-- Liens vers la connexion et l'inscription -->

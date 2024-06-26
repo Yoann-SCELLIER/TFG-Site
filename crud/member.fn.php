@@ -142,7 +142,7 @@ function connexion($bdd, $email, $password)
         error_log("Erreur lors de la connexion : " . $e->getMessage());
         return false;
     }
-}
+} 
 
 /**
  * Fonction pour vérifier le rôle de l'utilisateur actuel
