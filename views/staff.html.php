@@ -56,7 +56,7 @@
             ?>
                         <div class="col-md-4" style="width: 310px;">
                             <!-- Afficher l'image du membre -->
-                            <div class=" border border-2 border-warning" style="width: 100%; height: auto;">
+                            <div class=" border border-2 border-warning d-flex align-items-center bg-white" style="width: 100%; height: 282px;">
                                 <img src="<?= htmlspecialchars($member['cover']) ?>" class="card-img-top" alt="Photo de <?= htmlspecialchars($member['username']) ?>" style="width: 100%; height: auto;">
                             </div>
                             <div class="card mb-4 shadow-sm border border-2 border-warning">
@@ -85,7 +85,7 @@
             ?>
                         <div class="col-md-4" style="width: 310px;">
                             <!-- Afficher l'image du membre -->
-                            <div class=" border border-2 border-primary" style="width: 100%; height: auto;">
+                            <div class=" border border-2 border-primary d-flex align-items-center bg-white" style="width: 100%; height: 282px;">
                                 <img src="<?= htmlspecialchars($member['cover']) ?>" class="card-img-top" alt="Photo de <?= htmlspecialchars($member['username']) ?>" style="width: 100%; height: auto;">
                             </div>
                             <div class="card mb-4 shadow-sm border border-2 border-primary">

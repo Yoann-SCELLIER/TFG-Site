@@ -74,6 +74,8 @@
 /* Style pour les cellules de tableau et les en-têtes de tableau */
 table th,
 table td {
+    align-content: center !important;
+
     white-space: nowrap; /* Empêche le texte de se casser sur plusieurs lignes */
     text-overflow: ellipsis; /* Ajoute des points de suspension en cas de dépassement */
     overflow: hidden; /* Cache tout débordement */
@@ -81,6 +83,8 @@ table td {
 
 /* Style pour la zone de défilement horizontale des tableaux */
 .table-responsive {
+    align-content: center !important;
+
     overflow-x: auto; /* Activation du défilement horizontal automatique */
 }
 
@@ -144,3 +148,4 @@ table td {
     overflow: hidden; /* Cache tout débordement */
     text-overflow: ellipsis; /* Ajoute des points de suspension en cas de dépassement */
 }
+

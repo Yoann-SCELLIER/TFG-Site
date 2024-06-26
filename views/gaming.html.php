@@ -25,11 +25,11 @@
                     <p class="fs-6">Liste des jeux où vous pouvez nous rejoindre.</p>
                 </div>
             </div>
-            <div class="col g-0 p-0 m-0 b-0 order-1 order-sm-1 order-md-1 order-lg-1">
-                <img class="p-0 m-0 b-0 g-0" width="40%" height="auto" src="assets/images/img-gaming.webp" alt="image pour la section gaming">
+            <div class="col order-1 order-sm-1 order-md-1 order-lg-1">
+                <img class="" width="40%" height="auto" src="assets/images/img-gaming.webp" alt="image pour la section gaming">
             </div>
         </div>
-        <hr class="border-1 text-dark">
+        <hr class="border-1 text-dark m-0">
         <div class="container p-3">
             <div class="row d-flex justify-content-evenly align-self-center">
                 <?php foreach ($games as $game) : ?>
@@ -39,8 +39,8 @@
                             <img src="<?= !empty($game['cover']) ? htmlspecialchars($game['cover']) : htmlspecialchars($game['image_url']) ?>" class="card-img-top h-auto" alt="<?= htmlspecialchars($game['title']) ?>">
                         </div>
                         <div class="card mb-4 border border-0">
-                            <div class="card-body p-0 m-0 b-0 g-0">
-                                <h5 class="card-title fs-6"><?= htmlspecialchars($game['title']) ?></h5>
+                            <div class="card-body">
+                                <h5 class="card-title fs-6 m-0"><?= htmlspecialchars($game['title']) ?></h5>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
     <div class="text-center bg-grey text-white">
         <h1>Esport</h1>
         <p>Les tournois proposés par la True Fighters (TF).</p>
-        <hr class="border-1 text-light">
+        <hr class="border-1 text-light m-0">
         <div class="container">
             <div class="row d-flex justify-content-evenly">
                 <div class="col-md-4 d-flex flex-column align-items-center" style="width: 400px;">

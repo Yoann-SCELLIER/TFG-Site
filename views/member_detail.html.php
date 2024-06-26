@@ -15,13 +15,13 @@
                 <div class="col-md-7">
                     <div class="card-body">
                         <!-- Nom d'utilisateur du membre -->
-                        <h5 class="card-title"><?= isset($member['username']) ? htmlspecialchars($member['username']) : ''; ?></h5>
+                        <h5 class="card-title m-0"><?= isset($member['username']) ? htmlspecialchars($member['username']) : ''; ?></h5>
                         <!-- Description du membre -->
-                        <p class="card-text">Description :<br> <?= isset($member['content']) ? htmlspecialchars($member['content']) : ''; ?></p>
+                        <p class="card-text m-0">Description :<br> <?= isset($member['content']) ? nl2br(htmlspecialchars($member['content'])) : ''; ?></p>
                     </div>
                 </div>
                 <div class="col-md-2 text-white text-center">
-                    <div class="card-body bg-grey">
+                    <div class="card-body bg-grey h-100">
                         <!-- Rôle du membre -->
                         <p>Rôle :<br>
                             <span class="<?= isset($member['role_member_class']) ? htmlspecialchars($member['role_member_class']) : ''; ?>">
@@ -29,7 +29,7 @@
                             </span>
                         </p>
                         <!-- Spécialités du membre -->
-                        <p><strong>Spécialités :</strong><br>
+                        <p class="m-0"><strong>Spécialités :</strong><br>
                             <?php if (!empty($member['jobs'])) : ?>
                                 <ul class="list-unstyled">
                                     <?php foreach ($member['jobs'] as $job_title) : ?>
@@ -41,7 +41,7 @@
                             <?php endif; ?>
                         </p>
                         <!-- Jeux associés au membre -->
-                        <p><strong>Les jeux :</strong><br>
+                        <p class="m-0"><strong>Les jeux :</strong><br>
                             <?php if (!empty($selected_games) && is_array($selected_games)) : ?>
                                 <ul class="list-unstyled">
                                     <?php foreach ($selected_games as $game) : ?>
@@ -54,24 +54,24 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-md-3 text-center">
+                <div class="col-md-3 text-center align-items-center">
                     <!-- Informations temporelles -->
-                    <p class="card-text"><small class="text-body-secondary">Créé le : <?= isset($member['created_at']) ? htmlspecialchars($member['created_at']) : ''; ?></small></p>
-                    <p class="card-text"><small class="text-body-secondary">Mis à jour le : <?= isset($member['modif_at']) ? htmlspecialchars($member['modif_at']) : ''; ?></small></p>
+                    <p class="card-text m-0"><small class="text-body-secondary">Créé le : <?= isset($member['created_at']) ? htmlspecialchars($member['created_at']) : ''; ?></small></p>
+                    <p class="card-text m-0"><small class="text-body-secondary">Mis à jour le : <?= isset($member['modif_at']) ? htmlspecialchars($member['modif_at']) : ''; ?></small></p>
                 </div>
-                <div class="col-md-3 text-center">
+                <div class="col-md-3 d-flex align-items-center justify-content-center">
                     <!-- Bouton pour envoyer un e-mail au membre -->
                     <p class="card-text">
-                        <small class="text-body-secondary">
+                        <small class="text-body-secondary d-flex align-items-center text-center">
                             <a href="mailto:<?= isset($member['email']) ? htmlspecialchars($member['email']) : ''; ?>">
                                 <img src="assets/images/mail.webp" style="width: 5rem;" alt="Mail de <?= isset($member['username']) ? htmlspecialchars($member['username']) : ''; ?>">
                             </a>
                         </small>
                     </p>
                 </div>
-                <div class="col-md-6 text-center">
+                <div class="col-md-6 text-center d-flex align-items-center">
                     <!-- Message de contact -->
-                    <p>Si vous le souhaitez, vous pouvez contacter le membre directement par e-mail. Il vous répondra dès que possible.</p>
+                    <p class="m-0">Si vous le souhaitez, vous pouvez contacter le membre directement par e-mail. Il vous répondra dès que possible.</p>
                 </div>
             </div>
         </div>

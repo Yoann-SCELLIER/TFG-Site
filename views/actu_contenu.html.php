@@ -1,13 +1,13 @@
 <div class="text-center">
     <!-- Titre et introduction de la section Actualités -->
-    <h1>ACTUALITÉS</h1>
-    <p class="p-4">Bienvenue dans la section Actualités de True Fighters Gaming ! <br>
+    <h1 class="m-0">ACTUALITÉS</h1>
+    <p class="p-4 m-0">Bienvenue dans la section Actualités de True Fighters Gaming ! <br>
         Ici, vous trouverez les dernières informations et mises à jour sur tout ce qui se passe dans notre communauté dynamique. <br>
         Que ce soit les résultats de nos récents tournois, les annonces de nouveaux jeux et extensions, ou les présentations de nos nouveaux membres, cette rubrique est votre source principale pour rester informé. <br>
         Ne manquez pas nos reportages exclusifs sur les événements à venir, les analyses de gameplay, et les interviews avec les joueurs et développeurs. <br>
         True Fighters Gaming est plus qu'une association, c'est une famille passionnée par l'esport et les jeux vidéo. <br>
         Restez connectés pour ne rien rater de l'actualité brûlante de la TF - True Fighters Gaming !</p>
-    <hr class="border-2">
+    <hr class="border-2 m-0">
 
     <!-- Inclusion du contrôleur pour les boutons d'action -->
     <?php
@@ -25,16 +25,27 @@
         if ($posts) {
             foreach ($posts as $post) {
         ?>
-                <div class="col m-1">
-                    <div class="card border-2 fixed-size-card">
+                <div class="col m-1 d-flex justify-content-center">
+                    <div class="card border-2 fixed-size-card" style="height: 450px;">
                         <!-- Affichage de l'image associée au post -->
-                        <img src="<?php echo $post['image_url'] ?>" class="card-img-top p-1" alt="Image <?= $post['title'] ?>">
-                        <div class="card-body m-0 p-0 b-0 g-0" style="height: 4rem;">
-                            <hr class=" m-0 p-0 b-0 g-0">
-                            <!-- Affichage du titre et du contenu du post -->
-                            <h5 class="card-title m-0 p-0 b-0 g-0"><?= htmlspecialchars($post['title']) ?></h5>
-                            <p class="card-text m-0 p-0 b-0 g-0"><?= htmlspecialchars($post['content']) ?></p>
+                        <div style="height: 50rem;" class="d-flex align-items-center">
+                            <img src="<?php echo $post['image_url'] ?>" class="card-img-top p-1" alt="Image <?= $post['title'] ?>">
                         </div>
+                        <!-- <div class="card-body m-0 p-0 b-0 g-0" style="height: 4rem;">
+                            <hr class=" m-0 p-0 b-0 g-0">
+                             Affichage du titre et du contenu du post -->
+                            <h5 class="card-title m-0 p-0 b-0 g-0"><?= htmlspecialchars($post['title']) ?></h5>
+                            <!-- <p class="card-text m-0 p-0 b-0 g-0" style="max-height: 200px; overflow-y: auto;"><?= nl2br(htmlspecialchars($post['content'])) ?></p>
+                        </div> -->
+
+                            <div class="card-body">
+                                <!-- Contenu de la carte avec système de défilement -->
+                                <p class="card-text" style="max-height: 300px; overflow-y: auto;">
+                                    <?= nl2br(htmlspecialchars($post['content'])) ?>
+                                </p>
+                            </div>
+
+
                         <div class="card-footer m-0 p-0 b-0 g-0">
                             <!-- Affichage des dates de création et de modification du post -->
                             <small class="text-body-secondary m-0 p-0 b-0 g-0"><?= $post['created_at_fr'] ?></small><br>

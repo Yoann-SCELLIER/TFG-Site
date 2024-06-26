@@ -9,7 +9,7 @@ if (isset($_SESSION['member_id'])) {
 }
 ?>
 
-<div class="container text-center p-3">
+<div class="container text-center p-2">
     <!-- Conteneur principal avec une marge interne de 3 -->
     <div class="row d-flex justify-content-evenly">
         <!-- Ligne avec des colonnes justifiées de manière équitable -->

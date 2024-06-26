@@ -1,6 +1,6 @@
 <section class="container-fluid px-5">
     <!-- Titre principal -->
-    <h1 class="text-center p-5">Liste des Membres</h1>
+    <h1 class="text-center p-2 m-0">Liste des Membres</h1>
     <div class="table-responsive text-center">
         <!-- Tableau Bootstrap avec bordures -->
         <table class="table table-bordered border border-2 border-dark align-self-center">
