@@ -13,7 +13,7 @@ require_once dirname(__DIR__) . '/TFG/controllers/view_member.php';
 require_once dirname(__DIR__) . '/TFG/controllers/view_game.php';
 
 // Inclusion de la vue détaillée du membre
-require_once dirname(__DIR__) . '/TFG/views/member_detail.html.php';
+require_once dirname(__DIR__) . '/TFG/views/member_detail.html.php'; 
 
 // Inclusion du contrôleur pour le bouton de carte de membre
 require_once dirname(__DIR__) . '\TFG\controllers\controller_button_card_member.php';

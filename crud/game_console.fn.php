@@ -65,17 +65,16 @@ function view_list_game($bdd)
  * @param int $id ID du jeu à récupérer.
  * @return mixed Tableau associatif contenant les détails du jeu, ou null si non trouvé.
  */
-function getGameById($bdd, $id)
-{
+function getGameById($bdd, $game_id) {
     try {
-        $sql = "SELECT * FROM game WHERE game_id = :id";
-        $stmt = $bdd->prepare($sql);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt = $bdd->prepare("SELECT * FROM game WHERE game_id = :game_id");
+        $stmt->bindParam(':game_id', $game_id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
-        echo "Erreur : " . $e->getMessage();
-        return null;
+        // Gérer l'erreur, par exemple en affichant un message
+        echo 'Erreur: ' . $e->getMessage();
+        return false;
     }
 }
 
@@ -87,17 +86,17 @@ function getGameById($bdd, $id)
  * @param string $content Description du nouveau jeu.
  * @param string $image_url URL de l'image associée au nouveau jeu.
  */
-function addGame($bdd, $title, $content, $image_url)
-{
+function addGame($bdd, $title, $content, $cover) {
     try {
-        $sql = "INSERT INTO game (title, content, image_url) VALUES (:title, :content, :image_url)";
-        $stmt = $bdd->prepare($sql);
-        $stmt->bindParam(':title', $title, PDO::PARAM_STR);
-        $stmt->bindParam(':content', $content, PDO::PARAM_STR);
-        $stmt->bindParam(':image_url', $image_url, PDO::PARAM_STR);
-        $stmt->execute();
+        $stmt = $bdd->prepare("INSERT INTO game (title, content, cover) VALUES (:title, :content, :cover)");
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':content', $content);
+        $stmt->bindParam(':cover', $cover);
+        return $stmt->execute();
     } catch (PDOException $e) {
-        echo "Erreur : " . $e->getMessage();
+        // Gérer l'erreur, par exemple en affichant un message
+        echo 'Erreur: ' . $e->getMessage();
+        return false;
     }
 }
 
@@ -110,18 +109,18 @@ function addGame($bdd, $title, $content, $image_url)
  * @param string $content Nouvelle description du jeu.
  * @param string $image_url Nouvelle URL de l'image associée au jeu.
  */
-function updateGame($bdd, $id, $title, $content, $image_url) 
-{
+function updateGame($bdd, $game_id, $title, $content, $cover) {
     try {
-        $sql = "UPDATE game SET title = :title, content = :content, image_url = :image_url WHERE game_id = :id";
-        $stmt = $bdd->prepare($sql);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->bindParam(':title', $title, PDO::PARAM_STR);
-        $stmt->bindParam(':content', $content, PDO::PARAM_STR);
-        $stmt->bindParam(':image_url', $image_url, PDO::PARAM_STR);
-        $stmt->execute();
+        $stmt = $bdd->prepare("UPDATE game SET title = :title, content = :content, cover = :cover WHERE game_id = :game_id");
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':content', $content);
+        $stmt->bindParam(':cover', $cover);
+        $stmt->bindParam(':game_id', $game_id, PDO::PARAM_INT);
+        return $stmt->execute();
     } catch (PDOException $e) {
-        echo "Erreur : " . $e->getMessage();
+        // Gérer l'erreur, par exemple en affichant un message
+        echo 'Erreur: ' . $e->getMessage();
+        return false;
     }
 }
 

@@ -14,15 +14,15 @@ if ($game) {
     <div class="col p-5">
         <div class="card border-2 m-5">
             <!-- Image du jeu -->
-            <img src="<?= htmlspecialchars($game['image_url']) ?>" class="card-img-top p-5 align-self-center" 
-                alt="Couverture <?= htmlspecialchars($game['title']) ?>" style="width:50rem; height:auto">
+            <img src="<?= htmlspecialchars($game['cover']) ?>" class="card-img-top p-5 align-self-center" 
+                alt="Couverture <?= htmlspecialchars_decode($game['title']) ?>" style="width:50rem; height:auto">
             <div class="card-body text-center">
                 <!-- Titre du jeu -->
-                <h5 class="card-title"><?= htmlspecialchars($game['title']) ?></h5>
+                <h5 class="card-title"><?= htmlspecialchars_decode($game['title']) ?></h5>
             </div>
             <div class="card-body">
                 <!-- Description du jeu -->
-                <p class="card-text"><?= htmlspecialchars($game['content']) ?></p>
+                <p class="card-text"><?= nl2br(htmlspecialchars_decode($game['content'])) ?></p>
             </div>
 
             <!-- Actions sur le jeu -->

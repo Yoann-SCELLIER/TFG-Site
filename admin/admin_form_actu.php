@@ -6,7 +6,7 @@ require_once dirname(__DIR__) . '\components\header.html.php';
 require_once dirname(__DIR__) . '\controllers\verification_admin.php';
 
 // Inclusion du contrôleur de navigation pour gérer la navigation dans l'interface d'administration
-require_once dirname(__DIR__) . '\template\controller_nav.php';
+require_once dirname(__DIR__) . '\controllers\controller_nav.php';
 
 // Contrôleur responsable du formulaire d'administration des actualités
 require_once dirname(__DIR__) . '\controllers\admin_form_post.php';

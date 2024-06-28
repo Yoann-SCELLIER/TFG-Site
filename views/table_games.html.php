@@ -22,8 +22,8 @@
                     <td><?php echo htmlspecialchars($game['title']); ?></td>
                     <td>
                         <!-- Image URL du jeu (si disponible) -->
-                        <?php if (!empty($game['image_url'])) : ?>
-                            <img src="<?php echo htmlspecialchars($game['image_url']); ?>" alt="Image URL du jeu" width="100" height="auto">
+                        <?php if (!empty($game['cover'])) : ?>
+                            <img src="<?php echo htmlspecialchars($game['cover']); ?>" alt="Image URL du jeu" width="100" height="auto">
                         <?php else : ?>
                             <!-- Message si aucune image URL n'est disponible -->
                             Aucune image URL

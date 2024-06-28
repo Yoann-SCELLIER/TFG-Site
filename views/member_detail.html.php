@@ -38,7 +38,7 @@
                                 </ul>
                             <?php else : ?>
                                 Aucune spécialité.
-                            <?php endif; ?>
+                            <?php endif; ?> 
                         </p>
                         <!-- Jeux associés au membre -->
                         <p class="m-0"><strong>Les jeux :</strong><br>

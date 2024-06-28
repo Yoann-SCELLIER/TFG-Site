@@ -2,14 +2,24 @@
 // Inclusion du fichier contenant les fonctions CRUD pour les jeux et consoles, situé dans le répertoire "crud" du répertoire parent.
 require_once dirname(__DIR__) . '/crud/game_console.fn.php';
 
+// Vérifier si $member_id est défini dans la session
+if (isset($_SESSION['member_id'])) {
+    $member_id = $_SESSION['member_id'];
+} else {
+    // Gérer le cas où $member_id n'est pas défini
+    // Vous pouvez rediriger l'utilisateur vers une page de connexion ou afficher un message d'erreur
+    header('Location: /TFG/404.php');
+    exit;
+}
+
 // Vérifier si un ID de jeu est présent dans l'URL
 $game_id = isset($_GET['id']) ? (int)$_GET['id'] : null;
 
 // Si la requête est de type POST, cela signifie que le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Valider et nettoyer les données du formulaire
-    $title = isset($_POST['title']) ? trim($_POST['title']) : '';
-    $content = isset($_POST['content']) ? trim($_POST['content']) : '';
+    // Valider et nettoyer les données du formulaire.
+    $title = isset($_POST['title']) ? htmlspecialchars($_POST['title']) : '';
+    $content = isset($_POST['content']) ? nl2br(htmlspecialchars($_POST['content'])) : '';
     $image_url = isset($_POST['image_url']) ? trim($_POST['image_url']) : '';
 
     // Définir l'URL de l'image par défaut
@@ -20,28 +30,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($game_id) {
         // Si un ID de jeu est présent, modifier le jeu existant de manière sécurisée
-        updateGame($bdd, $game_id, $title, $content, $cover);
-        // Rediriger l'utilisateur vers la liste des jeux après la modification
-        header('Location: /TFG/admin/admin_view_list_game.php');
-        exit;
+        if (updateGame($bdd, $game_id, $title, $content, $cover)) {
+            // Rediriger l'utilisateur vers la liste des jeux après la modification
+            echo "<script>alert('Modification réussie.');</script>";
+            header('Location: /TFG/admin/admin_view_list_game.php');
+            exit;
+        } else {
+            echo "<script>alert('Erreur lors de la modification du jeu.');</script>";
+        }
     } else {
         // Sinon, ajouter un nouveau jeu de manière sécurisée
-        addGame($bdd, $title, $content, $cover);
-        // Rediriger l'utilisateur vers la liste des jeux après l'ajout
-        header('Location: /TFG/admin/admin_view_list_game.php');
-        exit;
+        if (addGame($bdd, $title, $content, $cover)) {
+            // Rediriger l'utilisateur vers la liste des jeux après l'ajout
+            echo "<script>alert('Ajout réussi.');</script>";
+            header('Location: /TFG/admin/admin_view_list_game.php');
+            exit;
+        } else {
+            echo "<script>alert('Erreur lors de l\'ajout du jeu.');</script>";
+        }
     }
 } else {
     if ($game_id) {
         // Si un ID de jeu est présent, charger les données du jeu pour modification
         $game = getGameById($bdd, $game_id);
         if ($game) {
-            $title = htmlspecialchars($game['title']); // Échapper les données pour éviter les attaques XSS
-            $content = isset($game['content']) ? htmlspecialchars($game['content']) : '';
-            $image_url = isset($game['image_url']) ? htmlspecialchars($game['image_url']) : '';
+            $title = htmlspecialchars_decode($game['title']); // Décoder les entités HTML spéciales
+            $content = isset($game['content']) ? htmlspecialchars_decode(nl2br($game['content'])) : '';
+            $image_url = isset($game['cover']) ? htmlspecialchars($game['cover']) : '';
         } else {
             // Gestion d'erreur si le jeu n'existe pas
-            echo "Jeu non trouvé";
+            echo "<script>alert('Aucun jeu trouvé...');</script>";
             exit;
         }
         $formTitle = "Modifier le jeu"; // Titre du formulaire pour la modification
