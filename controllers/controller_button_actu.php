@@ -1,7 +1,7 @@
 <?php
 
 // Inclusion du fichier contenant la fonction pour générer le bouton d'actualité, situé dans le répertoire "function" du répertoire parent.
-require_once dirname(__DIR__) . '/function/template_button_actu.php';
+require_once dirname(__DIR__) . '/template/template_button_actu.php';
 
 // Vérifier si la session n'est pas déjà démarrée, puis la démarrer si nécessaire
 if (session_status() == PHP_SESSION_NONE) {

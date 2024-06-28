@@ -1,7 +1,7 @@
 <?php
 
 // Inclusion du fichier contenant la fonction pour générer la barre de navigation, situé dans le répertoire "function" du répertoire parent.
-require_once dirname(__DIR__) . '/function/template_navbar.php';
+require_once dirname(__DIR__) . '/template/template_navbar.php';
 
 // Inclusion du fichier contenant les fonctions liées aux membres, situé dans le répertoire "crud" du répertoire parent.
 require_once dirname(__DIR__) . '/crud/member.fn.php';

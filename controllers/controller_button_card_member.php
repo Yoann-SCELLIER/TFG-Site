@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__DIR__) . '/function/template_button_card_member.php';
+require_once dirname(__DIR__) . '/template/template_button_card_member.php';
 
 // Vérifier si la session est démarrée
 if (session_status() == PHP_SESSION_NONE) {
