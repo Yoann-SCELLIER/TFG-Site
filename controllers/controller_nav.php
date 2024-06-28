@@ -1,10 +1,19 @@
 <?php
 
-// Inclusion du fichier contenant la fonction pour générer la barre de navigation, situé dans le répertoire "function" du répertoire parent.
+// Inclure le fichier contenant les fonctions liées aux membres
+require_once dirname(__DIR__) . '/crud/member.fn.php';
 require_once dirname(__DIR__) . '/template/template_navbar.php';
 
-// Inclusion du fichier contenant les fonctions liées aux membres, situé dans le répertoire "crud" du répertoire parent.
-require_once dirname(__DIR__) . '/crud/member.fn.php';
+// $members = viewMembers($bdd);
+
+// var_dump($members);
+// die;
+
+// Vérifier et afficher le contenu de $_SESSION pour déboguer si nécessaire
+// echo '<pre>';
+// var_dump($_SESSION);
+// echo '</pre>';
+// die;
 
 // Vérifier si 'member_id' est défini dans la session
 if (isset($_SESSION['member_id'])) {
@@ -38,3 +47,5 @@ if (isset($_SESSION['member_id'])) {
 } else {
     echo navVisitor(); // Afficher la barre de navigation par défaut si l'utilisateur n'est pas connecté
 }
+
+?>

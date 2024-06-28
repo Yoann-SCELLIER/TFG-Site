@@ -3,19 +3,6 @@
 require_once dirname(__DIR__) . '\bdd\db.fn.php';
 
 /**
- * Fonction pour récupérer la liste des consoles depuis la base de données.
- * @param PDO $bdd Connexion PDO à la base de données.
- * @return array Tableau associatif des consoles avec leurs détails.
- */
-function listConsoles($bdd) 
-{
-    $sqlQuery = 'SELECT * FROM console';
-    $stmt = $bdd->query($sqlQuery);
-    $consoles = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $consoles;
-}
-
-/**
  * Fonction pour ajouter ou mettre à jour un jeu dans la table "game".
  * @param PDO $bdd Connexion PDO à la base de données.
  * @param int|null $game_id ID du jeu à mettre à jour (null pour ajouter un nouveau jeu).

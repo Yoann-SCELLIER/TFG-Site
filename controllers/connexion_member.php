@@ -1,5 +1,5 @@
 <?php
-// Inclusion du fichier contenant les fonctions CRUD pour les membres, situé dans le répertoire "crud" du répertoire parent.
+// Inclusion du fichier contenant les fonctions CRUD pour les membres
 require_once dirname(__DIR__) . '/crud/member.fn.php';
 
 // Vérification si le formulaire est soumis via la méthode POST
@@ -10,6 +10,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Appel de la fonction connexion pour vérifier les informations d'identification
     $member = connexion($bdd, $email, $password);
+
+    // var_dump($member);
+    // var_dump($member['role_id']);
+    // var_dump($member['role_member']);
+    // var_dump($password);
+    // die;
 
     if ($member) {
         // Démarrage de la session et enregistrement des informations de membre

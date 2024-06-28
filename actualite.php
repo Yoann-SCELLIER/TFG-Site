@@ -2,7 +2,7 @@
 
 // Inclusion du header
 require_once dirname(__DIR__) . '\tfg\components\header.html.php';
-
+ 
 // Inclusion du contrôleur de navigation
 require_once dirname(__DIR__) . '\tfg\controllers\controller_nav.php';
 

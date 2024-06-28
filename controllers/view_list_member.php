@@ -7,3 +7,4 @@ $members = viewMembers($bdd);
 
 // Appel de la fonction pour récupérer les rôles depuis la base de données
 $roles = getRolesFromDatabase($bdd);
+

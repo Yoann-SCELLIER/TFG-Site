@@ -3,7 +3,7 @@
 require_once dirname(__DIR__) . '/bdd/db.fn.php';
 
 /**
- * Fonction pour ajouter un membre avec mot de passe hashé
+ * Fonction pour ajouter un membre avec mot de passe hashé et rôle par défaut 'memberGuest'
  *
  * @param PDO $bdd Instance de connexion PDO à la base de données
  * @param string $username Nom d'utilisateur du membre à ajouter
@@ -13,17 +13,18 @@ require_once dirname(__DIR__) . '/bdd/db.fn.php';
  * @param string $password Mot de passe hashé du membre à ajouter
  * @param int $departement_id ID du département du membre à ajouter
  * @param string $cover Chemin vers l'image de profil du membre à ajouter
+ * @param int $role_id ID du rôle du membre à ajouter
  * @return bool Retourne true si l'insertion s'est bien déroulée, sinon false
  */
-function addMember($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover) 
+function addMember($bdd, $username, $first_name, $last_name, $email, $password, $departement_id, $cover, $role_id) 
 {
     try {
         // Chemin de l'image par défaut
         $default_cover = '/tfg/assets/images/Default_esports_player_silhouette_face_not_visible_light_in_th_2.webp';
         
-        // Requête SQL pour insérer le nouveau membre avec le mot de passe hashé
-        $sql = "INSERT INTO member (username, first_name, last_name, email, password, departement_id, cover) 
-                VALUES (:username, :first_name, :last_name, :email, :password, :departement_id, :cover)";
+        // Requête SQL pour insérer le nouveau membre avec le mot de passe hashé et le rôle par défaut
+        $sql = "INSERT INTO member (username, first_name, last_name, email, password, departement_id, cover, role_id) 
+                VALUES (:username, :first_name, :last_name, :email, :password, :departement_id, :cover, :role_id)";
         $stmt = $bdd->prepare($sql);
         $stmt->execute([
             'username' => $username,
@@ -32,7 +33,8 @@ function addMember($bdd, $username, $first_name, $last_name, $email, $password, 
             'email' => $email,
             'password' => $password, // Utilisation du mot de passe hashé provenant du contrôleur
             'departement_id' => $departement_id,
-            'cover' => $cover ? $cover : $default_cover // Utilisation de l'image de profil spécifiée ou par défaut
+            'cover' => $cover ? $cover : $default_cover, // Utilisation de l'image de profil spécifiée ou par défaut
+            'role_id' => $role_id // Utilisation de l'ID du rôle fourni en argument
         ]);
         
         return true; // Retourne true si l'insertion s'est bien déroulée
@@ -102,18 +104,18 @@ function isEmailTaken($bdd, $email)
 }
 
 /**
- * Fonction pour vérifier les informations d'identification et retourner le membre si elles correspondent
+ * Fonction pour vérifier les informations d'identification et retourner le membre avec son rôle
  *
  * @param PDO $bdd Instance de connexion PDO à la base de données
  * @param string $email Adresse email du membre à vérifier
  * @param string $password Mot de passe à vérifier (non hashé)
- * @return mixed Retourne les informations du membre si les identifiants sont valides, sinon false
+ * @return mixed Retourne les informations du membre avec son rôle si les identifiants sont valides, sinon false
  */
 function connexion($bdd, $email, $password) 
 {
     try {
         // Sélectionner l'utilisateur depuis la base de données
-        $sql = "SELECT member.*, role.* 
+        $sql = "SELECT member.*, role.role_member 
                 FROM member 
                 JOIN role ON member.role_id = role.id 
                 WHERE member.email = :email";
@@ -121,6 +123,10 @@ function connexion($bdd, $email, $password)
         $stmt->execute(['email' => $email]);
         $member = $stmt->fetch(PDO::FETCH_ASSOC);
         
+        // var_dump($member['role_id']);
+        // var_dump($member['role_member']);
+        // die;
+
         if ($member) {
             // Récupération du mot de passe hashé depuis la base de données
             $hashed_password = $member['password'];
@@ -142,12 +148,12 @@ function connexion($bdd, $email, $password)
         error_log("Erreur lors de la connexion : " . $e->getMessage());
         return false;
     }
-} 
+}
 
 /**
  * Fonction pour vérifier le rôle de l'utilisateur actuel
  *
- * @param string $required_role Role requis pour accéder à la fonction
+ * @param string $required_role Role requis pour accéder à la fonction ('memberAdmin' dans ce cas)
  * @return void Redirige l'utilisateur s'il n'a pas le rôle requis
  */
 function check_role($required_role) 

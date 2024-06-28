@@ -83,8 +83,8 @@
             <?php else : ?>
                 <!-- Liens vers la connexion et l'inscription -->
                 <ul class="d-flex justify-content-center text-white" style="list-style-type:none;">
-                    <li class="p-0 m-2"><a href="/tfg/log.html.php" class="text-reset">Connexion</a></li>
-                    <li class="p-0 m-2"><a href="/tfg/log.html.php" class="text-reset">Inscription</a></li>
+                    <li class="p-0 m-2"><a href="/tfg/log.php" class="text-reset">Connexion</a></li>
+                    <li class="p-0 m-2"><a href="/tfg/log.php" class="text-reset">Inscription</a></li>
                 </ul>
             <?php endif; ?>
         </div>

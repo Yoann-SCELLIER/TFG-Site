@@ -3,8 +3,13 @@
 // Inclusion du header
 require_once dirname(__DIR__) . '\TFG\components\header.html.php';
 
+
 // Inclusion du contrôleur de navigation
 require_once dirname(__DIR__) . '\tfg\controllers\controller_nav.php';
+
+// var_dump($_SESSION);
+// var_dump($password);
+// die;
 
 // Inclusion du contrôleur pour afficher la liste des membres
 require_once dirname(__DIR__) . '\TFG\controllers\view_list_member.php';
@@ -29,6 +34,9 @@ require_once dirname(__DIR__) . '\TFG\views\formulaire.html.php';
 
 // Inclusion de la vue des conditions
 require_once dirname(__DIR__) . '\TFG\views\condition.html.php';
+
+// var_dump($members);
+// die;
 
 // Inclusion du footer
 require_once dirname(__DIR__) . '\TFG\components\footer.html.php';

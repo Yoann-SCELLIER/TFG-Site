@@ -53,9 +53,6 @@
                 </div>
         <?php
             }
-        } else {
-            // Message affiché en cas d'absence de posts
-            header('Location: /TFG/404.php');
         }
         ?>
     </div>

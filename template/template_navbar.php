@@ -135,3 +135,4 @@ function navMemberAdmin()
         <!-- Ajoutez ici le contenu principal spécifique à la page d'administration -->
 <?php
 }
+?>
