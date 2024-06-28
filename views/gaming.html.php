@@ -31,12 +31,14 @@
         </div>
         <hr class="border-1 text-dark m-0">
         <div class="container p-3">
-            <div class="row d-flex justify-content-evenly align-self-center">
+            <div class="row d-flex justify-content-evenly">
                 <?php foreach ($games as $game) : ?>
-                    <div class="col-md-4 d-flex flex-column align-items-center align-self-center" style="width: 280px;">
+                    <div class="col-md-4 d-flex flex-column align-items-center" style="width: 280px;">
                         <!-- Afficher l'image du jeu -->
                         <div style="width: 60%; height: auto;">
-                            <img src="<?= !empty($game['cover']) ? htmlspecialchars($game['cover']) : htmlspecialchars($game['image_url']) ?>" class="card-img-top h-auto" alt="<?= htmlspecialchars($game['title']) ?>">
+                            <img src="<?= !empty($game['cover']) ? htmlspecialchars($game['cover']) : 
+                            htmlspecialchars($game['image_url']) ?>" class="card-img-top h-auto" 
+                            alt="<?= htmlspecialchars($game['title']) ?>">
                         </div>
                         <div class="card mb-4 border border-0">
                             <div class="card-body">

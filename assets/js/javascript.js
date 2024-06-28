@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('hiddenGamingContent').style.display = 'block';
         document.querySelector('.downGamingContent').style.display = 'none';
         document.getElementById('showMoreGaming').style.display = 'none';
-    });
+    }); 
 
     document.getElementById('showLessGaming').addEventListener('click', function () {
         // Masque le contenu du gaming caché et réaffiche l'élément de déclenchement
@@ -69,18 +69,6 @@ backToTopBtn.addEventListener('click', function () {
     // Fonction pour remonter en haut de la page en douceur
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
-});
-
-//--------------------------------------------------------------------------------------------------------------------------------------
-// Gestion des pop-ups des conditions
-
-document.addEventListener('DOMContentLoaded', function () {
-    // Ferme les pop-ups en cliquant sur les boutons de fermeture
-    document.querySelectorAll('.close-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            this.parentElement.classList.add('d-none');
-        });
-    });
 });
 
 //--------------------------------------------------------------------------------------------------------------------------------------

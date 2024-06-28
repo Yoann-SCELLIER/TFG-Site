@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result) {
         // Redirection vers la page de connexion après inscription réussie
-        echo "<script>alert('Inscription réussie.'); window.location.href = '/TFG/log.php';</script>";
+        echo "<script>alert('Inscription réussie. Pensez à aller sur votre profil pour ajouter plus d'infos!'); window.location.href = '/TFG/log.php';</script>";
         exit();
     } else {
         // Gérer les erreurs si l'inscription a échoué
