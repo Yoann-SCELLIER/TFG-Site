@@ -4,7 +4,7 @@
     <div class="row row-cols-1 row-cols-md-2 row-clos-lg-2 text-center g-0 bg-grey p-1" id="staffSection">
         <!-- Section d'introduction -->
         <div class="col align-self-center text-end m-0 text-white order-2 order-sm-2 order-md-1 p-3">
-            <h1 class="fs-4">Staff & Membres</h1>
+            <h2 class="fs-4">Staff & Membres</h2>
             <p class="fs-6">Présentation du personnel "STAFF & MEMBRES", leurs rôles, leurs importances, ainsi que
                 la spécialité de chacun.</p>
         </div>
@@ -26,7 +26,7 @@
         <img class="p-0 m-0 b-0 g-0" width="23%" height="auto" src="assets/images/img-member.webp" alt="image pour la section membre et staff">
     </div>
     <!-- Introduction détaillée -->
-         <h1>Explorez la Galerie des Membres du Staff de la TF - True Fighters Gaming</h1>
+         <h2>Explorez la Galerie des Membres du Staff de la TF - True Fighters Gaming</h2>
          <p class="p-4">Dans cette section dédiée, plongez au cœur de la communauté True Fighters Gaming (TF) et découvrez les
              visages derrière cette passionnante aventure vidéoludique.<br>
              Chaque membre de la TF apporte sa propre touche à notre communauté dynamique, enrichissant notre expérience

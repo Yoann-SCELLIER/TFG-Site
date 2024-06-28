@@ -5,7 +5,7 @@
             <img class="p-0 m-0 b-0 g-0" width="40%" height="auto" src="assets/images/img-gaming.webp" alt="image pour la section gaming">
         </div>
         <div class="col row align-self-center text-start m-0">
-            <h1 class="fs-4">Gaming et Tournois</h1>
+            <h3 class="fs-4">Gaming et Tournois</h3>
             <p class="fs-6">Découvrez les différents types de jeux vidéo que vous pouvez rencontrer en tant que membre de la True Fighters (TF), ainsi que les tournois proposés par notre communauté.</p>
         </div>
     </div>
@@ -21,7 +21,7 @@
         <div class="row row-cols-1 row-cols-md-2 text-center g-0 p-1" background-size="10%">
             <div class="col align-self-center text-end order-2 order-sm-2 order-md-2 order-lg-2">
                 <div class="col row align-self-center text-start m-0">
-                    <h1 class="fs-4">Gaming</h1>
+                    <h3 class="fs-4">Gaming</h3>
                     <p class="fs-6">Liste des jeux où vous pouvez nous rejoindre.</p>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                         </div>
                         <div class="card mb-4 border border-0">
                             <div class="card-body">
-                                <h5 class="card-title fs-6 m-0"><?= htmlspecialchars($game['title']) ?></h5>
+                                <h4 class="card-title fs-6 m-0"><?= htmlspecialchars($game['title']) ?></h4>
                             </div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
     </div>
 
     <div class="text-center bg-grey text-white">
-        <h1>Esport</h1>
+        <h5>Esport</h5>
         <p>Les tournois proposés par la True Fighters (TF).</p>
         <hr class="border-1 text-light m-0">
         <div class="container">
@@ -59,7 +59,7 @@
                     <img src="assets\images\logo-tournament.webp" class="card-img-top h-auto" alt="Logo tournois Guilty Gear -STRIVE-">
                     <div class="card mb-4 border border-0 bg-transparent">
                         <div class="card-body bg-transparent p-0 m-0 b-0 g-0">
-                            <h5 class="card-title fs-6 text-white">Tournament Guilty Gear -STRIVE- True Fighters</h5>
+                            <h6 class="card-title fs-6 text-white">Tournament Guilty Gear -STRIVE- True Fighters</h6>
                         </div>
                     </div>
                 </div>

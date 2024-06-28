@@ -48,16 +48,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 //--------------------------------------------------------------------------------------------------------------------------------------
-// BOUTON CONTACT
-
-document.getElementById('contactButton').addEventListener('click', function (event) {
-    // Empêche le comportement par défaut du lien et affiche le modal de contact
-    event.preventDefault();
-    var contactModal = new bootstrap.Modal(document.getElementById('contactModal'));
-    contactModal.show();
-});
-
-//--------------------------------------------------------------------------------------------------------------------------------------
 // BOUTON REMONTE ECRAN
 
 let backToTopBtn = document.getElementById("backToTopBtn");

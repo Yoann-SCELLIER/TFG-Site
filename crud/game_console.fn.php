@@ -1,6 +1,6 @@
 <?php
 // Inclure le fichier de configuration de la base de données
-require_once dirname(__DIR__) . '\controller\db.fn.php';
+require_once dirname(__DIR__) . '\bdd\db.fn.php';
 
 /**
  * Fonction pour récupérer la liste des consoles depuis la base de données.

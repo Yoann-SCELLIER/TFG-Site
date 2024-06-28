@@ -28,22 +28,16 @@
                 <div class="col m-1 d-flex justify-content-center">
                     <div class="card border-2 fixed-size-card" style="height: 450px;">
                         <!-- Affichage de l'image associée au post -->
-                        <div style="height: 50rem;" class="d-flex align-items-center">
+                        <div style="height: 50rem;" class="d-flex align-items-center border-bottom border-2">
                             <img src="<?php echo $post['image_url'] ?>" class="card-img-top p-1" alt="Image <?= $post['title'] ?>">
                         </div>
-                        <!-- <div class="card-body m-0 p-0 b-0 g-0" style="height: 4rem;">
-                            <hr class=" m-0 p-0 b-0 g-0">
-                             Affichage du titre et du contenu du post -->
-                            <h5 class="card-title m-0 p-0 b-0 g-0"><?= htmlspecialchars($post['title']) ?></h5>
-                            <!-- <p class="card-text m-0 p-0 b-0 g-0" style="max-height: 200px; overflow-y: auto;"><?= nl2br(htmlspecialchars($post['content'])) ?></p>
-                        </div> -->
-
-                            <div class="card-body">
-                                <!-- Contenu de la carte avec système de défilement -->
-                                <p class="card-text" style="max-height: 300px; overflow-y: auto;">
-                                    <?= nl2br(htmlspecialchars($post['content'])) ?>
-                                </p>
-                            </div>
+                        <h5 class="card-title m-0 p-0 b-0 g-0"><?= htmlspecialchars($post['title']) ?></h5>
+                        <div class="card-body">
+                            <!-- Contenu de la carte avec système de défilement -->
+                            <p class="card-text" style="max-height: 200px; width: 280px; overflow-y: auto;">
+                                <?= nl2br(htmlspecialchars($post['content'])) ?>
+                            </p>
+                        </div>
 
 
                         <div class="card-footer m-0 p-0 b-0 g-0">

@@ -1,6 +1,6 @@
 <?php
 // Inclusion du fichier de configuration de la base de données
-require_once dirname(__DIR__) . '/controller/db.fn.php';
+require_once dirname(__DIR__) . '/bdd/db.fn.php';
 
 /**
  * Fonction pour ajouter un nouveau post dans la base de données

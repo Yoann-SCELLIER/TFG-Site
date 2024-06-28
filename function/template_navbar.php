@@ -19,7 +19,7 @@ function navMemberOfficial()
                     <li class="nav-item"><a class="nav-link text-white" href="index.php#staffSection">STAFF</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="index.php#gamingSection">GAMING</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="actualite.php">ACTUALITÉ</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#" id="contactButton">CONTACT</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="mailto:true.fighters.gaming.contact@gmail.com">CONTACT</a></li>
                     <li class="nav-item row text-center text-light">
                         <p class="m-0" style="font-size: 8px;">WELCOME</p>
                         <p class="m-0" style="font-size: 13px;"><?php echo htmlspecialchars($username); ?></p>
@@ -54,7 +54,7 @@ function navMemberGuest()
                     <li class="nav-item m-1"><a class="nav-link text-white" href="index.php#staffSection">STAFF</a></li>
                     <li class="nav-item m-1"><a class="nav-link text-white" href="index.php#gamingSection">GAMING</a></li>
                     <li class="nav-item m-1"><a class="nav-link text-white" href="actualite.php">ACTUALITÉ</a></li>
-                    <li class="nav-item m-1"><a class="nav-link text-white" href="#" id="contactButton">CONTACT</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="mailto:true.fighters.gaming.contact@gmail.com">CONTACT</a></li>
                     <li class="nav-item row text-center text-light">
                         <p class="m-0" style="font-size: 8px;">WELCOME</p>
                         <p class="m-0" style="font-size: 13px;"><?php echo htmlspecialchars($username); ?></p>
@@ -70,7 +70,7 @@ function navMemberGuest()
 <?php
 }
 
-function navVisitor()
+function navVisitor() 
 {
 ?>
     <nav class="navbar navbar-expand-lg bg-grey">
@@ -88,7 +88,7 @@ function navVisitor()
                     <li class="nav-item"><a class="nav-link text-white" href="index.php#staffSection">STAFF</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="index.php#gamingSection">GAMING</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="actualite.php">ACTUALITÉ</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#" id="contactButton">CONTACT</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="mailto:true.fighters.gaming.contact@gmail.com">CONTACT</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="/tfg/log.php">CONNEXION</a></li>
                 </ul>
             </div>
