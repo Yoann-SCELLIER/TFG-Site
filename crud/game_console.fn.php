@@ -17,10 +17,12 @@ function addOrUpdateGame($bdd, $game_id, $cover, $title, $content, $category_id)
     try {
         if ($game_id) {
             // Si un ID de jeu est fourni, mettez à jour le jeu existant
-            $sql = "UPDATE game SET cover = :cover, title = :title, content = :content, category_id = :category_id WHERE game_id = :game_id";
+            $sql = "UPDATE game SET cover = :cover, title = :title, content = :content, category_id = :category_id 
+            WHERE game_id = :game_id";
         } else {
             // Sinon, ajoutez un nouveau jeu
-            $sql = "INSERT INTO game (cover, title, content, category_id) VALUES (:cover, :title, :content, :category_id)";
+            $sql = "INSERT INTO game (cover, title, content, category_id) 
+            VALUES (:cover, :title, :content, :category_id)";
         }
 
         // Préparer et exécuter la requête SQL
@@ -65,7 +67,8 @@ function view_list_game($bdd)
  * @param int $id ID du jeu à récupérer.
  * @return mixed Tableau associatif contenant les détails du jeu, ou null si non trouvé.
  */
-function getGameById($bdd, $game_id) {
+function getGameById($bdd, $game_id) 
+{
     try {
         $stmt = $bdd->prepare("SELECT * FROM game WHERE game_id = :game_id");
         $stmt->bindParam(':game_id', $game_id, PDO::PARAM_INT);
@@ -86,7 +89,8 @@ function getGameById($bdd, $game_id) {
  * @param string $content Description du nouveau jeu.
  * @param string $image_url URL de l'image associée au nouveau jeu.
  */
-function addGame($bdd, $title, $content, $cover) {
+function addGame($bdd, $title, $content, $cover) 
+{
     try {
         $stmt = $bdd->prepare("INSERT INTO game (title, content, cover) VALUES (:title, :content, :cover)");
         $stmt->bindParam(':title', $title);
@@ -109,7 +113,8 @@ function addGame($bdd, $title, $content, $cover) {
  * @param string $content Nouvelle description du jeu.
  * @param string $image_url Nouvelle URL de l'image associée au jeu.
  */
-function updateGame($bdd, $game_id, $title, $content, $cover) {
+function updateGame($bdd, $game_id, $title, $content, $cover) 
+{
     try {
         $stmt = $bdd->prepare("UPDATE game SET title = :title, content = :content, cover = :cover WHERE game_id = :game_id");
         $stmt->bindParam(':title', $title);

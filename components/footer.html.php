@@ -49,7 +49,7 @@
     <div class="row cols-12 row-cols-1 row-cols-md-1 row-cols-lg-3 g-0 m-0 b-0 p-0 text-center align-self-center text-light">
         <!-- Section "Like & Follow" -->
         <div class="row col">
-            <h5 class="fs-5">Like & Follow</h5>
+            <h1 class="fs-5">Like & Follow</h1>
             <ul>
                 <!-- Liens vers les réseaux sociaux -->
                 <li><a href="/tfg/404.php" class="text-reset">Facebook</a></li>
@@ -59,7 +59,7 @@
         </div>
         <!-- Section "Conditions" -->
         <div class="row col container">
-            <h6 class="fs-5">Conditions</h6>
+            <h2 class="fs-5">Conditions</h2>
             <ul class="list-unstyled">
                 <!-- Liens vers les conditions générales et autres -->
                 <li><a class="text-reset" href="#" id="CGUButton" data-bs-toggle="modal" data-bs-target="#CGUModal">CGU</a></li>
