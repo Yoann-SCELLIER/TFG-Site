@@ -11,9 +11,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $first_name = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $last_name = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+    $departement_id = filter_input(INPUT_POST, 'departement_id', FILTER_VALIDATE_INT);
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
-    $departement_id = filter_input(INPUT_POST, 'departement_id', FILTER_VALIDATE_INT);
     $cover = $_POST['cover'];
 
     // Vérifier que les mots de passe correspondent

@@ -4,17 +4,6 @@
 require_once dirname(__DIR__) . '/crud/member.fn.php';
 require_once dirname(__DIR__) . '/template/template_navbar.php';
 
-// $members = viewMembers($bdd);
-
-// var_dump($members);
-// die;
-
-// Vérifier et afficher le contenu de $_SESSION pour déboguer si nécessaire
-// echo '<pre>';
-// var_dump($_SESSION);
-// echo '</pre>';
-// die;
-
 // Vérifier si 'member_id' est défini dans la session
 if (isset($_SESSION['member_id'])) {
     $member_id = $_SESSION['member_id'];

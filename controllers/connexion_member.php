@@ -11,12 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Appel de la fonction connexion pour vérifier les informations d'identification
     $member = connexion($bdd, $email, $password);
 
-    // var_dump($member);
-    // var_dump($member['role_id']);
-    // var_dump($member['role_member']);
-    // var_dump($password);
-    // die;
-
     if ($member) {
         // Démarrage de la session et enregistrement des informations de membre
         session_start();
