@@ -55,8 +55,7 @@ function addMember($bdd, $username, $first_name, $last_name, $email, $password, 
 function validateInputs($email, $password) 
 {
     // Vérifier si l'adresse e-mail contient un @ et se termine par .fr ou .com
-    $emailValid = preg_match('/^[^@]+@[^@]+\.(fr|com)$/i', $email);
-
+    $emailValid = preg_match('/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9.-]+\.(fr|com)$/i', $email);
     // Vérifier si le mot de passe contient au moins une majuscule, un chiffre et un caractère spécial
     $passwordValid = preg_match('/[A-Z]/', $password) && preg_match('/\d/', $password) && preg_match('/[\W_]/', $password);
 

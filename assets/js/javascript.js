@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    // STORY
+    // STORY 
     document.getElementById('showMoreStory').addEventListener('click', function (e) {
         // Affiche le contenu caché de l'histoire et masque les éléments associés
         document.getElementById('hiddenStoryContent').style.display = 'block';
         document.querySelector('.downStoryContent').style.display = 'none';
-        document.getElementById('showMoreStory').style.display = 'none';
+        document.getElementById('showMoreStory').style.display = 'none'; 
     });
 
     document.getElementById('showLessStory').addEventListener('click', function () {

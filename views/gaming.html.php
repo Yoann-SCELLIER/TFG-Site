@@ -43,7 +43,7 @@
                         <div class="card mb-4 border border-0">
                             <div class="card-body">
                                 <h4 class="card-title fs-6 m-0"><?= htmlspecialchars($game['title']) ?></h4>
-                            </div>
+                            </div> 
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -58,7 +58,8 @@
         <div class="container">
             <div class="row d-flex justify-content-evenly">
                 <div class="col-md-4 d-flex flex-column align-items-center" style="width: 400px;">
-                    <img src="assets\images\logo-tournament.webp" class="card-img-top h-auto" alt="Logo tournois Guilty Gear -STRIVE-">
+                    <img src="assets\images\logo-tournament.webp" class="card-img-top h-auto" 
+                    alt="Logo tournois Guilty Gear -STRIVE-">
                     <div class="card mb-4 border border-0 bg-transparent">
                         <div class="card-body bg-transparent p-0 m-0 b-0 g-0">
                             <h6 class="card-title fs-6 text-white">Tournament Guilty Gear -STRIVE- True Fighters</h6>

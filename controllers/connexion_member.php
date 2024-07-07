@@ -29,12 +29,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Déconnexion et redirection si le rôle n'est pas reconnu
             session_unset();
             session_destroy();
-            header("Location: /TFG/log.php");
+            header("Location: /TFG/log.php"); 
             exit();
         }
     } else {
-        // Redirection si la connexion échoue avec un message d'erreur
-        header("Location: /TFG/log.php?error=1"); // Ajoutez un paramètre d'erreur pour afficher un message approprié
+        // Message d'erreur
+        echo "<script>alert('Email ou mot de passe incorrecte...'); window.history.back();</script>";
         exit();
     }
 } else {

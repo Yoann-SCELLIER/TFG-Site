@@ -1,5 +1,6 @@
 <!-- Contenu STORY -->
 <!------------------------------------------------------------------------------------------------------------------------------------>
+<!-- CONTENU VISIBLE -->
 <div class="downStoryContent" id="storySection">
     <!-- Section principale visible -->
     <div class="row row-cols-1 row-cols-md-2 text-center g-0 p-1">

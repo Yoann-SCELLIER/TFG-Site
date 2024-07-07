@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Vérifier que les mots de passe correspondent
     if ($password !== $confirm_password) {
         echo "<script>alert('Les mots de passe ne correspondent pas.'); window.history.back();</script>";
-        exit();
+        exit(); 
     }
 
     // Vérifier la complexité du mot de passe et la validité de l'e-mail

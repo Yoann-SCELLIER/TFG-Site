@@ -92,7 +92,8 @@ function getGameById($bdd, $game_id)
 function addGame($bdd, $title, $content, $cover) 
 {
     try {
-        $stmt = $bdd->prepare("INSERT INTO game (title, content, cover) VALUES (:title, :content, :cover)");
+        $stmt = $bdd->prepare("INSERT INTO game (title, content, cover) 
+        VALUES (:title, :content, :cover)");
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':content', $content);
         $stmt->bindParam(':cover', $cover);
@@ -116,7 +117,9 @@ function addGame($bdd, $title, $content, $cover)
 function updateGame($bdd, $game_id, $title, $content, $cover) 
 {
     try {
-        $stmt = $bdd->prepare("UPDATE game SET title = :title, content = :content, cover = :cover WHERE game_id = :game_id");
+        $stmt = $bdd->prepare("UPDATE game 
+        SET title = :title, content = :content, cover = :cover 
+        WHERE game_id = :game_id");
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':content', $content);
         $stmt->bindParam(':cover', $cover);
@@ -170,7 +173,7 @@ function getMemberGames($bdd, $member_id)
     try {
         $sqlQuery = '
             SELECT game.*
-            FROM game
+            FROM game 
             INNER JOIN member_game ON game.game_id = member_game.game_id
             WHERE member_game.member_id = :member_id
         ';
